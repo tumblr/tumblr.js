@@ -1,0 +1,22 @@
+{
+  "author": "Bryan Irace <bryan.irace@gmail.com>",
+  "name": "tumblr.js",
+  "description": "JavaScript client for the Tumblr API",
+  "homepage": "http://bryanirace.com/tumblr.js/",
+  "version": "0.0.0",
+  "repository": {
+    "url": "https://github.com/irace/tumblr.js.git"
+  },
+  "bin": {
+    "tumblr": "./bin/tumblr"
+  },
+  "main": "./index",
+  "dependencies": {
+    "request": "2.9.202"
+  },
+  "devDependencies": {},
+  "optionalDependencies": {},
+  "engines": {
+    "node": "*"
+  }
+}
