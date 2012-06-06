@@ -1,5 +1,4 @@
-var request = require('request')
-  , qs = require('querystring');
+var request = require('request');
 
 function Tumblr(credentials) {
   this.credentials = credentials;
@@ -16,6 +15,7 @@ Tumblr.prototype.blogInfo = function (blogName, callback) {
 };
 
 Tumblr.prototype.avatar = function (options, callback) {
+  // TODO
 };
 
 Tumblr.prototype.followers = function (blogName, options, callback) {
@@ -41,47 +41,64 @@ Tumblr.prototype.submissions = function (blogName, options, callback) {
 // Posts
 
 Tumblr.prototype.edit = function (options) {
+  // TODO
 };
 
 Tumblr.prototype.reblog = function (options) {
+  // TODO
 };
 
 Tumblr.prototype.delete = function (options) {
+  // TODO
 };
 
 Tumblr.prototype.photo = function (options) {
   options = options || {};
   options.type = 'photo';
+
+  // TODO
 };
 
 Tumblr.prototype.quote = function (options) {
   options = options || {};
   options.type = 'quote';
+
+  // TODO
 };
 
 Tumblr.prototype.text = function (options) {
   options = options || {};
   options.type = 'text';
+
+  // TODO
 };
 
 Tumblr.prototype.link = function (options) {
   options = options || {};
   options.type = 'link';
+
+  // TODO
 };
 
 Tumblr.prototype.chat = function (options) {
   options = options || {};
   options.type = 'chat';
+
+  // TODO
 };
 
 Tumblr.prototype.audio = function (options) {
   options = options || {};
   options.type = 'audio';
+
+  // TODO
 };
 
 Tumblr.prototype.video = function (options) {
   options = options || {};
   options.type = 'video';
+
+  // TODO
 };
 
 // User
@@ -95,17 +112,11 @@ Tumblr.prototype.dashboard = function (options, callback) {
 };
 
 Tumblr.prototype.likes = function (offset, limit, callback) {
-  offset = offset || 0;
-  limit = limit || 20;
-
-  get('/user/likes', {offset: offset, limit: limit}, callback, this.credentials);
+  get('/user/likes', {offset: offset || 0, limit: limit || 20}, callback, this.credentials);
 };
 
 Tumblr.prototype.following = function (offset, limit, callback) {
-  offset = offset || 0;
-  limit = limit || 20;
-
-  get('/user/following', {offset: offset, limit: limit}, callback, this.credentials);
+  get('/user/following', {offset: offset || 0, limit: limit || 20}, callback, this.credentials);
 };
 
 Tumblr.prototype.follow = function (blogName, callback) {
@@ -117,9 +128,11 @@ Tumblr.prototype.unfollow = function (blogName, callback) {
 };
 
 Tumblr.prototype.like = function (id, reblogKey, callback) {
+  // TODO
 };
 
 Tumblr.prototype.unlike = function (id, reblogKey, callback) {
+  // TODO
 };
 
 // Helpers
@@ -143,15 +156,12 @@ var baseURL = 'http://api.tumblr.com/v2';
 
 var get = function (path, params, callback, oauth) {
   // TODO: Be smarter about handling which arguments are passed
-  request.get({url: baseURL + path + '?' + qs.stringify(params), oauth: oauth}, requestCallback(callback));
+  request.get({url: baseURL + path, qs: params, oauth: oauth}, requestCallback(callback));
 };
 
 var post = function (path, params, callback, oauth) {
   // TODO: Be smarter about handling which arguments are passed
-  console.log('URL: ' + baseURL + path);
-  console.log('Body: ' + qs.stringify(params));
-
-  request.post({url: baseURL + path, oauth: oauth, body: qs.stringify(params)}, requestCallback(callback));
+  request.post({url: baseURL + path, form: params, oauth: oauth}, requestCallback(callback));
 };
 
 var requestCallback = function (callback) {
