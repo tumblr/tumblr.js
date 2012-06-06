@@ -10,29 +10,30 @@ module.exports = Tumblr;
 // Blogs
 
 Tumblr.prototype.blogInfo = function(blogName, callback) {
-    get(blogPathForBlogName(blogName) + '/info', {}, this.credentials, callback);
+    blogRequest('/info', blogName, {}, callback, this.credentials);
 };
 
-Tumblr.prototype.avatar = function(options, callback) {};
+Tumblr.prototype.avatar = function(options, callback) {
+};
 
 Tumblr.prototype.followers = function(blogName, options, callback) {
-    get(blogPathForBlogName(blogName) + '/followers', options, this.credentials, callback);
+    blogRequest('/followers', blogName, options, callback, this.credentials);
 };
 
 Tumblr.prototype.posts = function(blogName, options, callback) {
-    get(blogPathForBlogName(blogName) + '/posts', options, this.credentials, callback);
+    blogRequest('/posts', blogName, options, callback, this.credentials);
 };
 
 Tumblr.prototype.queue = function(blogName, options, callback) {
-    get(blogPathForBlogName(blogName) + '/posts/queue', options, this.credentials, callback);
+    blogRequest('/posts/queue', blogName, options, callback, this.credentials);
 };
 
 Tumblr.prototype.drafts = function(blogName, options, callback) {
-    get(blogPathForBlogName(blogName) + '/posts/draft', options, this.credentials, callback);
+    blogRequest('/posts/draft', blogName, options, callback, this.credentials);
 };
 
 Tumblr.prototype.submissions = function(blogName, options, callback) {
-    get(blogPathForBlogName(blogName) + '/posts/submission', options, this.credentials, callback);
+    blogRequest('/posts/submission', blogName, options, callback, this.credentials);
 };
 
 // Posts
@@ -51,20 +52,19 @@ Tumblr.prototype.video = function(options) {};
 // User
 
 Tumblr.prototype.userInfo = function(callback) {
-    get('/user/info', {}, this.credentials, callback);
+    get('/user/info', {}, callback, this.credentials);
 };
 
 Tumblr.prototype.dashboard = function(options, callback) {
-    get('/user/dashboard', {}, this.credentials, callback);
-
+    get('/user/dashboard', {}, callback, this.credentials);
 };
 
 Tumblr.prototype.likes = function(options, callback) {
-    get('/user/likes', {}, this.credentials, callback);
+    get('/user/likes', {}, callback, this.credentials);
 };
 
 Tumblr.prototype.following = function(options, callback) {
-    get('/user/following', {}, this.credentials, callback);
+    get('/user/following', {}, callback, this.credentials);
 };
 
 Tumblr.prototype.follow = function(options, callback) {};
@@ -74,11 +74,18 @@ Tumblr.prototype.unlike = function(options, callback) {};
 
 // Helpers
 
+var blogRequest = function(path, blogName, options, callback, credentials) {
+    options = options || {};
+    options.api_key = credentials.consumer_key;
+
+    get(blogPathForBlogName(blogName) + path, options, callback, credentials);
+};
+
 var blogPathForBlogName = function(blogName) {
     return '/blog/' + blogName + '.tumblr.com';
 };
 
-var get = function(path, params, oauth, callback) {
+var get = function(path, params, callback, oauth) {
     // TODO: Be smarter about handling which arguments are passed
 
     // TODO: Is this a good idea?
@@ -92,8 +99,10 @@ var get = function(path, params, oauth, callback) {
 
     // TODO: Better way to checkjust for this? Look at Underscore
     if (params && Object.keys(params).length > 0) {
-        url += '&' + qs.stringify(params);
+        url += '?' + qs.stringify(params);
     }
+
+    console.log(url);
 
     request.get({ url: url, oauth: oauth }, function(err, response, body) {
         // TODO: Error handling
