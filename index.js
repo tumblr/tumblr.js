@@ -128,11 +128,11 @@ Tumblr.prototype.unfollow = function (blogName, callback) {
 };
 
 Tumblr.prototype.like = function (id, reblogKey, callback) {
-  // TODO
+  post('/user/like', {id: id, reblog_key: reblogKey}, callback, this.credentials);
 };
 
 Tumblr.prototype.unlike = function (id, reblogKey, callback) {
-  // TODO
+  post('/user/unlike', {id: id, reblog_key: reblogKey}, callback, this.credentials);
 };
 
 // Helpers
