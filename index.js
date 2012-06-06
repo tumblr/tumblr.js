@@ -7,22 +7,33 @@ function Tumblr(credentials) {
 
 module.exports = Tumblr;
 
-// Blog
+// Blogs
 
 Tumblr.prototype.blogInfo = function(blogName, callback) {
-    get('blog/' + blogName + '.tumblr.com/info', {}, this.credentials, callback);
+    get(blogPathForBlogName(blogName) + '/info', {}, this.credentials, callback);
 };
 
-Tumblr.prototype.avatar = function(options) {};
+Tumblr.prototype.avatar = function(options, callback) {};
 
 Tumblr.prototype.followers = function(blogName, options, callback) {
-    get('blog/' + blogName + '.tumblr.com/followers', options, this.credentials, callback);
+    get(blogPathForBlogName(blogName) + '/followers', options, this.credentials, callback);
 };
 
-Tumblr.prototype.posts = function(options) {};
-Tumblr.prototype.queue = function(options) {};
-Tumblr.prototype.draft = function(options) {};
-Tumblr.prototype.submission = function(options) {};
+Tumblr.prototype.posts = function(blogName, options, callback) {
+    get(blogPathForBlogName(blogName) + '/posts', options, this.credentials, callback);
+};
+
+Tumblr.prototype.queue = function(blogName, options, callback) {
+    get(blogPathForBlogName(blogName) + '/posts/queue', options, this.credentials, callback);
+};
+
+Tumblr.prototype.drafts = function(blogName, options, callback) {
+    get(blogPathForBlogName(blogName) + '/posts/draft', options, this.credentials, callback);
+};
+
+Tumblr.prototype.submissions = function(blogName, options, callback) {
+    get(blogPathForBlogName(blogName) + '/posts/submission', options, this.credentials, callback);
+};
 
 // Posts
 
@@ -39,16 +50,33 @@ Tumblr.prototype.video = function(options) {};
 
 // User
 
-Tumblr.prototype.info = function(options) {};
-Tumblr.prototype.dashboard = function(options) {};
-Tumblr.prototype.likes = function(options) {};
-Tumblr.prototype.following = function(options) {};
-Tumblr.prototype.follow = function(options) {};
-Tumblr.prototype.unfollow = function(options) {};
-Tumblr.prototype.like = function(options) {};
-Tumblr.prototype.unlike = function(options) {};
+Tumblr.prototype.userInfo = function(callback) {
+    get('/user/info', {}, this.credentials, callback);
+};
+
+Tumblr.prototype.dashboard = function(options, callback) {
+    get('/user/dashboard', {}, this.credentials, callback);
+
+};
+
+Tumblr.prototype.likes = function(options, callback) {
+    get('/user/likes', {}, this.credentials, callback);
+};
+
+Tumblr.prototype.following = function(options, callback) {
+    get('/user/following', {}, this.credentials, callback);
+};
+
+Tumblr.prototype.follow = function(options, callback) {};
+Tumblr.prototype.unfollow = function(options, callback) {};
+Tumblr.prototype.like = function(options, callback) {};
+Tumblr.prototype.unlike = function(options, callback) {};
 
 // Helpers
+
+var blogPathForBlogName = function(blogName) {
+    return '/blog/' + blogName + '.tumblr.com';
+};
 
 var get = function(path, params, oauth, callback) {
     // TODO: Be smarter about handling which arguments are passed
@@ -60,7 +88,7 @@ var get = function(path, params, oauth, callback) {
         };
     }
 
-    var url = 'http://api.tumblr.com/v2/' + path + '?api_key=' + oauth.consumer_key;
+    var url = 'http://api.tumblr.com/v2' + path;
 
     // TODO: Better way to checkjust for this? Look at Underscore
     if (params && Object.keys(params).length > 0) {
@@ -69,6 +97,8 @@ var get = function(path, params, oauth, callback) {
 
     request.get({ url: url, oauth: oauth }, function(err, response, body) {
         // TODO: Error handling
-        callback(body.response);
+
+        // TODO: JSON.parse(body) doesn't handle nested objects ([Object object])
+        callback(body);
     });
 };
