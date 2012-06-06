@@ -7,6 +7,7 @@ function Tumblr(credentials) {
 module.exports = Tumblr;
 
 // TODO: Check option validity (arrays of expected option values)
+// TODO: Be smarter about handling which arguments are passed
 
 // Blogs
 
@@ -14,8 +15,8 @@ Tumblr.prototype.blogInfo = function (blogName, callback) {
   blogRequest('/info', blogName, {}, callback, this.credentials);
 };
 
-Tumblr.prototype.avatar = function (options, callback) {
-  // TODO
+Tumblr.prototype.avatar = function (blogName, size, callback) {
+  blogRequest('/avatar/' + (size || 64), blogName, {}, callback, this.credentials);
 };
 
 Tumblr.prototype.followers = function (blogName, options, callback) {
@@ -155,13 +156,11 @@ var blogURLPath = function (blogName, path) {
 var baseURL = 'http://api.tumblr.com/v2';
 
 var get = function (path, params, callback, oauth) {
-  // TODO: Be smarter about handling which arguments are passed
-  request.get({url: baseURL + path, qs: params, oauth: oauth}, requestCallback(callback));
+  request.get({url: baseURL + path, qs: params, oauth: oauth, followRedirect: false}, requestCallback(callback));
 };
 
 var post = function (path, params, callback, oauth) {
-  // TODO: Be smarter about handling which arguments are passed
-  request.post({url: baseURL + path, form: params, oauth: oauth}, requestCallback(callback));
+  request.post({url: baseURL + path, form: params, oauth: oauth, followRedirect: false}, requestCallback(callback));
 };
 
 var requestCallback = function (callback) {
@@ -179,7 +178,7 @@ var requestCallback = function (callback) {
     var responseBody = JSON.parse(body)
       , statusCode = responseBody.meta.status;
 
-    if (statusCode != 200)
+    if (statusCode != 200 && statusCode != 301) // Avatar requests will return 301 responses
       return callback('API error: ' + statusCode);
 
     return callback(responseBody.response);
