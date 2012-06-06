@@ -7,99 +7,92 @@ function Tumblr(credentials) {
 module.exports = Tumblr;
 
 // TODO: Check option validity (arrays of expected option values)
-// TODO: Be smarter about handling which arguments are passed
 
 // Blogs
 
 Tumblr.prototype.blogInfo = function (blogName, callback) {
-  blogRequest('/info', blogName, {}, callback, this.credentials);
+  blogRequest( blogName, '/info', {}, callback, this.credentials);
 };
 
 Tumblr.prototype.avatar = function (blogName, size, callback) {
-  blogRequest('/avatar/' + (size || 64), blogName, {}, callback, this.credentials);
+  if (isFunction(size)) callback = size, size = null;
+
+  blogRequest(blogName, '/avatar/' + (size || 64), {}, callback, this.credentials);
 };
 
 Tumblr.prototype.followers = function (blogName, options, callback) {
-  blogRequest('/followers', blogName, options, callback, this.credentials);
+  if (isFunction(options)) callback = options, options = null;
+
+  blogRequest(blogName, '/followers', options, callback, this.credentials);
 };
 
 Tumblr.prototype.posts = function (blogName, options, callback) {
-  blogRequest('/posts', blogName, options, callback, this.credentials);
+  if (isFunction(options)) callback = options, options = null;
+
+  blogRequest(blogName, '/posts', options, callback, this.credentials);
 };
 
 Tumblr.prototype.queue = function (blogName, options, callback) {
-  blogRequest('/posts/queue', blogName, options, callback, this.credentials);
+  if (isFunction(options)) callback = options, options = null;
+
+  blogRequest(blogName, '/posts/queue', options, callback, this.credentials);
 };
 
 Tumblr.prototype.drafts = function (blogName, options, callback) {
-  blogRequest('/posts/draft', blogName, options, callback, this.credentials);
+  if (isFunction(options)) callback = options, options = null;
+
+  blogRequest(blogName, '/posts/draft', options, callback, this.credentials);
 };
 
 Tumblr.prototype.submissions = function (blogName, options, callback) {
-  blogRequest('/posts/submission', blogName, options, callback, this.credentials);
+  if (isFunction(options)) callback = options, options = null;
+
+  blogRequest(blogName, '/posts/submission', options, callback, this.credentials);
 };
 
 // Posts
 
-Tumblr.prototype.edit = function (options) {
+Tumblr.prototype.edit = function (blogName, options, callback) {
   // TODO
 };
 
-Tumblr.prototype.reblog = function (options) {
-  // TODO
+Tumblr.prototype.reblog = function (blogName, options, callback) {
+  post(blogURLPath(blogName, '/post/reblog'), options, callback, this.credentials);
 };
 
-Tumblr.prototype.delete = function (options) {
-  // TODO
+Tumblr.prototype.delete = function (blogName, id, callback) {
+  post(blogURLPath(blogName, '/post/delete'), {id: id}, callback, this.credentials);
 };
 
-Tumblr.prototype.photo = function (options) {
-  options = options || {};
-  options.type = 'photo';
-
-  // TODO
+Tumblr.prototype.photo = function (blogName, options, callback) {
+  // TODO: File I/O
+  createPost(blogName, 'photo', options, callback)
 };
 
-Tumblr.prototype.quote = function (options) {
-  options = options || {};
-  options.type = 'quote';
-
-  // TODO
+Tumblr.prototype.quote = function (blogName, options, callback) {
+  createPost(blogName, 'quote', options, callback)
 };
 
-Tumblr.prototype.text = function (options) {
-  options = options || {};
-  options.type = 'text';
-
-  // TODO
+Tumblr.prototype.text = function (blogName, options, callback) {
+  createPost(blogName, 'text', options, callback, this.credentials);
 };
 
-Tumblr.prototype.link = function (options) {
-  options = options || {};
-  options.type = 'link';
-
-  // TODO
+Tumblr.prototype.link = function (blogName, options, callback) {
+  createPost(blogName, 'link', options, callback, this.credentials);
 };
 
-Tumblr.prototype.chat = function (options) {
-  options = options || {};
-  options.type = 'chat';
-
-  // TODO
+Tumblr.prototype.chat = function (blogName, options, callback) {
+  createPost(blogName, 'chat', options, callback, this.credentials);
 };
 
-Tumblr.prototype.audio = function (options) {
-  options = options || {};
-  options.type = 'audio';
-
-  // TODO
+Tumblr.prototype.audio = function (blogName, options, callback) {
+  // TODO: File I/O
+  createPost(blogName, 'audio', options, callback, this.credentials);
 };
 
-Tumblr.prototype.video = function (options) {
-  options = options || {};
-  options.type = 'video';
-
-  // TODO
+Tumblr.prototype.video = function (blogName, options, callback) {
+  // TODO: File I/O
+  createPost(blogName, 'video', options, callback, this.credentials);
 };
 
 // User
@@ -109,14 +102,22 @@ Tumblr.prototype.userInfo = function (callback) {
 };
 
 Tumblr.prototype.dashboard = function (options, callback) {
+  if (isFunction(options)) callback = options, options = null;
+
   get('/user/dashboard', options, callback, this.credentials);
 };
 
 Tumblr.prototype.likes = function (offset, limit, callback) {
+  if (isFunction(offset)) callback = offset, offset = null, limit = null;
+  if (isFunction(limit)) callback = limit, limit = null;
+
   get('/user/likes', {offset: offset || 0, limit: limit || 20}, callback, this.credentials);
 };
 
 Tumblr.prototype.following = function (offset, limit, callback) {
+  if (isFunction(offset)) callback = offset, offset = null, limit = null;
+  if (isFunction(limit)) callback = limit, limit = null;
+
   get('/user/following', {offset: offset || 0, limit: limit || 20}, callback, this.credentials);
 };
 
@@ -138,32 +139,39 @@ Tumblr.prototype.unlike = function (id, reblogKey, callback) {
 
 // Helpers
 
-var blogRequest = function (path, blogName, options, callback, credentials) {
+function createPost(blogName, type, options, callback, credentials) {
+  options = options || {};
+  options.type = type;
+
+  post(blogURLPath(blogName, '/post'), options, callback, credentials);
+}
+
+function blogRequest(blogName, path, options, callback, credentials) {
   options = options || {};
   options.api_key = credentials.consumer_key;
 
   get(blogURLPath(blogName, path), options, callback, credentials);
-};
+}
 
-var blogURL = function (blogName) {
+function blogURL(blogName) {
   return blogName + '.tumblr.com';
 }
 
-var blogURLPath = function (blogName, path) {
+function blogURLPath(blogName, path) {
   return '/blog/' + blogURL(blogName) + path;
-};
+}
 
 var baseURL = 'http://api.tumblr.com/v2';
 
-var get = function (path, params, callback, oauth) {
+function get(path, params, callback, oauth) {
   request.get({url: baseURL + path, qs: params, oauth: oauth, followRedirect: false}, requestCallback(callback));
-};
+}
 
-var post = function (path, params, callback, oauth) {
+function post(path, params, callback, oauth) {
   request.post({url: baseURL + path, form: params, oauth: oauth, followRedirect: false}, requestCallback(callback));
-};
+}
 
-var requestCallback = function (callback) {
+function requestCallback(callback) {
   if (!callback) {
     // If callback has not been provided, log the response (particularly useful in the REPL)
     callback = function (response) {
@@ -178,9 +186,13 @@ var requestCallback = function (callback) {
     var responseBody = JSON.parse(body)
       , statusCode = responseBody.meta.status;
 
-    if (statusCode != 200 && statusCode != 301) // Avatar requests will return 301 responses
+    if (Math.floor(statusCode/100) !== 2 && statusCode != 301) // Avatar requests will return 301 responses
       return callback('API error: ' + statusCode);
 
     return callback(responseBody.response);
   };
-};
+}
+
+function isFunction(value) {
+  return Object.prototype.toString.call(value) == "[object Function]";
+}
