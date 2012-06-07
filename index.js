@@ -1,6 +1,5 @@
 var request = require('request')
-  , fs = require('fs')
-  , qs = require('querystring');
+  , fs = require('fs');
 
 function Tumblr(credentials) {
   this.credentials = credentials;
@@ -8,7 +7,7 @@ function Tumblr(credentials) {
 
 module.exports = Tumblr;
 
-// TODO: Check option validity (arrays of expected option values)
+// TODO: Input validation
 
 // Blogs
 
@@ -55,7 +54,7 @@ Tumblr.prototype.submissions = function (blogName, options, callback) {
 // Posts
 
 Tumblr.prototype.edit = function (blogName, options, callback) {
-  // TODO
+  post(blogURLPath(blogName, '/post/edit'), options, callback, this.credentials);
 };
 
 Tumblr.prototype.reblog = function (blogName, options, callback) {
@@ -70,6 +69,8 @@ Tumblr.prototype.photo = function (blogName, options, callback) {
   var that = this;
 
   if (options.data) {
+    // TODO: Photoset support
+
     fs.readFile(options.data, function (err, data) {
       if (err) throw err;
 
@@ -109,8 +110,16 @@ Tumblr.prototype.audio = function (blogName, options, callback) {
 };
 
 Tumblr.prototype.video = function (blogName, options, callback) {
-  // TODO: File I/O
-  createPost(blogName, 'video', options, callback, this.credentials);
+  var that = this;
+
+  if (options.data) {
+    fs.readFile(options.data, function (err, data) {
+      if (err) throw err;
+
+      options.data = data.toString('binary');
+      createPost(blogName, 'video', options, callback, that.credentials);
+    });
+  }
 };
 
 // User
@@ -190,17 +199,10 @@ function post(path, params, callback, oauth) {
 }
 
 function requestCallback(callback) {
-  if (!callback) {
-    // If callback has not been provided, log the response (particularly useful in the REPL)
-    callback = function (response) {
-      console.log(JSON.stringify(response, null, 2));
-    };
-  }
+  if (!callback) return null;
 
   return function (err, response, body) {
     if (err) throw err;
-
-    console.log(body);
 
     var responseBody = JSON.parse(body)
       , statusCode = responseBody.meta.status;
