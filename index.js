@@ -69,8 +69,8 @@ Tumblr.prototype.photo = function (blogName, options, callback) {
   var that = this;
 
   if (options.data) {
-    // TODO: Photoset support
-
+    // TODO: This doesn't work
+    // TODO: Add photoset support
     fs.readFile(options.data, function (err, data) {
       if (err) throw err;
 
@@ -100,6 +100,7 @@ Tumblr.prototype.audio = function (blogName, options, callback) {
   var that = this;
 
   if (options.data) {
+    // TODO: This doesn't work
     fs.readFile(options.data, function (err, data) {
       if (err) throw err;
 
@@ -113,6 +114,7 @@ Tumblr.prototype.video = function (blogName, options, callback) {
   var that = this;
 
   if (options.data) {
+    // TODO: This doesn't work
     fs.readFile(options.data, function (err, data) {
       if (err) throw err;
 
@@ -138,6 +140,7 @@ Tumblr.prototype.likes = function (offset, limit, callback) {
   if (isFunction(offset)) callback = offset, offset = null, limit = null;
   if (isFunction(limit)) callback = limit, limit = null;
 
+  // TODO: For some reason this options hash results in a 401
   get('/user/likes', {offset: offset || 0, limit: limit || 20}, callback, this.credentials);
 };
 
@@ -145,6 +148,7 @@ Tumblr.prototype.following = function (offset, limit, callback) {
   if (isFunction(offset)) callback = offset, offset = null, limit = null;
   if (isFunction(limit)) callback = limit, limit = null;
 
+  // TODO: For some reason this options hash results in a 401
   get('/user/following', {offset: offset || 0, limit: limit || 20}, callback, this.credentials);
 };
 
@@ -199,16 +203,20 @@ function post(path, params, callback, oauth) {
 }
 
 function requestCallback(callback) {
-  if (!callback) return null;
+  if (!callback) return function () {
+  };
 
   return function (err, response, body) {
     if (err) throw err;
 
+    console.log(response);
+
     var responseBody = JSON.parse(body)
-      , statusCode = responseBody.meta.status;
+      , statusCode = responseBody.meta.status
+      , message = responseBody.meta.msg;
 
     if (Math.floor(statusCode / 100) !== 2 && statusCode != 301) // Avatar requests will return 301 responses
-      return callback('API error: ' + statusCode);
+      return callback('API error: ' + statusCode + ' ' + message);
 
     return callback(responseBody.response);
   };
