@@ -1,4 +1,6 @@
-var request = require('request');
+var request = require('request')
+  , fs = require('fs')
+  , qs = require('querystring');
 
 function Tumblr(credentials) {
   this.credentials = credentials;
@@ -11,7 +13,7 @@ module.exports = Tumblr;
 // Blogs
 
 Tumblr.prototype.blogInfo = function (blogName, callback) {
-  blogRequest( blogName, '/info', {}, callback, this.credentials);
+  blogRequest(blogName, '/info', {}, callback, this.credentials);
 };
 
 Tumblr.prototype.avatar = function (blogName, size, callback) {
@@ -65,8 +67,16 @@ Tumblr.prototype.delete = function (blogName, id, callback) {
 };
 
 Tumblr.prototype.photo = function (blogName, options, callback) {
-  // TODO: File I/O
-  createPost(blogName, 'photo', options, callback)
+  var that = this;
+
+  if (options.data) {
+    fs.readFile(options.data, function (err, data) {
+      if (err) throw err;
+
+      options.data = data.toString('binary');
+      createPost(blogName, 'photo', options, callback, that.credentials);
+    });
+  }
 };
 
 Tumblr.prototype.quote = function (blogName, options, callback) {
@@ -86,8 +96,16 @@ Tumblr.prototype.chat = function (blogName, options, callback) {
 };
 
 Tumblr.prototype.audio = function (blogName, options, callback) {
-  // TODO: File I/O
-  createPost(blogName, 'audio', options, callback, this.credentials);
+  var that = this;
+
+  if (options.data) {
+    fs.readFile(options.data, function (err, data) {
+      if (err) throw err;
+
+      options.data = data.toString('binary');
+      createPost(blogName, 'audio', options, callback, that.credentials);
+    });
+  }
 };
 
 Tumblr.prototype.video = function (blogName, options, callback) {
@@ -180,13 +198,14 @@ function requestCallback(callback) {
   }
 
   return function (err, response, body) {
-    if (err)
-      return callback('Unknown error');
+    if (err) throw err;
+
+    console.log(body);
 
     var responseBody = JSON.parse(body)
       , statusCode = responseBody.meta.status;
 
-    if (Math.floor(statusCode/100) !== 2 && statusCode != 301) // Avatar requests will return 301 responses
+    if (Math.floor(statusCode / 100) !== 2 && statusCode != 301) // Avatar requests will return 301 responses
       return callback('API error: ' + statusCode);
 
     return callback(responseBody.response);
@@ -194,5 +213,13 @@ function requestCallback(callback) {
 }
 
 function isFunction(value) {
-  return Object.prototype.toString.call(value) == "[object Function]";
+  return Object.prototype.toString.call(value) == '[object Function]';
 }
+
+function isArray(value) {
+  return Object.prototype.toString.call(value) == '[object Array]';
+}
+
+Buffer.prototype.toByteArray = function () {
+  return Array.prototype.slice.call(this, 0)
+};
