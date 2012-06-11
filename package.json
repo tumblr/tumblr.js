@@ -7,12 +7,14 @@
   "repository": {
     "url": "https://github.com/irace/tumblr.js.git"
   },
+  "browserify": "browser/index.js",
   "bin": {
-    "tumblr": "./bin/tumblr"
+    "tumblr": "./bin/repl"
   },
   "main": "./index",
   "dependencies": {
-    "request": "2.9.202"
+    "request": "2.9.202",
+    "browserify": "1.12.1"
   },
   "devDependencies": {},
   "optionalDependencies": {},
