@@ -28,3 +28,8 @@ fs.readFile('credentials.json', function (err, data) {
 function print(object) {
   console.log(util.inspect(object, null, null, true)); // Style output with ANSI color codes
 }
+
+// Control + L should clear the REPL
+process.stdin.on('keypress', function (s, key) {
+  if (key && key.ctrl && key.name == 'l') process.stdout.write('\u001B[2J\u001B[0;0f');
+});
