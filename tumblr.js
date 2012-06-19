@@ -16,43 +16,49 @@ module.exports = {
 // Blogs
 
 Tumblr.prototype.blogInfo = function (blogName, callback) {
-  blogRequest(blogName, '/info', {}, callback, this.credentials);
+  get(blogURLPath(blogName, '/info'), {api_key: this.credentials.consumer_key}, callback, this.credentials);
 };
 
 Tumblr.prototype.avatar = function (blogName, size, callback) {
   if (isFunction(size)) { callback = size; size = null; }
 
-  blogRequest(blogName, '/avatar/' + (size || 64), {}, callback, this.credentials);
+  get(blogURLPath(blogName, '/avatar/' + (size || 64)), {api_key: this.credentials.consumer_key}, callback, this.credentials);
 };
 
 Tumblr.prototype.followers = function (blogName, options, callback) {
-  if (isFunction(options)) { callback = options; options = null; }
+  if (isFunction(options)) { callback = options; options = {}; }
 
-  blogRequest(blogName, '/followers', options, callback, this.credentials);
+  options = options || {};
+  options.api_key = this.credentials.consumer_key;
+
+  get(blogURLPath(blogName, '/followers'), options, callback, this.credentials);
 };
 
 Tumblr.prototype.posts = function (blogName, options, callback) {
-  if (isFunction(options)) { callback = options; options = null; }
+  if (isFunction(options)) { callback = options; options = {}; }
 
-  blogRequest(blogName, '/posts', options, callback, this.credentials);
+  options = options || {};
+  options.api_key = this.credentials.consumer_key;
+
+  get(blogURLPath(blogName, '/posts'), options, callback, this.credentials);
 };
 
 Tumblr.prototype.queue = function (blogName, options, callback) {
-  if (isFunction(options)) { callback = options; options = null }
+  if (isFunction(options)) { callback = options; options = {} }
 
-  blogRequest(blogName, '/posts/queue', options, callback, this.credentials);
+  get(blogURLPath(blogName, '/posts/queue'), options, callback, this.credentials);
 };
 
 Tumblr.prototype.drafts = function (blogName, options, callback) {
-  if (isFunction(options)) { callback = options; options = null; }
+  if (isFunction(options)) { callback = options; options = {}; }
 
-  blogRequest(blogName, '/posts/draft', options, callback, this.credentials);
+  get(blogURLPath(blogName, '/posts/draft'), options, callback, this.credentials);
 };
 
 Tumblr.prototype.submissions = function (blogName, options, callback) {
-  if (isFunction(options)) { callback = options; options = null; }
+  if (isFunction(options)) { callback = options; options = {}; }
 
-  blogRequest(blogName, '/posts/submission', options, callback, this.credentials);
+  get(blogURLPath(blogName, '/posts/submission'), options, callback, this.credentials);
 };
 
 // Posts
@@ -159,7 +165,7 @@ Tumblr.prototype.userInfo = function (callback) {
 };
 
 Tumblr.prototype.dashboard = function (options, callback) {
-  if (isFunction(options)) { callback = options; options = null; }
+  if (isFunction(options)) { callback = options; options = {}; }
 
   get('/user/dashboard', options, callback, this.credentials);
 };
@@ -201,13 +207,6 @@ function createPost(blogName, type, options, callback, credentials) {
   options.type = type;
 
   post(blogURLPath(blogName, '/post'), options, callback, credentials);
-}
-
-function blogRequest(blogName, path, options, callback, credentials) {
-  options = options || {};
-  options.api_key = credentials.consumer_key;
-
-  get(blogURLPath(blogName, path), options, callback, credentials);
 }
 
 function blogURL(blogName) {
