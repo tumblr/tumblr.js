@@ -16,9 +16,15 @@
     "request": "2.9.202",
     "browserify": "1.12.1"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*"
+  },
   "optionalDependencies": {},
   "engines": {
     "node": "*"
+  },
+  "scripts": {
+    "test": "mocha -r should spec/*"
   }
 }

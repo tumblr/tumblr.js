@@ -16,13 +16,22 @@ module.exports = {
 // Blogs
 
 Tumblr.prototype.blogInfo = function (blogName, callback) {
-  get(blogURLPath(blogName, '/info'), {api_key: this.credentials.consumer_key}, callback, this.credentials);
+  this._get(blogURLPath(blogName, '/info'), {api_key: this.credentials.consumer_key}, callback);
 };
 
 Tumblr.prototype.avatar = function (blogName, size, callback) {
   if (isFunction(size)) { callback = size; size = null; }
 
-  get(blogURLPath(blogName, '/avatar/' + (size || 64)), {api_key: this.credentials.consumer_key}, callback, this.credentials);
+  this._get(blogURLPath(blogName, '/avatar/' + (size || 64)), {api_key: this.credentials.consumer_key}, callback);
+};
+
+Tumblr.prototype.blogLikes = function (blogName, options, callback) {
+  if (isFunction(options)) { callback = options; options = {}; }
+
+  options = options || {};
+  options.api_key = this.credentials.consumer_key;
+
+  this._get(blogURLPath(blogName, '/likes'), options, callback);
 };
 
 Tumblr.prototype.followers = function (blogName, options, callback) {
@@ -31,7 +40,7 @@ Tumblr.prototype.followers = function (blogName, options, callback) {
   options = options || {};
   options.api_key = this.credentials.consumer_key;
 
-  get(blogURLPath(blogName, '/followers'), options, callback, this.credentials);
+  this._get(blogURLPath(blogName, '/followers'), options, callback);
 };
 
 Tumblr.prototype.posts = function (blogName, options, callback) {
@@ -40,39 +49,44 @@ Tumblr.prototype.posts = function (blogName, options, callback) {
   options = options || {};
   options.api_key = this.credentials.consumer_key;
 
-  get(blogURLPath(blogName, '/posts'), options, callback, this.credentials);
+  var path = '/posts';
+  if (options.type) {
+    path += '/' + options.type;
+  }
+
+  this._get(blogURLPath(blogName, path), options, callback);
 };
 
 Tumblr.prototype.queue = function (blogName, options, callback) {
   if (isFunction(options)) { callback = options; options = {} }
 
-  get(blogURLPath(blogName, '/posts/queue'), options, callback, this.credentials);
+  this._get(blogURLPath(blogName, '/posts/queue'), options, callback);
 };
 
 Tumblr.prototype.drafts = function (blogName, options, callback) {
   if (isFunction(options)) { callback = options; options = {}; }
 
-  get(blogURLPath(blogName, '/posts/draft'), options, callback, this.credentials);
+  this._get(blogURLPath(blogName, '/posts/draft'), options, callback);
 };
 
 Tumblr.prototype.submissions = function (blogName, options, callback) {
   if (isFunction(options)) { callback = options; options = {}; }
 
-  get(blogURLPath(blogName, '/posts/submission'), options, callback, this.credentials);
+  this._get(blogURLPath(blogName, '/posts/submission'), options, callback);
 };
 
 // Posts
 
 Tumblr.prototype.edit = function (blogName, options, callback) {
-  post(blogURLPath(blogName, '/post/edit'), options, callback, this.credentials);
+  this._post(blogURLPath(blogName, '/post/edit'), options, callback);
 };
 
 Tumblr.prototype.reblog = function (blogName, options, callback) {
-  post(blogURLPath(blogName, '/post/reblog'), options, callback, this.credentials);
+  this._post(blogURLPath(blogName, '/post/reblog'), options, callback);
 };
 
 Tumblr.prototype.delete = function (blogName, id, callback) {
-  post(blogURLPath(blogName, '/post/delete'), {id: id}, callback, this.credentials);
+  this._post(blogURLPath(blogName, '/post/delete'), {id: id}, callback);
 };
 
 Tumblr.prototype.photo = function (blogName, options, callback) {
@@ -87,7 +101,7 @@ Tumblr.prototype.photo = function (blogName, options, callback) {
       if (err) throw err;
 
       options.data = data;
-      createPost(blogName, 'photo', options, callback, that.credentials);
+      that._createPost(blogName, 'photo', options, callback);
     });
   }
 };
@@ -96,28 +110,29 @@ Tumblr.prototype.quote = function (blogName, options, callback) {
   if (!options.quote)
     return callback(new Error('Missing required field: "quote"'));
 
-  createPost(blogName, 'quote', options, callback)
+  this._createPost(blogName, 'quote', options, callback)
 };
 
 Tumblr.prototype.text = function (blogName, options, callback) {
   if (!options.body)
     return callback(new Error('Missing required field: "body"'));
 
-  createPost(blogName, 'text', options, callback, this.credentials);
+  this._createPost(blogName, 'text', options, callback);
 };
 
 Tumblr.prototype.link = function (blogName, options, callback) {
   if (!options.url)
     return callback(new Error('Missing required field: "url"'));
 
-  createPost(blogName, 'link', options, callback, this.credentials);
+  this._createPost(blogName, 'link', options, callback);
+
 };
 
 Tumblr.prototype.chat = function (blogName, options, callback) {
   if (!options.conversation)
     return callback(new Error('Missing required field: "conversation"'));
 
-  createPost(blogName, 'chat', options, callback, this.credentials);
+  this._createPost(blogName, 'chat', options, callback);
 };
 
 Tumblr.prototype.audio = function (blogName, options, callback) {
@@ -134,7 +149,7 @@ Tumblr.prototype.audio = function (blogName, options, callback) {
       if (err) throw err;
 
       options.data = data.toString('base64');
-      createPost(blogName, 'audio', options, callback, that.credentials);
+      that._createPost(blogName, 'audio', options, callback);
     });
   }
 };
@@ -153,7 +168,7 @@ Tumblr.prototype.video = function (blogName, options, callback) {
       if (err) throw err;
 
       options.data = data.toString('base64');
-      createPost(blogName, 'video', options, callback, that.credentials);
+      that._createPost(blogName, 'video', options, callback);
     });
   }
 };
@@ -161,53 +176,63 @@ Tumblr.prototype.video = function (blogName, options, callback) {
 // User
 
 Tumblr.prototype.userInfo = function (callback) {
-  get('/user/info', {}, callback, this.credentials);
+  this._get('/user/info', {}, callback);
 };
 
 Tumblr.prototype.dashboard = function (options, callback) {
   if (isFunction(options)) { callback = options; options = {}; }
 
-  get('/user/dashboard', options, callback, this.credentials);
+  this._get('/user/dashboard', options, callback);
 };
 
 Tumblr.prototype.likes = function (offset, limit, callback) {
   if (isFunction(offset)) { callback = offset, offset = null; limit = null; }
   if (isFunction(limit)) { callback = limit; limit = null; }
 
-  get('/user/likes', {offset: offset || 0, limit: limit || 20}, callback, this.credentials);
+  this._get('/user/likes', {offset: offset || 0, limit: limit || 20}, callback);
 };
 
 Tumblr.prototype.following = function (offset, limit, callback) {
   if (isFunction(offset)) { callback = offset; offset = null; limit = null; }
   if (isFunction(limit)) { callback = limit; limit = null; }
 
-  get('/user/following', {offset: offset || 0, limit: limit || 20}, callback, this.credentials);
+  this._get('/user/following', {offset: offset || 0, limit: limit || 20}, callback);
 };
 
 Tumblr.prototype.follow = function (blogName, callback) {
-  post('/user/follow', {url: blogURL(blogName)}, callback, this.credentials);
+  this._post('/user/follow', {url: blogURL(blogName)}, callback);
 };
 
 Tumblr.prototype.unfollow = function (blogName, callback) {
-  post('/user/unfollow', {url: blogURL(blogName)}, callback, this.credentials);
+  this._post('/user/unfollow', {url: blogURL(blogName)}, callback);
 };
 
 Tumblr.prototype.like = function (id, reblogKey, callback) {
-  post('/user/like', {id: id, reblog_key: reblogKey}, callback, this.credentials);
+  this._post('/user/like', {id: id, reblog_key: reblogKey}, callback);
 };
 
 Tumblr.prototype.unlike = function (id, reblogKey, callback) {
-  post('/user/unlike', {id: id, reblog_key: reblogKey}, callback, this.credentials);
+  this._post('/user/unlike', {id: id, reblog_key: reblogKey}, callback);
 };
 
 // Helpers
 
-function createPost(blogName, type, options, callback, credentials) {
+var baseURL = 'http://api.tumblr.com/v2';
+
+Tumblr.prototype._createPost = function (blogName, type, options, callback) {
   options = options || {};
   options.type = type;
 
-  post(blogURLPath(blogName, '/post'), options, callback, credentials);
-}
+  this._post(blogURLPath(blogName, '/post'), options, callback);
+};
+
+Tumblr.prototype.get = function (path, params, callback) {
+  request.get({url: baseURL + path, qs: params, oauth: this.credentials, followRedirect: false}, requestCallback(callback));
+};
+
+Tumblr.prototype.post = function (path, params, callback) {
+  request.post({url: baseURL + path, form: params, oauth: this.credentials, followRedirect: false}, requestCallback(callback));
+};
 
 function blogURL(blogName) {
   return blogName + '.tumblr.com';
@@ -217,23 +242,11 @@ function blogURLPath(blogName, path) {
   return '/blog/' + blogURL(blogName) + path;
 }
 
-var baseURL = 'http://api.tumblr.com/v2';
-
-function get(path, params, callback, oauth) {
-  request.get({url: baseURL + path, qs: params, oauth: oauth, followRedirect: false}, requestCallback(callback));
-}
-
-function post(path, params, callback, oauth) {
-  request.post({url: baseURL + path, form: params, oauth: oauth, followRedirect: false}, requestCallback(callback));
-}
-
 function requestCallback(callback) {
   if (!callback) return function () {};
 
   return function (err, response, body) {
     if (err) return callback(err);
-
-    console.log(response);
 
     var responseBody = JSON.parse(body)
       , statusCode = responseBody.meta.status

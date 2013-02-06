@@ -1,3 +1,6 @@
 credentials.json
 .idea
 node_modules
+
+*.swp
+*.swo
