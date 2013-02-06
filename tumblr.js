@@ -13,6 +13,17 @@ module.exports = {
   }
 };
 
+// Tagged
+
+Tumblr.prototype.tagged = function (tag, options, callback) {
+  if (isFunction(options)) { callback = options; options = {}; }
+
+  options = options || {};
+  options.api_key = this.credentials.consumer_key;
+
+  this._get('/tagged', options, callback);
+};
+
 // Blogs
 
 Tumblr.prototype.blogInfo = function (blogName, callback) {
@@ -41,15 +52,6 @@ Tumblr.prototype.followers = function (blogName, options, callback) {
   options.api_key = this.credentials.consumer_key;
 
   this._get(blogURLPath(blogName, '/followers'), options, callback);
-};
-
-Tumblr.prototype.tagged = function (tag, options, callback) {
-  if (isFunction(options)) { callback = options; options = {}; }
-
-  options = options || {};
-  options.api_key = this.credentials.consumer_key;
-
-  this._get('/tagged', options, callback);
 };
 
 Tumblr.prototype.posts = function (blogName, options, callback) {
