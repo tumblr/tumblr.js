@@ -69,7 +69,7 @@ Tumblr.prototype.posts = function (blogName, options, callback) {
 };
 
 Tumblr.prototype.queue = function (blogName, options, callback) {
-  if (isFunction(options)) { callback = options; options = {} }
+  if (isFunction(options)) { callback = options; options = {}; }
 
   this._get(blogURLPath(blogName, '/posts/queue'), options, callback);
 };
