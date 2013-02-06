@@ -96,8 +96,8 @@ client.tagged(tag, callback);
 ## Running tests
 
 ``` bash
-npm install
-npm test
+make # run tests
+make coverage # run coverage report
 ```
 
 # License
