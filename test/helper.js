@@ -1,4 +1,5 @@
-var t = require('../tumblr');
+var libpath = process.env['TUMBLR_COV'] ? '../lib-cov/' : '../lib/';
+var t = require(libpath + 'tumblr');
 var assert = require('assert');
 
 assert.sameRequest = function (original, other) {
