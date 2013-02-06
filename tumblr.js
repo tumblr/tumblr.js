@@ -237,11 +237,11 @@ Tumblr.prototype._createPost = function (blogName, type, options, callback) {
   this._post(blogURLPath(blogName, '/post'), options, callback);
 };
 
-Tumblr.prototype.get = function (path, params, callback) {
+Tumblr.prototype._get = function (path, params, callback) {
   request.get({url: baseURL + path, qs: params, oauth: this.credentials, followRedirect: false}, requestCallback(callback));
 };
 
-Tumblr.prototype.post = function (path, params, callback) {
+Tumblr.prototype._post = function (path, params, callback) {
   request.post({url: baseURL + path, form: params, oauth: this.credentials, followRedirect: false}, requestCallback(callback));
 };
 
