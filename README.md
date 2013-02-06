@@ -1,6 +1,5 @@
 # Tumblr.js
-
-A JavaScript client library for the
+JavaScript client library for the
 [Tumblr API](http://www.tumblr.com/docs/en/api/v2).
 
 ## Create a Client
@@ -73,7 +72,7 @@ client.edit(blogName, options, callback);
 
 client.reblog(blogName, options, callback);
 
-client.delete(blogName, id, callback);
+client.deletePost(blogName, id, callback);
 
 client.photo(blogName, options, callback);
 client.quote(blogName, options, callback);
