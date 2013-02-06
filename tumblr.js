@@ -43,6 +43,15 @@ Tumblr.prototype.followers = function (blogName, options, callback) {
   this._get(blogURLPath(blogName, '/followers'), options, callback);
 };
 
+Tumblr.prototype.tagged = function (tag, options, callback) {
+  if (isFunction(options)) { callback = options; options = {}; }
+
+  options = options || {};
+  options.api_key = this.credentials.consumer_key;
+
+  this._get('/tagged', options, callback);
+};
+
 Tumblr.prototype.posts = function (blogName, options, callback) {
   if (isFunction(options)) { callback = options; options = {}; }
 

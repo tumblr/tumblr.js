@@ -2,7 +2,6 @@ var assert = require('assert');
 var helper = require('./helper');
 var client = helper.client;
 
-/* NOT IMPLEMENTED
 describe('tagged', function () {
 
   before(function () {
@@ -20,7 +19,7 @@ describe('tagged', function () {
     });
 
     it('should use the proper path', function () {
-      client.lastCall.path.should.equal('tagged');
+      client.lastCall.path.should.equal('/tagged');
     });
 
     it('should use the proper callback', function () {
@@ -44,23 +43,6 @@ describe('tagged', function () {
       assert.sameRequest(callOne, callTwo);
     });
 
-    describe('when oauth_token is set', function () {
-
-      before(function () {
-        this.options = { hello: 'world' };
-        client.credentials.token = 'abc';
-        client.tagged(this.tag, this.options, function () { });
-      });
-
-      after(function () { client.credentials.token = undefined; });
-
-      it('should not include api_key', function () {
-        assert.equal(undefined, client.lastCall.options.api_key);
-      });
-
-    });
-
   });
 
 });
-*/
