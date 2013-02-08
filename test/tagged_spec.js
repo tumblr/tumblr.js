@@ -18,6 +18,10 @@ describe('tagged', function () {
       client.tagged(this.tag, this.options, this.callback);
     });
 
+    it('should be a get', function () {
+      client.lastCall.method.should.equal('get');
+    });
+
     it('should use the proper path', function () {
       client.lastCall.path.should.equal('/tagged');
     });

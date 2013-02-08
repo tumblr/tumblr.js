@@ -20,6 +20,10 @@ describe('blog', function () {
         client.posts(this.blogName, this.options, this.callback);
       });
 
+      it('should be a get', function () {
+        client.lastCall.method.should.equal('get');
+      });
+
       it('should use the proper path', function () {
         client.lastCall.path.should.equal('/blog/' + this.blogName + '.tumblr.com/posts');
       });
@@ -74,6 +78,10 @@ describe('blog', function () {
           done();
         }.bind(this);
         client.avatar(this.blogName, undefined, this.callback);
+      });
+
+      it('should be a get', function () {
+        client.lastCall.method.should.equal('get');
       });
 
       it('should use the proper path', function () {
@@ -144,6 +152,10 @@ describe('blog', function () {
       client.blogInfo(this.blogName, this.callback);
     });
 
+    it('should be a get', function () {
+      client.lastCall.method.should.equal('get');
+    });
+
     it('should use the proper path', function () {
       client.lastCall.path.should.equal('/blog/' + this.blogName + '.tumblr.com/info');
     });
@@ -171,6 +183,10 @@ describe('blog', function () {
         this.callback = function () { done(); };
         this.options = { hello: 'world' };
         client[fname](this.blogName, this.options, this.callback);
+      });
+
+      it('should be a get', function () {
+        client.lastCall.method.should.equal('get');
       });
 
       it('should use the proper path', function () {
