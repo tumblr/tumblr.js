@@ -54,6 +54,6 @@ module.exports = {
     };
   },
 
-  client: new t.Tumblr()
+  client: new t.createClient()
 
 };
