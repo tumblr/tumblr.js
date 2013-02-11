@@ -9,6 +9,40 @@ describe('post', function () {
     helper.stubPost(client);
   });
 
+  var simpleCalls = { edit: 'edit', reblog: 'reblog' };
+  for (var call in simpleCalls) {
+
+    var path = simpleCalls[call];
+
+    describe(call, function () {
+
+      before(function (done) {
+        this.callback = function () { done(); };
+        this.blogName = 'heyo';
+        this.options = { coolstory: 'bro' };
+        client[call](this.blogName, this.options, this.callback);
+      });
+
+      it('should be a post', function () {
+        client.lastCall.method.should.equal('post');
+      });
+
+      it('should use the proper path', function () {
+        client.lastCall.path.should.equal('/blog/' + this.blogName + '.tumblr.com/post/' + path);
+      });
+
+      it('should use the same options', function () {
+        client.lastCall.options.should.eql(this.options);
+      });
+
+      it('should use the proper callback', function () {
+        client.lastCall.callback.should.equal(this.callback);
+      });
+
+    });
+
+  }
+
   ['like', 'unlike'].forEach(function (call) {
 
     describe(call, function () {
