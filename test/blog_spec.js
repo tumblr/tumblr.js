@@ -35,16 +35,12 @@ describe('blog', function () {
       });
 
       helper.properCall.bind(this)(client, function () {
-        var properOptions = { api_key: 'consumer_key' };
-        for (var key in this.options) {
-          properOptions[key] = this.options[key];
-        }
-
         return {
           method: 'get',
           path: '/blog/' + this.blogName + '.tumblr.com/posts',
-          options: properOptions,
-          callback: this.callback
+          options: this.options,
+          callback: this.callback,
+          apiKey: true
         };
       });
 
@@ -67,16 +63,12 @@ describe('blog', function () {
       });
 
       helper.properCall.bind(this)(client, function () {
-        var properOptions = { api_key: 'consumer_key' };
-        for (var key in this.options) {
-          properOptions[key] = this.options[key];
-        }
-
         return {
           method: 'get',
           path: '/blog/' + this.blogName + '.tumblr.com/posts/text',
-          options: properOptions,
-          callback: this.callback
+          options: this.options,
+          callback: this.callback,
+          apiKey: true
         };
       });
 
@@ -103,7 +95,7 @@ describe('blog', function () {
       });
 
       it('should use the proper path', function () {
-        client.lastCall.path.should.equal('/blog/' + this.blogName + '.tumblr.com/avatar/64');
+        client.lastCall.path.should.equal('/blog/' + this.blogName + '.tumblr.com/avatar');
       });
 
       it('should use the proxy callback', function () {
@@ -174,8 +166,9 @@ describe('blog', function () {
       return {
         method: 'get',
         path: '/blog/' + this.blogName + '.tumblr.com/info',
-        options: { api_key: 'consumer_key' },
-        callback: this.callback
+        options: { },
+        callback: this.callback,
+        apiKey: true
       };
     });
 
@@ -226,7 +219,7 @@ describe('blog', function () {
       if (call === 'likes') {
 
         it('should include the api key', function () {
-          client.lastCall.options.api_key.should.equal('consumer_key');
+          client.lastCall.apiKey.should.equal(true);
         });
 
       }

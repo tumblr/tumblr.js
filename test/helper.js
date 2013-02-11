@@ -28,6 +28,11 @@ module.exports = {
     it('should use the proper callback', function () {
       client.lastCall.callback.should.equal(this.proper.callback);
     });
+    it('should use api key properly', function () {
+      if (this.proper.apiKey !== undefined) {
+        assert.equal(client.lastCall.apiKey, this.proper.apiKey);
+      }
+    });
   },
 
   stubPost: function (client) {
@@ -43,12 +48,13 @@ module.exports = {
   },
 
   stubGet: function (client, err, data) {
-    client._get = function (path, options, callback) {
+    client._get = function (path, options, callback, apiKey) {
       client.lastCall = {
         method: 'get',
         path: path,
         options: options,
-        callback: callback
+        callback: callback,
+        apiKey: !!apiKey
       };
       callback(err, data);
     };
