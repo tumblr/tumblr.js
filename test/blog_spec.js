@@ -20,20 +20,18 @@ describe('blog', function () {
         client.posts(this.blogName, this.options, this.callback);
       });
 
-      it('should be a get', function () {
-        client.lastCall.method.should.equal('get');
-      });
+      helper.properCall.bind(this)(client, function () {
+        var properOptions = { api_key: 'consumer_key' };
+        for (var key in this.options) {
+          properOptions[key] = this.options[key];
+        }
 
-      it('should use the proper path', function () {
-        client.lastCall.path.should.equal('/blog/' + this.blogName + '.tumblr.com/posts');
-      });
-
-      it('should use the proper options', function () {
-        client.lastCall.options.should.equal(this.options);
-      });
-
-      it('should use the proper callback', function () {
-        client.lastCall.callback.should.equal(this.callback);
+        return {
+          method: 'get',
+          path: '/blog/' + this.blogName + '.tumblr.com/posts',
+          options: properOptions,
+          callback: this.callback
+        };
       });
 
       it('should allow options to be skipped', function () {
@@ -41,10 +39,6 @@ describe('blog', function () {
         client.posts(this.blogName, undefined, callback); var callOne = client.lastCall;
         client.posts(this.blogName, callback); var callTwo = client.lastCall;
         assert.sameRequest(callOne, callTwo);
-      });
-
-      it('should include the api token', function () {
-        client.lastCall.options.api_key.should.equal('consumer_key');
       });
 
     });
@@ -58,8 +52,18 @@ describe('blog', function () {
         client.posts(this.blogName, this.options, this.callback);
       });
 
-      it('should use the proper path', function () {
-        client.lastCall.path.should.equal('/blog/' + this.blogName + '.tumblr.com/posts/text');
+      helper.properCall.bind(this)(client, function () {
+        var properOptions = { api_key: 'consumer_key' };
+        for (var key in this.options) {
+          properOptions[key] = this.options[key];
+        }
+
+        return {
+          method: 'get',
+          path: '/blog/' + this.blogName + '.tumblr.com/posts/text',
+          options: properOptions,
+          callback: this.callback
+        };
       });
 
     });

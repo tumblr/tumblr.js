@@ -18,26 +18,18 @@ describe('tagged', function () {
       client.tagged(this.tag, this.options, this.callback);
     });
 
-    it('should be a get', function () {
-      client.lastCall.method.should.equal('get');
-    });
-
-    it('should use the proper path', function () {
-      client.lastCall.path.should.equal('/tagged');
-    });
-
-    it('should use the proper callback', function () {
-      client.lastCall.callback.should.equal(this.callback);
-    });
-
-    it('should use the proper options', function () {
+    helper.properCall.bind(this)(client, function () {
+      var properOptions = { api_key: 'consumer_key' };
       for (var key in this.options) {
-        client.lastCall.options[key].should.equal(this.options[key]);
+        properOptions[key] = this.options[key];
       }
-    });
 
-    it('should include the api_key', function () {
-      client.lastCall.options.api_key.should.equal('consumer_key');
+      return {
+        method: 'get',
+        path: '/tagged',
+        options: properOptions,
+        callback: this.callback
+      };
     });
 
     it('should work the same when passed the callback earlier', function () {
