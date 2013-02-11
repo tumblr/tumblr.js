@@ -19,7 +19,7 @@ describe('tagged', function () {
     });
 
     helper.properCall.bind(this)(client, function () {
-      var properOptions = { api_key: 'consumer_key' };
+      var properOptions = { api_key: 'consumer_key', tag: this.tag };
       for (var key in this.options) {
         properOptions[key] = this.options[key];
       }
