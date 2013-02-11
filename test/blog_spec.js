@@ -9,6 +9,20 @@ describe('blog', function () {
     client.credentials = { consumer_key: 'consumer_key' };
   });
 
+  describe('quote', function () {
+
+    describe('when not passing quote option', function () {
+
+      it('should raise an error', function () {
+        (function () {
+          client.quote('blog', {}, function () { });
+        }).should.throw();
+      });
+
+    });
+
+  });
+
   describe('posts', function () {
 
     describe('with no type specified', function () {
