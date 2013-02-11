@@ -21,6 +21,7 @@ var tumblr = require('tumblr');
 var client = new tumblr.Client({
 	// ...
 });
+```
 
 ## Supported Methods
 
