@@ -23,12 +23,10 @@ client.userInfo(callback);
 client.dashboard(options, callback);
 client.dashboard(callback);
 
-client.likes(offset, limit, callback);
-client.likes(offset, callback);
+client.likes(options, callback);
 client.likes(callback);
 
-client.following(offset, limit, callback);
-client.following(offset, callback);
+client.following(options, callback);
 client.following(callback);
 
 client.follow(blogName, callback);
