@@ -118,7 +118,7 @@ describe('post', function () {
 
   });
 
-  ['likes', 'following'].forEach(function (call) {
+  ['dashboard', 'likes', 'following'].forEach(function (call) {
 
     describe(call, function () {
 
