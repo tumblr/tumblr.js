@@ -37,7 +37,7 @@ describe('blog', function () {
       helper.properCall.bind(this)(client, function () {
         return {
           method: 'get',
-          path: '/blog/' + this.blogName + '.tumblr.com/posts',
+          path: '/blog/' + this.blogName + '/posts',
           options: this.options,
           callback: this.callback,
           apiKey: true
@@ -65,7 +65,7 @@ describe('blog', function () {
       helper.properCall.bind(this)(client, function () {
         return {
           method: 'get',
-          path: '/blog/' + this.blogName + '.tumblr.com/posts/text',
+          path: '/blog/' + this.blogName + '/posts/text',
           options: this.options,
           callback: this.callback,
           apiKey: true
@@ -95,7 +95,7 @@ describe('blog', function () {
       });
 
       it('should use the proper path', function () {
-        client.lastCall.path.should.equal('/blog/' + this.blogName + '.tumblr.com/avatar');
+        client.lastCall.path.should.equal('/blog/' + this.blogName + '/avatar');
       });
 
       it('should use the proxy callback', function () {
@@ -123,7 +123,7 @@ describe('blog', function () {
       });
 
       it('should use the proper path', function () {
-        client.lastCall.path.should.equal('/blog/' + this.blogName + '.tumblr.com/avatar/128');
+        client.lastCall.path.should.equal('/blog/' + this.blogName + '/avatar/128');
       });
 
       it('should use the proxy callback', function () {
@@ -165,7 +165,7 @@ describe('blog', function () {
     helper.properCall.bind(this)(client, function () {
       return {
         method: 'get',
-        path: '/blog/' + this.blogName + '.tumblr.com/info',
+        path: '/blog/' + this.blogName + '/info',
         options: { },
         callback: this.callback,
         apiKey: true
@@ -195,9 +195,9 @@ describe('blog', function () {
 
       it('should use the proper path', function () {
         if (['queue', 'draft', 'submission'].indexOf(call) !== -1) {
-          client.lastCall.path.should.equal('/blog/' + this.blogName + '.tumblr.com/posts/' + call);
+          client.lastCall.path.should.equal('/blog/' + this.blogName + '/posts/' + call);
         } else {
-          client.lastCall.path.should.equal('/blog/' + this.blogName + '.tumblr.com/' + call);
+          client.lastCall.path.should.equal('/blog/' + this.blogName + '/' + call);
         }
       });
 

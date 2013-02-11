@@ -39,8 +39,8 @@ client.likes(callback);
 client.following(options, callback);
 client.following(callback);
 
-client.follow(blogName, callback);
-client.unfollow(blogName, callback);
+client.follow(blogURL, callback);
+client.unfollow(blogURL, callback);
 
 client.like(id, reblogKey, callback);
 client.unlike(id, reblogKey, callback);
