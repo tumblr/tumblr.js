@@ -156,20 +156,13 @@ describe('blog', function () {
       client.blogInfo(this.blogName, this.callback);
     });
 
-    it('should be a get', function () {
-      client.lastCall.method.should.equal('get');
-    });
-
-    it('should use the proper path', function () {
-      client.lastCall.path.should.equal('/blog/' + this.blogName + '.tumblr.com/info');
-    });
-
-    it('should send with the proper callback', function () {
-      client.lastCall.callback.should.equal(this.callback);
-    });
-
-    it('should include the api key', function () {
-      client.lastCall.options.should.eql({ api_key: 'consumer_key' });
+    helper.properCall.bind(this)(client, function () {
+      return {
+        method: 'get',
+        path: '/blog/' + this.blogName + '.tumblr.com/info',
+        options: { api_key: 'consumer_key' },
+        callback: this.callback
+      };
     });
 
   });
