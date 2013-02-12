@@ -25,6 +25,6 @@
     "node": "*"
   },
   "scripts": {
-    "test": "mocha -r should test/*"
+    "test": "mocha -r should test/*_spec.js"
   }
 }

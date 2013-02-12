@@ -10,6 +10,96 @@ describe('blog', function () {
     client.credentials = { consumer_key: 'consumer_key' };
   });
 
+  ['photo', 'audio', 'video'].forEach(function (call) {
+
+    var otherData = { photo: 'source', audio: 'external_url', video: 'embed' };
+    var otherField = otherData[call];
+
+    describe(call, function () {
+
+      describe('when passing no options', function () {
+
+        it('should raise an error', function () {
+          (function () {
+            client[call]('blog', {}, function () { });
+          }).should.throw('Missing one of: data,' + otherField);
+        });
+
+      });
+
+      describe('when passing both options', function () {
+
+        it('should raise an error', function () {
+          (function () {
+            var options = { data: 'data' };
+            options[otherField] = 'otherField';
+            client[call]('blog', options, function () { });
+          }).should.throw('Can only use one of: data,' + otherField);
+        });
+
+      });
+
+      describe('when passing only other field', function () {
+
+        before(function (done) {
+          this.callback = function () { done(); };
+          this.options = {}; this.options[otherField] = 'value';
+          this.blogName = 'blog';
+          client[call](this.blogName, this.options, this.callback);
+        });
+
+        helper.properCall.bind(this)(client, function () {
+          var proper = { type: call };
+          proper[otherField] = this.options[otherField];
+
+          return {
+            method: 'post',
+            path: '/blog/' + this.blogName + '/post',
+            options: proper,
+            callback: this.callback
+          };
+        });
+
+      });
+
+      describe('when passing data with bad path', function () {
+
+        it('should raise an error', function () {
+          client[call]('blog', { data: '/no/such/path' }, function (err, data) {
+            assert.equal(err.errno, 34);
+            assert.equal(data, undefined);
+          });
+        });
+
+      });
+
+      describe('when passing data', function () {
+
+        before(function (done) {
+          this.callback = function () { done(); };
+          this.options = { data: './test/support' };
+          this.blogName = 'blog';
+          client[call](this.blogName, this.options, this.callback);
+        });
+
+        helper.properCall.bind(this)(client, function () {
+          var properData = require('fs').readFileSync('./test/support').toString('base64');
+          var proper = { type: call, data: properData };
+
+          return {
+            method: 'post',
+            path: '/blog/' + this.blogName + '/post',
+            options: proper,
+            callback: this.callback
+          };
+        });
+
+      });
+
+    });
+
+  });
+
   ['quote', 'text', 'link', 'chat'].forEach(function (call) {
 
     var simpleTypes = { quote: 'quote', text: 'body', link: 'url', chat: 'conversation' };
@@ -22,7 +112,7 @@ describe('blog', function () {
         it('should raise an error', function () {
           (function () {
             client[call]('blog', {}, function () { });
-          }).should.throw();
+          }).should.throw('Missing required field: "' + field + '"');
         });
 
       });
