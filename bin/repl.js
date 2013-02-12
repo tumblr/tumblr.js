@@ -2,14 +2,21 @@
 
 var fs = require('fs')
   , repl = require('repl')
-  , Tumblr = require('../index.js')
+  , tumblr = require('../index.js')
   , util = require('util')
   , _ = require('underscore'); // TODO: Figure out where to specify this dependency
 
 fs.readFile('credentials.json', function (err, data) {
   if (err) return console.log('File not found: credentials.json');
 
-  var context = repl.start(null, null, null, null, true).context; // Don't output return value if undefined
+  var r = repl.start({
+    prompt: null,
+    source: null,
+    eval: null,
+    useGlobal: false,
+    useColors: true
+  });
+  var context = r.context;
 
   // Callback function that can be used to store an API response object in the REPL context
   context.set = function (err, object) {
@@ -22,7 +29,7 @@ fs.readFile('credentials.json', function (err, data) {
 
   context.print = print;
   context.u = _;
-  context.tumblr = new Tumblr(JSON.parse(data));
+  context.tumblr = new tumblr.Client(JSON.parse(data));
 });
 
 function print(object) {
