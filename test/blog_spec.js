@@ -6,17 +6,49 @@ describe('blog', function () {
 
   before(function () {
     helper.stubGet(client);
+    helper.stubPost(client);
     client.credentials = { consumer_key: 'consumer_key' };
   });
 
-  describe('quote', function () {
+  ['quote', 'text', 'link', 'chat'].forEach(function (call) {
 
-    describe('when not passing quote option', function () {
+    var simpleTypes = { quote: 'quote', text: 'body', link: 'url', chat: 'conversation' };
+    var field = simpleTypes[call];
 
-      it('should raise an error', function () {
-        (function () {
-          client.quote('blog', {}, function () { });
-        }).should.throw();
+    describe(call, function () {
+
+      describe('when not passing quote option', function () {
+
+        it('should raise an error', function () {
+          (function () {
+            client[call]('blog', {}, function () { });
+          }).should.throw();
+        });
+
+      });
+
+      describe('when passing the quote options', function () {
+
+        before(function (done) {
+          this.blogName = 'blog';
+          this.options = {}; this.options[field] = 'hello world';
+          this.callback = function () { done(); };
+          client[call](this.blogName, this.options, this.callback);
+        });
+
+        helper.properCall.bind(this)(client, function () {
+          var proper = { type: call };
+          proper[field] = this.options[field];
+
+          return {
+            method: 'post',
+            path: '/blog/' + this.blogName + '/post',
+            options: proper,
+            callback: this.callback,
+            apiKey: undefined
+          };
+        });
+
       });
 
     });
