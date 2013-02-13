@@ -7,9 +7,10 @@ client.credentials.consumer_key = 'consumer_key';
 describe('_post', function () {
 
   before(function () {
-    request.post = function (options, callback) {
-      this.call = options;
+    request.post = function (url, callback) {
+      this.url = url;
       this.receivedCallback = callback;
+      return { form: function () { return { append: function () { } } }, oauth: function () { } };
     }.bind(this);
     // make a call
     this.path = '/the/path';
@@ -19,23 +20,7 @@ describe('_post', function () {
   });
 
   it('should call with the proper url', function () {
-    this.call.url.should.equal('http://api.tumblr.com/v2' + this.path);
-  });
-
-  it('should want json back', function () {
-    this.call.json.should.equal(true);
-  });
-
-  it('should call with the params as form', function () {
-    this.call.form.should.eql(this.options);
-  });
-
-  it('should pass the credentials for oauth', function () {
-    this.call.oauth.should.eql(client.credentials);
-  });
-
-  it('should avoid redirect', function () {
-    this.call.followRedirect.should.equal(false);
+    this.url.should.equal('http://api.tumblr.com/v2' + this.path);
   });
 
   it('should get a function callback', function () {

@@ -62,17 +62,6 @@ describe('blog', function () {
 
       });
 
-      describe('when passing data with bad path', function () {
-
-        it('should raise an error', function () {
-          client[call]('blog', { data: '/no/such/path' }, function (err, data) {
-            assert.equal(err.errno, 34);
-            assert.equal(data, undefined);
-          });
-        });
-
-      });
-
       describe('when passing data', function () {
 
         before(function (done) {
@@ -83,8 +72,7 @@ describe('blog', function () {
         });
 
         helper.properCall.bind(this)(client, function () {
-          var properData = require('fs').readFileSync('./test/support').toString('base64');
-          var proper = { type: call, data: properData };
+          var proper = { data: './test/support', type: call };
 
           return {
             method: 'post',
