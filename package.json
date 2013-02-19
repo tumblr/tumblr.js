@@ -1,11 +1,21 @@
 {
-  "author": "Bryan Irace <bryan.irace@gmail.com>",
+  "author": "Tumblr",
+  "contributors": [
+    {
+      "name": "Bryan Irace",
+      "email": "bryan.irace@gmail.com"
+    },
+    {
+      "name": "John Crepezzi",
+      "email": "john.crepezzi@gmail.com"
+    }
+  ],
   "name": "tumblr.js",
-  "description": "JavaScript client for the Tumblr API",
-  "homepage": "http://bryanirace.com/tumblr.js/",
-  "version": "0.0.0",
+  "description": "Official JavaScript client for the Tumblr API",
+  "homepage": "https://github.com/tumblr/tumblr.js",
+  "version": "0.0.1",
   "repository": {
-    "url": "https://github.com/irace/tumblr.js.git"
+    "url": "https://github.com/tumblr/tumblr.js"
   },
   "browserify": "browser/index.js",
   "bin": {
