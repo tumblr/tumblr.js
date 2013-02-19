@@ -19,12 +19,11 @@
   },
   "browserify": "browser/index.js",
   "bin": {
-    "tumblr": "./bin/repl"
+    "tumblr": "./bin/repl.js"
   },
   "main": "./index",
   "dependencies": {
-    "request": "2.12.0",
-    "browserify": "1.12.1"
+    "request": "2.12.0"
   },
   "devDependencies": {
     "mocha": "*",
