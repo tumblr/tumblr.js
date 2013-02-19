@@ -5,7 +5,7 @@ JavaScript client library for the
 ## Create a Client
 
 ``` javascript
-var tumblr = require('tumblr');
+var tumblr = require('tumblr.js');
 var client = tumblr.createClient({
   consumer_key: '<consumer key>',
   consumer_secret: '<consumer secret>',
@@ -17,7 +17,7 @@ var client = tumblr.createClient({
 Or, if you prefer:
 
 ``` javascript
-var tumblr = require('tumblr');
+var tumblr = require('tumblr.js');
 var client = new tumblr.Client({
 	// ...
 });
