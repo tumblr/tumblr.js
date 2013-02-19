@@ -27,6 +27,17 @@ var client = new tumblr.Client({
 });
 ```
 
+## Example
+
+``` javascript
+// Show user's blog names
+client.userInfo(function (err, data) {
+	data.blogs.forEach(function (blog) {
+		console.log(blog.name);
+	});
+});
+```
+
 ## Supported Methods
 
 ### User Methods
