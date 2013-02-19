@@ -54,7 +54,7 @@ describe('blog', function () {
 
           return {
             method: 'post',
-            path: '/blog/' + this.blogName + '/post',
+            path: '/blog/' + this.blogName + '.tumblr.com/post',
             options: proper,
             callback: this.callback
           };
@@ -76,7 +76,7 @@ describe('blog', function () {
 
           return {
             method: 'post',
-            path: '/blog/' + this.blogName + '/post',
+            path: '/blog/' + this.blogName + '.tumblr.com/post',
             options: proper,
             callback: this.callback
           };
@@ -120,7 +120,7 @@ describe('blog', function () {
 
           return {
             method: 'post',
-            path: '/blog/' + this.blogName + '/post',
+            path: '/blog/' + this.blogName + '.tumblr.com/post',
             options: proper,
             callback: this.callback,
             apiKey: undefined
@@ -147,7 +147,7 @@ describe('blog', function () {
       helper.properCall.bind(this)(client, function () {
         return {
           method: 'get',
-          path: '/blog/' + this.blogName + '/posts',
+          path: '/blog/' + this.blogName + '.tumblr.com/posts',
           options: this.options,
           callback: this.callback,
           apiKey: true
@@ -175,7 +175,7 @@ describe('blog', function () {
       helper.properCall.bind(this)(client, function () {
         return {
           method: 'get',
-          path: '/blog/' + this.blogName + '/posts/text',
+          path: '/blog/' + this.blogName + '.tumblr.com/posts/text',
           options: this.options,
           callback: this.callback,
           apiKey: true
@@ -205,7 +205,7 @@ describe('blog', function () {
       });
 
       it('should use the proper path', function () {
-        client.lastCall.path.should.equal('/blog/' + this.blogName + '/avatar');
+        client.lastCall.path.should.equal('/blog/' + this.blogName + '.tumblr.com/avatar');
       });
 
       it('should use the proxy callback', function () {
@@ -233,7 +233,7 @@ describe('blog', function () {
       });
 
       it('should use the proper path', function () {
-        client.lastCall.path.should.equal('/blog/' + this.blogName + '/avatar/128');
+        client.lastCall.path.should.equal('/blog/' + this.blogName + '.tumblr.com/avatar/128');
       });
 
       it('should use the proxy callback', function () {
@@ -267,7 +267,7 @@ describe('blog', function () {
   describe('info', function () {
 
     before(function (done) {
-      this.blogName = 'blog';
+      this.blogName = 'blog.com';
       this.callback = function () { done(); };
       client.blogInfo(this.blogName, this.callback);
     });
@@ -305,9 +305,9 @@ describe('blog', function () {
 
       it('should use the proper path', function () {
         if (['queue', 'draft', 'submission'].indexOf(call) !== -1) {
-          client.lastCall.path.should.equal('/blog/' + this.blogName + '/posts/' + call);
+          client.lastCall.path.should.equal('/blog/' + this.blogName + '.tumblr.com/posts/' + call);
         } else {
-          client.lastCall.path.should.equal('/blog/' + this.blogName + '/' + call);
+          client.lastCall.path.should.equal('/blog/' + this.blogName + '.tumblr.com/' + call);
         }
       });
 

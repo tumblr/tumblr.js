@@ -21,7 +21,7 @@ describe('post', function () {
     helper.properCall.bind(this)(client, function () {
       return {
         method: 'post',
-        path: '/blog/' + this.blogName + '/post/delete',
+        path: '/blog/' + this.blogName + '.tumblr.com/post/delete',
         options: { id: this.id },
         callback: this.callback
       };
@@ -43,7 +43,7 @@ describe('post', function () {
       helper.properCall.bind(this)(client, function () {
         return {
           method: 'post',
-          path: '/blog/' + this.blogName + '/post/' + call,
+          path: '/blog/' + this.blogName + '.tumblr.com/post/' + call,
           options: this.options,
           callback: this.callback
         };

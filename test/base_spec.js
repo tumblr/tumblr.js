@@ -4,31 +4,6 @@ var client = helper.client;
 
 client.credentials.consumer_key = 'consumer_key';
 
-describe('_post', function () {
-
-  before(function () {
-    request.post = function (url, callback) {
-      this.url = url;
-      this.receivedCallback = callback;
-      return { form: function () { return { append: function () { } } }, oauth: function () { } };
-    }.bind(this);
-    // make a call
-    this.path = '/the/path';
-    this.options = { my: 'options' };
-    this.callback = function () { };
-    client._post(this.path, this.options, this.callback);
-  });
-
-  it('should call with the proper url', function () {
-    this.url.should.equal('http://api.tumblr.com/v2' + this.path);
-  });
-
-  it('should get a function callback', function () {
-    this.receivedCallback.should.be.a('function');
-  });
-
-});
-
 describe('_get', function () {
 
   describe('no api key', function () {
