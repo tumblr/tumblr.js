@@ -1,0 +1,6 @@
+notifications:
+  email:
+    - john.crepezzi@gmail.com
+language: node_js
+rvm:
+  - 0.8

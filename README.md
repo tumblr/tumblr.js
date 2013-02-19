@@ -1,4 +1,7 @@
-# Tumblr.js
+# tumblr.js
+
+[![Build Status](https://secure.travis-ci.org/tumblr/tumblr.js.png)](http://travis-ci.org/tumblr/tumblr.js)
+
 JavaScript client library for the
 [Tumblr API](http://www.tumblr.com/docs/en/api/v2).
 
