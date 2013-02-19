@@ -2,6 +2,8 @@
 JavaScript client library for the
 [Tumblr API](http://www.tumblr.com/docs/en/api/v2).
 
+npm: https://npmjs.org/package/tumblr.js
+
 ## Create a Client
 
 ``` javascript
