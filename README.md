@@ -69,8 +69,8 @@ client.blogInfo(blogName, callback);
 client.posts(blogName, options, callback);
 client.posts(blogName, callback);
 
-client.avatar(blocName, size, callback);
-client.avatar(blocName, callback);
+client.avatar(blogName, size, callback);
+client.avatar(blogName, callback);
 
 client.blogLikes(blogName, options, callback);
 client.blogLikes(blogName, callback);
