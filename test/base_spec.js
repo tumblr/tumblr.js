@@ -21,15 +21,11 @@ describe('_get', function () {
     });
 
     it('should call with the proper url', function () {
-      this.call.url.should.equal('http://api.tumblr.com/v2' + this.path);
+      this.call.url.should.equal('http://api.tumblr.com/v2' + this.path + '?my=options');
     });
 
     it('should want json back', function () {
       this.call.json.should.equal(true);
-    });
-
-    it('should call with the params as qs', function () {
-      this.call.qs.should.eql(this.options);
     });
 
     it('should pass the credentials for oauth', function () {
@@ -62,7 +58,7 @@ describe('_get', function () {
 
     it('should add the api key as an option', function () {
       var proper = { my: 'options', api_key: 'consumer_key' };
-      proper.should.eql(this.call.qs);
+      this.call.url.should.equal('http://api.tumblr.com/v2/the/path?my=options&api_key=consumer_key');
     });
 
   });
