@@ -37,7 +37,7 @@ describe('_get', function () {
     });
 
     it('should get a function callback', function () {
-      this.receivedCallback.should.be.a('function');
+      (typeof this.receivedCallback).should.equal('function');
     });
 
   });
