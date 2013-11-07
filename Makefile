@@ -2,11 +2,11 @@ test:
 	npm test
 
 coverage:
-	jscoverage --no-highlight lib lib-cov
-	- TUMBLR_COV=1 mocha -R html-cov > coverage.html
+	./node_modules/jscoverage/bin/jscoverage --no-highlight lib lib-cov
+	- TUMBLR_COV=1 ./node_modules/mocha/bin/mocha -R html-cov > coverage.html
 	rm -rf lib-cov
 
 jslint:
-	jsl -process lib/tumblr.js -process index.js
+	./node_modules/jsl/bin/jsl -process lib/tumblr.js -process index.js
 
 .PHONY: test
