@@ -40,23 +40,49 @@ client.userInfo(function (err, data) {
 
 ## Supported Methods
 
+Below is a list of available methods and their purpose.  Available options
+are documented on http://www.tumblr.com/docs/en/api/v2 and are specified as
+a JavaScript object, for example:
+
+``` javascript
+client.posts('seejohnrun', { type: 'photo' }, function (err, resp) {
+  resp.posts; // use them for something
+});
+```
+
+In most cases, since options are optional (heh) they are also an optional
+argument, so there is no need to pass an empty object when supplying no options,
+like:
+
+``` javascript
+client.posts('seejohnrun', function (err, resp) {
+  resp.posts; // now we've got all kinds of posts
+});
+```
+
+
 ### User Methods
 
 ``` javascript
-client.userInfo(callback);
+client.userInfo(callback); // get information about authenticating user
 
+// Get dashboard for authenticating user
 client.dashboard(options, callback);
 client.dashboard(callback);
 
+// Get likes for authenticating user
 client.likes(options, callback);
 client.likes(callback);
 
+// Get followings for authenticating user
 client.following(options, callback);
 client.following(callback);
 
+// Follow or unfollow a given blog
 client.follow(blogURL, callback);
 client.unfollow(blogURL, callback);
 
+// Like or unlike a given post
 client.like(id, reblogKey, callback);
 client.unlike(id, reblogKey, callback);
 ```
@@ -64,26 +90,34 @@ client.unlike(id, reblogKey, callback);
 ### Blog Methods
 
 ``` javascript
+// Get information about a given blog
 client.blogInfo(blogName, callback);
 
+// Get a list of posts for a blog (with optional filtering)
 client.posts(blogName, options, callback);
 client.posts(blogName, callback);
 
+// Get the avatar URL for a blog
 client.avatar(blogName, size, callback);
 client.avatar(blogName, callback);
 
+// Get the likes for a blog
 client.blogLikes(blogName, options, callback);
 client.blogLikes(blogName, callback);
 
+// Get the followers for a blog
 client.followers(blogName, options, callback);
 client.followers(blogName, callback);
 
+// Get the queue for a blog
 client.queue(blogName, options, callback);
 client.queue(blogName, callback);
 
+// Get the drafts for a blog
 client.drafts(blogName, options, callback);
 client.drafts(blogName, callback);
 
+// Get the submissions for a blog
 client.submissions(blogName, options, callback);
 client.submissions(blogName, callback);
 ```
@@ -91,12 +125,16 @@ client.submissions(blogName, callback);
 ### Post Methods
 
 ``` javascript
+// Edit a given post
 client.edit(blogName, options, callback);
 
+// Reblog a given post
 client.reblog(blogName, options, callback);
 
+// Delete a given psot
 client.deletePost(blogName, id, callback);
 
+// Convenience methods for creating post types
 client.photo(blogName, options, callback);
 client.quote(blogName, options, callback);
 client.text(blogName, options, callback);
@@ -109,6 +147,7 @@ client.video(blogName, options, callback);
 ### Tagged Methods
 
 ``` javascript
+// View posts tagged with a certain tag
 client.tagged(tag, options, callback);
 client.tagged(tag, callback);
 ```
