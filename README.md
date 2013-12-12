@@ -64,7 +64,8 @@ client.posts('seejohnrun', function (err, resp) {
 ### User Methods
 
 ``` javascript
-client.userInfo(callback); // get information about authenticating user
+// Get information about the authenticating user & their blogs
+client.userInfo(callback);
 
 // Get dashboard for authenticating user
 client.dashboard(options, callback);
