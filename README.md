@@ -32,7 +32,7 @@ var client = new tumblr.Client({
 ``` javascript
 // Show user's blog names
 client.userInfo(function (err, data) {
-	data.blogs.forEach(function (blog) {
+	data.user.blogs.forEach(function (blog) {
 		console.log(blog.name);
 	});
 });
