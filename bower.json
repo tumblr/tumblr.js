@@ -1,0 +1,26 @@
+{
+  "name": "tumblr.js",
+  "version": "0.0.4",
+  "main": "lib/tumblr.js",
+  "ignore": [
+    "bin",
+    "browser",
+    "test",
+    ".gitignore",
+    "bower.json",
+    "index.js",
+    "Makefile",
+    "package.json",
+    "README.md",
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "tests"
+  ],
+  "homepage": "https://github.com/tumblr/tumblr.js",
+  "authors": [
+    "Tumblr"
+  ],
+  "description": "Official JavaScript client for the Tumblr API",
+  "license": "Apache License"
+}
