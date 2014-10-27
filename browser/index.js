@@ -1,4 +1,10 @@
-var tumblr = require('../lib/tumblr');
-tumblr.request(require('browser-request'));
 
-module.exports = tumblr;
+var TumblrClient = require('./client');
+var request = require('browser-request');
+
+module.exports = {
+  Client: TumblrClient,
+  createClient: function (credentials) {
+    return new TumblrClient(credentials, request);
+  }
+};
