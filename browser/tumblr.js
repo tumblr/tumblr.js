@@ -4,7 +4,7 @@ module.exports = {
 
   Client: TumblrClient,
 
-  createClient: function (credentials) {
+  createClient: function(credentials) {
     return new TumblrClient(credentials);
   },
 
