@@ -1,16 +1,15 @@
 var TumblrClient = require('./client');
 
-var request;
-
 module.exports = {
 
   Client: TumblrClient,
 
-  createClient: function (credentials) {
-    return new TumblrClient(credentials, request);
+  createClient: function(credentials) {
+    return new TumblrClient(credentials);
   },
 
   request: function(r) {
-    request = r;
+    TumblrClient.prototype.request = r;
   }
+
 };
