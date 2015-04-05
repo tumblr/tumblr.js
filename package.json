@@ -23,6 +23,7 @@
   },
   "main": "./index",
   "dependencies": {
+    "browser-request": "^0.3.3",
     "request": "2.12.0"
   },
   "devDependencies": {
