@@ -3,6 +3,7 @@ var helper = require('./helper');
 var client = helper.client;
 
 client.credentials.consumer_key = 'consumer_key';
+client.requestTimeout = 12345;
 
 describe('_get', function () {
 
@@ -34,6 +35,10 @@ describe('_get', function () {
 
     it('should avoid redirect', function () {
       this.call.followRedirect.should.equal(false);
+    });
+
+    it('should pass the configured request timeout', function () {
+      this.call.timeout.should.equal(12345);
     });
 
     it('should get a function callback', function () {
