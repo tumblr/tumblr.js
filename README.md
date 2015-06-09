@@ -31,7 +31,7 @@ var client = new tumblr.Client({
 
 ``` javascript
 // Show user's blog names
-client.userInfo(function (err, data) {
+client.userInfo(function (err, data, response) {
 	data.user.blogs.forEach(function (blog) {
 		console.log(blog.name);
 	});
@@ -45,8 +45,8 @@ are documented on http://www.tumblr.com/docs/en/api/v2 and are specified as
 a JavaScript object, for example:
 
 ``` javascript
-client.posts('seejohnrun', { type: 'photo' }, function (err, resp) {
-  resp.posts; // use them for something
+client.posts('seejohnrun', { type: 'photo' }, function (err, data, response) {
+  data.posts; // use them for something
 });
 ```
 
@@ -55,8 +55,8 @@ argument, so there is no need to pass an empty object when supplying no options,
 like:
 
 ``` javascript
-client.posts('seejohnrun', function (err, resp) {
-  resp.posts; // now we've got all kinds of posts
+client.posts('seejohnrun', function (err, data, response) {
+  data.posts; // now we've got all kinds of posts
 });
 ```
 
@@ -151,6 +151,20 @@ client.video(blogName, options, callback);
 // View posts tagged with a certain tag
 client.tagged(tag, options, callback);
 client.tagged(tag, callback);
+```
+
+### More response details
+
+Sometimes it may be helpful to inspect more details about the response, such as the status code, or headers.  The http response object is returned as the 3rd argument in the callback:
+
+``` javascript
+// Show user's blog names
+client.userInfo(function (err, data, response) {
+	// check status code
+    response.statusCode;
+    // check a specific header
+    response.headers['x-ratelimit-api_followers-remaining'];
+});
 ```
 
 ---
