@@ -13,7 +13,7 @@
   "name": "tumblr.js",
   "description": "Official JavaScript client for the Tumblr API",
   "homepage": "https://github.com/tumblr/tumblr.js",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "repository": {
     "url": "https://github.com/tumblr/tumblr.js"
   },
