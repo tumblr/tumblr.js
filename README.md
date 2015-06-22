@@ -132,7 +132,7 @@ client.edit(blogName, options, callback);
 // Reblog a given post
 client.reblog(blogName, options, callback);
 
-// Delete a given psot
+// Delete a given post
 client.deletePost(blogName, id, callback);
 
 // Convenience methods for creating post types
@@ -143,6 +143,20 @@ client.link(blogName, options, callback);
 client.chat(blogName, options, callback);
 client.audio(blogName, options, callback);
 client.video(blogName, options, callback);
+
+// An example photo post using the source parameter
+client.photo(blogName, {
+  caption: 'Look at this neat photo!',
+  link: 'http://nodejs.org'
+  source: 'http://nodejs.org/images/logo.png',
+}, callback);
+
+// An example photo post using the data parameter passing multiple external images
+client.photo(blogName, {
+  caption: 'Look at these neat photos!',
+  data: ['http://nodejs.org/images/logos/nodejs-green.png', 'http://nodejs.org/images/logos/nodejs-dark.png'
+}, callback);
+
 ```
 
 ### Tagged Methods
