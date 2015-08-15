@@ -21,7 +21,7 @@ describe('_get', function () {
     });
 
     it('should call with the proper url', function () {
-      this.call.url.should.equal('http://api.tumblr.com/v2' + this.path + '?my=options');
+      this.call.url.should.equal('https://api.tumblr.com/v2' + this.path + '?my=options');
     });
 
     it('should want json back', function () {
@@ -58,7 +58,7 @@ describe('_get', function () {
 
     it('should add the api key as an option', function () {
       var proper = { my: 'options', api_key: 'consumer_key' };
-      this.call.url.should.equal('http://api.tumblr.com/v2/the/path?my=options&api_key=consumer_key');
+      this.call.url.should.equal('https://api.tumblr.com/v2/the/path?my=options&api_key=consumer_key');
     });
 
   });
