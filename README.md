@@ -132,7 +132,7 @@ client.edit(blogName, options, callback);
 // Reblog a given post
 client.reblog(blogName, options, callback);
 
-// Delete a given psot
+// Delete a given post
 client.deletePost(blogName, id, callback);
 
 // Convenience methods for creating post types
