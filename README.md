@@ -137,6 +137,7 @@ client.deletePost(blogName, id, callback);
 
 // Convenience methods for creating post types
 client.photo(blogName, options, callback);
+client.base64(blogName, options, callback);
 client.quote(blogName, options, callback);
 client.text(blogName, options, callback);
 client.link(blogName, options, callback);
