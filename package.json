@@ -1,21 +1,15 @@
 {
   "author": "Tumblr",
   "contributors": [
-    {
-      "name": "Bryan Irace",
-      "email": "bryan.irace@gmail.com"
-    },
-    {
-      "name": "John Crepezzi",
-      "email": "john.crepezzi@gmail.com"
-    }
+    "Bryan Irace <bryan.irace@gmail.com>",
+    "John Crepezzi <john.crepezzi@gmail.com>"
   ],
-  "name": "tumblr.js",
+  "name": "base64-tumblr.js",
   "description": "Official JavaScript client for the Tumblr API",
-  "homepage": "https://github.com/tumblr/tumblr.js",
+  "homepage": "https://github.com/oliver-j/tumblr.js",
   "version": "0.0.7",
   "repository": {
-    "url": "https://github.com/tumblr/tumblr.js"
+    "url": "git+https://github.com/oliver-j/tumblr.js.git"
   },
   "browserify": "browser/index.js",
   "bin": {
@@ -37,5 +31,16 @@
   },
   "scripts": {
     "test": "mocha -r should test/*_spec.js"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/tumblr/tumblr.js/issues"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "keywords": [
+    "base64",
+    "tumblr"
+  ],
+  "license": "ISC"
 }
