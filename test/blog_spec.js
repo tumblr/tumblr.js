@@ -10,9 +10,9 @@ describe('blog', function () {
     client.credentials = { consumer_key: 'consumer_key' };
   });
 
-  ['photo', 'audio', 'video'].forEach(function (call) {
+  ['base64', 'photo', 'audio', 'video'].forEach(function (call) {
 
-    var otherData = { photo: 'source', audio: 'external_url', video: 'embed' };
+    var otherData = { photo: 'source', audio: 'external_url', video: 'embed', base64: 'data64'};
     var otherField = otherData[call];
 
     describe(call, function () {
