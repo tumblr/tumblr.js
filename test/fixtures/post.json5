@@ -1,0 +1,13 @@
+{
+  '/post': {
+    body: {
+      meta: {
+        status: 200,
+        msg: 'OK',
+      },
+      response: {
+        id: 8675309,
+      }
+    }
+  }
+}

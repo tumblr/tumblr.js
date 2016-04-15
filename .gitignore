@@ -1,9 +1,6 @@
-credentials.json
-.idea
 node_modules
-
-coverage.html
-lib-cov
-
+.DS_Store
+*.log
 *.swp
-*.swo
+*.bak
+credentials*.json

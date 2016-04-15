@@ -1,6 +1,6 @@
 # Contributing
 
-We want to make contributing to tumblr.js as easy and transparent as possible. If you run into problems, please open an issue. We also actively welcome pull requests.
+We want to make contributing to `tumblr.js` as easy and transparent as possible. If you run into problems, please open an issue. We also actively welcome pull requests.
 
 ## Pull Requests
 
