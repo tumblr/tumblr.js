@@ -6,10 +6,10 @@
   "scripts": {
     "test": "gulp"
   },
-  "homepage": "https://www.github.com/tumblr/tumblr.js",
+  "homepage": "https://github.com/tumblr/tumblr.js",
   "repository": {
     "type": "git",
-    "url": "https://www.github.com/tumblr/tumblr.js"
+    "url": "https://github.com/tumblr/tumblr.js.git"
   },
   "keywords": [
     "tumblr",
