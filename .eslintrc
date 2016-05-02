@@ -103,7 +103,7 @@
     "no-lone-blocks": "off", // disallow unnecessary nested blocks
     "no-loop-func": "off", // disallow creation of functions within loops
     "no-magic-numbers": "off", // disallow the use of magic numbers
-    "no-multi-spaces": "off", // disallow use of multiple spaces (fixable)
+    "no-multi-spaces": "error", // disallow use of multiple spaces (fixable)
     "no-multi-str": "off", // disallow use of multiline strings
     "no-native-reassign": "off", // disallow reassignments of native objects
     "no-new": "off", // disallow use of the `new` operator when not part of an assignment or comparison
@@ -189,10 +189,10 @@
     "brace-style": ["error", "1tbs", {"allowSingleLine": false}], // enforce one true brace style
     "camelcase": "off", // require camel case names
     "comma-spacing": ["error", {"before": false, "after": true}], // enforce spacing before and after comma (fixable)
-    "comma-style": "off", // enforce one true comma style
+    "comma-style": ["error", "last"], // enforce one true comma style
     "computed-property-spacing": "off", // require or disallow padding inside computed properties (fixable)
     "consistent-this": "off", // enforce consistent naming when capturing the current execution context
-    "eol-last": "off", // enforce newline at the end of file, with no multiple empty lines (fixable)
+    "eol-last": ["error"], // enforce newline at the end of file, with no multiple empty lines (fixable)
     "func-names": "off", // require function expressions to have a name
     "func-style": "off", // enforce use of function declarations or expressions
     "id-blacklist": "off", // disallow certain identifiers to prevent them being used
@@ -201,8 +201,8 @@
     "indent": ["error", 4, {"SwitchCase": 1}], // specify tab or space width for your code (fixable)
     "jsx-quotes": "off", // specify whether double or single quotes should be used in JSX attributes (fixable)
     "key-spacing": ["error", {"beforeColon": false, "afterColon": true}], // enforce spacing between keys and values in object literal properties
-    "keyword-spacing": "off", // enforce spacing before and after keywords (fixable)
-    "linebreak-style": "off", // enforce linebreak style (fixable)
+    "keyword-spacing": ["error", {"before": true, "after": true}], // enforce spacing before and after keywords
+    "linebreak-style": ["error", "unix"], // enforce linebreak style (fixable)
     "lines-around-comment": "off", // enforce empty lines around comments
     "max-depth": "off", // specify the maximum depth that blocks can be nested
     "max-len": "off", // specify the maximum length of a line in your program
@@ -215,7 +215,7 @@
     "newline-after-var": "off", // require or disallow an empty newline after variable declarations
     "newline-before-return": "off", // require newline before `return` statement
     "newline-per-chained-call": "off", // enforce newline after each call when chaining the calls
-    "no-array-constructor": "off", // disallow use of the `Array` constructor
+    "no-array-constructor": ["error"], // disallow use of the `Array` constructor
     "no-bitwise": "off", // disallow use of bitwise operators
     "no-continue": "off", // disallow use of the `continue` statement
     "no-inline-comments": "off", // disallow comments inline after code
@@ -229,7 +229,7 @@
     "no-restricted-syntax": "off", // disallow use of certain syntax in code
     "no-spaced-func": "off", // disallow space between function identifier and application (fixable)
     "no-ternary": "off", // disallow the use of ternary operators
-    "no-trailing-spaces": "off", // disallow trailing whitespace at the end of lines (fixable)
+    "no-trailing-spaces": "error", // disallow trailing whitespace at the end of lines (fixable)
     "no-underscore-dangle": "off", // disallow dangling underscores in identifiers
     "no-unneeded-ternary": "off", // disallow the use of ternary operators when a simpler alternative exists
     "no-whitespace-before-property": "off", // disallow whitespace before properties
@@ -243,13 +243,13 @@
     "quotes": ["error", "single", "avoid-escape"], // specify whether backticks, double or single quotes should be used (fixable)
     "require-jsdoc": "off", // require JSDoc comment
     "semi": ["error", "always"], // require or disallow use of semicolons instead of ASI (fixable)
-    "semi-spacing": "off", // enforce spacing before and after semicolons (fixable)
+    "semi-spacing": "error", // enforce spacing before and after semicolons (fixable)
     "sort-imports": "off", // enforce sorting import declarations within module
     "sort-vars": "off", // enforce sorting variables within the same declaration block
     "space-before-blocks": ["error", "always"], // require or disallow a space before blocks (fixable)
     "space-before-function-paren": ["error", "never"], // require or disallow a space before function opening parenthesis (fixable)
-    "space-in-parens": "off", // require or disallow spaces inside parentheses (fixable)
-    "space-infix-ops": "off", // require spaces around operators (fixable)
+    "space-in-parens": ["error", "never"], // require or disallow spaces inside parentheses (fixable)
+    "space-infix-ops": "error", // require spaces around operators (fixable)
     "space-unary-ops": ["error", {"words": true, "nonwords": false}], // require or disallow spaces before/after unary operators (fixable)
     "spaced-comment": ["error", "always", {"markers": ["!"]}], // require or disallow a space immediately following the `//` or `/*` in a comment (fixable)
     "wrap-regex": "off", // require regex literals to be wrapped in parentheses
