@@ -180,18 +180,16 @@ describe('tumblr.js', function() {
                             requestError = err;
                             requestResponse = resp;
                         };
-                        var queryParams = {};
+                        var queryParams, testApiPath;
 
-                        before(function(done) {
-                            callbackInvoked = false;
-                            requestError = false;
-                            requestResponse = false;
+                        before(function() {
+                            queryParams = {};
 
                             if (client.credentials.consumer_key) {
                                 queryParams.api_key = client.credentials.consumer_key;
                             }
 
-                            var testApiPath = apiPath;
+                            testApiPath = apiPath;
                             if (httpMethod === 'get') {
                                 testApiPath += createQueryString(queryParams);
                             }
@@ -199,24 +197,54 @@ describe('tumblr.js', function() {
                             nock(client.baseUrl)
                                 .persist()[httpMethod](testApiPath)
                                 .reply(data.body.meta.status, data.body);
-
-                            return client[clientMethod](apiPath, params, function() {
-                                callback.apply(this, arguments);
-                                done();
-                            });
                         });
 
                         after(function() {
                             nock.cleanAll();
                         });
 
-                        it('invokes the callback', function() {
-                            assert.isTrue(callbackInvoked);
+                        describe('params and callback', function() {
+                            before(function(done) {
+                                callbackInvoked = false;
+                                requestError = false;
+                                requestResponse = false;
+
+                                client[clientMethod](apiPath, params, function() {
+                                    callback.apply(this, arguments);
+                                    done();
+                                });
+                            });
+
+                            it('invokes the callback', function() {
+                                assert.isTrue(callbackInvoked);
+                            });
+
+                            it('gets a successful response', function() {
+                                assert.isNotOk(requestError, 'err is falsy');
+                                assert.isDefined(requestResponse);
+                            });
                         });
 
-                        it('gets a successful response', function() {
-                            assert.isNotOk(requestError, 'err is falsy');
-                            assert.isDefined(requestResponse);
+                        describe('callback only', function() {
+                            before(function(done) {
+                                callbackInvoked = false;
+                                requestError = false;
+                                requestResponse = false;
+
+                                client[clientMethod](apiPath, function() {
+                                    callback.apply(this, arguments);
+                                    done();
+                                });
+                            });
+
+                            it('invokes the callback', function() {
+                                assert.isTrue(callbackInvoked);
+                            });
+
+                            it('gets a successful response', function() {
+                                assert.isNotOk(requestError, 'err is falsy');
+                                assert.isDefined(requestResponse);
+                            });
                         });
                     });
                 });

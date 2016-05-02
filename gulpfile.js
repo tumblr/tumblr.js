@@ -8,10 +8,19 @@ gulp.task('lint', function() {
         .pipe(eslint.failAfterError());
 });
 
-gulp.task('test', function() {
+gulp.task('pre-test', function() {
+    var istanbul = require('gulp-istanbul');
+    return gulp.src('lib/tumblr.js')
+        .pipe(istanbul())
+        .pipe(istanbul.hookRequire());
+});
+
+gulp.task('test', ['pre-test'], function() {
     var mocha = require('gulp-mocha');
-    return gulp.src('test/*.test.js', {read: false})
-        .pipe(mocha());
+    var istanbul = require('gulp-istanbul');
+    return gulp.src('test/**/*.test.js', {read: false})
+        .pipe(mocha())
+        .pipe(istanbul.writeReports());
 });
 
 gulp.task('default', ['lint', 'test']);
