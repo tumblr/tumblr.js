@@ -1,6 +1,27 @@
 {
+  "name": "tumblr.js",
+  "version": "1.0.0",
+  "description": "Official JavaScript client for the Tumblr API",
+  "main": "./lib/tumblr",
+  "scripts": {
+    "test": "gulp"
+  },
+  "homepage": "https://github.com/tumblr/tumblr.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tumblr/tumblr.js.git"
+  },
+  "keywords": [
+    "tumblr",
+    "api"
+  ],
   "author": "Tumblr",
+  "license": "Apache-2.0",
   "contributors": [
+    {
+      "name": "Keith McKnight",
+      "email": "keith@mcknig.ht"
+    },
     {
       "name": "Bryan Irace",
       "email": "bryan.irace@gmail.com"
@@ -10,32 +31,22 @@
       "email": "john.crepezzi@gmail.com"
     }
   ],
-  "name": "tumblr.js",
-  "description": "Official JavaScript client for the Tumblr API",
-  "homepage": "https://github.com/tumblr/tumblr.js",
-  "version": "0.0.7",
-  "repository": {
-    "url": "https://github.com/tumblr/tumblr.js"
-  },
-  "browserify": "browser/index.js",
-  "bin": {
-    "tumblr": "./bin/repl.js"
-  },
-  "main": "./index",
   "dependencies": {
-    "request": "^2.12.0"
+    "lodash": "^4.12.0",
+    "query-string": "^4.1.0",
+    "request": "^2.72.0"
   },
   "devDependencies": {
-    "mocha": "*",
-    "should": "*",
-    "jscoverage": "*",
-    "jsl": "*"
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
+    "gulp-istanbul": "^0.10.4",
+    "gulp-mocha": "^2.2.0",
+    "json5": "^0.5.0",
+    "nock": "^8.0.0"
   },
-  "optionalDependencies": {},
-  "engines": {
-    "node": "*"
-  },
-  "scripts": {
-    "test": "mocha -r should test/*_spec.js"
-  }
+  "files": [
+    "/lib",
+    "/LICENSE"
+  ]
 }

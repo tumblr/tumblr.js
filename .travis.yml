@@ -1,6 +1,8 @@
 notifications:
   email:
-    - john.crepezzi@gmail.com
+    - keith@tumblr.com
 language: node_js
-rvm:
-  - 0.8
+node_js:
+  - "5"
+  - "4"
+  - "0.12"

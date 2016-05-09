@@ -1,0 +1,31 @@
+{
+  '/blog/staff/info': {
+    body: {
+      meta: {
+        status: 200,
+        msg: 'OK',
+      },
+      response: {
+        blog: {
+          title: 'Tumblr Staff',
+          name: 'staff',
+          total_posts: 1682,
+          posts: 1682,
+          url: 'https://staff.tumblr.com/',
+          updated: 1461979830,
+          description: 'The world\'s *first* content-free social network',
+          is_nsfw: false,
+          ask: false,
+          ask_page_title: '',
+          ask_anon: false,
+          followed: true,
+          can_send_fan_mail: true,
+          is_blocked_from_primary: false,
+          share_likes: false,
+          subscribed: false,
+          can_subscribe: true,
+        },
+      }
+    },
+  },
+}
