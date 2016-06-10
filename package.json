@@ -6,6 +6,9 @@
   "scripts": {
     "test": "gulp"
   },
+  "engines": {
+    "node": ">=0.12.0"
+  },
   "homepage": "https://github.com/tumblr/tumblr.js",
   "repository": {
     "type": "git",
