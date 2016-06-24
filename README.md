@@ -48,6 +48,15 @@ var client = new tumblr.Client({
 });
 ```
 
+The request methods return `Request` objects by default, but you can have it return `Promise` objects instead, if that's more your thing. Pass `true` as the second argument to `createClient`:
+
+```js
+var tumblr = require('tumblr.js');
+var client = tumblr.createClient({
+  // ...
+}, true);
+```
+
 ### In the Browser
 
 Due to CORS restrictions, you're going to have a really hard time using this library in the browser. Although GET endpoints on the Tumblr API support JSONP, this library is not intended for in-browser use. Sorry!
@@ -73,14 +82,24 @@ client.blogPosts('staff', {type: 'photo'}, function(err, resp) {
 });
 ```
 
-In most cases, since options are optional (heh) they are also an optional
-argument, so there is no need to pass an empty object when supplying no options,
-like:
+In most cases, since options are optional (heh) they are also an optional argument, so there is no need to pass an empty object when supplying no options, like:
 
 ```js
 client.blogPosts('staff', function(err, resp) {
   resp.posts; // now we've got all kinds of posts
 });
+```
+
+If you're using Promises, use `then` and/or `catch` instead of a callback:
+
+```js
+client.blogPosts('staff')
+  .then(function(resp) {
+    resp.posts;
+  })
+  .catch(function(err) {
+    // oops
+  });
 ```
 
 ### User Methods
