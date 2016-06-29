@@ -48,13 +48,16 @@ var client = new tumblr.Client({
 });
 ```
 
-The request methods return `Request` objects by default, but you can have it return `Promise` objects instead, if that's more your thing. Pass `true` as the second argument to `createClient`:
+The request methods return `Request` objects by default, but you can have it return `Promise` objects instead, if that's more your thing. Pass `returnPromises: true` in the options to `createClient`:
 
 ```js
 var tumblr = require('tumblr.js');
 var client = tumblr.createClient({
-  // ...
-}, true);
+  credentials: {
+    // ...
+  },
+  returnPromises: true,
+});
 ```
 
 ### In the Browser
@@ -236,7 +239,9 @@ client.addPostMethods({
     gulp lint # linter
     gulp test # just the tests
 
-# Copyright and license
+---
+
+## Copyright and license
 
 Copyright 2013-2016 Tumblr, Inc.
 
