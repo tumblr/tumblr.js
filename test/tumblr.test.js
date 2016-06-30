@@ -34,6 +34,7 @@ describe('tumblr.js', function() {
 
     describe('createClient', function() {
         var tumblr = require('../lib/tumblr.js');
+        var client;
 
         it('creates a TumblrClient instance', function() {
             assert.isFunction(tumblr.createClient);
@@ -43,8 +44,16 @@ describe('tumblr.js', function() {
 
         it('passes credentials to the client', function() {
             var credentials = DUMMY_CREDENTIALS;
-            var client = tumblr.createClient(credentials);
 
+            // tumblr.createClient(credentials, baseUrl, requestLibrary)
+            client = tumblr.createClient(credentials);
+            assert.equal(client.credentials.consumer_key, credentials.consumer_key);
+            assert.equal(client.credentials.consumer_secret, credentials.consumer_secret);
+            assert.equal(client.credentials.token, credentials.token);
+            assert.equal(client.credentials.token_secret, credentials.token_secret);
+
+            // tumblr.createClient(options)
+            client = tumblr.createClient({credentials: credentials});
             assert.equal(client.credentials.consumer_key, credentials.consumer_key);
             assert.equal(client.credentials.consumer_secret, credentials.consumer_secret);
             assert.equal(client.credentials.token, credentials.token);
@@ -53,21 +62,51 @@ describe('tumblr.js', function() {
 
         it('passes baseUrl to the client', function() {
             var baseUrl = 'https://t.umblr.com/v2';
-            var client = tumblr.createClient({}, baseUrl);
 
+            // tumblr.createClient(credentials, baseUrl, requestLibrary)
+            client = tumblr.createClient({}, baseUrl);
             assert.equal(client.baseUrl, baseUrl);
+
+            // tumblr.createClient(options)
+            client = tumblr.createClient({baseUrl: baseUrl});
+            assert.equal(client.baseUrl, baseUrl);
+        });
+
+        it('passes requestLibrary to the client', function() {
+            var client;
+            var requestLibrary = {
+                get: function(options, callback) {
+                    return callback(options);
+                },
+                post: function(options, callback) {
+                    return callback(options);
+                },
+            };
+
+            // TumblrClient(options)
+            client = tumblr.createClient({request: requestLibrary});
+            assert.equal(client.request, requestLibrary);
+        });
+
+        it('passes returnPromises to the client', function() {
+            // tumblr.createClient(options)
+            client = tumblr.createClient({returnPromises: true});
+            assert.notEqual(client.getRequest, tumblr.Client.prototype.getRequest);
+            assert.notEqual(client.postRequest, tumblr.Client.prototype.postRequest);
         });
     });
 
     describe('Client', function() {
+        var client;
         var tumblr = require('../lib/tumblr.js');
-
         var TumblrClient = tumblr.Client;
 
-        var client;
-
         beforeEach(function() {
-            client = new TumblrClient(DUMMY_CREDENTIALS, DUMMY_API_URL);
+            client = new TumblrClient({
+                credentials: DUMMY_CREDENTIALS,
+                baseUrl: DUMMY_API_URL,
+                returnPromises: false,
+            });
         });
 
         describe('constructor', function() {
@@ -77,9 +116,18 @@ describe('tumblr.js', function() {
             });
 
             it('uses the supplied credentials', function() {
+                var client;
                 var credentials = DUMMY_CREDENTIALS;
-                var client = new TumblrClient(credentials);
 
+                // TumblrClient(credentials, baseUrl, requestLibrary)
+                client = new TumblrClient(credentials);
+                assert.equal(client.credentials.consumer_key, credentials.consumer_key);
+                assert.equal(client.credentials.consumer_secret, credentials.consumer_secret);
+                assert.equal(client.credentials.token, credentials.token);
+                assert.equal(client.credentials.token_secret, credentials.token_secret);
+
+                // TumblrClient(options)
+                client = new TumblrClient({credentials: credentials});
                 assert.equal(client.credentials.consumer_key, credentials.consumer_key);
                 assert.equal(client.credentials.consumer_secret, credentials.consumer_secret);
                 assert.equal(client.credentials.token, credentials.token);
@@ -87,13 +135,20 @@ describe('tumblr.js', function() {
             });
 
             it('uses the supplied baseUrl', function() {
+                var client;
                 var baseUrl = DUMMY_API_URL;
-                var client = tumblr.createClient({}, baseUrl);
 
+                // TumblrClient(credentials, baseUrl, requestLibrary)
+                client = tumblr.createClient({}, baseUrl);
+                assert.equal(client.baseUrl, baseUrl);
+
+                // TumblrClient(options)
+                client = tumblr.createClient({baseUrl: baseUrl});
                 assert.equal(client.baseUrl, baseUrl);
             });
 
             it('uses the supplied requestLibrary', function() {
+                var client;
                 var requestLibrary = {
                     get: function(options, callback) {
                         return callback(options);
@@ -102,9 +157,58 @@ describe('tumblr.js', function() {
                         return callback(options);
                     },
                 };
-                var client = new TumblrClient({}, '', requestLibrary);
 
+                // TumblrClient(credentials, baseUrl, requestLibrary)
+                client = new TumblrClient({}, '', requestLibrary);
                 assert.equal(client.request, requestLibrary);
+
+                // TumblrClient(options)
+                client = new TumblrClient({request: requestLibrary});
+                assert.equal(client.request, requestLibrary);
+            });
+
+            it('uses the supplied returnPromises value', function() {
+                var client;
+
+                // tumblr.createClient(options)
+                client = tumblr.createClient({returnPromises: false});
+                assert.equal(client.getRequest, tumblr.Client.prototype.getRequest);
+                assert.equal(client.postRequest, tumblr.Client.prototype.postRequest);
+
+                // tumblr.createClient(options)
+                client = tumblr.createClient({returnPromises: true});
+                assert.notEqual(client.getRequest, tumblr.Client.prototype.getRequest);
+                assert.notEqual(client.postRequest, tumblr.Client.prototype.postRequest);
+            });
+
+            describe('default options', function() {
+                it('uses the default Tumblr API base URL', function() {
+                    var client = tumblr.createClient();
+                    assert.equal(client.baseUrl, 'https://api.tumblr.com/v2');
+                });
+
+                it('uses default request library', function() {
+                    var client = tumblr.createClient();
+                    assert.equal(client.request, require('request'));
+                });
+
+                it('does not return Promises', function() {
+                    var client = tumblr.createClient();
+                    assert.equal(client.getRequest, tumblr.Client.prototype.getRequest);
+                    assert.equal(client.postRequest, tumblr.Client.prototype.postRequest);
+                });
+            });
+
+        });
+
+        describe('#returnPromises', function() {
+            it('modifies getRequest and postRequest', function() {
+                var client = new TumblrClient();
+                var getRequestBefore = client.getRequest;
+                var postRequestBefore = client.postRequest;
+                client.returnPromises();
+                assert.notEqual(getRequestBefore, client.getRequest);
+                assert.notEqual(postRequestBefore, client.postRequest);
             });
         });
 
@@ -164,6 +268,31 @@ describe('tumblr.js', function() {
          * - TumblrClient#postRequest
          */
 
+        function setupNockBeforeAfter(httpMethod, data, apiPath) {
+            var queryParams, testApiPath;
+
+            before(function() {
+                queryParams = {};
+
+                if (client.credentials.consumer_key) {
+                    queryParams.api_key = client.credentials.consumer_key;
+                }
+
+                testApiPath = apiPath;
+                if (httpMethod === 'get') {
+                    testApiPath += createQueryString(queryParams);
+                }
+
+                nock(client.baseUrl)
+                    .persist()[httpMethod](testApiPath)
+                    .reply(data.body.meta.status, data.body);
+            });
+
+            after(function() {
+                nock.cleanAll();
+            });
+        }
+
         forEach({
             get: 'getRequest',
             post: 'postRequest',
@@ -171,79 +300,139 @@ describe('tumblr.js', function() {
             describe('#' + clientMethod, function() {
                 var fixtures = JSON5.parse(fs.readFileSync(path.join(__dirname, 'fixtures/' + httpMethod + '.json5')).toString());
 
-                forEach(fixtures, function(data, apiPath) {
-                    describe(apiPath, function() {
-                        var callbackInvoked, requestError, requestResponse;
-                        var params = {};
-                        var callback = function(err, resp) {
-                            callbackInvoked = true;
-                            requestError = err;
-                            requestResponse = resp;
-                        };
-                        var queryParams, testApiPath;
+                /**
+                 * ### Callback
+                 */
 
-                        before(function() {
-                            queryParams = {};
+                describe('returnPromises disabled', function() {
+                    forEach(fixtures, function(data, apiPath) {
+                        describe(apiPath, function() {
+                            var callbackInvoked, requestError, requestResponse, returnValue;
+                            var params = {};
+                            var callback = function(err, resp) {
+                                callbackInvoked = true;
+                                requestError = err;
+                                requestResponse = resp;
+                            };
 
-                            if (client.credentials.consumer_key) {
-                                queryParams.api_key = client.credentials.consumer_key;
-                            }
+                            setupNockBeforeAfter(httpMethod, data, apiPath);
 
-                            testApiPath = apiPath;
-                            if (httpMethod === 'get') {
-                                testApiPath += createQueryString(queryParams);
-                            }
+                            describe('params and callback', function() {
+                                before(function(done) {
+                                    callbackInvoked = false;
+                                    requestError = false;
+                                    requestResponse = false;
 
-                            nock(client.baseUrl)
-                                .persist()[httpMethod](testApiPath)
-                                .reply(data.body.meta.status, data.body);
-                        });
+                                    returnValue = client[clientMethod](apiPath, params, function() {
+                                        callback.apply(this, arguments);
+                                        done();
+                                    });
+                                });
 
-                        after(function() {
-                            nock.cleanAll();
-                        });
+                                if (httpMethod === 'post') {
+                                    // Nock seems to cause the POST request to return a Promise,
+                                    // making this difficult to properly test.
+                                    it('returns a Request');
+                                } else {
+                                    it('returns a Request', function() {
+                                        assert.isTrue(returnValue instanceof client.request.Request);
+                                    });
+                                }
 
-                        describe('params and callback', function() {
-                            before(function(done) {
-                                callbackInvoked = false;
-                                requestError = false;
-                                requestResponse = false;
+                                it('invokes the callback', function() {
+                                    assert.isTrue(callbackInvoked);
+                                });
 
-                                client[clientMethod](apiPath, params, function() {
-                                    callback.apply(this, arguments);
-                                    done();
+                                it('gets a successful response', function() {
+                                    assert.isNotOk(requestError, 'err is falsy');
+                                    assert.isDefined(requestResponse);
                                 });
                             });
 
-                            it('invokes the callback', function() {
-                                assert.isTrue(callbackInvoked);
-                            });
+                            describe('callback only', function() {
+                                before(function(done) {
+                                    callbackInvoked = false;
+                                    requestError = false;
+                                    requestResponse = false;
 
-                            it('gets a successful response', function() {
-                                assert.isNotOk(requestError, 'err is falsy');
-                                assert.isDefined(requestResponse);
-                            });
-                        });
+                                    client[clientMethod](apiPath, function() {
+                                        callback.apply(this, arguments);
+                                        done();
+                                    });
+                                });
 
-                        describe('callback only', function() {
-                            before(function(done) {
-                                callbackInvoked = false;
-                                requestError = false;
-                                requestResponse = false;
+                                it('invokes the callback', function() {
+                                    assert.isTrue(callbackInvoked);
+                                });
 
-                                client[clientMethod](apiPath, function() {
-                                    callback.apply(this, arguments);
-                                    done();
+                                it('gets a successful response', function() {
+                                    assert.isNotOk(requestError, 'err is falsy');
+                                    assert.isDefined(requestResponse);
                                 });
                             });
+                        });
+                    });
+                });
 
-                            it('invokes the callback', function() {
-                                assert.isTrue(callbackInvoked);
-                            });
+                /**
+                 * ### Promises
+                 */
 
-                            it('gets a successful response', function() {
-                                assert.isNotOk(requestError, 'err is falsy');
-                                assert.isDefined(requestResponse);
+                describe('returnPromises enabled', function() {
+                    beforeEach(function() {
+                        client.returnPromises();
+                    });
+
+                    forEach({
+                        get: 'getRequest',
+                        post: 'postRequest',
+                    }, function(clientMethod, httpMethod) {
+                        describe('#' + clientMethod, function() {
+                            var fixtures = JSON5.parse(fs.readFileSync(path.join(__dirname, 'fixtures/' + httpMethod + '.json5')).toString());
+
+                            forEach(fixtures, function(data, apiPath) {
+                                describe(apiPath, function() {
+                                    var callbackInvoked, requestError, requestResponse, returnValue;
+                                    var params = {};
+                                    var callback = function(err, resp) {
+                                        callbackInvoked = true;
+                                        requestError = err;
+                                        requestResponse = resp;
+                                    };
+
+                                    setupNockBeforeAfter(httpMethod, data, apiPath);
+
+                                    beforeEach(function(done) {
+                                        callbackInvoked = false;
+                                        requestError = false;
+                                        requestResponse = false;
+
+                                        returnValue = client[clientMethod](apiPath, params);
+                                        // Invoke the callback when the Promise resolves or rejects
+                                        returnValue
+                                            .then(function(resp) {
+                                                callback(null, resp);
+                                                done();
+                                            })
+                                            .catch(function(err) {
+                                                callback(err, null);
+                                                done();
+                                            });
+                                    });
+
+                                    it('returns a Promise', function() {
+                                        assert.isTrue(returnValue instanceof Promise);
+                                    });
+
+                                    it('invokes the callback', function() {
+                                        assert.isTrue(callbackInvoked);
+                                    });
+
+                                    it('gets a successful response', function() {
+                                        assert.isNotOk(requestError, 'err is falsy');
+                                        assert.isDefined(requestResponse);
+                                    });
+                                });
                             });
                         });
                     });

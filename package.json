@@ -1,10 +1,13 @@
 {
   "name": "tumblr.js",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Official JavaScript client for the Tumblr API",
   "main": "./lib/tumblr",
   "scripts": {
     "test": "gulp"
+  },
+  "engines": {
+    "node": ">=0.12.0"
   },
   "homepage": "https://github.com/tumblr/tumblr.js",
   "repository": {
