@@ -1,0 +1,174 @@
+// Palette
+$color-white: #ffffff;
+$color-black: #000000;
+$color-tumblr-blue: #36465d;
+$color-tuatura: #444444;
+$color-dank-smoke: #9da6af;
+$color-likable-red: #d95e40;
+$color-cheezbort: #f2992e;
+$color-always-sunny: #f7dd38;
+$color-reblog-green: #56bc8a;
+$color-neat-blue: #529ecc;
+$color-purple-rain: #a77dc2;
+$color-gloomy-cloud: #748089;
+
+$color-just-vaped: mix($color-tuatura, $color-white, 13%);
+
+$color-marble-statue: mix($color-white, $color-tumblr-blue, 87%);
+$color-high-seas: mix($color-white, $color-tumblr-blue, 13%);
+
+// Colors
+$background-color: $color-tumblr-blue;
+$text-color: $color-white;
+$link-color: $color-reblog-green;
+$link-active-color: $color-purple-rain;
+$link-hover-color: $link-color;
+$border-color: $color-high-seas;
+$disabled-text-color: rgba($text-color, 0.5);
+$important-text-color: $color-likable-red;
+$ancestor-text-color: rgba($text-color, 0.8);
+
+$header-text-color: $color-neat-blue;
+$footer-text-color: inherit;
+
+$method-container-border-color: $border-color;
+$method-background-color: $color-purple-rain;
+$method-text-color: $color-white;
+$method-signature-text-color: rgba($color-white, 0.8);
+$method-signature-type-text-color: rgba($color-white, 0.7);
+$method-signature-return-text-color: rgba($color-white, 0.8);
+
+$table-border-color: $border-color;
+$table-background-color: $background-color;
+$table-head-background-color: transparent;
+$table-row-background-color: transparent;
+$table-row-alt-background-color: transparent;
+
+$param-type-text-color: $color-reblog-green;
+$param-attributes-text-color: $color-dank-smoke;
+
+$nav-background-color: $background-color;
+$nav-header-color: $text-color;
+$nav-subheader-color: $color-neat-blue;
+$nav-subheader-active-color: $nav-subheader-color;
+$nav-subheader-hover-color: $nav-subheader-color;
+$nav-text-color: $color-marble-statue;
+$nav-bullet-color: rgba($text-color, 0.7);
+$nav-active-color: $color-neat-blue;
+$nav-hover-color: $color-neat-blue;
+$nav-border-color: $border-color;
+
+$menu-text-color: $text-color;
+$overlay-background-color: rgba($background-color, 0.5);
+$overlay-text-color: $color-neat-blue;
+
+$code-background-color: mix($color-black, $background-color, 25%);
+$code-text-color: inherit;
+$code-block-background-color: $code-background-color;
+$code-block-text-color: inherit;
+$code-border-color: $border-color;
+$code-selected-border-color: $color-reblog-green;
+
+$github-corner-background-color: $color-reblog-green;
+$github-corner-foreground-color: $color-white;
+
+// Syntax highlighting
+$syntax-default: $code-text-color;
+
+$syntax-keyword: $color-likable-red;
+$syntax-built-in: $color-reblog-green;
+$syntax-type: $color-neat-blue;
+$syntax-literal: $color-cheezbort;
+$syntax-number: $color-purple-rain;
+$syntax-regexp: $color-purple-rain;
+$syntax-string: $color-always-sunny;
+$syntax-subst: $color-likable-red;
+$syntax-symbol: $color-likable-red;
+$syntax-class: $color-reblog-green;
+$syntax-function: $syntax-default;
+$syntax-title: $color-reblog-green;
+$syntax-params: $color-cheezbort;
+
+$syntax-comment: $color-gloomy-cloud;
+$syntax-doctag: $color-purple-rain;
+$syntax-meta: $color-likable-red;
+$syntax-meta-keyword: $color-gloomy-cloud;
+$syntax-meta-string: $color-reblog-green;
+
+$syntax-section: $color-gloomy-cloud;
+$syntax-tag: $color-purple-rain;
+$syntax-name: $color-gloomy-cloud;
+$syntax-built-in-name: $color-gloomy-cloud;
+$syntax-attr: $color-dank-smoke;
+$syntax-attribute: $color-dank-smoke;
+$syntax-variable: $color-reblog-green;
+
+$syntax-bullet: $color-purple-rain;
+$syntax-code: $color-purple-rain;
+$syntax-emphasis: $color-cheezbort;
+$syntax-strong: $color-black;
+$syntax-formula: $color-neat-blue;
+$syntax-link: $color-reblog-green;
+$syntax-quote: $color-cheezbort;
+
+$syntax-selector-tag: $color-cheezbort;
+$syntax-selector-id: $color-cheezbort;
+$syntax-selector-class: $color-reblog-green;
+$syntax-selector-attr: $color-cheezbort;
+$syntax-selector-pseudo: $color-dank-smoke;
+
+$syntax-template-tag: $color-likable-red;
+$syntax-template-variable: $color-gloomy-cloud;
+
+$syntax-diff-addition: $color-reblog-green;
+$syntax-diff-deletion: $color-likable-red;
+
+$syntax-tag-name: $color-purple-rain;
+$syntax-tag-attr: $color-dank-smoke;
+$syntax-tag-string: $color-reblog-green;
+$syntax-html-tag: $color-gloomy-cloud;
+$syntax-function-keyword: $color-neat-blue;
+$syntax-function-params: $color-cheezbort;
+
+// Fonts
+$webfont-import: 'https://fonts.googleapis.com/css?family=Montserrat:400,700|Open+Sans:400,600|Anonymous+Pro';
+
+$body-font: 'Open Sans', sans-serif;
+$header-font: 'Montserrat', $body-font;
+$subheader-font: $header-font;
+$navigation-font: $body-font;
+$navigation-item-font: $body-font;
+$code-font: 'Anonymous Pro', monospace;
+
+$font-size: 14pt;
+$font-weight: 400;
+
+$code-font-size: 1rem;
+$code-font-weight: 400;
+
+$header-font-size: 3.75rem;
+$header-font-weight: 700;
+
+$subheader-font-size: 2.25rem;
+$subheader-font-weight: 400;
+
+$subsubheader-font-weight: 600;
+
+$nav-font-size: 0.9rem;
+$nav-font-weight: 400;
+
+// Dimensions
+$min-width: 360px;
+$menu-width: 250px;
+$content-padding: 1rem;
+
+// Z-indexing
+$z-index-hidden: -1;
+$z-index-normal: 1;
+$z-index-overlay: 2;
+$z-index-top: 3;
+
+// Flags
+$global-antialias: true;
+$custom-underline: true;
+$show-footer: false;

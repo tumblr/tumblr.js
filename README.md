@@ -8,7 +8,9 @@ The official JavaScript client library for the [Tumblr API](http://www.tumblr.co
 
 Install this package from [npm](https://www.npmjs.com/package/tumblr.js):
 
-    npm install --save tumblr.js
+```bash
+npm install --save tumblr.js
+```
 
 ## Usage
 
@@ -235,9 +237,11 @@ client.addPostMethods({
 
 ## Running Tests
 
-    npm test # linter and tests
-    gulp lint # linter
-    gulp test # just the tests
+```bash
+npm test # linter and tests
+gulp lint # linter
+gulp test # just the tests
+```
 
 ---
 

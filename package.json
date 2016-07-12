@@ -4,6 +4,8 @@
   "description": "Official JavaScript client for the Tumblr API",
   "main": "./lib/tumblr",
   "scripts": {
+    "generate-docs": "rm -rf gh-pages && node_modules/.bin/jsdoc -c jsdoc.json",
+    "gh-pages": "git subtree push --prefix=gh-pages origin gh-pages",
     "test": "gulp"
   },
   "engines": {
@@ -35,16 +37,18 @@
     }
   ],
   "dependencies": {
-    "lodash": "^4.12.0",
-    "query-string": "^4.1.0",
-    "request": "^2.72.0"
+    "lodash": "^4.13.1",
+    "query-string": "^4.2.2",
+    "request": "^2.73.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "gulp": "^3.9.1",
-    "gulp-eslint": "^2.0.0",
-    "gulp-istanbul": "^0.10.4",
+    "gulp-eslint": "^3.0.1",
+    "gulp-istanbul": "^1.0.0",
     "gulp-mocha": "^2.2.0",
+    "hotdoc": "^0.7.0",
+    "jsdoc": "^3.4.0",
     "json5": "^0.5.0",
     "nock": "^8.0.0"
   },

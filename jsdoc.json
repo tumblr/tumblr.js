@@ -1,0 +1,43 @@
+{
+    "tags": {
+        "allowUnknownTags": false
+    },
+    "source": {
+        "include": "lib",
+        "includePattern": ".js$"
+    },
+    "plugins": [
+        "plugins/markdown"
+    ],
+    "opts": {
+        "encoding": "utf8",
+        "destination": "gh-pages/",
+        "recurse": true,
+        "verbose": true,
+        "readme": "README.md",
+        "template": "node_modules/hotdoc/template"
+    },
+    "hotdoc": {
+        "static": true,
+        "sort": false,
+        "collapsible": true,
+        "startExpanded": true,
+        "github": "https://github.com/tumblr/tumblr.js",
+        "customVariables": "docs/_variables.scss",
+        "customOverrides": "docs/_overrides.scss"
+    },
+    "markdown": {
+        "highlight": true
+    },
+    "templates": {
+        "cleverLinks": true,
+        "monospaceLinks": false,
+        "default": {
+            "staticFiles": {
+                "include": [
+                    "docs/static"
+                ]
+            }
+        }
+    }
+}
