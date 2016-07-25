@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var semver = require('semver');
 
 gulp.task('lint', function() {
     var eslint = require('gulp-eslint');
@@ -23,4 +24,9 @@ gulp.task('test', ['pre-test'], function() {
         .pipe(istanbul.writeReports());
 });
 
-gulp.task('default', ['lint', 'test']);
+if (semver.satisfies(process.version, '>=4')) {
+    gulp.task('default', ['lint', 'test']);
+} else {
+    // Don't lint in non-ES2015 environments
+    gulp.task('default', ['test']);
+}
