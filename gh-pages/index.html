@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Home - Documentation</title>
+
+    <!--[if lt IE 9]>
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+    <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="nav">
+    <h2 class="home-link"><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><details open><summary><a href="TumblrClient.html">TumblrClient</a></summary><ul class='methods'><li data-type='method'><a href="TumblrClient.html#.blogInfo">blogInfo</a></li><li data-type='method'><a href="TumblrClient.html#.blogAvatar">blogAvatar</a></li><li data-type='method'><a href="TumblrClient.html#.blogLikes">blogLikes</a></li><li data-type='method'><a href="TumblrClient.html#.blogLikes">blogLikes</a></li><li data-type='method'><a href="TumblrClient.html#.blogPosts">blogPosts</a></li><li data-type='method'><a href="TumblrClient.html#.blogQueue">blogQueue</a></li><li data-type='method'><a href="TumblrClient.html#.blogDrafts">blogDrafts</a></li><li data-type='method'><a href="TumblrClient.html#.blogSubmissions">blogSubmissions</a></li><li data-type='method'><a href="TumblrClient.html#.userInfo">userInfo</a></li><li data-type='method'><a href="TumblrClient.html#.userDashboard">userDashboard</a></li><li data-type='method'><a href="TumblrClient.html#.userFollowing">userFollowing</a></li><li data-type='method'><a href="TumblrClient.html#.userLikes">userLikes</a></li><li data-type='method'><a href="TumblrClient.html#.taggedPosts">taggedPosts</a></li><li data-type='method'><a href="TumblrClient.html#.createPost">createPost</a></li><li data-type='method'><a href="TumblrClient.html#.editPost">editPost</a></li><li data-type='method'><a href="TumblrClient.html#.reblogPost">reblogPost</a></li><li data-type='method'><a href="TumblrClient.html#.deletePost">deletePost</a></li><li data-type='method'><a href="TumblrClient.html#.followBlog">followBlog</a></li><li data-type='method'><a href="TumblrClient.html#.unfollowBlog">unfollowBlog</a></li><li data-type='method'><a href="TumblrClient.html#.likePost">likePost</a></li><li data-type='method'><a href="TumblrClient.html#.unlikePost">unlikePost</a></li><li data-type='method'><a href="TumblrClient.html#.createTextPost">createTextPost</a></li><li data-type='method'><a href="TumblrClient.html#.createPhotoPost">createPhotoPost</a></li><li data-type='method'><a href="TumblrClient.html#.createQuotePost">createQuotePost</a></li><li data-type='method'><a href="TumblrClient.html#.createLinkPost">createLinkPost</a></li><li data-type='method'><a href="TumblrClient.html#.createLinkPost">createLinkPost</a></li><li data-type='method'><a href="TumblrClient.html#.createAudioPost">createAudioPost</a></li><li data-type='method'><a href="TumblrClient.html#.createVideoPost">createVideoPost</a></li><li data-type='method'><a href="TumblrClient.html#getRequest">getRequest</a></li><li data-type='method'><a href="TumblrClient.html#postRequest">postRequest</a></li><li data-type='method'><a href="TumblrClient.html#returnPromises">returnPromises</a></li><li data-type='method'><a href="TumblrClient.html#addGetMethods">addGetMethods</a></li><li data-type='method'><a href="TumblrClient.html#addPostMethods">addPostMethods</a></li></ul></details></li></ul><h3>Namespaces</h3><ul><li><details open><summary><a href="tumblr.html">tumblr</a></summary><ul class='members'><li data-type='member'><a href="tumblr.html#.Client">Client</a></li></ul><ul class='methods'><li data-type='method'><a href="tumblr.html#.createClient">createClient</a></li></ul></details></li></ul>
+</nav>
+
+<div id="main" class="main-container">
+    
+
+    
+
+
+
+    
+
+
+
+
+
+
+
+
+
+    
+
+
+    <section class="readme has-github-corner">
+        <article><h1>tumblr.js</h1><p><a href="https://travis-ci.org/tumblr/tumblr.js"><img src="https://travis-ci.org/tumblr/tumblr.js.svg?branch=master" alt="Build Status"></a></p>
+<p>The official JavaScript client library for the <a href="http://www.tumblr.com/docs/api/v2">Tumblr API</a>.</p>
+<h2>Installation</h2><p>Install this package from <a href="https://www.npmjs.com/package/tumblr.js">npm</a>:</p>
+<pre class="prettyprint source lang-bash"><code>npm install --save tumblr.js</code></pre><h2>Usage</h2><h3>Authentication</h3><p>Different API methods use different kinds of authentication.</p>
+<p>Most of them require at least an API key, which will require you to <a href="https://www.tumblr.com/oauth/apps">register an application</a>. The <strong>OAuth Consumer Key</strong> is your API key.</p>
+<p>For methods that require a fully signed request, you'll need OAuth tokens as well, which you get from authenticating as a Tumblr user and allowing access to your API application. Here's the easy way to do it with our own account:</p>
+<ol>
+<li>Visit the <a href="https://www.tumblr.com/oauth/apps">OAuth applications page</a></li>
+<li>Click &quot;Explore API&quot; on the application you want to authorize</li>
+<li>Click the &quot;Allow&quot; button, which will take you to the <a href="https://api.tumblr.com/console">API console</a></li>
+<li>Click the &quot;Show keys&quot; button, which will show you the credentials you can use to make signed requests.</li>
+</ol>
+<p>If you're building an application of your own for users out in the world, you'll need to go through the 3-legged OAuth flow. See the <a href="https://www.tumblr.com/docs/api/v2#auth">help docs</a> for more info.</p>
+<h3>In Node.js</h3><pre class="prettyprint source lang-js"><code>var tumblr = require('tumblr.js');
+var client = tumblr.createClient({
+  consumer_key: '&lt;consumer key>',
+  consumer_secret: '&lt;consumer secret>',
+  token: '&lt;oauth token>',
+  token_secret: '&lt;oauth token secret>'
+});</code></pre><p>Or, if you prefer:</p>
+<pre class="prettyprint source lang-js"><code>var tumblr = require('tumblr.js');
+var client = new tumblr.Client({
+  // ...
+});</code></pre><p>The request methods return <code>Request</code> objects by default, but you can have it return <code>Promise</code> objects instead, if that's more your thing. Pass <code>returnPromises: true</code> in the options to <code>createClient</code>:</p>
+<pre class="prettyprint source lang-js"><code>var tumblr = require('tumblr.js');
+var client = tumblr.createClient({
+  credentials: {
+    // ...
+  },
+  returnPromises: true,
+});</code></pre><h3>In the Browser</h3><p>Due to CORS restrictions, you're going to have a really hard time using this library in the browser. Although GET endpoints on the Tumblr API support JSONP, this library is not intended for in-browser use. Sorry!</p>
+<h2>Example</h2><pre class="prettyprint source lang-js"><code>// Show user's blog names
+client.userInfo(function(err, data) {
+  data.user.blogs.forEach(function(blog) {
+    console.log(blog.name);
+  });
+});</code></pre><h2>Supported Methods</h2><p>Below is a list of available methods and their purpose. Available options are documented in the <a href="https://www.tumblr.com/docs/api/v2">API Docs</a> and are specified as a JavaScript object.</p>
+<pre class="prettyprint source lang-js"><code>client.blogPosts('staff', {type: 'photo'}, function(err, resp) {
+  resp.posts; // use them for something
+});</code></pre><p>In most cases, since options are optional (heh) they are also an optional argument, so there is no need to pass an empty object when supplying no options, like:</p>
+<pre class="prettyprint source lang-js"><code>client.blogPosts('staff', function(err, resp) {
+  resp.posts; // now we've got all kinds of posts
+});</code></pre><p>If you're using Promises, use <code>then</code> and/or <code>catch</code> instead of a callback:</p>
+<pre class="prettyprint source lang-js"><code>client.blogPosts('staff')
+  .then(function(resp) {
+    resp.posts;
+  })
+  .catch(function(err) {
+    // oops
+  });</code></pre><h3>User Methods</h3><pre class="prettyprint source lang-js"><code>// Get information about the authenticating user & their blogs
+client.userInfo(callback);
+
+// Get dashboard for authenticating user
+client.userDashboard(options, callback);
+client.userDashboard(callback);
+
+// Get likes for authenticating user
+client.userLikes(options, callback);
+client.userLikes(callback);
+
+// Get followings for authenticating user
+client.userFollowing(options, callback);
+client.userFollowing(callback);
+
+// Follow or unfollow a given blog
+client.followBlog(blogURL, callback);
+client.unfollowBlog(blogURL, callback);
+
+// Like or unlike a given post
+client.likePost(id, reblogKey, callback);
+client.unlikePost(id, reblogKey, callback);</code></pre><h3>Blog Methods</h3><pre class="prettyprint source lang-js"><code>// Get information about a given blog
+client.blogInfo(blogName, callback);
+
+// Get a list of posts for a blog (with optional filtering)
+client.blogPosts(blogName, options, callback);
+client.blogPosts(blogName, callback);
+
+// Get the avatar URL for a blog
+client.blogAvatar(blogName, size, callback);
+client.blogAvatar(blogName, callback);
+
+// Get the likes for a blog
+client.blogLikes(blogName, options, callback);
+client.blogLikes(blogName, callback);
+
+// Get the followers for a blog
+client.blogFollowers(blogName, options, callback);
+client.blogFollowers(blogName, callback);
+
+// Get the queue for a blog
+client.blogQueue(blogName, options, callback);
+client.blogQueue(blogName, callback);
+
+// Get the drafts for a blog
+client.blogDrafts(blogName, options, callback);
+client.blogDrafts(blogName, callback);
+
+// Get the submissions for a blog
+client.blogSubmissions(blogName, options, callback);
+client.blogSubmissions(blogName, callback);</code></pre><h3>Post Methods</h3><pre class="prettyprint source lang-js"><code>// Edit a given post
+client.editPost(blogName, options, callback);
+
+// Reblog a given post
+client.reblogPost(blogName, options, callback);
+
+// Delete a given post
+client.deletePost(blogName, id, callback);
+
+// Convenience methods for creating post types
+client.createTextPost(blogName, options, callback);
+client.createPhotoPost(blogName, options, callback);
+client.createQuotePost(blogName, options, callback);
+client.createLinkPost(blogName, options, callback);
+client.createChatPost(blogName, options, callback);
+client.createAudioPost(blogName, options, callback);
+client.createVideoPost(blogName, options, callback);</code></pre><h3>Tagged Methods</h3><pre class="prettyprint source lang-js"><code>// View posts tagged with a certain tag
+client.taggedPosts(tag, options, callback);
+client.taggedPosts(tag, callback);</code></pre><h2>Unsupported Methods</h2><p>You can make GET and POST requests to any endpoint directly. These methods are used internally by the methods listed above:</p>
+<pre class="prettyprint source lang-js"><code>// GET requests
+client.getRequest(apiPath, params, callback);
+
+// POST requests
+client.postRequest(apiPath, params, callback);</code></pre><p>In the unlikely event that we add a bunch of methods to the API docs and don't update this client, you can map new client methods to API endpoints. URL and query parameters are automatically turned into arguments to these methods. It's a little weird to explain, so just look at these examples:</p>
+<pre class="prettyprint source lang-js"><code>// GET methods
+client.addGetMethods({
+  // creates client.userInfo(params, callback)
+  userInfo: '/user/info',
+  // client.blogInfo(blogIdentifier, params, callback)
+  blogInfo: '/blog/:blogIdentifier/info',
+  // Creates client.taggedPosts(tag, params, callback)
+  taggedPosts: ['/tagged', ['tag']],
+});
+
+// POST methods
+client.addPostMethods({
+  // client.deletePost(blogIdentifier, id, params, callback)
+  deletePost: ['/blog/:blogIdentifier/post/delete', ['id']],
+  // Creates client.likePost(tag, id, reblog_key, params, callback)
+  likePost: ['/user/like', ['id', 'reblog_key']],
+});</code></pre><hr>
+<h2>Running Tests</h2><pre class="prettyprint source lang-bash"><code>npm test # linter and tests
+gulp lint # linter
+gulp test # just the tests</code></pre><hr>
+<h2>Copyright and license</h2><p>Copyright 2013-2016 Tumblr, Inc.</p>
+<p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;); you may not
+use this work except in compliance with the License. You may obtain a copy of
+the License in the <a href="LICENSE">LICENSE</a> file, or at:</p>
+<p>http://www.apache.org/licenses/LICENSE-2.0</p>
+<p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS, WITHOUT
+WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+License for the specific language governing permissions and limitations.</p></article>
+    </section>
+
+    
+        <a href="https://github.com/tumblr/tumblr.js" class="github-corner">
+            <svg width="80" height="80" viewBox="0 0 250 250">
+                <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path>
+                <path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" class="octo-arm"></path>
+                <path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+            </svg>
+        </a>
+
+    
+
+
+
+
+
+
+</div>
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Jul 25 2016 16:32:48 GMT-0400 (EDT) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script src="scripts/main.js"></script>
+</body>
+</html>

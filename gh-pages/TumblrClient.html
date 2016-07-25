@@ -1,0 +1,9610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>TumblrClient - Documentation</title>
+
+    <!--[if lt IE 9]>
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+    <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav class="nav">
+    <h2 class="home-link"><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><details open><summary><a href="TumblrClient.html">TumblrClient</a></summary><ul class='methods'><li data-type='method'><a href="TumblrClient.html#.blogInfo">blogInfo</a></li><li data-type='method'><a href="TumblrClient.html#.blogAvatar">blogAvatar</a></li><li data-type='method'><a href="TumblrClient.html#.blogLikes">blogLikes</a></li><li data-type='method'><a href="TumblrClient.html#.blogLikes">blogLikes</a></li><li data-type='method'><a href="TumblrClient.html#.blogPosts">blogPosts</a></li><li data-type='method'><a href="TumblrClient.html#.blogQueue">blogQueue</a></li><li data-type='method'><a href="TumblrClient.html#.blogDrafts">blogDrafts</a></li><li data-type='method'><a href="TumblrClient.html#.blogSubmissions">blogSubmissions</a></li><li data-type='method'><a href="TumblrClient.html#.userInfo">userInfo</a></li><li data-type='method'><a href="TumblrClient.html#.userDashboard">userDashboard</a></li><li data-type='method'><a href="TumblrClient.html#.userFollowing">userFollowing</a></li><li data-type='method'><a href="TumblrClient.html#.userLikes">userLikes</a></li><li data-type='method'><a href="TumblrClient.html#.taggedPosts">taggedPosts</a></li><li data-type='method'><a href="TumblrClient.html#.createPost">createPost</a></li><li data-type='method'><a href="TumblrClient.html#.editPost">editPost</a></li><li data-type='method'><a href="TumblrClient.html#.reblogPost">reblogPost</a></li><li data-type='method'><a href="TumblrClient.html#.deletePost">deletePost</a></li><li data-type='method'><a href="TumblrClient.html#.followBlog">followBlog</a></li><li data-type='method'><a href="TumblrClient.html#.unfollowBlog">unfollowBlog</a></li><li data-type='method'><a href="TumblrClient.html#.likePost">likePost</a></li><li data-type='method'><a href="TumblrClient.html#.unlikePost">unlikePost</a></li><li data-type='method'><a href="TumblrClient.html#.createTextPost">createTextPost</a></li><li data-type='method'><a href="TumblrClient.html#.createPhotoPost">createPhotoPost</a></li><li data-type='method'><a href="TumblrClient.html#.createQuotePost">createQuotePost</a></li><li data-type='method'><a href="TumblrClient.html#.createLinkPost">createLinkPost</a></li><li data-type='method'><a href="TumblrClient.html#.createLinkPost">createLinkPost</a></li><li data-type='method'><a href="TumblrClient.html#.createAudioPost">createAudioPost</a></li><li data-type='method'><a href="TumblrClient.html#.createVideoPost">createVideoPost</a></li><li data-type='method'><a href="TumblrClient.html#getRequest">getRequest</a></li><li data-type='method'><a href="TumblrClient.html#postRequest">postRequest</a></li><li data-type='method'><a href="TumblrClient.html#returnPromises">returnPromises</a></li><li data-type='method'><a href="TumblrClient.html#addGetMethods">addGetMethods</a></li><li data-type='method'><a href="TumblrClient.html#addPostMethods">addPostMethods</a></li></ul></details></li></ul><h3>Namespaces</h3><ul><li><details open><summary><a href="tumblr.html">tumblr</a></summary><ul class='members'><li data-type='member'><a href="tumblr.html#.Client">Client</a></li></ul><ul class='methods'><li data-type='method'><a href="tumblr.html#.createClient">createClient</a></li></ul></details></li></ul>
+</nav>
+
+<div id="main" class="main-container">
+    
+        <h1 class="page-title">TumblrClient</h1>
+    
+
+    
+
+
+
+
+<section class="page-container">
+
+    <header class="page-header">
+        
+            <h2>
+            TumblrClient
+            </h2>
+            
+        
+    </header>
+
+    <section class="page-content">
+        <article class="container-overview">
+            
+                
+                
+
+<article class="method">
+    
+        <h4 class="name" id="TumblrClient"><span class="signature-type"></span>new TumblrClient<span class="signature">(<span class="optional">[options]</span>)</span><span class="signature-return"></span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line696">line 696</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Creates a Tumblr API client using the given options</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>options</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>client options</p></td>
+
+</tr>
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>credentials</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>OAuth credentials</p></td>
+
+</tr>
+
+
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>baseUrl</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>API base URL</p></td>
+
+</tr>
+
+
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>request</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>library to use for making requests</p></td>
+
+</tr>
+
+
+
+
+
+        
+            
+            
+            
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+            
+        </article>
+
+        
+
+        
+
+        
+
+         
+
+        
+
+        
+
+        
+            <article class="container-methods">
+                <h3 class="subsection-title">Methods</h3>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".blogInfo"><span class="signature-type">(static) </span>blogInfo<span class="signature">(blogIdentifier, <span class="optional">[params]</span>, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line34">line 34</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Gets information about a given blog</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>blogIdentifier</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>blog name or URL</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>optional data sent with the request</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".blogAvatar"><span class="signature-type">(static) </span>blogAvatar<span class="signature">(blogIdentifier, <span class="optional">[size]</span>, <span class="optional">[params]</span>, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line49">line 49</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Gets the avatar URL for a blog</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>blogIdentifier</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>blog name or URL</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>size</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">number</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>avatar size, in pixels</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>optional data sent with the request</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".blogLikes"><span class="signature-type">(static) </span>blogLikes<span class="signature">(blogIdentifier, <span class="optional">[params]</span>, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line65">line 65</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Gets the likes for a blog</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>blogIdentifier</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>blog name or URL</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>optional data sent with the request</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".blogLikes"><span class="signature-type">(static) </span>blogLikes<span class="signature">(blogIdentifier, <span class="optional">[params]</span>, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line80">line 80</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Gets the followers for a blog</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>blogIdentifier</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>blog name or URL</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>optional data sent with the request</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".blogPosts"><span class="signature-type">(static) </span>blogPosts<span class="signature">(blogIdentifier, <span class="optional">[type]</span>, <span class="optional">[params]</span>, <span class="optional">[callback]</span>)</span><span class="signature-return"></span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line95">line 95</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Gets a list of posts for a blog</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>blogIdentifier</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>blog name or URL</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>type</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>filters returned posts to the specified type</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>optional data sent with the request</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".blogQueue"><span class="signature-type">(static) </span>blogQueue<span class="signature">(blogIdentifier, <span class="optional">[params]</span>, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line109">line 109</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Gets the queue for a blog</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>blogIdentifier</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>blog name or URL</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>optional data sent with the request</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".blogDrafts"><span class="signature-type">(static) </span>blogDrafts<span class="signature">(blogIdentifier, <span class="optional">[params]</span>, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line124">line 124</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Gets the drafts for a blog</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>blogIdentifier</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>blog name or URL</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>optional data sent with the request</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".blogSubmissions"><span class="signature-type">(static) </span>blogSubmissions<span class="signature">(blogIdentifier, <span class="optional">[params]</span>, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line139">line 139</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Gets the submissions for a blog</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>blogIdentifier</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>blog name or URL</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>optional parameters sent with the request</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".userInfo"><span class="signature-type">(static) </span>userInfo<span class="signature">(<span class="optional">[params]</span>, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line154">line 154</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Gets information about the authenticating user and their blogs</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>optional parameters sent with the request</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".userDashboard"><span class="signature-type">(static) </span>userDashboard<span class="signature">(<span class="optional">[params]</span>, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line168">line 168</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Gets the dashboard posts for the authenticating user</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>optional parameters sent with the request</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".userFollowing"><span class="signature-type">(static) </span>userFollowing<span class="signature">(<span class="optional">[params]</span>, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line182">line 182</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Gets the blogs the authenticating user follows</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>optional parameters sent with the request</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".userLikes"><span class="signature-type">(static) </span>userLikes<span class="signature">(<span class="optional">[params]</span>, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line196">line 196</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Gets the likes for the authenticating user</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>optional parameters sent with the request</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".taggedPosts"><span class="signature-type">(static) </span>taggedPosts<span class="signature">(<span class="optional">[tag]</span>, <span class="optional">[params]</span>, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line210">line 210</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Gets posts tagged with the specified tag</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>tag</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>tag to search for</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>optional parameters sent with the request</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".createPost"><span class="signature-type">(static) </span>createPost<span class="signature">(blogIdentifier, params, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line227">line 227</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Creates a post on the given blog.
+See the <a href="https://www.tumblr.com/docs/api/v2#posting">API docs</a> for more information
+about the parameters accepted.</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>blogIdentifier</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>blog name or URL</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>parameters sent with the request</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".editPost"><span class="signature-type">(static) </span>editPost<span class="signature">(blogIdentifier, params, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line244">line 244</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Edits a given post</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>blogIdentifier</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>blog name or URL</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>parameters sent with the request</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".reblogPost"><span class="signature-type">(static) </span>reblogPost<span class="signature">(blogIdentifier, params, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line259">line 259</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Edits a given post</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>blogIdentifier</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>blog name or URL</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>parameters sent with the request</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".deletePost"><span class="signature-type">(static) </span>deletePost<span class="signature">(blogIdentifier, params, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line274">line 274</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Edits a given post</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>blogIdentifier</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>blog name or URL</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>parameters sent with the request</p></td>
+
+</tr>
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>id</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>ID of the post to delete</p></td>
+
+</tr>
+
+
+
+
+
+        
+            
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".followBlog"><span class="signature-type">(static) </span>followBlog<span class="signature">(params, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line290">line 290</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Follows a blog as the authenticating user</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>parameters sent with the request</p></td>
+
+</tr>
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>url</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>URL of the blog to follow</p></td>
+
+</tr>
+
+
+
+
+
+        
+            
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".unfollowBlog"><span class="signature-type">(static) </span>unfollowBlog<span class="signature">(params, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line305">line 305</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Unfollows a blog as the authenticating user</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>parameters sent with the request</p></td>
+
+</tr>
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>url</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>URL of the blog to unfollow</p></td>
+
+</tr>
+
+
+
+
+
+        
+            
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".likePost"><span class="signature-type">(static) </span>likePost<span class="signature">(params, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line320">line 320</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Likes a post as the authenticating user</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>parameters sent with the request</p></td>
+
+</tr>
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>id</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>ID of the post to like</p></td>
+
+</tr>
+
+
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>reblog_key</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>Reblog key for the post ID</p></td>
+
+</tr>
+
+
+
+
+
+        
+            
+            
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".unlikePost"><span class="signature-type">(static) </span>unlikePost<span class="signature">(params, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line336">line 336</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Unlikes a post as the authenticating user</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>parameters sent with the request</p></td>
+
+</tr>
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>id</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>ID of the post to unlike</p></td>
+
+</tr>
+
+
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>reblog_key</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>Reblog key for the post ID</p></td>
+
+</tr>
+
+
+
+
+
+        
+            
+            
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".createTextPost"><span class="signature-type">(static) </span>createTextPost<span class="signature">(blogIdentifier, params, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line723">line 723</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://www.tumblr.com/docs/api/v2#ptext-posts">API docs</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Creates a text post on the given blog</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>blogIdentifier</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>blog name or URL</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>parameters sent with the request</p></td>
+
+</tr>
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>title</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>post title text</p></td>
+
+</tr>
+
+
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>body</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>post body text</p></td>
+
+</tr>
+
+
+
+
+
+        
+            
+            
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".createPhotoPost"><span class="signature-type">(static) </span>createPhotoPost<span class="signature">(blogIdentifier, params, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line742">line 742</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://www.tumblr.com/docs/api/v2#pphoto-posts">API docs</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Creates a photo post on the given blog</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>blogIdentifier</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>blog name or URL</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>parameters sent with the request</p></td>
+
+</tr>
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>source</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>image source URL</p></td>
+
+</tr>
+
+
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>data</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Stream</span>
+|
+
+<span class="param-type">Array</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>an image or array of images</p></td>
+
+</tr>
+
+
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>data64</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>base64-encoded image data</p></td>
+
+</tr>
+
+
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>caption</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>post caption text</p></td>
+
+</tr>
+
+
+
+
+
+        
+            
+            
+            
+            
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".createQuotePost"><span class="signature-type">(static) </span>createQuotePost<span class="signature">(blogIdentifier, params, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line763">line 763</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://www.tumblr.com/docs/api/v2#pquote-posts">API docs</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Creates a quote post on the given blog</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>blogIdentifier</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>blog name or URL</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>parameters sent with the request</p></td>
+
+</tr>
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>quote</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>quote text</p></td>
+
+</tr>
+
+
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>source</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>quote source</p></td>
+
+</tr>
+
+
+
+
+
+        
+            
+            
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".createLinkPost"><span class="signature-type">(static) </span>createLinkPost<span class="signature">(blogIdentifier, params, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line782">line 782</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://www.tumblr.com/docs/api/v2#plink-posts">API docs</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Creates a link post on the given blog</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>blogIdentifier</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>blog name or URL</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>parameters sent with the request</p></td>
+
+</tr>
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>title</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>post title text</p></td>
+
+</tr>
+
+
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>url</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>the link URL</p></td>
+
+</tr>
+
+
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>thumbnail</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>the URL of an image to use as the thumbnail</p></td>
+
+</tr>
+
+
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>excerpt</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>an excerpt from the page the link points to</p></td>
+
+</tr>
+
+
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>author</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>the name of the author of the page the link points to</p></td>
+
+</tr>
+
+
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>description</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>post caption text</p></td>
+
+</tr>
+
+
+
+
+
+        
+            
+            
+            
+            
+            
+            
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".createLinkPost"><span class="signature-type">(static) </span>createLinkPost<span class="signature">(blogIdentifier, params, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line805">line 805</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://www.tumblr.com/docs/api/v2#pchat-posts">API docs</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Creates a chat post on the given blog</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>blogIdentifier</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>blog name or URL</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>parameters sent with the request</p></td>
+
+</tr>
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>title</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>post title text</p></td>
+
+</tr>
+
+
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>conversation</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>chat text</p></td>
+
+</tr>
+
+
+
+
+
+        
+            
+            
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".createAudioPost"><span class="signature-type">(static) </span>createAudioPost<span class="signature">(blogIdentifier, params, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line824">line 824</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://www.tumblr.com/docs/api/v2#paudio-posts">API docs</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Creates a photo post on the given blog</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>blogIdentifier</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>blog name or URL</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>parameters sent with the request</p></td>
+
+</tr>
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>external_url</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>image source URL</p></td>
+
+</tr>
+
+
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>data</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Stream</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>an audio file</p></td>
+
+</tr>
+
+
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>caption</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>post caption text</p></td>
+
+</tr>
+
+
+
+
+
+        
+            
+            
+            
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id=".createVideoPost"><span class="signature-type">(static) </span>createVideoPost<span class="signature">(blogIdentifier, params, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line844">line 844</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://www.tumblr.com/docs/api/v2#pvideo-posts">API docs</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Creates a photo post on the given blog</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>blogIdentifier</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>blog name or URL</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>parameters sent with the request</p></td>
+
+</tr>
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>embed</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>embed code or a video URL</p></td>
+
+</tr>
+
+
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>data</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Stream</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>a video file</p></td>
+
+</tr>
+
+
+
+
+    
+    
+<tr class="prop">
+    
+        <td class="name">
+            
+                <span class="prefix">&#8627;</span>
+            
+            <code>caption</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>post caption text</p></td>
+
+</tr>
+
+
+
+
+
+        
+            
+            
+            
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>invoked when the request completes</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id="getRequest"><span class="signature-type"></span>getRequest<span class="signature">(apiPath, params, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line879">line 879</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Performs a GET request</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>apiPath</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>URL path for the request</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>query parameters</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>request callback</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id="postRequest"><span class="signature-type"></span>postRequest<span class="signature">(apiPath, params, <span class="optional">[callback]</span>)</span><span class="signature-return"> &rarr; {Request|Promise}</span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line896">line 896</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Performs a POST request</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>apiPath</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>URL path for the request</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>params</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>form parameters</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>callback</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type"><a href="TumblrClient.html#~callback">TumblrClient~callback</a></span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>request callback</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <h5>Returns:</h5>
+    
+            
+<div class="param-desc">
+    <p>Request object, or Promise if <code>returnPromises</code> was used</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Request</span>
+|
+
+<span class="param-type">Promise</span>
+
+
+    </dd>
+</dl>
+
+        
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id="returnPromises"><span class="signature-type"></span>returnPromises<span class="signature">()</span><span class="signature-return"></span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line908">line 908</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Sets the client to return Promises instead of Request objects by patching the <code>getRequest</code> and
+<code>postRequest</code> methods on the client</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id="addGetMethods"><span class="signature-type"></span>addGetMethods<span class="signature">(methods)</span><span class="signature-return"></span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line918">line 918</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Adds GET methods to the client</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>methods</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>mapping of method names to endpoints</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id="addPostMethods"><span class="signature-type"></span>addPostMethods<span class="signature">(methods)</span><span class="signature-return"></span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line927">line 927</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Adds POST methods to the client</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>methods</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+
+    
+
+    <td class="description last"><p>mapping of method names to endpoints</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+                
+            </article>
+        
+
+        
+            <article class="container-type-definitions">
+                <h3 class="subsection-title">Type Definitions</h3>
+
+                
+                    
+
+<article class="method">
+    
+        <h4 class="name" id="~callback"><span class="signature-type"></span>callback<span class="signature">(err<span class="signature-attributes">nullable</span>, resp<span class="signature-attributes">nullable</span>, <span class="optional">[response]</span><span class="signature-attributes">nullable</span>)</span><span class="signature-return"></span></h4>
+
+        
+    
+
+    
+
+<dl class="details">
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line931">line 931</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+    
+    <div class="description">
+        <p>Handles the response from a client reuest</p>
+    </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params">
+    <thead>
+    <tr>
+        
+            <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+            <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>err</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Error</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+                <div class="attribute nullable">nullable</div>
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>error message</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>resp</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">Object</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+
+            
+                <div class="attribute nullable">nullable</div>
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>response body</p></td>
+
+</tr>
+
+
+
+        
+            
+            
+<tr class="prop">
+    
+        <td class="name">
+            
+            <code>response</code>
+        </td>
+    
+
+    <td class="type">
+        
+            
+<span class="param-type">string</span>
+
+
+        
+    </td>
+
+    
+        <td class="attributes">
+            
+                <div class="attribute optional">optional</div>
+            
+
+            
+                <div class="attribute nullable">nullable</div>
+            
+
+            
+        </td>
+    
+
+    
+
+    <td class="description last"><p>raw response</p></td>
+
+</tr>
+
+
+
+        
+    </tbody>
+</table>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+                
+            </article>
+        
+
+        
+    </section>
+
+</section>
+
+
+
+
+</div>
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.0</a> on Mon Jul 25 2016 16:32:48 GMT-0400 (EDT) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script src="scripts/main.js"></script>
+</body>
+</html>
