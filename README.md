@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/tumblr/tumblr.js.svg?branch=master)](https://travis-ci.org/tumblr/tumblr.js)
 
-The official JavaScript client library for the [Tumblr API](http://www.tumblr.com/docs/api/v2).
+The official JavaScript client library for the [Tumblr API](http://www.tumblr.com/docs/api/v2). Check out the [detailed documentation here](https://tumblr.github.io/tumblr.js/index.html).
 
 ## Installation
 
