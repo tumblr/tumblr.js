@@ -3,6 +3,7 @@
   "version": "1.1.1",
   "description": "Official JavaScript client for the Tumblr API",
   "main": "./lib/tumblr",
+  "types": "./lib/tumblr.d.ts",
   "scripts": {
     "generate-docs": "rm -rf gh-pages && node_modules/.bin/jsdoc -c jsdoc.json",
     "gh-pages": "git subtree push --prefix=gh-pages origin gh-pages",
