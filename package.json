@@ -1,6 +1,6 @@
 {
   "name": "tumblr.js",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Official JavaScript client for the Tumblr API",
   "main": "./lib/tumblr",
   "scripts": {
