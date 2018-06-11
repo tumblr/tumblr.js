@@ -3,6 +3,6 @@ notifications:
     - keith@tumblr.com
 language: node_js
 node_js:
-  - "5"
-  - "4"
-  - "0.12"
+  - "6"
+  - "8"
+  - "10"
