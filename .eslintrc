@@ -6,7 +6,6 @@
   },
 
   "parser": "espree",
-  "ecmaFeatures": {},
 
   //
   // http://eslint.org/docs/rules/

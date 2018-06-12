@@ -239,8 +239,8 @@ client.addPostMethods({
 
 ```bash
 npm test # linter and tests
-gulp lint # linter
-gulp test # just the tests
+npm run lint # linter
+npm run mocha # just the tests
 ```
 
 ---

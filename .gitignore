@@ -4,4 +4,5 @@ node_modules
 *.swp
 *.bak
 credentials*.json
-coverage
+.nyc_output
+package-lock.json
