@@ -82,7 +82,7 @@ client.userInfo(function(err, data) {
 Below is a list of available methods and their purpose. Available options are documented in the [API Docs](https://www.tumblr.com/docs/api/v2) and are specified as a JavaScript object.
 
 ```js
-client.blogPosts('staff', {type: 'photo'}, function(err, resp) {
+client.blogPosts('blogName', {type: 'photo', tag: ['multiple','tags','likethis']}, function(err, resp) {
   resp.posts; // use them for something
 });
 ```
@@ -90,7 +90,7 @@ client.blogPosts('staff', {type: 'photo'}, function(err, resp) {
 In most cases, since options are optional (heh) they are also an optional argument, so there is no need to pass an empty object when supplying no options, like:
 
 ```js
-client.blogPosts('staff', function(err, resp) {
+client.blogPosts('blogName', function(err, resp) {
   resp.posts; // now we've got all kinds of posts
 });
 ```
@@ -98,7 +98,7 @@ client.blogPosts('staff', function(err, resp) {
 If you're using Promises, use `then` and/or `catch` instead of a callback:
 
 ```js
-client.blogPosts('staff')
+client.blogPosts('blogName')
   .then(function(resp) {
     resp.posts;
   })
