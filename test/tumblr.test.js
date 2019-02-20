@@ -1,26 +1,26 @@
-var fs = require('fs');
-var path = require('path');
+const fs = require('fs');
+const path = require('path');
 
-var JSON5 = require('json5');
-var qs = require('query-string');
-var forEach = require('lodash/forEach');
-var lowerCase = require('lodash/lowerCase');
+const JSON5 = require('json5');
+const qs = require('query-string');
+const forEach = require('lodash/forEach');
+const lowerCase = require('lodash/lowerCase');
 
-var assert = require('chai').assert;
-var nock = require('nock');
+const assert = require('chai').assert;
+const nock = require('nock');
 
-var DUMMY_CREDENTIALS = {
+const DUMMY_CREDENTIALS = {
     consumer_key: 'Mario',
     consumer_secret: 'Luigi',
     token: 'Toad',
     token_secret: 'Princess Toadstool',
 };
-var DUMMY_API_URL = 'https://t.umblr.com/v2';
+const DUMMY_API_URL = 'https://t.umblr.com/v2';
 
-var URL_PARAM_REGEX = /\/:([^\/]+)/g;
+const URL_PARAM_REGEX = /\/:([^\/]+)/g;
 
 function createQueryString(obj) {
-    var queryString = qs.stringify(obj);
+    const queryString = qs.stringify(obj);
     return queryString ? '?' + queryString : '';
 }
 
@@ -33,20 +33,19 @@ describe('tumblr.js', function() {
     });
 
     describe('createClient', function() {
-        var tumblr = require('../lib/tumblr.js');
-        var client;
+        const tumblr = require('../lib/tumblr.js');
 
         it('creates a TumblrClient instance', function() {
             assert.isFunction(tumblr.createClient);
-            var client = tumblr.createClient();
+            const client = tumblr.createClient();
             assert.isTrue(client instanceof tumblr.Client);
         });
 
         it('passes credentials to the client', function() {
-            var credentials = DUMMY_CREDENTIALS;
+            const credentials = DUMMY_CREDENTIALS;
 
             // tumblr.createClient(credentials, baseUrl, requestLibrary)
-            client = tumblr.createClient(credentials);
+            let client = tumblr.createClient(credentials);
             assert.equal(client.credentials.consumer_key, credentials.consumer_key);
             assert.equal(client.credentials.consumer_secret, credentials.consumer_secret);
             assert.equal(client.credentials.token, credentials.token);
@@ -61,10 +60,10 @@ describe('tumblr.js', function() {
         });
 
         it('passes baseUrl to the client', function() {
-            var baseUrl = 'https://t.umblr.com/v2';
+            const baseUrl = 'https://t.umblr.com/v2';
 
             // tumblr.createClient(credentials, baseUrl, requestLibrary)
-            client = tumblr.createClient({}, baseUrl);
+            let client = tumblr.createClient({}, baseUrl);
             assert.equal(client.baseUrl, baseUrl);
 
             // tumblr.createClient(options)
@@ -73,8 +72,7 @@ describe('tumblr.js', function() {
         });
 
         it('passes requestLibrary to the client', function() {
-            var client;
-            var requestLibrary = {
+            const requestLibrary = {
                 get: function(options, callback) {
                     return callback(options);
                 },
@@ -84,40 +82,31 @@ describe('tumblr.js', function() {
             };
 
             // TumblrClient(options)
-            client = tumblr.createClient({request: requestLibrary});
+            const client = tumblr.createClient({request: requestLibrary});
             assert.equal(client.request, requestLibrary);
         });
 
         it('passes returnPromises to the client', function() {
             // tumblr.createClient(options)
-            client = tumblr.createClient({returnPromises: true});
+            const client = tumblr.createClient({returnPromises: true});
             assert.notEqual(client.getRequest, tumblr.Client.prototype.getRequest);
             assert.notEqual(client.postRequest, tumblr.Client.prototype.postRequest);
         });
     });
 
     describe('Client', function() {
-        var client;
-        var tumblr = require('../lib/tumblr.js');
-        var TumblrClient = tumblr.Client;
-
-        beforeEach(function() {
-            client = new TumblrClient({
-                credentials: DUMMY_CREDENTIALS,
-                baseUrl: DUMMY_API_URL,
-                returnPromises: false,
-            });
-        });
+        const tumblr = require('../lib/tumblr.js');
+        const TumblrClient = tumblr.Client;
 
         describe('constructor', function() {
             it('creates a TumblrClient instance', function() {
-                var client = new TumblrClient();
+                const client = new TumblrClient();
                 assert.isTrue(client instanceof TumblrClient);
             });
 
             it('uses the supplied credentials', function() {
-                var client;
-                var credentials = DUMMY_CREDENTIALS;
+                let client;
+                const credentials = DUMMY_CREDENTIALS;
 
                 // TumblrClient(credentials, baseUrl, requestLibrary)
                 client = new TumblrClient(credentials);
@@ -135,8 +124,8 @@ describe('tumblr.js', function() {
             });
 
             it('uses the supplied baseUrl', function() {
-                var client;
-                var baseUrl = DUMMY_API_URL;
+                let client;
+                const baseUrl = DUMMY_API_URL;
 
                 // TumblrClient(credentials, baseUrl, requestLibrary)
                 client = tumblr.createClient({}, baseUrl);
@@ -148,8 +137,8 @@ describe('tumblr.js', function() {
             });
 
             it('uses the supplied requestLibrary', function() {
-                var client;
-                var requestLibrary = {
+                let client;
+                const requestLibrary = {
                     get: function(options, callback) {
                         return callback(options);
                     },
@@ -168,10 +157,8 @@ describe('tumblr.js', function() {
             });
 
             it('uses the supplied returnPromises value', function() {
-                var client;
-
                 // tumblr.createClient(options)
-                client = tumblr.createClient({returnPromises: false});
+                let client = tumblr.createClient({returnPromises: false});
                 assert.equal(client.getRequest, tumblr.Client.prototype.getRequest);
                 assert.equal(client.postRequest, tumblr.Client.prototype.postRequest);
 
@@ -183,17 +170,17 @@ describe('tumblr.js', function() {
 
             describe('default options', function() {
                 it('uses the default Tumblr API base URL', function() {
-                    var client = tumblr.createClient();
+                    const client = tumblr.createClient();
                     assert.equal(client.baseUrl, 'https://api.tumblr.com/v2');
                 });
 
                 it('uses default request library', function() {
-                    var client = tumblr.createClient();
+                    const client = tumblr.createClient();
                     assert.equal(client.request, require('request'));
                 });
 
                 it('does not return Promises', function() {
-                    var client = tumblr.createClient();
+                    const client = tumblr.createClient();
                     assert.equal(client.getRequest, tumblr.Client.prototype.getRequest);
                     assert.equal(client.postRequest, tumblr.Client.prototype.postRequest);
                 });
@@ -203,15 +190,23 @@ describe('tumblr.js', function() {
 
         describe('#returnPromises', function() {
             it('modifies getRequest and postRequest', function() {
-                var client = new TumblrClient();
-                var getRequestBefore = client.getRequest;
-                var postRequestBefore = client.postRequest;
+                const client = new TumblrClient();
+                const getRequestBefore = client.getRequest;
+                const postRequestBefore = client.postRequest;
                 client.returnPromises();
                 assert.notEqual(getRequestBefore, client.getRequest);
                 assert.notEqual(postRequestBefore, client.postRequest);
             });
         });
 
+        let client;
+        beforeEach(function() {
+            client = new TumblrClient({
+                credentials: DUMMY_CREDENTIALS,
+                baseUrl: DUMMY_API_URL,
+                returnPromises: false,
+            });
+        });
 
         /**
          * ## Default methods
@@ -220,7 +215,7 @@ describe('tumblr.js', function() {
          */
 
         describe('default methods', function() {
-            var defaulthMethods = [
+            const defaulthMethods = [
                 'blogInfo',
                 'blogAvatar',
                 'blogLikes',
@@ -269,7 +264,7 @@ describe('tumblr.js', function() {
          */
 
         function setupNockBeforeAfter(httpMethod, data, apiPath) {
-            var queryParams, testApiPath;
+            let queryParams, testApiPath;
 
             before(function() {
                 queryParams = {};
@@ -298,7 +293,7 @@ describe('tumblr.js', function() {
             post: 'postRequest',
         }, function(clientMethod, httpMethod) {
             describe('#' + clientMethod, function() {
-                var fixtures = JSON5.parse(fs.readFileSync(path.join(__dirname, 'fixtures/' + httpMethod + '.json5')).toString());
+                const fixtures = JSON5.parse(fs.readFileSync(path.join(__dirname, 'fixtures/' + httpMethod + '.json5')).toString());
 
                 /**
                  * ### Callback
@@ -307,9 +302,9 @@ describe('tumblr.js', function() {
                 describe('returnPromises disabled', function() {
                     forEach(fixtures, function(data, apiPath) {
                         describe(apiPath, function() {
-                            var callbackInvoked, requestError, requestResponse, returnValue;
-                            var params = {};
-                            var callback = function(err, resp) {
+                            let callbackInvoked, requestError, requestResponse, returnValue;
+                            const params = {};
+                            const callback = function(err, resp) {
                                 callbackInvoked = true;
                                 requestError = err;
                                 requestResponse = resp;
@@ -388,13 +383,13 @@ describe('tumblr.js', function() {
                         post: 'postRequest',
                     }, function(clientMethod, httpMethod) {
                         describe('#' + clientMethod, function() {
-                            var fixtures = JSON5.parse(fs.readFileSync(path.join(__dirname, 'fixtures/' + httpMethod + '.json5')).toString());
+                            const fixtures = JSON5.parse(fs.readFileSync(path.join(__dirname, 'fixtures/' + httpMethod + '.json5')).toString());
 
                             forEach(fixtures, function(data, apiPath) {
                                 describe(apiPath, function() {
-                                    var callbackInvoked, requestError, requestResponse, returnValue;
-                                    var params = {};
-                                    var callback = function(err, resp) {
+                                    let callbackInvoked, requestError, requestResponse, returnValue;
+                                    const params = {};
+                                    const callback = function(err, resp) {
                                         callbackInvoked = true;
                                         requestError = err;
                                         requestResponse = resp;
@@ -455,7 +450,7 @@ describe('tumblr.js', function() {
             post: 'addPostMethods',
         }, function(clientMethod, httpMethod) {
             describe('#' + clientMethod, function() {
-                var data = {
+                const data = {
                     meta: {
                         status: 200,
                         msg: 'k',
@@ -467,7 +462,7 @@ describe('tumblr.js', function() {
                     },
                 };
 
-                var addMethods = {
+                const addMethods = {
                     testNoPathParameters: '/no/params',
                     testOnePathParameter: '/one/:url/param',
                     testTwoPathParameters: '/one/:url/param',
@@ -481,15 +476,15 @@ describe('tumblr.js', function() {
 
                 forEach(addMethods, function(apiPath, methodName) {
                     describe(lowerCase(methodName).replace(/^test /i, ''), function() {
-                        var callbackInvoked, requestError, requestResponse;
-                        var params = {};
-                        var callback = function(err, resp) {
+                        let callbackInvoked, requestError, requestResponse;
+                        const params = {};
+                        const callback = function(err, resp) {
                             callbackInvoked = true;
                             requestError = err;
                             requestResponse = resp;
                         };
-                        var queryParams = {};
-                        var args = [];
+                        const queryParams = {};
+                        const args = [];
 
                         if (typeof apiPath === 'string') {
                             forEach(apiPath.match(URL_PARAM_REGEX), function(apiPathParam) {
@@ -518,7 +513,7 @@ describe('tumblr.js', function() {
                                 queryParams.api_key = client.credentials.consumer_key;
                             }
 
-                            var testApiPath = apiPath;
+                            let testApiPath = apiPath;
                             if (httpMethod === 'get') {
                                 testApiPath += createQueryString(queryParams);
                             }

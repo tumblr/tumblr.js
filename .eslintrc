@@ -274,7 +274,7 @@
     "no-restricted-imports": "off", // restrict usage of specified modules when loaded by `import` declaration
     "no-this-before-super": "error", // disallow use of `this`/`super` before calling `super()` in constructors (recommended)
     "no-useless-constructor": "off", // disallow unnecessary constructor
-    "no-var": "off", // require `let` or `const` instead of `var`
+    "no-var": "error", // require `let` or `const` instead of `var`
     "object-shorthand": "off", // require method and property shorthand syntax for object literals
     "prefer-arrow-callback": "off", // suggest using arrow functions as callbacks
     "prefer-const": "off", // suggest using `const` declaration for variables that are never reassigned after declared
