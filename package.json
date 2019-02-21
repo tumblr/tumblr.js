@@ -1,6 +1,6 @@
 {
   "name": "tumblr.js",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Official JavaScript client for the Tumblr API",
   "main": "./lib/tumblr",
   "types": "./lib/tumblr.d.ts",
@@ -40,19 +40,19 @@
     }
   ],
   "dependencies": {
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.11",
     "query-string": "^6.1.0",
     "request": "^2.87.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",
     "eslint": "^4.19.1",
-    "hotdoc": "^0.7.1",
+    "hotdoc": "^0.7.2",
     "jsdoc": "^3.4.0",
     "json5": "^1.0.1",
     "mocha": "^5.2.0",
     "nock": "^9.2.6",
-    "nyc": "^11.8.0",
+    "nyc": "^13.3.0",
     "semver": "^5.5.0"
   },
   "files": [
