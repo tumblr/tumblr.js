@@ -32,8 +32,8 @@ If you're building an application of your own for users out in the world, you'll
 ### In Node.js
 
 ```js
-var tumblr = require('tumblr.js');
-var client = tumblr.createClient({
+const tumblr = require('tumblr.js');
+const client = tumblr.createClient({
   consumer_key: '<consumer key>',
   consumer_secret: '<consumer secret>',
   token: '<oauth token>',
@@ -44,8 +44,8 @@ var client = tumblr.createClient({
 Or, if you prefer:
 
 ```js
-var tumblr = require('tumblr.js');
-var client = new tumblr.Client({
+const tumblr = require('tumblr.js');
+const client = new tumblr.Client({
   // ...
 });
 ```
@@ -53,8 +53,8 @@ var client = new tumblr.Client({
 The request methods return `Request` objects by default, but you can have it return `Promise` objects instead, if that's more your thing. Pass `returnPromises: true` in the options to `createClient`:
 
 ```js
-var tumblr = require('tumblr.js');
-var client = tumblr.createClient({
+const tumblr = require('tumblr.js');
+const client = tumblr.createClient({
   credentials: {
     // ...
   },
