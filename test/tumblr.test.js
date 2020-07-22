@@ -171,7 +171,7 @@ describe('tumblr.js', function() {
             describe('default options', function() {
                 it('uses the default Tumblr API base URL', function() {
                     const client = tumblr.createClient();
-                    assert.equal(client.baseUrl, 'https://api.tumblr.com/v2');
+                    assert.equal(client.baseUrl, 'https://api.tumblr.com');
                 });
 
                 it('uses default request library', function() {
