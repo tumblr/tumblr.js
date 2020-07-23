@@ -15,7 +15,7 @@ const DUMMY_CREDENTIALS = {
     token: 'Toad',
     token_secret: 'Princess Toadstool',
 };
-const DUMMY_API_URL = 'https://t.umblr.com/v2';
+const DUMMY_API_URL = 'https://t.umblr.com';
 
 const URL_PARAM_REGEX = /\/:([^\/]+)/g;
 
