@@ -15,7 +15,7 @@ const DUMMY_CREDENTIALS = {
     token: 'Toad',
     token_secret: 'Princess Toadstool',
 };
-const DUMMY_API_URL = 'https://t.umblr.com/v2';
+const DUMMY_API_URL = 'https://t.umblr.com';
 
 const URL_PARAM_REGEX = /\/:([^\/]+)/g;
 
@@ -171,7 +171,7 @@ describe('tumblr.js', function() {
             describe('default options', function() {
                 it('uses the default Tumblr API base URL', function() {
                     const client = tumblr.createClient();
-                    assert.equal(client.baseUrl, 'https://api.tumblr.com/v2');
+                    assert.equal(client.baseUrl, 'https://api.tumblr.com');
                 });
 
                 it('uses default request library', function() {

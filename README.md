@@ -217,19 +217,19 @@ In the unlikely event that we add a bunch of methods to the API docs and don't u
 // GET methods
 client.addGetMethods({
   // creates client.userInfo(params, callback)
-  userInfo: '/user/info',
+  userInfo: '/v2/user/info',
   // client.blogInfo(blogIdentifier, params, callback)
-  blogInfo: '/blog/:blogIdentifier/info',
+  blogInfo: '/v2/blog/:blogIdentifier/info',
   // Creates client.taggedPosts(tag, params, callback)
-  taggedPosts: ['/tagged', ['tag']],
+  taggedPosts: ['/v2/tagged', ['tag']],
 });
 
 // POST methods
 client.addPostMethods({
   // client.deletePost(blogIdentifier, id, params, callback)
-  deletePost: ['/blog/:blogIdentifier/post/delete', ['id']],
+  deletePost: ['/v2/blog/:blogIdentifier/post/delete', ['id']],
   // Creates client.likePost(tag, id, reblog_key, params, callback)
-  likePost: ['/user/like', ['id', 'reblog_key']],
+  likePost: ['/v2/user/like', ['id', 'reblog_key']],
 });
 ```
 
