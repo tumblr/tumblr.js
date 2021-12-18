@@ -74,6 +74,7 @@ declare module 'tumblr.js' {
         unlikePost(id: number | string, reblogKey: string, callback: TumblrClientCallback): void
         
         getRequest(apiPath: string, paramsOrCallback?: object | null | TumblrClientCallback, callback?: TumblrClientCallback): Request
+        postRequest(apiPath: string, paramsOrCallback?: object | null | TumblrClientCallback, callback?: TumblrClientCallback): Request
     }
 
     function createClient(options: any): TumblrClient;
