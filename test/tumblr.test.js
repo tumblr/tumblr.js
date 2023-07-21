@@ -17,7 +17,7 @@ const DUMMY_CREDENTIALS = {
 };
 const DUMMY_API_URL = 'https://t.umblr.com';
 
-const URL_PARAM_REGEX = /\/:([^\/]+)/g;
+const URL_PARAM_REGEX = /\/:([^/]+)/g;
 
 function createQueryString(obj) {
   const queryString = qs.stringify(obj);
