@@ -59,7 +59,7 @@
     "no-unexpected-multiline": "error", // disallow code that looks like two expressions but is actually one (recommended)
     "no-unreachable": "error", // disallow unreachable statements after a return, throw, continue, or break statement (recommended)
     "use-isnan": "error", // disallow comparisons with the value `NaN` (recommended)
-    "valid-jsdoc": ["error", {"requireReturn": false}], // ensure JSDoc comments are valid
+    "valid-jsdoc": ["error", { "requireReturn": false }], // ensure JSDoc comments are valid
     "valid-typeof": "error", // ensure results of typeof are compared against a valid string (recommended)
 
     //
@@ -158,7 +158,7 @@
     "no-undef": "error", // disallow use of undeclared variables unless mentioned in a `/*global */` block (recommended)
     "no-undef-init": "off", // disallow use of undefined when initializing variables
     "no-undefined": "off", // disallow use of `undefined` variable
-    "no-unused-vars": ["error", {"vars": "all", "args": "none"}], // disallow declaration of variables that are not used in the code (recommended)
+    "no-unused-vars": ["error", { "vars": "all", "args": "none" }], // disallow declaration of variables that are not used in the code (recommended)
     "no-use-before-define": "off", // disallow use of variables before they are defined
 
     //
@@ -186,9 +186,9 @@
 
     "array-bracket-spacing": ["error", "never"], // enforce spacing inside array brackets (fixable)
     "block-spacing": "off", // disallow or enforce spaces inside of single line blocks (fixable)
-    "brace-style": ["error", "1tbs", {"allowSingleLine": false}], // enforce one true brace style
+    "brace-style": ["error", "1tbs", { "allowSingleLine": false }], // enforce one true brace style
     "camelcase": "off", // require camel case names
-    "comma-spacing": ["error", {"before": false, "after": true}], // enforce spacing before and after comma (fixable)
+    "comma-spacing": ["error", { "before": false, "after": true }], // enforce spacing before and after comma (fixable)
     "comma-style": ["error", "last"], // enforce one true comma style
     "computed-property-spacing": "off", // require or disallow padding inside computed properties (fixable)
     "consistent-this": "off", // enforce consistent naming when capturing the current execution context
@@ -198,10 +198,10 @@
     "id-blacklist": "off", // disallow certain identifiers to prevent them being used
     "id-length": "off", // enforce minimum and maximum identifier lengths (variable names, property names etc.)
     "id-match": "off", // require identifiers to match the provided regular expression
-    "indent": ["error", 4, {"SwitchCase": 1}], // specify tab or space width for your code (fixable)
+    "indent": ["error", 4, { "SwitchCase": 1 }], // specify tab or space width for your code (fixable)
     "jsx-quotes": "off", // specify whether double or single quotes should be used in JSX attributes (fixable)
-    "key-spacing": ["error", {"beforeColon": false, "afterColon": true}], // enforce spacing between keys and values in object literal properties
-    "keyword-spacing": ["error", {"before": true, "after": true}], // enforce spacing before and after keywords
+    "key-spacing": ["error", { "beforeColon": false, "afterColon": true }], // enforce spacing between keys and values in object literal properties
+    "keyword-spacing": ["error", { "before": true, "after": true }], // enforce spacing before and after keywords
     "linebreak-style": ["error", "unix"], // enforce linebreak style (fixable)
     "lines-around-comment": "off", // enforce empty lines around comments
     "max-depth": "off", // specify the maximum depth that blocks can be nested
@@ -239,7 +239,7 @@
     "operator-assignment": "off", // require assignment operator shorthand where possible or prohibit it entirely
     "operator-linebreak": "off", // enforce operators to be placed before or after line breaks
     "padded-blocks": "off", // enforce padding within blocks
-    "quote-props": ["error", "as-needed", {"keywords": true}], // require quotes around object literal property names
+    "quote-props": ["error", "as-needed", { "keywords": true }], // require quotes around object literal property names
     "quotes": ["error", "single", "avoid-escape"], // specify whether backticks, double or single quotes should be used (fixable)
     "require-jsdoc": "off", // require JSDoc comment
     "semi": ["error", "always"], // require or disallow use of semicolons instead of ASI (fixable)
@@ -250,8 +250,8 @@
     "space-before-function-paren": ["error", "never"], // require or disallow a space before function opening parenthesis (fixable)
     "space-in-parens": ["error", "never"], // require or disallow spaces inside parentheses (fixable)
     "space-infix-ops": "error", // require spaces around operators (fixable)
-    "space-unary-ops": ["error", {"words": true, "nonwords": false}], // require or disallow spaces before/after unary operators (fixable)
-    "spaced-comment": ["error", "always", {"markers": ["!"]}], // require or disallow a space immediately following the `//` or `/*` in a comment (fixable)
+    "space-unary-ops": ["error", { "words": true, "nonwords": false }], // require or disallow spaces before/after unary operators (fixable)
+    "spaced-comment": ["error", "always", { "markers": ["!"] }], // require or disallow a space immediately following the `//` or `/*` in a comment (fixable)
     "wrap-regex": "off", // require regex literals to be wrapped in parentheses
 
     //

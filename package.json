@@ -5,6 +5,7 @@
   "main": "./lib/tumblr",
   "types": "./lib/tumblr.d.ts",
   "scripts": {
+    "autoformat": "prettier --write .",
     "generate-docs": "rm -rf gh-pages && node_modules/.bin/jsdoc -c jsdoc.json",
     "gh-pages": "git subtree push --prefix=gh-pages origin gh-pages",
     "test": "eslint lib test && nyc mocha",
