@@ -2,7 +2,8 @@
 
 [![Build Status](https://travis-ci.org/tumblr/tumblr.js.svg?branch=master)](https://travis-ci.org/tumblr/tumblr.js)
 
-The official JavaScript client library for the [Tumblr API](http://www.tumblr.com/docs/api/v2). Check out the [detailed documentation here](https://tumblr.github.io/tumblr.js/index.html).
+The official JavaScript client library for the [Tumblr API](http://www.tumblr.com/docs/api/v2).
+Check out the [detailed documentation here](https://tumblr.github.io/tumblr.js/index.html).
 
 ## Installation
 
@@ -18,16 +19,23 @@ npm install --save tumblr.js
 
 Different API methods use different kinds of authentication.
 
-Most of them require at least an API key, which will require you to [register an application](https://www.tumblr.com/oauth/apps). The **OAuth Consumer Key** is your API key.
+Most of them require at least an API key, which will require you to
+[register an application](https://www.tumblr.com/oauth/apps). The **OAuth Consumer Key** is your API
+key.
 
-For methods that require a fully signed request, you'll need OAuth tokens as well, which you get from authenticating as a Tumblr user and allowing access to your API application. Here's the easy way to do it with our own account:
+For methods that require a fully signed request, you'll need OAuth tokens as well, which you get
+from authenticating as a Tumblr user and allowing access to your API application. Here's the easy
+way to do it with our own account:
 
 1. Visit the [OAuth applications page](https://www.tumblr.com/oauth/apps)
 2. Click "Explore API" on the application you want to authorize
-3. Click the "Allow" button, which will take you to the [API console](https://api.tumblr.com/console)
-4. Click the "Show keys" button, which will show you the credentials you can use to make signed requests.
+3. Click the "Allow" button, which will take you to the
+   [API console](https://api.tumblr.com/console)
+4. Click the "Show keys" button, which will show you the credentials you can use to make signed
+   requests.
 
-If you're building an application of your own for users out in the world, you'll need to go through the 3-legged OAuth flow. See the [help docs](https://www.tumblr.com/docs/api/v2#auth) for more info.
+If you're building an application of your own for users out in the world, you'll need to go through
+the 3-legged OAuth flow. See the [help docs](https://www.tumblr.com/docs/api/v2#auth) for more info.
 
 ### In Node.js
 
@@ -37,7 +45,7 @@ const client = tumblr.createClient({
   consumer_key: '<consumer key>',
   consumer_secret: '<consumer secret>',
   token: '<oauth token>',
-  token_secret: '<oauth token secret>'
+  token_secret: '<oauth token secret>',
 });
 ```
 
@@ -50,7 +58,9 @@ const client = new tumblr.Client({
 });
 ```
 
-The request methods return `Request` objects by default, but you can have it return `Promise` objects instead, if that's more your thing. Pass `returnPromises: true` in the options to `createClient`:
+The request methods return `Request` objects by default, but you can have it return `Promise`
+objects instead, if that's more your thing. Pass `returnPromises: true` in the options to
+`createClient`:
 
 ```js
 const tumblr = require('tumblr.js');
@@ -64,14 +74,16 @@ const client = tumblr.createClient({
 
 ### In the Browser
 
-Due to CORS restrictions, you're going to have a really hard time using this library in the browser. Although GET endpoints on the Tumblr API support JSONP, this library is not intended for in-browser use. Sorry!
+Due to CORS restrictions, you're going to have a really hard time using this library in the browser.
+Although GET endpoints on the Tumblr API support JSONP, this library is not intended for in-browser
+use. Sorry!
 
 ## Example
 
 ```js
 // Show user's blog names
-client.userInfo(function(err, data) {
-  data.user.blogs.forEach(function(blog) {
+client.userInfo(function (err, data) {
+  data.user.blogs.forEach(function (blog) {
     console.log(blog.name);
   });
 });
@@ -79,18 +91,24 @@ client.userInfo(function(err, data) {
 
 ## Supported Methods
 
-Below is a list of available methods and their purpose. Available options are documented in the [API Docs](https://www.tumblr.com/docs/api/v2) and are specified as a JavaScript object.
+Below is a list of available methods and their purpose. Available options are documented in the
+[API Docs](https://www.tumblr.com/docs/api/v2) and are specified as a JavaScript object.
 
 ```js
-client.blogPosts('blogName', {type: 'photo', tag: ['multiple','tags','likethis']}, function(err, resp) {
-  resp.posts; // use them for something
-});
+client.blogPosts(
+  'blogName',
+  { type: 'photo', tag: ['multiple', 'tags', 'likethis'] },
+  function (err, resp) {
+    resp.posts; // use them for something
+  }
+);
 ```
 
-In most cases, since options are optional (heh) they are also an optional argument, so there is no need to pass an empty object when supplying no options, like:
+In most cases, since options are optional (heh) they are also an optional argument, so there is no
+need to pass an empty object when supplying no options, like:
 
 ```js
-client.blogPosts('blogName', function(err, resp) {
+client.blogPosts('blogName', function (err, resp) {
   resp.posts; // now we've got all kinds of posts
 });
 ```
@@ -98,11 +116,12 @@ client.blogPosts('blogName', function(err, resp) {
 If you're using Promises, use `then` and/or `catch` instead of a callback:
 
 ```js
-client.blogPosts('blogName')
-  .then(function(resp) {
+client
+  .blogPosts('blogName')
+  .then(function (resp) {
     resp.posts;
   })
-  .catch(function(err) {
+  .catch(function (err) {
     // oops
   });
 ```
@@ -201,7 +220,8 @@ client.taggedPosts(tag, callback);
 
 ## Unsupported Methods
 
-You can make GET and POST requests to any endpoint directly. These methods are used internally by the methods listed above:
+You can make GET and POST requests to any endpoint directly. These methods are used internally by
+the methods listed above:
 
 ```js
 // GET requests
@@ -211,7 +231,9 @@ client.getRequest(apiPath, params, callback);
 client.postRequest(apiPath, params, callback);
 ```
 
-In the unlikely event that we add a bunch of methods to the API docs and don't update this client, you can map new client methods to API endpoints. URL and query parameters are automatically turned into arguments to these methods. It's a little weird to explain, so just look at these examples:
+In the unlikely event that we add a bunch of methods to the API docs and don't update this client,
+you can map new client methods to API endpoints. URL and query parameters are automatically turned
+into arguments to these methods. It's a little weird to explain, so just look at these examples:
 
 ```js
 // GET methods
@@ -249,13 +271,12 @@ npm run mocha # just the tests
 
 Copyright 2013-2019 Tumblr, Inc.
 
-Licensed under the Apache License, Version 2.0 (the "License"); you may not
-use this work except in compliance with the License. You may obtain a copy of
-the License in the [LICENSE](LICENSE) file, or at:
+Licensed under the Apache License, Version 2.0 (the "License"); you may not use this work except in
+compliance with the License. You may obtain a copy of the License in the [LICENSE](LICENSE) file, or
+at:
 
 http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-License for the specific language governing permissions and limitations.
+Unless required by applicable law or agreed to in writing, software distributed under the License is
+distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+implied. See the License for the specific language governing permissions and limitations.
