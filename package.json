@@ -12,7 +12,8 @@
     "mocha": "mocha"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=18",
+    "npm": ">=8"
   },
   "homepage": "https://github.com/tumblr/tumblr.js",
   "repository": {
@@ -58,5 +59,9 @@
   "files": [
     "/lib",
     "/LICENSE"
-  ]
+  ],
+  "volta": {
+    "node": "18.17.0",
+    "npm": "9.8.1"
+  }
 }
