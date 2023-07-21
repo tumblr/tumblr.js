@@ -8,8 +8,8 @@
     "autoformat": "prettier --write .",
     "generate-docs": "rm -rf gh-pages && node_modules/.bin/jsdoc -c jsdoc.json",
     "gh-pages": "git subtree push --prefix=gh-pages origin gh-pages",
-    "test": "eslint lib test && nyc mocha",
-    "lint": "eslint lib test",
+    "test": "npm run lint && nyc mocha",
+    "lint": "eslint --report-unused-disable-directives lib test",
     "mocha": "mocha"
   },
   "engines": {
@@ -49,6 +49,7 @@
   "devDependencies": {
     "chai": "^4.1.2",
     "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.8.0",
     "jsdoc": "^3.4.0",
     "json5": "^1.0.1",
     "mocha": "^5.2.0",
