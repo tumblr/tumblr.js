@@ -1,6 +1,6 @@
 # tumblr.js
 
-[![Build Status](https://travis-ci.org/tumblr/tumblr.js.svg?branch=master)](https://travis-ci.org/tumblr/tumblr.js)
+[![Build Status](https://github.com/tumblr/tumblr.js/actions/workflows/ci.yaml/badge.svg)](https://github.com/tumblr/tumblr.js/actions/workflows/ci.yaml)
 
 The official JavaScript client library for the [Tumblr API](http://www.tumblr.com/docs/api/v2).
 Check out the [detailed documentation here](https://tumblr.github.io/tumblr.js/index.html).
