@@ -2,7 +2,7 @@
   "extends": ["eslint:recommended", "prettier"],
 
   "env": {
-    "browser": true,
+    "node": true,
     "commonjs": true,
     "es6": true
   },
@@ -13,8 +13,7 @@
     {
       "files": ["./test/**/*"],
       "env": {
-        "jest": true,
-        "node": true
+        "jest": true
       }
     }
   ]
