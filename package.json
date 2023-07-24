@@ -52,7 +52,7 @@
     "eslint-config-prettier": "^8.8.0",
     "jsdoc": "^3.4.0",
     "json5": "^1.0.1",
-    "mocha": "^5.2.0",
+    "mocha": "^10.2.0",
     "nock": "^9.2.6",
     "nyc": "^15.1.0",
     "prettier": "^3.0.0",
