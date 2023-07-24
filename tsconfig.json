@@ -5,6 +5,7 @@
     "emitDeclarationOnly": true,
     "rootDir": "lib",
     "moduleResolution": "node16",
+    "types": ["node"],
 
     "noUncheckedIndexedAccess": false
   },

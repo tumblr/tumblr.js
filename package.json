@@ -42,6 +42,7 @@
     }
   ],
   "dependencies": {
+    "@types/node": ">=16",
     "lodash": "^4.17.11",
     "query-string": "^6.1.0",
     "request": "^2.88.0"
