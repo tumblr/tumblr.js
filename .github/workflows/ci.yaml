@@ -14,8 +14,10 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - lts/*
           - current
+          - lts/*
+          - lts/-1
+          - lts/-2
 
     steps:
       - name: Checkout code
