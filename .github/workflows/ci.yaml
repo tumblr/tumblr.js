@@ -20,7 +20,6 @@ jobs:
           - current
           - lts/*
           - lts/-1
-          - lts/-2
 
     steps:
       - name: Checkout code
