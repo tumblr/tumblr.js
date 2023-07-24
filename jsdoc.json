@@ -13,16 +13,11 @@
     "recurse": true,
     "verbose": true,
     "readme": "README.md",
-    "template": "node_modules/hotdoc/template"
+    "template": "node_modules/docdash"
   },
-  "hotdoc": {
+  "docdash": {
     "static": true,
-    "sort": false,
-    "collapsible": true,
-    "startExpanded": true,
-    "github": "https://github.com/tumblr/tumblr.js",
-    "customVariables": "docs/_variables.scss",
-    "customOverrides": "docs/_overrides.scss"
+    "sort": true
   },
   "markdown": {
     "highlight": true
