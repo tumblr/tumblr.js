@@ -13,7 +13,7 @@
     "mocha": "mocha"
   },
   "engines": {
-    "node": ">=18",
+    "node": ">=16",
     "npm": ">=8"
   },
   "homepage": "https://github.com/tumblr/tumblr.js",
