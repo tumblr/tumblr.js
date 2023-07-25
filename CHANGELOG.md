@@ -10,6 +10,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Changed
 
 - **Breaking** blogIdentifier will not get special handling.
+- **Breaking** TumblrClient constructor accepts single options argument.
+- **Breaking** Providing an invalid baseUrl with a path will throw.
 
 ## [3.0.0] - 2020-07-28
 
