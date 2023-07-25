@@ -7,7 +7,10 @@
     "moduleResolution": "node16",
     "types": ["node"],
 
-    "noUncheckedIndexedAccess": false
+    "noUncheckedIndexedAccess": false,
+
+    // @todo Work through these
+    "noImplicitAny": false
   },
   "files": ["lib/tumblr.js"]
 }
