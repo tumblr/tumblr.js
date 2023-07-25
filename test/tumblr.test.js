@@ -7,7 +7,6 @@ const path = require('path');
 const Request = require('request').Request;
 const JSON5 = require('json5');
 const forEach = require('lodash/forEach');
-const lowerCase = require('lodash/lowerCase');
 
 const assert = require('chai').assert;
 const nock = require('nock');
@@ -433,11 +432,11 @@ describe('tumblr.js', function () {
 
           const addMethods =
             /** @type {Record<string, readonly [string, ReadonlyArray<string>]>} */ ({
-              testNoPathParameters: ['/no/params', []],
-              testOnePathParameter: ['/one/:url/param', []],
-              testTwoPathParameters: ['/one/:url/param', []],
-              testRequiredParams: ['/query/params', ['id']],
-              testPathAndRequiredParams: ['/query/:url/params', ['id']],
+              noPathParameters: ['/no/params', []],
+              onePathParameter: ['/one/:url/param', []],
+              twoPathParameters: ['/one/:url/param', []],
+              requiredParams: ['/query/params', ['id']],
+              pathAndRequiredParams: ['/query/:url/params', ['id']],
             });
 
           beforeEach(function () {
@@ -445,7 +444,7 @@ describe('tumblr.js', function () {
           });
 
           forEach(addMethods, function ([apiPath, params], methodName) {
-            describe(lowerCase(methodName).replace(/^test /i, ''), function () {
+            describe(methodName, function () {
               let callbackInvoked, requestError, requestResponse;
               const callback = function (err, resp) {
                 callbackInvoked = true;
