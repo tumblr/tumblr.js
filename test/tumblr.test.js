@@ -9,6 +9,8 @@ const JSON5 = require('json5');
 const assert = require('chai').assert;
 const nock = require('nock');
 
+nock.disableNetConnect();
+
 const DUMMY_CREDENTIALS = {
   consumer_key: 'Mario',
   consumer_secret: 'Luigi',
@@ -61,14 +63,14 @@ describe('tumblr.js', function () {
       );
     });
 
-    it('throws baseUrl with path', function () {
+    it('throws on baseUrl with path', function () {
       assert.throws(
         () => tumblr.createClient({ consumer_key: 'abc123', baseUrl: 'https://example.com/v2' }),
         'baseUrl option must not include a pathname.'
       );
     });
 
-    it('throws baseUrl with search', function () {
+    it('throws on baseUrl with search', function () {
       assert.throws(
         () =>
           tumblr.createClient({ consumer_key: 'abc123', baseUrl: 'https://example.com/?params' }),
@@ -76,21 +78,21 @@ describe('tumblr.js', function () {
       );
     });
 
-    it('throws baseUrl with username', function () {
+    it('throws on baseUrl with username', function () {
       assert.throws(
         () => tumblr.createClient({ consumer_key: 'abc123', baseUrl: 'https://user@example.com/' }),
         'baseUrl option must not include username.'
       );
     });
 
-    it('throws baseUrl with password', function () {
+    it('throws on baseUrl with password', function () {
       assert.throws(
         () => tumblr.createClient({ consumer_key: 'abc123', baseUrl: 'https://:pw@example.com/' }),
         'baseUrl option must not include password.'
       );
     });
 
-    it('throws baseUrl with hash', function () {
+    it('throws on baseUrl with hash', function () {
       assert.throws(
         () => tumblr.createClient({ consumer_key: 'abc123', baseUrl: 'https://example.com/#hash' }),
         'baseUrl option must not include hash.'
@@ -109,11 +111,9 @@ describe('tumblr.js', function () {
       });
 
       it('uses the supplied credentials', function () {
-        let client;
         const credentials = DUMMY_CREDENTIALS;
 
-        // TumblrClient(credentials, baseUrl, requestLibrary)
-        client = new TumblrClient(credentials);
+        const client = new TumblrClient(credentials);
         assert.equal(client.credentials.consumer_key, credentials.consumer_key);
         // @ts-expect-error May be undefined
         assert.equal(client.credentials.consumer_secret, credentials.consumer_secret);
@@ -124,9 +124,7 @@ describe('tumblr.js', function () {
       });
 
       it('uses the supplied baseUrl', function () {
-        let client;
-
-        client = tumblr.createClient({ ...DUMMY_CREDENTIALS, baseUrl: DUMMY_API_URL });
+        const client = tumblr.createClient({ ...DUMMY_CREDENTIALS, baseUrl: DUMMY_API_URL });
         assert.equal(client.baseUrl, DUMMY_API_URL.replace(/\/?$/, '/'));
       });
 
@@ -155,6 +153,7 @@ describe('tumblr.js', function () {
       });
     });
 
+    /** @type {import('../lib/tumblr.js').Client} */
     let client;
     beforeEach(function () {
       client = new TumblrClient({
@@ -221,14 +220,12 @@ describe('tumblr.js', function () {
      * @param {string} apiPath
      */
     function setupNockBeforeAfter(httpMethod, data, apiPath) {
-      let scope;
-
       before(function () {
-        scope = nock(client.baseUrl)
+        nock(client.baseUrl)
           [httpMethod](apiPath)
           .query(true)
-          .reply(data.body.meta.status, data.body);
-        scope.persist();
+          .reply(data.body.meta.status, data.body)
+          .persist();
       });
 
       after(function () {
@@ -241,6 +238,57 @@ describe('tumblr.js', function () {
       ['post', 'postRequest'],
     ]).forEach(function ([httpMethod, clientMethod]) {
       describe('#' + clientMethod, function () {
+        it('sends expected headers', function (done) {
+          const scope = nock(client.baseUrl).get('/').reply(200, { meta: {}, response: {} });
+          console.log({ bu: client.baseUrl, cs: client.credentials });
+          client.getRequest(
+            '/',
+            {},
+            /**
+             * @param {unknown} err
+             * @param {unknown} resp
+             * @param {any} rawResponse
+             */
+            (err, resp, rawResponse) => {
+              assert.isNull(err);
+              console.log({ resp, rawResponse, h: rawResponse.request.headers });
+              assert.equal(
+                rawResponse.request.headers['User-Agent'],
+                `tumblr.js/${client.version}`
+              );
+              // @TODO better?
+              assert.isTrue(rawResponse.request.headers['Authorization'].startsWith('OAuth'));
+              scope.done();
+              done();
+            }
+          );
+        });
+
+        it('sends api_key when all creds are not provided', function (done) {
+          const client = new TumblrClient({ consumer_key: 'abc123' });
+          const scope = nock(client.baseUrl)
+            .get('/')
+            .query({ api_key: 'abc123' })
+            .reply(200, { meta: {}, response: {} });
+          console.log({ bu: client.baseUrl, cs: client.credentials });
+          client.getRequest(
+            '/',
+            {},
+            /**
+             * @param {unknown} err
+             * @param {unknown} resp
+             * @param {any} rawResponse
+             */
+            (err, resp, rawResponse) => {
+              assert.isNull(err);
+              console.log({ resp, rawResponse, h: rawResponse.request.headers });
+              assert.isUndefined(rawResponse.request.headers['Authorization']);
+              scope.done();
+              done();
+            }
+          );
+        });
+
         const fixtures = JSON5.parse(
           fs.readFileSync(path.join(__dirname, 'fixtures/' + httpMethod + '.json5')).toString()
         );
