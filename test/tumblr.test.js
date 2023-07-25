@@ -3,10 +3,8 @@ require('mocha');
 const fs = require('fs');
 const path = require('path');
 
-// @ts-expect-error It does exist!
 const Request = require('request').Request;
 const JSON5 = require('json5');
-const forEach = require('lodash/forEach');
 
 const assert = require('chai').assert;
 const nock = require('nock');
@@ -252,7 +250,7 @@ describe('tumblr.js', function () {
          */
 
         describe('returnPromises disabled', function () {
-          forEach(fixtures, function (data, apiPath) {
+          Object.entries(fixtures).forEach(function ([apiPath, data]) {
             describe(apiPath, function () {
               let callbackInvoked, requestError, requestResponse, returnValue;
               const params = {};
@@ -331,67 +329,59 @@ describe('tumblr.js', function () {
             client.returnPromises();
           });
 
-          forEach(
-            {
-              get: 'getRequest',
-              post: 'postRequest',
-            },
+          /** @type {const} */ ([
+            ['get', 'getRequest'],
+            ['post', 'postRequest'],
+          ]).forEach(function ([httpMethod, clientMethod]) {
+            describe('#' + clientMethod, function () {
+              Object.entries(fixtures).forEach(function ([apiPath, data]) {
+                describe(apiPath, function () {
+                  let callbackInvoked, requestError, requestResponse, returnValue;
+                  const params = {};
+                  const callback = function (err, resp) {
+                    callbackInvoked = true;
+                    requestError = err;
+                    requestResponse = resp;
+                  };
 
-            /**
-             * @param {string} clientMethod
-             * @param {*} httpMethod
-             */
-            function (clientMethod, httpMethod) {
-              describe('#' + clientMethod, function () {
-                forEach(fixtures, function (data, apiPath) {
-                  describe(apiPath, function () {
-                    let callbackInvoked, requestError, requestResponse, returnValue;
-                    const params = {};
-                    const callback = function (err, resp) {
-                      callbackInvoked = true;
-                      requestError = err;
-                      requestResponse = resp;
-                    };
+                  setupNockBeforeAfter(httpMethod, data, apiPath);
 
-                    setupNockBeforeAfter(httpMethod, data, apiPath);
+                  beforeEach(function (done) {
+                    callbackInvoked = false;
+                    requestError = false;
+                    requestResponse = false;
 
-                    beforeEach(function (done) {
-                      callbackInvoked = false;
-                      requestError = false;
-                      requestResponse = false;
+                    returnValue = client[clientMethod](apiPath, params);
+                    // Invoke the callback when the Promise resolves or rejects
+                    returnValue.then(
+                      function (resp) {
+                        callback(null, resp);
+                        done();
+                      },
+                      function (err) {
+                        console.error({ err });
+                        callback(err, null);
+                        done();
+                      }
+                    );
+                  });
 
-                      returnValue = client[clientMethod](apiPath, params);
-                      // Invoke the callback when the Promise resolves or rejects
-                      returnValue.then(
-                        function (resp) {
-                          callback(null, resp);
-                          done();
-                        },
-                        function (err) {
-                          console.error({ err });
-                          callback(err, null);
-                          done();
-                        }
-                      );
-                    });
+                  it('returns a Promise', function () {
+                    assert.isTrue(returnValue instanceof Promise);
+                  });
 
-                    it('returns a Promise', function () {
-                      assert.isTrue(returnValue instanceof Promise);
-                    });
+                  it('invokes the callback', function () {
+                    assert.isTrue(callbackInvoked);
+                  });
 
-                    it('invokes the callback', function () {
-                      assert.isTrue(callbackInvoked);
-                    });
-
-                    it('gets a successful response', function () {
-                      assert.isNull(requestError, 'err is falsy');
-                      assert.isDefined(requestResponse);
-                    });
+                  it('gets a successful response', function () {
+                    assert.isNull(requestError, 'err is falsy');
+                    assert.isDefined(requestResponse);
                   });
                 });
               });
-            }
-          );
+            });
+          });
         });
       });
     });
@@ -435,7 +425,7 @@ describe('tumblr.js', function () {
           client[clientMethod](addMethods);
         });
 
-        forEach(addMethods, function ([apiPath, params], methodName) {
+        Object.entries(addMethods).forEach(function ([methodName, [apiPath, params]]) {
           describe(methodName, function () {
             let callbackInvoked, requestError, requestResponse;
             const callback = function (err, resp) {
@@ -446,10 +436,10 @@ describe('tumblr.js', function () {
             const queryParams = {};
             const args = [];
 
-            forEach(apiPath.match(URL_PARAM_REGEX), function (apiPathParam) {
+            apiPath.match(URL_PARAM_REGEX)?.forEach(function (apiPathParam) {
               args.push(apiPathParam.replace(URL_PARAM_REGEX, '$1'));
             });
-            forEach(params, function (param) {
+            params.forEach(function (param) {
               queryParams[param] = param + ' value';
               args.push(queryParams[param]);
             });
