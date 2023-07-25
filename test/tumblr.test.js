@@ -228,167 +228,75 @@ describe('tumblr.js', function () {
       });
     }
 
+    /**
+     * ### Promises
+     */
+
+    beforeEach(function () {
+      client.returnPromises();
+    });
+
     forEach(
       {
         get: 'getRequest',
         post: 'postRequest',
       },
+
+      /**
+       * @param {string} clientMethod
+       * @param {*} httpMethod
+       */
       function (clientMethod, httpMethod) {
         describe('#' + clientMethod, function () {
           const fixtures = JSON5.parse(
             fs.readFileSync(path.join(__dirname, 'fixtures/' + httpMethod + '.json5')).toString()
           );
 
-          /**
-           * ### Callback
-           */
+          forEach(fixtures, function (data, apiPath) {
+            describe(apiPath, function () {
+              let callbackInvoked, requestError, requestResponse, returnValue;
+              const params = {};
+              const callback = function (err, resp) {
+                callbackInvoked = true;
+                requestError = err;
+                requestResponse = resp;
+              };
 
-          describe('returnPromises disabled', function () {
-            forEach(fixtures, function (data, apiPath) {
-              describe(apiPath, function () {
-                let callbackInvoked, requestError, requestResponse, returnValue;
-                const params = {};
-                const callback = function (err, resp) {
-                  callbackInvoked = true;
-                  requestError = err;
-                  requestResponse = resp;
-                };
+              setupNockBeforeAfter(httpMethod, data, apiPath);
 
-                setupNockBeforeAfter(httpMethod, data, apiPath);
+              beforeEach(function (done) {
+                callbackInvoked = false;
+                requestError = false;
+                requestResponse = false;
 
-                describe('params and callback', function () {
-                  before(function (done) {
-                    callbackInvoked = false;
-                    requestError = false;
-                    requestResponse = false;
-
-                    returnValue = client[clientMethod](apiPath, params, function () {
-                      callback.apply(this, arguments);
-                      done();
-                    });
-                  });
-
-                  if (httpMethod === 'post') {
-                    // Nock seems to cause the POST request to return a Promise,
-                    // making this difficult to properly test.
-                    it('returns a Request');
-                  } else {
-                    it('returns a Request', function () {
-                      assert.isTrue(returnValue instanceof client.request.Request);
-                    });
+                returnValue = client[clientMethod](apiPath, params);
+                // Invoke the callback when the Promise resolves or rejects
+                returnValue.then(
+                  function (resp) {
+                    callback(null, resp);
+                    done();
+                  },
+                  function (err) {
+                    console.error({ err });
+                    callback(err, null);
+                    done();
                   }
+                );
+              });
 
-                  it('invokes the callback', function () {
-                    assert.isTrue(callbackInvoked);
-                  });
+              it('returns a Promise', function () {
+                assert.isTrue(returnValue instanceof Promise);
+              });
 
-                  it('gets a successful response', function () {
-                    assert.isNull(requestError, 'err is falsy');
-                    assert.isDefined(requestResponse);
-                  });
-                });
+              it('invokes the callback', function () {
+                assert.isTrue(callbackInvoked);
+              });
 
-                describe('callback only', function () {
-                  before(function (done) {
-                    callbackInvoked = false;
-                    requestError = false;
-                    requestResponse = false;
-
-                    client[clientMethod](apiPath, function () {
-                      callback.apply(this, arguments);
-                      done();
-                    });
-                  });
-
-                  it('invokes the callback', function () {
-                    assert.isTrue(callbackInvoked);
-                  });
-
-                  it('gets a successful response', function () {
-                    assert.isNull(requestError, 'err is falsy');
-                    assert.isDefined(requestResponse);
-                  });
-                });
+              it('gets a successful response', function () {
+                assert.isNull(requestError, 'err is falsy');
+                assert.isDefined(requestResponse);
               });
             });
-          });
-
-          /**
-           * ### Promises
-           */
-
-          describe('returnPromises enabled', function () {
-            beforeEach(function () {
-              client.returnPromises();
-            });
-
-            forEach(
-              {
-                get: 'getRequest',
-                post: 'postRequest',
-              },
-
-              /**
-               * @param {string} clientMethod
-               * @param {*} httpMethod
-               */
-              function (clientMethod, httpMethod) {
-                describe('#' + clientMethod, function () {
-                  const fixtures = JSON5.parse(
-                    fs
-                      .readFileSync(path.join(__dirname, 'fixtures/' + httpMethod + '.json5'))
-                      .toString()
-                  );
-
-                  forEach(fixtures, function (data, apiPath) {
-                    describe(apiPath, function () {
-                      let callbackInvoked, requestError, requestResponse, returnValue;
-                      const params = {};
-                      const callback = function (err, resp) {
-                        callbackInvoked = true;
-                        requestError = err;
-                        requestResponse = resp;
-                      };
-
-                      setupNockBeforeAfter(httpMethod, data, apiPath);
-
-                      beforeEach(function (done) {
-                        callbackInvoked = false;
-                        requestError = false;
-                        requestResponse = false;
-
-                        returnValue = client[clientMethod](apiPath, params);
-                        // Invoke the callback when the Promise resolves or rejects
-                        returnValue.then(
-                          function (resp) {
-                            callback(null, resp);
-                            done();
-                          },
-                          function (err) {
-                            console.error({ err });
-                            callback(err, null);
-                            done();
-                          }
-                        );
-                      });
-
-                      it('returns a Promise', function () {
-                        assert.isTrue(returnValue instanceof Promise);
-                      });
-
-                      it('invokes the callback', function () {
-                        assert.isTrue(callbackInvoked);
-                      });
-
-                      it('gets a successful response', function () {
-                        assert.isNull(requestError, 'err is falsy');
-                        assert.isDefined(requestResponse);
-                      });
-                    });
-                  });
-                });
-              }
-            );
           });
         });
       }
