@@ -3,6 +3,7 @@ require('mocha');
 const fs = require('fs');
 const path = require('path');
 
+// @ts-expect-error
 const Request = require('request').Request;
 const JSON5 = require('json5');
 
@@ -313,10 +314,15 @@ describe('tumblr.js', function () {
                   requestError = false;
                   requestResponse = false;
 
-                  returnValue = client[clientMethod](apiPath, params, function () {
-                    callback.apply(this, arguments);
-                    done();
-                  });
+                  returnValue = client[clientMethod](
+                    apiPath,
+                    params,
+                    /** @param {any} args */
+                    function (...args) {
+                      callback.call(client, ...args);
+                      done();
+                    }
+                  );
                 });
 
                 if (httpMethod === 'post') {
@@ -345,10 +351,15 @@ describe('tumblr.js', function () {
                   requestError = false;
                   requestResponse = false;
 
-                  client[clientMethod](apiPath, function () {
-                    callback.apply(this, arguments);
-                    done();
-                  });
+                  // @ts-expect-error This is a bad function signature - optionals in middle @TODO
+                  client[clientMethod](
+                    apiPath,
+                    /** @param {any} args */
+                    function (...args) {
+                      callback.call(client, ...args);
+                      done();
+                    }
+                  );
                 });
 
                 it('invokes the callback', function () {
@@ -395,6 +406,7 @@ describe('tumblr.js', function () {
                     requestError = false;
                     requestResponse = false;
 
+                    // @ts-expect-error It's promises, no callback
                     returnValue = client[clientMethod](apiPath, params);
                     // Invoke the callback when the Promise resolves or rejects
                     returnValue.then(
@@ -507,8 +519,8 @@ describe('tumblr.js', function () {
 
               return client[methodName].apply(
                 client,
-                args.concat(function () {
-                  callback.apply(this, arguments);
+                args.concat(function (...args) {
+                  callback.call(client, ...args);
                   done();
                 })
               );
