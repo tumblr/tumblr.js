@@ -173,7 +173,7 @@ describe('tumblr.js', function () {
      */
 
     describe('default methods', function () {
-      const defaulthMethods = [
+      /** @type {const} */ ([
         'blogInfo',
         'blogAvatar',
         'blogLikes',
@@ -202,9 +202,7 @@ describe('tumblr.js', function () {
         'createChatPost',
         'createAudioPost',
         'createVideoPost',
-      ];
-
-      forEach(defaulthMethods, function (methodName) {
+      ]).forEach(function (methodName) {
         it('has #' + methodName, function () {
           assert.isFunction(client[methodName]);
         });
