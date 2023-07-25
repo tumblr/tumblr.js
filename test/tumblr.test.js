@@ -269,14 +269,14 @@ describe('tumblr.js', function () {
      * @param {string} apiPath
      */
     function setupNockBeforeAfter(httpMethod, data, apiPath) {
+      let scope;
+
       before(function () {
-        const scope = nock(client.baseUrl)
-          .persist()
+        scope = nock(client.baseUrl)
           [httpMethod](apiPath)
           .query(true)
           .reply(data.body.meta.status, data.body);
-
-        console.log({ scope, i: scope.interceptors });
+        scope.persist();
       });
 
       after(function () {
@@ -478,22 +478,22 @@ describe('tumblr.js', function () {
             },
           };
 
-          const addMethods = {
-            testNoPathParameters: '/no/params',
-            testOnePathParameter: '/one/:url/param',
-            testTwoPathParameters: '/one/:url/param',
-            testRequiredParams: ['/quert/params', ['id']],
-            testPathAndRequiredParams: ['/query/:url/params', ['id']],
-          };
+          const addMethods =
+            /** @type {Record<string, readonly [string, ReadonlyArray<string>]>} */ ({
+              testNoPathParameters: ['/no/params', []],
+              testOnePathParameter: ['/one/:url/param', []],
+              testTwoPathParameters: ['/one/:url/param', []],
+              testRequiredParams: ['/query/params', ['id']],
+              testPathAndRequiredParams: ['/query/:url/params', ['id']],
+            });
 
           beforeEach(function () {
             client[clientMethod](addMethods);
           });
 
-          forEach(addMethods, function (apiPath, methodName) {
+          forEach(addMethods, function ([apiPath, params], methodName) {
             describe(lowerCase(methodName).replace(/^test /i, ''), function () {
               let callbackInvoked, requestError, requestResponse;
-              const params = {};
               const callback = function (err, resp) {
                 callbackInvoked = true;
                 requestError = err;
@@ -502,23 +502,14 @@ describe('tumblr.js', function () {
               const queryParams = {};
               const args = [];
 
-              if (typeof apiPath === 'string') {
-                forEach(apiPath.match(URL_PARAM_REGEX), function (apiPathParam) {
-                  args.push(apiPathParam.replace(URL_PARAM_REGEX, '$1'));
-                });
-                apiPath = apiPath.replace(URL_PARAM_REGEX, '/$1');
-              } else {
-                forEach(apiPath[0].match(URL_PARAM_REGEX), function (apiPathParam) {
-                  args.push(apiPathParam.replace(URL_PARAM_REGEX, '$1'));
-                });
-                forEach(apiPath[1], function (param) {
-                  queryParams[param] = param + ' value';
-                  args.push(queryParams[param]);
-                });
-                apiPath = apiPath[0].replace(URL_PARAM_REGEX, '/$1');
-              }
-
-              args.push(params);
+              forEach(apiPath.match(URL_PARAM_REGEX), function (apiPathParam) {
+                args.push(apiPathParam.replace(URL_PARAM_REGEX, '$1'));
+              });
+              forEach(params, function (param) {
+                queryParams[param] = param + ' value';
+                args.push(queryParams[param]);
+              });
+              apiPath = apiPath.replace(URL_PARAM_REGEX, '/$1');
 
               beforeEach(function (done) {
                 callbackInvoked = false;
@@ -529,15 +520,11 @@ describe('tumblr.js', function () {
                   queryParams.api_key = client.credentials.consumer_key;
                 }
 
-                let testApiPath = apiPath;
-                if (httpMethod === 'get') {
-                  testApiPath += createQueryString(queryParams);
-                }
-
                 nock(client.baseUrl)
-                  .persist()
-                  [httpMethod](testApiPath)
-                  .reply(data.meta.status, data.body);
+                  [httpMethod](apiPath)
+                  .query(true)
+                  .reply(data.meta.status, data.body)
+                  .persist();
 
                 return client[methodName].apply(
                   client,
@@ -561,7 +548,7 @@ describe('tumblr.js', function () {
               });
 
               it('gets a successful response', function () {
-                assert.isNotOk(requestError, 'err is falsy');
+                assert.isNull(requestError, 'err is falsy');
                 assert.isDefined(requestResponse);
               });
             });
