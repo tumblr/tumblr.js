@@ -103,13 +103,6 @@ describe('tumblr.js', function () {
         'baseUrl option must not include hash.'
       );
     });
-
-    it.skip('passes returnPromises to the client', function () {
-      // tumblr.createClient(options)
-      const client = tumblr.createClient({ returnPromises: true });
-      assert.notEqual(client.getRequest, tumblr.Client.prototype.getRequest);
-      assert.notEqual(client.postRequest, tumblr.Client.prototype.postRequest);
-    });
   });
 
   describe('Client', function () {
@@ -144,45 +137,13 @@ describe('tumblr.js', function () {
         assert.equal(client.baseUrl, DUMMY_API_URL.replace(/\/?$/, '/'));
       });
 
-      it.skip('uses the supplied requestLibrary', function () {
-        let client;
-        const requestLibrary = {
-          get: function (options, callback) {
-            return callback(options);
-          },
-          post: function (options, callback) {
-            return callback(options);
-          },
-        };
-
-        // TumblrClient(credentials, baseUrl, requestLibrary)
-        client = new TumblrClient({}, '', requestLibrary);
-        assert.equal(client.request, requestLibrary);
-
-        // TumblrClient(options)
-        client = new TumblrClient({ request: requestLibrary });
-        assert.equal(client.request, requestLibrary);
-      });
-
-      it.skip('uses the supplied returnPromises value', function () {
-        // tumblr.createClient(options)
-        let client = tumblr.createClient({ returnPromises: false });
-        assert.equal(client.getRequest, tumblr.Client.prototype.getRequest);
-        assert.equal(client.postRequest, tumblr.Client.prototype.postRequest);
-
-        // tumblr.createClient(options)
-        client = tumblr.createClient({ returnPromises: true });
-        assert.notEqual(client.getRequest, tumblr.Client.prototype.getRequest);
-        assert.notEqual(client.postRequest, tumblr.Client.prototype.postRequest);
-      });
-
       describe('default options', function () {
         it('uses the default Tumblr API base URL', function () {
           const client = tumblr.createClient(DUMMY_CREDENTIALS);
           assert.equal(client.baseUrl, 'https://api.tumblr.com/');
         });
 
-        it.skip('does not return Promises', function () {
+        it('does not return Promises', function () {
           const client = tumblr.createClient(DUMMY_CREDENTIALS);
           assert.equal(client.getRequest, tumblr.Client.prototype.getRequest);
           assert.equal(client.postRequest, tumblr.Client.prototype.postRequest);
@@ -190,7 +151,7 @@ describe('tumblr.js', function () {
       });
     });
 
-    describe.skip('#returnPromises', function () {
+    describe('#returnPromises', function () {
       it('modifies getRequest and postRequest', function () {
         const client = new TumblrClient(DUMMY_CREDENTIALS);
         const getRequestBefore = client.getRequest;
