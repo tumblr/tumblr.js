@@ -12,5 +12,5 @@
     // @todo Work through these
     "noImplicitAny": false
   },
-  "files": ["lib/tumblr.js"]
+  "files": ["lib/tumblr.js", "test/tumblr.test.js"]
 }

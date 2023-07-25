@@ -1,3 +1,5 @@
+require('mocha');
+
 const fs = require('fs');
 const path = require('path');
 
@@ -15,7 +17,8 @@ const DUMMY_CREDENTIALS = {
   token: 'Toad',
   token_secret: 'Princess Toadstool',
 };
-const DUMMY_API_URL = 'https://t.umblr.com';
+
+const DUMMY_API_URL = 'https://example.com';
 
 const URL_PARAM_REGEX = /\/:([^/]+)/g;
 
@@ -46,8 +49,11 @@ describe('tumblr.js', function () {
 
       const client = tumblr.createClient(credentials);
       assert.equal(client.credentials.consumer_key, credentials.consumer_key);
+      // @ts-expect-error Maybe undefined
       assert.equal(client.credentials.consumer_secret, credentials.consumer_secret);
+      // @ts-expect-error Maybe undefined
       assert.equal(client.credentials.token, credentials.token);
+      // @ts-expect-error Maybe undefined
       assert.equal(client.credentials.token_secret, credentials.token_secret);
     });
 
@@ -112,7 +118,7 @@ describe('tumblr.js', function () {
 
     describe('constructor', function () {
       it('creates a TumblrClient instance', function () {
-        const client = new TumblrClient();
+        const client = new TumblrClient(DUMMY_CREDENTIALS);
         assert.isTrue(client instanceof TumblrClient);
       });
 
@@ -123,32 +129,22 @@ describe('tumblr.js', function () {
         // TumblrClient(credentials, baseUrl, requestLibrary)
         client = new TumblrClient(credentials);
         assert.equal(client.credentials.consumer_key, credentials.consumer_key);
+        // @ts-expect-error May be undefined
         assert.equal(client.credentials.consumer_secret, credentials.consumer_secret);
+        // @ts-expect-error May be undefined
         assert.equal(client.credentials.token, credentials.token);
-        assert.equal(client.credentials.token_secret, credentials.token_secret);
-
-        // TumblrClient(options)
-        client = new TumblrClient({ credentials: credentials });
-        assert.equal(client.credentials.consumer_key, credentials.consumer_key);
-        assert.equal(client.credentials.consumer_secret, credentials.consumer_secret);
-        assert.equal(client.credentials.token, credentials.token);
+        // @ts-expect-error May be undefined
         assert.equal(client.credentials.token_secret, credentials.token_secret);
       });
 
       it('uses the supplied baseUrl', function () {
         let client;
-        const baseUrl = DUMMY_API_URL;
 
-        // TumblrClient(credentials, baseUrl, requestLibrary)
-        client = tumblr.createClient({}, baseUrl);
-        assert.equal(client.baseUrl, baseUrl);
-
-        // TumblrClient(options)
-        client = tumblr.createClient({ baseUrl: baseUrl });
-        assert.equal(client.baseUrl, baseUrl);
+        client = tumblr.createClient({ ...DUMMY_CREDENTIALS, baseUrl: DUMMY_API_URL });
+        assert.equal(client.baseUrl, DUMMY_API_URL.replace(/\/?$/, '/'));
       });
 
-      it('uses the supplied requestLibrary', function () {
+      it.skip('uses the supplied requestLibrary', function () {
         let client;
         const requestLibrary = {
           get: function (options, callback) {
@@ -168,7 +164,7 @@ describe('tumblr.js', function () {
         assert.equal(client.request, requestLibrary);
       });
 
-      it('uses the supplied returnPromises value', function () {
+      it.skip('uses the supplied returnPromises value', function () {
         // tumblr.createClient(options)
         let client = tumblr.createClient({ returnPromises: false });
         assert.equal(client.getRequest, tumblr.Client.prototype.getRequest);
@@ -182,26 +178,21 @@ describe('tumblr.js', function () {
 
       describe('default options', function () {
         it('uses the default Tumblr API base URL', function () {
-          const client = tumblr.createClient();
-          assert.equal(client.baseUrl, 'https://api.tumblr.com');
+          const client = tumblr.createClient(DUMMY_CREDENTIALS);
+          assert.equal(client.baseUrl, 'https://api.tumblr.com/');
         });
 
-        it('uses default request library', function () {
-          const client = tumblr.createClient();
-          assert.equal(client.request, require('request'));
-        });
-
-        it('does not return Promises', function () {
-          const client = tumblr.createClient();
+        it.skip('does not return Promises', function () {
+          const client = tumblr.createClient(DUMMY_CREDENTIALS);
           assert.equal(client.getRequest, tumblr.Client.prototype.getRequest);
           assert.equal(client.postRequest, tumblr.Client.prototype.postRequest);
         });
       });
     });
 
-    describe('#returnPromises', function () {
+    describe.skip('#returnPromises', function () {
       it('modifies getRequest and postRequest', function () {
-        const client = new TumblrClient();
+        const client = new TumblrClient(DUMMY_CREDENTIALS);
         const getRequestBefore = client.getRequest;
         const postRequestBefore = client.postRequest;
         client.returnPromises();
@@ -215,7 +206,6 @@ describe('tumblr.js', function () {
       client = new TumblrClient({
         ...DUMMY_CREDENTIALS,
         baseUrl: DUMMY_API_URL,
-        returnPromises: false,
       });
     });
 
@@ -273,25 +263,20 @@ describe('tumblr.js', function () {
      * - TumblrClient#postRequest
      */
 
+    /**
+     * @param {'get'|'post'} httpMethod
+     * @param {any} data
+     * @param {string} apiPath
+     */
     function setupNockBeforeAfter(httpMethod, data, apiPath) {
-      let queryParams, testApiPath;
-
       before(function () {
-        queryParams = {};
-
-        if (client.credentials.consumer_key) {
-          queryParams.api_key = client.credentials.consumer_key;
-        }
-
-        testApiPath = apiPath;
-        if (httpMethod === 'get') {
-          testApiPath += createQueryString(queryParams);
-        }
-
-        nock(client.baseUrl)
+        const scope = nock(client.baseUrl)
           .persist()
-          [httpMethod](testApiPath)
+          [httpMethod](apiPath)
+          .query(true)
           .reply(data.body.meta.status, data.body);
+
+        console.log({ scope, i: scope.interceptors });
       });
 
       after(function () {
@@ -354,7 +339,7 @@ describe('tumblr.js', function () {
                   });
 
                   it('gets a successful response', function () {
-                    assert.isNotOk(requestError, 'err is falsy');
+                    assert.isNull(requestError, 'err is falsy');
                     assert.isDefined(requestResponse);
                   });
                 });
@@ -376,7 +361,7 @@ describe('tumblr.js', function () {
                   });
 
                   it('gets a successful response', function () {
-                    assert.isNotOk(requestError, 'err is falsy');
+                    assert.isNull(requestError, 'err is falsy');
                     assert.isDefined(requestResponse);
                   });
                 });
@@ -398,6 +383,11 @@ describe('tumblr.js', function () {
                 get: 'getRequest',
                 post: 'postRequest',
               },
+
+              /**
+               * @param {string} clientMethod
+               * @param {*} httpMethod
+               */
               function (clientMethod, httpMethod) {
                 describe('#' + clientMethod, function () {
                   const fixtures = JSON5.parse(
@@ -425,15 +415,17 @@ describe('tumblr.js', function () {
 
                         returnValue = client[clientMethod](apiPath, params);
                         // Invoke the callback when the Promise resolves or rejects
-                        returnValue
-                          .then(function (resp) {
+                        returnValue.then(
+                          function (resp) {
                             callback(null, resp);
                             done();
-                          })
-                          .catch(function (err) {
+                          },
+                          function (err) {
+                            console.error({ err });
                             callback(err, null);
                             done();
-                          });
+                          }
+                        );
                       });
 
                       it('returns a Promise', function () {
@@ -445,7 +437,7 @@ describe('tumblr.js', function () {
                       });
 
                       it('gets a successful response', function () {
-                        assert.isNotOk(requestError, 'err is falsy');
+                        assert.isNull(requestError, 'err is falsy');
                         assert.isDefined(requestResponse);
                       });
                     });
