@@ -42,10 +42,12 @@
     }
   ],
   "dependencies": {
+    "@types/lodash": "^4.14.195",
     "@types/node": ">=16",
+    "@types/request": "^2.48.8",
     "lodash": "^4.17.11",
     "query-string": "^6.1.0",
-    "request": "^2.88.0"
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "@tsconfig/node16": "^16.1.0",
@@ -55,7 +57,7 @@
     "eslint": "^8.45.0",
     "eslint-config-prettier": "^8.8.0",
     "jsdoc": "^4.0.2",
-    "json5": "^1.0.1",
+    "json5": "^2.2.3",
     "mocha": "^10.2.0",
     "nock": "^9.2.6",
     "nyc": "^15.1.0",
