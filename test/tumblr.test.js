@@ -405,103 +405,100 @@ describe('tumblr.js', function () {
      * - TumblrClient#addPostMethods
      */
 
-    forEach(
-      {
-        get: 'addGetMethods',
-        post: 'addPostMethods',
-      },
-      function (clientMethod, httpMethod) {
-        describe('#' + clientMethod, function () {
-          const data = {
-            meta: {
-              status: 200,
-              msg: 'k',
+    /** @type {const} */ ([
+      ['get', 'addGetMethods'],
+      ['post', 'addPostMethods'],
+    ]).forEach(function ([httpMethod, clientMethod]) {
+      describe('#' + clientMethod, function () {
+        const data = {
+          meta: {
+            status: 200,
+            msg: 'k',
+          },
+          body: {
+            response: {
+              ayy: 'lmao',
             },
-            body: {
-              response: {
-                ayy: 'lmao',
-              },
-            },
-          };
+          },
+        };
 
-          const addMethods =
-            /** @type {Record<string, readonly [string, ReadonlyArray<string>]>} */ ({
-              noPathParameters: ['/no/params', []],
-              onePathParameter: ['/one/:url/param', []],
-              twoPathParameters: ['/one/:url/param', []],
-              requiredParams: ['/query/params', ['id']],
-              pathAndRequiredParams: ['/query/:url/params', ['id']],
-            });
-
-          beforeEach(function () {
-            client[clientMethod](addMethods);
+        const addMethods =
+          /** @type {Record<string, readonly [string, ReadonlyArray<string>]>} */ ({
+            noPathParameters: ['/no/params', []],
+            onePathParameter: ['/one/:url/param', []],
+            twoPathParameters: ['/one/:url/param', []],
+            requiredParams: ['/query/params', ['id']],
+            pathAndRequiredParams: ['/query/:url/params', ['id']],
           });
 
-          forEach(addMethods, function ([apiPath, params], methodName) {
-            describe(methodName, function () {
-              let callbackInvoked, requestError, requestResponse;
-              const callback = function (err, resp) {
-                callbackInvoked = true;
-                requestError = err;
-                requestResponse = resp;
-              };
-              const queryParams = {};
-              const args = [];
+        beforeEach(function () {
+          client[clientMethod](addMethods);
+        });
 
-              forEach(apiPath.match(URL_PARAM_REGEX), function (apiPathParam) {
-                args.push(apiPathParam.replace(URL_PARAM_REGEX, '$1'));
-              });
-              forEach(params, function (param) {
-                queryParams[param] = param + ' value';
-                args.push(queryParams[param]);
-              });
-              apiPath = apiPath.replace(URL_PARAM_REGEX, '/$1');
+        forEach(addMethods, function ([apiPath, params], methodName) {
+          describe(methodName, function () {
+            let callbackInvoked, requestError, requestResponse;
+            const callback = function (err, resp) {
+              callbackInvoked = true;
+              requestError = err;
+              requestResponse = resp;
+            };
+            const queryParams = {};
+            const args = [];
 
-              beforeEach(function (done) {
-                callbackInvoked = false;
-                requestError = false;
-                requestResponse = false;
+            forEach(apiPath.match(URL_PARAM_REGEX), function (apiPathParam) {
+              args.push(apiPathParam.replace(URL_PARAM_REGEX, '$1'));
+            });
+            forEach(params, function (param) {
+              queryParams[param] = param + ' value';
+              args.push(queryParams[param]);
+            });
+            apiPath = apiPath.replace(URL_PARAM_REGEX, '/$1');
 
-                if (client.credentials.consumer_key) {
-                  queryParams.api_key = client.credentials.consumer_key;
-                }
+            beforeEach(function (done) {
+              callbackInvoked = false;
+              requestError = false;
+              requestResponse = false;
 
-                nock(client.baseUrl)
-                  [httpMethod](apiPath)
-                  .query(true)
-                  .reply(data.meta.status, data.body)
-                  .persist();
+              if (client.credentials.consumer_key) {
+                queryParams.api_key = client.credentials.consumer_key;
+              }
 
-                return client[methodName].apply(
-                  client,
-                  args.concat(function () {
-                    callback.apply(this, arguments);
-                    done();
-                  })
-                );
-              });
+              nock(client.baseUrl)
+                [httpMethod](apiPath)
+                .query(true)
+                .reply(data.meta.status, data.body)
+                .persist();
 
-              afterEach(function () {
-                nock.cleanAll();
-              });
+              return client[methodName].apply(
+                client,
+                args.concat(function () {
+                  callback.apply(this, arguments);
+                  done();
+                })
+              );
+            });
 
-              it('method is a function', function () {
-                assert.isFunction(client[methodName]);
-              });
+            afterEach(function () {
+              nock.cleanAll();
+            });
 
-              it('invokes the callback', function () {
-                assert.isTrue(callbackInvoked);
-              });
+            it('method is a function', function () {
+              assert.isFunction(client[methodName]);
+            });
 
-              it('gets a successful response', function () {
-                assert.isNull(requestError, 'err is falsy');
-                assert.isDefined(requestResponse);
-              });
+            it('invokes the callback', function () {
+              assert.isTrue(callbackInvoked);
+            });
+
+            it('gets a successful response', function () {
+              assert.isNull(requestError, 'err is falsy');
+              assert.isDefined(requestResponse);
             });
           });
         });
-      }
-    );
+      });
+    });
 
     /**
      * ~fin~
