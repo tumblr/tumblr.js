@@ -221,11 +221,7 @@ describe('tumblr.js', function () {
      */
     function setupNockBeforeAfter(httpMethod, data, apiPath) {
       before(function () {
-        nock(client.baseUrl)
-          [httpMethod](apiPath)
-          .query(true)
-          .reply(data.body.meta.status, data.body)
-          .persist();
+        nock(client.baseUrl)[httpMethod](apiPath).reply(data.body.meta.status, data.body).persist();
       });
 
       after(function () {
@@ -502,11 +498,12 @@ describe('tumblr.js', function () {
                 queryParams.api_key = client.credentials.consumer_key;
               }
 
-              nock(client.baseUrl)
-                [httpMethod](apiPath)
-                .query(true)
-                .reply(data.meta.status, data.body)
-                .persist();
+              const scope = nock(client.baseUrl)[httpMethod](apiPath);
+              if (params.length) {
+                scope.query(true);
+              }
+
+              scope.reply(data.meta.status, data.body).persist();
 
               return client[methodName].apply(
                 client,
