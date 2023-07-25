@@ -343,12 +343,6 @@ describe('tumblr.js', function () {
              */
             function (clientMethod, httpMethod) {
               describe('#' + clientMethod, function () {
-                const fixtures = JSON5.parse(
-                  fs
-                    .readFileSync(path.join(__dirname, 'fixtures/' + httpMethod + '.json5'))
-                    .toString()
-                );
-
                 forEach(fixtures, function (data, apiPath) {
                   describe(apiPath, function () {
                     let callbackInvoked, requestError, requestResponse, returnValue;
