@@ -237,7 +237,6 @@ describe('tumblr.js', function () {
       describe('#' + clientMethod, function () {
         it('sends expected headers', function (done) {
           const scope = nock(client.baseUrl).get('/').reply(200, { meta: {}, response: {} });
-          console.log({ bu: client.baseUrl, cs: client.credentials });
           client.getRequest(
             '/',
             {},
@@ -248,7 +247,6 @@ describe('tumblr.js', function () {
              */
             (err, resp, rawResponse) => {
               assert.isNull(err);
-              console.log({ resp, rawResponse, h: rawResponse.request.headers });
               assert.equal(
                 rawResponse.request.headers['User-Agent'],
                 `tumblr.js/${client.version}`
@@ -267,7 +265,6 @@ describe('tumblr.js', function () {
             .get('/')
             .query({ api_key: 'abc123' })
             .reply(200, { meta: {}, response: {} });
-          console.log({ bu: client.baseUrl, cs: client.credentials });
           client.getRequest(
             '/',
             {},
@@ -278,7 +275,6 @@ describe('tumblr.js', function () {
              */
             (err, resp, rawResponse) => {
               assert.isNull(err);
-              console.log({ resp, rawResponse, h: rawResponse.request.headers });
               assert.isUndefined(rawResponse.request.headers['Authorization']);
               scope.done();
               done();
