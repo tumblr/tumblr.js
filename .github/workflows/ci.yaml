@@ -35,10 +35,13 @@ jobs:
       - name: Build
         run: npm run build --if-present
 
+      - name: Run lint
+        run: npm run lint
+
       - name: Run tests
-        run: npm test
+        run: npm run test:coverage
 
       - name: Run integration tests
         env:
           TUMBLR_OAUTH_CONSUMER_KEY: ${{ secrets.TUMBLR_OAUTH_CONSUMER_KEY }}
-        run: ./node_modules/.bin/mocha integration
+        run: npm run test:integration

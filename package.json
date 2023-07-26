@@ -11,9 +11,10 @@
     "autoformat": "prettier --write .",
     "generate-docs": "rm -rf gh-pages && node_modules/.bin/jsdoc -c jsdoc.json",
     "gh-pages": "git subtree push --prefix=gh-pages origin gh-pages",
-    "test": "npm run lint && nyc mocha",
-    "lint": "eslint --report-unused-disable-directives lib test",
-    "mocha": "mocha"
+    "test": "mocha",
+    "test:coverage": "nyc mocha",
+    "test:integration": "mocha ./integration",
+    "lint": "eslint --report-unused-disable-directives lib test"
   },
   "engines": {
     "node": ">=16",

@@ -14,3 +14,46 @@ problems, please open an issue. We also actively welcome pull requests.
 
 By contributing to tumblr.js you agree that your contributions will be licensed under its Apache 2.0
 license.
+
+## Testing
+
+First install dependencies by running `npm ci`.
+
+### Unit tests
+
+Run unit tests as follows:
+
+```sh
+npm run test
+```
+
+### Integration tests
+
+To run the integration tests which will actually call the API, you'll need to get oauth application
+credentials. To get valid credentials, visit the
+[Tumblr OAuth Applications page](https://www.tumblr.com/oauth/apps).
+
+**Never share your OAuth credentials, keep them secret!**
+
+Part of the suite can be run with just the `consumer_key`, which is required:
+
+```sh
+TUMBLR_OAUTH_CONSUMER_KEY='--- valid consumer_key ---' \
+npm run test:integration
+```
+
+To run the full suite, you must provide complete OAuth1 credentials. These full credentials can be
+found by visiting the [Tumblr API Console](https://api.tumblr.com/console/calls/user/info) and
+entering your OAuth Application consumer credentials. _Note:_ You may need to set
+`https://api.tumblr.com/console/calls/user/info` as the default callback URL for you application.
+It's recommended to create a dedicated application for testing this library.
+
+Provide the full OAuth1 credentials as environment variables and run the integration test suite:
+
+```sh
+TUMBLR_OAUTH_CONSUMER_KEY='--- valid consumer_key ---' \
+TUMBLR_OAUTH_CONSUMER_SECRET='--- valid consumer_secret ---' \
+TUMBLR_OAUTH_TOKEN='--- valid token ---' \
+TUMBLR_OAUTH_TOKEN_SECRET='--- valid token_key ---' \
+npm run test:integration
+```
