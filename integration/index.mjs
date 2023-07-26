@@ -15,7 +15,7 @@ describe('consumer_key only request', () => {
     c.returnPromises();
   });
 
-  test('fetches staff blog with just consumer key', async () => {
+  test('fetches staff blog', async () => {
     const {
       blog: { uuid, name },
     } = await c.blogInfo('staff');
