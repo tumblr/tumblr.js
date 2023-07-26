@@ -3,7 +3,7 @@
   "version": "4.0.0-alpha.0",
   "description": "Official JavaScript client for the Tumblr API",
   "main": "./lib/tumblr",
-  "types": "./lib/tumblr.d.ts",
+  "type": "commonjs",
   "exports": {
     ".": "./lib/tumblr.js"
   },
@@ -46,9 +46,9 @@
     }
   ],
   "dependencies": {
-    "@types/lodash": "^4.14.196",
+    "@types/lodash": "^4.0.0",
     "@types/node": ">=16",
-    "@types/request": "^2.48.8",
+    "@types/request": "^2.0.0",
     "lodash": "^4.17.11",
     "query-string": "^6.1.0",
     "request": "^2.88.2"
