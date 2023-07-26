@@ -1,5 +1,3 @@
-# yamllint disable rule:line-length
-# yamllint disable rule:braces
 name: CI
 
 on:
@@ -39,3 +37,8 @@ jobs:
 
       - name: Run tests
         run: npm test
+
+      - name: Run integration tests
+        env:
+          TUMBLR_OAUTH_CONSUMER_KEY: ${{ secrets.TUMBLR_OAUTH_CONSUMER_KEY }}
+        run: ./node_modules/.bin/mocha integration
