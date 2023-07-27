@@ -11,6 +11,10 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - **Breaking** Support Node.js versions `>=16`
 
+### Added
+
+- Integration test suites using real API.
+
 ## [3.0.0] - 2020-07-28
 
 ## [2.0.0] - 2018-06-13
