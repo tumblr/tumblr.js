@@ -1,6 +1,7 @@
 # Contributing
 
-We want to make contributing to `tumblr.js` as easy and transparent as possible. If you run into problems, please open an issue. We also actively welcome pull requests.
+We want to make contributing to `tumblr.js` as easy and transparent as possible. If you run into
+problems, please open an issue. We also actively welcome pull requests.
 
 ## Pull Requests
 
@@ -11,4 +12,5 @@ We want to make contributing to `tumblr.js` as easy and transparent as possible.
 
 ## License
 
-By contributing to tumblr.js you agree that your contributions will be licensed under its Apache 2.0 license.
+By contributing to tumblr.js you agree that your contributions will be licensed under its Apache 2.0
+license.
