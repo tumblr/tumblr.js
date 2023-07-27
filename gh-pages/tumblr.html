@@ -1,59 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>tumblr - Documentation</title>
-
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
     <!--[if lt IE 9]>
-        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/main.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 
 <input type="checkbox" id="nav-trigger" class="nav-trigger" />
 <label for="nav-trigger" class="navicon-button x">
-    <div class="navicon"></div>
+  <div class="navicon"></div>
 </label>
 
 <label for="nav-trigger" class="overlay"></label>
 
-<nav class="nav">
-    <h2 class="home-link"><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><details open><summary><a href="TumblrClient.html">TumblrClient</a></summary><ul class='methods'><li data-type='method'><a href="TumblrClient.html#.blogInfo">blogInfo</a></li><li data-type='method'><a href="TumblrClient.html#.blogAvatar">blogAvatar</a></li><li data-type='method'><a href="TumblrClient.html#.blogLikes">blogLikes</a></li><li data-type='method'><a href="TumblrClient.html#.blogFollowers">blogFollowers</a></li><li data-type='method'><a href="TumblrClient.html#.blogPosts">blogPosts</a></li><li data-type='method'><a href="TumblrClient.html#.blogQueue">blogQueue</a></li><li data-type='method'><a href="TumblrClient.html#.blogDrafts">blogDrafts</a></li><li data-type='method'><a href="TumblrClient.html#.blogSubmissions">blogSubmissions</a></li><li data-type='method'><a href="TumblrClient.html#.userInfo">userInfo</a></li><li data-type='method'><a href="TumblrClient.html#.userDashboard">userDashboard</a></li><li data-type='method'><a href="TumblrClient.html#.userFollowing">userFollowing</a></li><li data-type='method'><a href="TumblrClient.html#.userLikes">userLikes</a></li><li data-type='method'><a href="TumblrClient.html#.taggedPosts">taggedPosts</a></li><li data-type='method'><a href="TumblrClient.html#.createPost">createPost</a></li><li data-type='method'><a href="TumblrClient.html#.editPost">editPost</a></li><li data-type='method'><a href="TumblrClient.html#.reblogPost">reblogPost</a></li><li data-type='method'><a href="TumblrClient.html#.deletePost">deletePost</a></li><li data-type='method'><a href="TumblrClient.html#.followBlog">followBlog</a></li><li data-type='method'><a href="TumblrClient.html#.unfollowBlog">unfollowBlog</a></li><li data-type='method'><a href="TumblrClient.html#.likePost">likePost</a></li><li data-type='method'><a href="TumblrClient.html#.unlikePost">unlikePost</a></li><li data-type='method'><a href="TumblrClient.html#.createTextPost">createTextPost</a></li><li data-type='method'><a href="TumblrClient.html#.createPhotoPost">createPhotoPost</a></li><li data-type='method'><a href="TumblrClient.html#.createQuotePost">createQuotePost</a></li><li data-type='method'><a href="TumblrClient.html#.createLinkPost">createLinkPost</a></li><li data-type='method'><a href="TumblrClient.html#.createChatPost">createChatPost</a></li><li data-type='method'><a href="TumblrClient.html#.createAudioPost">createAudioPost</a></li><li data-type='method'><a href="TumblrClient.html#.createVideoPost">createVideoPost</a></li><li data-type='method'><a href="TumblrClient.html#getRequest">getRequest</a></li><li data-type='method'><a href="TumblrClient.html#postRequest">postRequest</a></li><li data-type='method'><a href="TumblrClient.html#returnPromises">returnPromises</a></li><li data-type='method'><a href="TumblrClient.html#addGetMethods">addGetMethods</a></li><li data-type='method'><a href="TumblrClient.html#addPostMethods">addPostMethods</a></li></ul></details></li></ul><h3>Namespaces</h3><ul><li><details open><summary><a href="tumblr.html">tumblr</a></summary><ul class='members'><li data-type='member'><a href="tumblr.html#.Client">Client</a></li></ul><ul class='methods'><li data-type='method'><a href="tumblr.html#.createClient">createClient</a></li></ul></details></li></ul>
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="TumblrClient.html">TumblrClient</a><ul class='methods'><li data-type='method'><a href="TumblrClient.html#addGetMethods">addGetMethods</a></li><li data-type='method'><a href="TumblrClient.html#addPostMethods">addPostMethods</a></li><li data-type='method'><a href="TumblrClient.html#getRequest">getRequest</a></li><li data-type='method'><a href="TumblrClient.html#postRequest">postRequest</a></li><li data-type='method'><a href="TumblrClient.html#returnPromises">returnPromises</a></li><li data-type='method'><a href="TumblrClient.html#.blogAvatar">blogAvatar</a></li><li data-type='method'><a href="TumblrClient.html#.blogDrafts">blogDrafts</a></li><li data-type='method'><a href="TumblrClient.html#.blogFollowers">blogFollowers</a></li><li data-type='method'><a href="TumblrClient.html#.blogInfo">blogInfo</a></li><li data-type='method'><a href="TumblrClient.html#.blogLikes">blogLikes</a></li><li data-type='method'><a href="TumblrClient.html#.blogPosts">blogPosts</a></li><li data-type='method'><a href="TumblrClient.html#.blogQueue">blogQueue</a></li><li data-type='method'><a href="TumblrClient.html#.blogSubmissions">blogSubmissions</a></li><li data-type='method'><a href="TumblrClient.html#.createAudioPost">createAudioPost</a></li><li data-type='method'><a href="TumblrClient.html#.createChatPost">createChatPost</a></li><li data-type='method'><a href="TumblrClient.html#.createLinkPost">createLinkPost</a></li><li data-type='method'><a href="TumblrClient.html#.createPhotoPost">createPhotoPost</a></li><li data-type='method'><a href="TumblrClient.html#.createPost">createPost</a></li><li data-type='method'><a href="TumblrClient.html#.createQuotePost">createQuotePost</a></li><li data-type='method'><a href="TumblrClient.html#.createTextPost">createTextPost</a></li><li data-type='method'><a href="TumblrClient.html#.createVideoPost">createVideoPost</a></li><li data-type='method'><a href="TumblrClient.html#.deletePost">deletePost</a></li><li data-type='method'><a href="TumblrClient.html#.editPost">editPost</a></li><li data-type='method'><a href="TumblrClient.html#.followBlog">followBlog</a></li><li data-type='method'><a href="TumblrClient.html#.likePost">likePost</a></li><li data-type='method'><a href="TumblrClient.html#.reblogPost">reblogPost</a></li><li data-type='method'><a href="TumblrClient.html#.taggedPosts">taggedPosts</a></li><li data-type='method'><a href="TumblrClient.html#.unfollowBlog">unfollowBlog</a></li><li data-type='method'><a href="TumblrClient.html#.unlikePost">unlikePost</a></li><li data-type='method'><a href="TumblrClient.html#.userDashboard">userDashboard</a></li><li data-type='method'><a href="TumblrClient.html#.userFollowing">userFollowing</a></li><li data-type='method'><a href="TumblrClient.html#.userInfo">userInfo</a></li><li data-type='method'><a href="TumblrClient.html#.userLikes">userLikes</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="tumblr.html">tumblr</a><ul class='members'><li data-type='member'><a href="tumblr.html#.Client">Client</a></li></ul><ul class='methods'><li data-type='method'><a href="tumblr.html#.createClient">createClient</a></li></ul></li></ul>
+    
 </nav>
 
-<div id="main" class="main-container">
+<div id="main">
     
-        <h1 class="page-title">tumblr</h1>
-    
-
+    <h1 class="page-title">tumblr</h1>
     
 
+    
 
 
 
-<section class="page-container">
 
-    <header class="page-header">
+<section>
+
+<header>
+    
+        <h2>
         
-            <h2>
-            tumblr
-            </h2>
-            
+            Namespace
         
-    </header>
+        </h2>
+        
+    
+</header>
 
-    <section class="page-content">
-        <article class="container-overview">
+<article>
+    
+        <div class="container-overview">
+        
             
-                
+
+
+    
+
+    <h4 class="name" id="tumblr">tumblr</h4>
+
+    
+
+
+
 
 <dl class="details">
+    
 
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul><li>
+    <dd class="tag-source"><ul class="dummy"><li>
         <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line8">line 8</a>
     </li></ul></dd>
     
@@ -92,41 +116,69 @@
 
 
 
-                
 
-                
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+        <h3 class="subsection-title">Members</h3>
+
+        
             
-        </article>
+<h4 class="name" id=".Client"><span class="type-signature type-signature-static">(static) </span>Client<span class="type-signature"></span></h4>
 
-        
 
-        
 
-        
 
-         
-
-        
-
-        
-            <article class="container-members">
-                <h3 class="subsection-title">Members</h3>
-
-                
-                    
-<article class="member">
-    <h4 class="name" id=".Client"><span class="signature-type">(static) </span>Client<span class="signature-type"></span></h4>
-
-    
-
-    
 
 <dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Passthrough for the <a href="TumblrClient.html"><code>TumblrClient</code></a> class</p></li></ul></dd>
+    
 
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul><li>
-        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line957">line 957</a>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line984">line 984</a>
     </li></ul></dd>
     
 
@@ -171,45 +223,46 @@
 
 
 
-    
-    <div class="description">
-        <p>Passthrough for the <a href="TumblrClient.html"><code>TumblrClient</code></a> class</p>
-    </div>
-    
 
-    
+<div class="description usertext">
+    <p>Passthrough for the <a href="TumblrClient.html"><code>TumblrClient</code></a> class</p>
+</div>
 
-    
 
-    
-</article>
 
-                
-            </article>
-        
 
-        
-            <article class="container-methods">
-                <h3 class="subsection-title">Methods</h3>
 
-                
-                    
 
-<article class="method">
-    
-        <h4 class="name" id=".createClient"><span class="signature-type">(static) </span>createClient<span class="signature">(<span class="optional">[options]</span>)</span><span class="signature-return"> &rarr; {<a href="TumblrClient.html">TumblrClient</a>}</span></h4>
+
 
         
     
 
     
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".createClient"><span class="type-signature type-signature-static">(static) </span>createClient<span class="signature">(options<span class="signature-attributes">opt</span>)</span><span class="type-signature"> &rarr; {<a href="TumblrClient.html">TumblrClient</a>}</span></h4>
+
+    
+
+
+
 
 <dl class="details">
+    
+    <dt class="tag-description">Description:</dt>
+    <dd class="tag-description"><ul class="dummy"><li><p>Creates a Tumblr Client</p></li></ul></dd>
+    
 
     
     <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul><li>
-        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line972">line 972</a>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="tumblr.js.html">tumblr.js</a>, <a href="tumblr.js.html#line999">line 999</a>
     </li></ul></dd>
     
 
@@ -254,35 +307,29 @@
 
 
 
-    
-    <div class="description">
-        <p>Creates a Tumblr Client</p>
-    </div>
-    
 
-    
 
-    
 
-    
 
-    
 
+
+
+
+
+    <h5 class="h5-parameters">Parameters:</h5>
     
-        <h5>Parameters:</h5>
-        
 
 <table class="params">
     <thead>
     <tr>
         
-            <th>Name</th>
+        <th>Name</th>
         
 
         <th>Type</th>
 
         
-            <th>Attributes</th>
+        <th>Attributes</th>
         
 
         
@@ -292,195 +339,192 @@
     </thead>
 
     <tbody>
-        
-            
-            
-<tr class="prop">
-    
-        <td class="name">
-            
-            <code>options</code>
-        </td>
     
 
-    <td class="type">
-        
+        <tr>
             
+                <td class="name"><code>options</code></td>
+            
+
+            <td class="type">
+            
+                
 <span class="param-type">Object</span>
 
 
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>client options</p>
+                <h6>Properties</h6>
+                
+
+<table class="params">
+    <thead>
+    <tr>
         
-    </td>
-
-    
-        <td class="attributes">
-            
-                <div class="attribute optional">optional</div>
-            
-
-            
-
-            
-        </td>
-    
-
-    
-
-    <td class="description last"><p>client options</p></td>
-
-</tr>
-
-
-    
-    
-<tr class="prop">
-    
-        <td class="name">
-            
-                <span class="prefix">&#8627;</span>
-            
-            <code>credentials</code>
-        </td>
-    
-
-    <td class="type">
+        <th>Name</th>
         
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
             
+                <td class="name"><code>credentials</code></td>
+            
+
+            <td class="type">
+            
+                
 <span class="param-type">Object</span>
 
 
-        
-    </td>
-
-    
-        <td class="attributes">
-            
-                <div class="attribute optional">optional</div>
-            
 
             
+            </td>
 
             
-        </td>
-    
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
-    
+                
 
-    <td class="description last"><p>OAuth credentials</p></td>
-
-</tr>
-
-
-
-
-    
-    
-<tr class="prop">
-    
-        <td class="name">
+                
+                </td>
             
-                <span class="prefix">&#8627;</span>
+
             
-            <code>baseUrl</code>
-        </td>
+
+            <td class="description last"><p>OAuth credentials</p></td>
+        </tr>
+
     
 
-    <td class="type">
-        
+        <tr>
             
+                <td class="name"><code>baseUrl</code></td>
+            
+
+            <td class="type">
+            
+                
 <span class="param-type">string</span>
 
 
-        
-    </td>
-
-    
-        <td class="attributes">
-            
-                <div class="attribute optional">optional</div>
-            
 
             
+            </td>
 
             
-        </td>
-    
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
 
-    
+                
 
-    <td class="description last"><p>API base URL</p></td>
-
-</tr>
-
-
-
-
-    
-    
-<tr class="prop">
-    
-        <td class="name">
+                
+                </td>
             
-                <span class="prefix">&#8627;</span>
+
             
-            <code>request</code>
-        </td>
+
+            <td class="description last"><p>API base URL</p></td>
+        </tr>
+
     
 
-    <td class="type">
-        
+        <tr>
             
+                <td class="name"><code>request</code></td>
+            
+
+            <td class="type">
+            
+                
 <span class="param-type">Object</span>
 
 
-        
-    </td>
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+                    &lt;optional><br>
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>library to use for making requests</p></td>
+        </tr>
 
     
-        <td class="attributes">
-            
-                <div class="attribute optional">optional</div>
-            
-
-            
-
-            
-        </td>
-    
-
-    
-
-    <td class="description last"><p>library to use for making requests</p></td>
-
-</tr>
-
-
-
-
-
-        
-            
-            
-            
     </tbody>
 </table>
 
-    
+            </td>
+        </tr>
 
     
+    </tbody>
+</table>
 
-    
 
-    
 
-    
 
-    
 
-    
-    <h5>Returns:</h5>
-    
-            
+
+
+
+
+
+
+
+
+
+
+
+<h5 class="h5-returns">Returns:</h5>
+
+        
 <div class="param-desc">
     <p><a href="TumblrClient.html"><code>TumblrClient</code></a> instance</p>
 </div>
@@ -496,32 +540,42 @@
 <span class="param-type"><a href="TumblrClient.html">TumblrClient</a></span>
 
 
+
     </dd>
 </dl>
 
+    
+
+
+
         
+    
+
+    
+
+    
 </article>
-
-                
-            </article>
-        
-
-        
-
-        
-    </section>
 
 </section>
 
 
 
 
+    
+    
 </div>
 
+<br class="clear">
+
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Wed Dec 26 2018 11:52:28 GMT-0500 (Eastern Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a> on Thu Jul 27 2023 17:44:50 GMT+0200 (Central European Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
-<script src="scripts/main.js"></script>
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
 </body>
 </html>
