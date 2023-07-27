@@ -5,6 +5,8 @@
   "main": "./lib/tumblr",
   "types": "./lib/tumblr.d.ts",
   "scripts": {
+    "autoformat": "prettier --write .",
+    "format-check": "prettier --check .",
     "generate-docs": "rm -rf gh-pages && node_modules/.bin/jsdoc -c jsdoc.json",
     "gh-pages": "git subtree push --prefix=gh-pages origin gh-pages",
     "test": "mocha",
@@ -49,11 +51,13 @@
     "chai": "^4.1.2",
     "docdash": "^2.0.1",
     "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.9.0",
     "jsdoc": "^4.0.2",
     "json5": "^2.2.3",
     "mocha": "^10.2.0",
     "nock": "^13.3.2",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "prettier": "^3.0.0"
   },
   "files": [
     "/lib",
