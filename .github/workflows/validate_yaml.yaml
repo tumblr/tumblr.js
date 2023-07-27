@@ -1,10 +1,11 @@
-# yamllint disable rule:line-length
-
 name: YAML Validation
 
 on:
   pull_request:
   push:
+    branches:
+      - main
+      - master
 
 jobs:
   validate-yaml:
@@ -13,8 +14,16 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Run YAML linter
         run: |
-          find . -path \*/vendor -prune -false -o -name \*.y*ml | xargs yamllint -d relaxed
+          yamllint --list-files .
+          yamllint -d "{
+            extends: default,
+            rules: {
+              line-length: disable,
+              document-start: {present: false},
+              truthy: {check-keys: false}
+            }
+          }" .

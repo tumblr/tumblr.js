@@ -3,16 +3,21 @@
   "version": "3.0.0",
   "description": "Official JavaScript client for the Tumblr API",
   "main": "./lib/tumblr",
-  "types": "./lib/tumblr.d.ts",
+  "type": "commonjs",
+  "exports": {
+    ".": "./lib/tumblr.js"
+  },
   "scripts": {
     "generate-docs": "rm -rf gh-pages && node_modules/.bin/jsdoc -c jsdoc.json",
     "gh-pages": "git subtree push --prefix=gh-pages origin gh-pages",
-    "test": "eslint lib test && nyc mocha",
-    "lint": "eslint lib test",
-    "mocha": "mocha"
+    "test": "mocha",
+    "test:coverage": "nyc mocha",
+    "test:integration": "mocha ./integration",
+    "lint": "eslint --report-unused-disable-directives lib test"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=16",
+    "npm": ">=8"
   },
   "homepage": "https://github.com/tumblr/tumblr.js",
   "repository": {
@@ -40,23 +45,32 @@
     }
   ],
   "dependencies": {
+    "@types/lodash": "^4.0.0",
+    "@types/node": ">=16",
+    "@types/request": "^2.0.0",
     "lodash": "^4.17.11",
     "query-string": "^6.1.0",
-    "request": "^2.88.0"
+    "request": "^2.88.2"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.5",
+    "@types/mocha": "^10.0.1",
     "chai": "^4.1.2",
-    "eslint": "^4.19.1",
-    "hotdoc": "^0.7.2",
-    "jsdoc": "^3.4.0",
-    "json5": "^1.0.1",
-    "mocha": "^5.2.0",
-    "nock": "^9.2.6",
-    "nyc": "^13.3.0",
-    "semver": "^5.5.0"
+    "docdash": "^2.0.1",
+    "eslint": "^8.45.0",
+    "eslint-config-prettier": "^8.8.0",
+    "jsdoc": "^4.0.2",
+    "json5": "^2.2.3",
+    "mocha": "^10.2.0",
+    "nock": "^13.3.2",
+    "nyc": "^15.1.0"
   },
   "files": [
     "/lib",
     "/LICENSE"
-  ]
+  ],
+  "volta": {
+    "node": "18.17.0",
+    "npm": "9.8.1"
+  }
 }

@@ -13,7 +13,7 @@
           posts: 1682,
           url: 'https://staff.tumblr.com/',
           updated: 1461979830,
-          description: 'The world\'s *first* content-free social network',
+          description: "The world's *first* content-free social network",
           is_nsfw: false,
           ask: false,
           ask_page_title: '',
@@ -25,7 +25,7 @@
           subscribed: false,
           can_subscribe: true,
         },
-      }
+      },
     },
   },
 }
