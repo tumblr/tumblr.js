@@ -12,7 +12,8 @@
     "mocha": "mocha"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=16",
+    "npm": ">=8"
   },
   "homepage": "https://github.com/tumblr/tumblr.js",
   "repository": {
@@ -42,21 +43,24 @@
   "dependencies": {
     "lodash": "^4.17.11",
     "query-string": "^6.1.0",
-    "request": "^2.88.0"
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "chai": "^4.1.2",
-    "eslint": "^4.19.1",
-    "hotdoc": "^0.7.2",
-    "jsdoc": "^3.4.0",
-    "json5": "^1.0.1",
-    "mocha": "^5.2.0",
-    "nock": "^9.2.6",
-    "nyc": "^13.3.0",
-    "semver": "^5.5.0"
+    "docdash": "^2.0.1",
+    "eslint": "^8.45.0",
+    "jsdoc": "^4.0.2",
+    "json5": "^2.2.3",
+    "mocha": "^10.2.0",
+    "nock": "^13.3.2",
+    "nyc": "^15.1.0"
   },
   "files": [
     "/lib",
     "/LICENSE"
-  ]
+  ],
+  "volta": {
+    "node": "18.17.0",
+    "npm": "9.8.1"
+  }
 }
