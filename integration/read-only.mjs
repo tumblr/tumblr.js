@@ -14,7 +14,7 @@ describe('consumer_key (api_key) only requests', () => {
     client = new Client({
       consumer_key: env.TUMBLR_OAUTH_CONSUMER_KEY,
     });
-    c.returnPromises();
+    client.returnPromises();
   });
 
   test('fetches blogInfo("staff")', async () => {
