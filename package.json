@@ -3,7 +3,10 @@
   "version": "3.0.0",
   "description": "Official JavaScript client for the Tumblr API",
   "main": "./lib/tumblr",
-  "types": "./lib/tumblr.d.ts",
+  "type": "commonjs",
+  "exports": {
+    ".": "./lib/tumblr.js"
+  },
   "scripts": {
     "autoformat": "prettier --write .",
     "format-check": "prettier --check .",
@@ -11,6 +14,7 @@
     "gh-pages": "git subtree push --prefix=gh-pages origin gh-pages",
     "test": "mocha",
     "test:coverage": "nyc mocha",
+    "test:integration": "mocha ./integration",
     "lint": "eslint --report-unused-disable-directives lib test"
   },
   "engines": {
