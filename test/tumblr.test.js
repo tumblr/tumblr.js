@@ -1,10 +1,11 @@
+require('mocha');
+
 const fs = require('fs');
 const path = require('path');
 
+// @ts-expect-error
+const Request = require('request').Request;
 const JSON5 = require('json5');
-const qs = require('query-string');
-const forEach = require('lodash/forEach');
-const lowerCase = require('lodash/lowerCase');
 
 const assert = require('chai').assert;
 const nock = require('nock');
@@ -17,14 +18,10 @@ const DUMMY_CREDENTIALS = {
   token: 'Toad',
   token_secret: 'Princess Toadstool',
 };
-const DUMMY_API_URL = 'https://t.umblr.com';
+
+const DUMMY_API_URL = 'https://example.com';
 
 const URL_PARAM_REGEX = /\/:([^/]+)/g;
-
-function createQueryString(obj) {
-  const queryString = qs.stringify(obj);
-  return queryString ? '?' + queryString : '';
-}
 
 describe('tumblr.js', function () {
   it('can be included without throwing', function () {
@@ -38,29 +35,66 @@ describe('tumblr.js', function () {
 
     it('creates a TumblrClient instance', function () {
       assert.isFunction(tumblr.createClient);
-      const client = tumblr.createClient();
+      const client = tumblr.createClient({ consumer_key: 'abc123' });
       assert.isTrue(client instanceof tumblr.Client);
+      assert.equal(client.credentials.consumer_key, 'abc123');
     });
 
     it('passes credentials to the client', function () {
-      const client = tumblr.createClient(DUMMY_CREDENTIALS);
-      assert.equal(client.credentials.consumer_key, DUMMY_CREDENTIALS.consumer_key);
-      assert.equal(client.credentials.consumer_secret, DUMMY_CREDENTIALS.consumer_secret);
-      assert.equal(client.credentials.token, DUMMY_CREDENTIALS.token);
-      assert.equal(client.credentials.token_secret, DUMMY_CREDENTIALS.token_secret);
+      const credentials = DUMMY_CREDENTIALS;
+
+      const client = tumblr.createClient(credentials);
+      assert.equal(client.credentials.consumer_key, credentials.consumer_key);
+      assert.equal(client.credentials.consumer_secret, credentials.consumer_secret);
+      assert.equal(client.credentials.token, credentials.token);
+      assert.equal(client.credentials.token_secret, credentials.token_secret);
     });
 
     it('passes baseUrl to the client', function () {
-      const baseUrl = 'https://t.umblr.com/v2';
+      const baseUrl = 'https://example.com/';
+      assert.equal(tumblr.createClient({ consumer_key: 'abc123', baseUrl }).baseUrl, baseUrl);
 
-      const client = tumblr.createClient({ baseUrl: baseUrl });
-      assert.equal(client.baseUrl, baseUrl);
+      const baseUrlNoSlash = 'https://example.com';
+      assert.equal(
+        tumblr.createClient({ consumer_key: 'abc123', baseUrl: baseUrlNoSlash }).baseUrl,
+        baseUrl,
+      );
     });
 
-    it('passes returnPromises to the client', function () {
-      const client = tumblr.createClient({ returnPromises: true });
-      assert.notEqual(client.getRequest, tumblr.Client.prototype.getRequest);
-      assert.notEqual(client.postRequest, tumblr.Client.prototype.postRequest);
+    it('throws on baseUrl with path', function () {
+      assert.throws(
+        () => tumblr.createClient({ consumer_key: 'abc123', baseUrl: 'https://example.com/v2' }),
+        'baseUrl option must not include a pathname.',
+      );
+    });
+
+    it('throws on baseUrl with search', function () {
+      assert.throws(
+        () =>
+          tumblr.createClient({ consumer_key: 'abc123', baseUrl: 'https://example.com/?params' }),
+        'baseUrl option must not include search params (query).',
+      );
+    });
+
+    it('throws on baseUrl with username', function () {
+      assert.throws(
+        () => tumblr.createClient({ consumer_key: 'abc123', baseUrl: 'https://user@example.com/' }),
+        'baseUrl option must not include username.',
+      );
+    });
+
+    it('throws on baseUrl with password', function () {
+      assert.throws(
+        () => tumblr.createClient({ consumer_key: 'abc123', baseUrl: 'https://:pw@example.com/' }),
+        'baseUrl option must not include password.',
+      );
+    });
+
+    it('throws on baseUrl with hash', function () {
+      assert.throws(
+        () => tumblr.createClient({ consumer_key: 'abc123', baseUrl: 'https://example.com/#hash' }),
+        'baseUrl option must not include hash.',
+      );
     });
   });
 
@@ -70,38 +104,33 @@ describe('tumblr.js', function () {
 
     describe('constructor', function () {
       it('creates a TumblrClient instance', function () {
-        const client = new TumblrClient();
+        const client = new TumblrClient(DUMMY_CREDENTIALS);
         assert.isTrue(client instanceof TumblrClient);
       });
 
       it('uses the supplied credentials', function () {
-        const client = new TumblrClient(DUMMY_CREDENTIALS);
-        assert.equal(client.credentials.consumer_key, DUMMY_CREDENTIALS.consumer_key);
-        assert.equal(client.credentials.consumer_secret, DUMMY_CREDENTIALS.consumer_secret);
-        assert.equal(client.credentials.token, DUMMY_CREDENTIALS.token);
-        assert.equal(client.credentials.token_secret, DUMMY_CREDENTIALS.token_secret);
+        const credentials = DUMMY_CREDENTIALS;
+
+        const client = new TumblrClient(credentials);
+        assert.equal(client.credentials.consumer_key, credentials.consumer_key);
+        assert.equal(client.credentials.consumer_secret, credentials.consumer_secret);
+        assert.equal(client.credentials.token, credentials.token);
+        assert.equal(client.credentials.token_secret, credentials.token_secret);
       });
 
       it('uses the supplied baseUrl', function () {
-        const baseUrl = DUMMY_API_URL;
-        const client = tumblr.createClient({ baseUrl: baseUrl });
-        assert.equal(client.baseUrl, baseUrl);
-      });
-
-      it('uses the supplied returnPromises value', function () {
-        const client = tumblr.createClient({ returnPromises: true });
-        assert.notEqual(client.getRequest, tumblr.Client.prototype.getRequest);
-        assert.notEqual(client.postRequest, tumblr.Client.prototype.postRequest);
+        const client = tumblr.createClient({ ...DUMMY_CREDENTIALS, baseUrl: DUMMY_API_URL });
+        assert.equal(client.baseUrl, DUMMY_API_URL.replace(/\/?$/, '/'));
       });
 
       describe('default options', function () {
         it('uses the default Tumblr API base URL', function () {
-          const client = tumblr.createClient();
-          assert.equal(client.baseUrl, 'https://api.tumblr.com');
+          const client = tumblr.createClient(DUMMY_CREDENTIALS);
+          assert.equal(client.baseUrl, 'https://api.tumblr.com/');
         });
 
         it('does not return Promises', function () {
-          const client = tumblr.createClient();
+          const client = tumblr.createClient(DUMMY_CREDENTIALS);
           assert.equal(client.getRequest, tumblr.Client.prototype.getRequest);
           assert.equal(client.postRequest, tumblr.Client.prototype.postRequest);
         });
@@ -110,7 +139,7 @@ describe('tumblr.js', function () {
 
     describe('#returnPromises', function () {
       it('modifies getRequest and postRequest', function () {
-        const client = new TumblrClient();
+        const client = new TumblrClient(DUMMY_CREDENTIALS);
         const getRequestBefore = client.getRequest;
         const postRequestBefore = client.postRequest;
         client.returnPromises();
@@ -119,12 +148,12 @@ describe('tumblr.js', function () {
       });
     });
 
+    /** @type {import('../lib/tumblr.js').Client} */
     let client;
     beforeEach(function () {
       client = new TumblrClient({
         ...DUMMY_CREDENTIALS,
         baseUrl: DUMMY_API_URL,
-        returnPromises: false,
       });
     });
 
@@ -135,7 +164,7 @@ describe('tumblr.js', function () {
      */
 
     describe('default methods', function () {
-      const defaulthMethods = [
+      /** @type {const} */ ([
         'blogInfo',
         'blogAvatar',
         'blogLikes',
@@ -164,9 +193,7 @@ describe('tumblr.js', function () {
         'createChatPost',
         'createAudioPost',
         'createVideoPost',
-      ];
-
-      forEach(defaulthMethods, function (methodName) {
+      ]).forEach(function (methodName) {
         it('has #' + methodName, function () {
           assert.isFunction(client[methodName]);
         });
@@ -182,25 +209,14 @@ describe('tumblr.js', function () {
      * - TumblrClient#postRequest
      */
 
+    /**
+     * @param {'get'|'post'} httpMethod
+     * @param {any} data
+     * @param {string} apiPath
+     */
     function setupNockBeforeAfter(httpMethod, data, apiPath) {
-      let queryParams, testApiPath;
-
       before(function () {
-        queryParams = {};
-
-        if (client.credentials.consumer_key) {
-          queryParams.api_key = client.credentials.consumer_key;
-        }
-
-        testApiPath = apiPath;
-        if (httpMethod === 'get') {
-          testApiPath += createQueryString(queryParams);
-        }
-
-        nock(client.baseUrl)
-          .persist()
-          [httpMethod](testApiPath)
-          .reply(data.body.meta.status, data.body);
+        nock(client.baseUrl)[httpMethod](apiPath).reply(data.body.meta.status, data.body).persist();
       });
 
       after(function () {
@@ -208,76 +224,235 @@ describe('tumblr.js', function () {
       });
     }
 
-    forEach(
-      {
-        get: 'getRequest',
-        post: 'postRequest',
-      },
-      function (clientMethod, httpMethod) {
-        describe('#' + clientMethod, function () {
-          const fixtures = JSON5.parse(
-            fs.readFileSync(path.join(__dirname, 'fixtures/' + httpMethod + '.json5')).toString(),
-          );
+    it('get request expected headers', async () => {
+      client.returnPromises();
+      const scope = nock(client.baseUrl, {
+        reqheaders: {
+          'user-agent': `tumblr.js/${client.version}`,
+          accept: 'application/json',
+          authorization: (value) => {
+            return [
+              value.startsWith('OAuth '),
+              value.includes('oauth_signature_method="HMAC-SHA1"'),
+              value.includes('oauth_version="1.0"'),
+              value.includes(`oauth_consumer_key="${DUMMY_CREDENTIALS.consumer_key}"`),
+              value.includes(`oauth_token="${DUMMY_CREDENTIALS.token}"`),
+              /oauth_nonce="[^"]+"/.test(value),
+              /oauth_timestamp="[^"]+"/.test(value),
+              /oauth_signature="[^"]+"/.test(value),
+            ].every((passes) => passes);
+          },
+        },
+      })
+        .get('/')
+        .reply(200, { meta: {}, response: {} });
 
-          /**
-           * ### Callback
-           */
+      // @ts-expect-error Promise request with no params, this is OK.
+      assert.isOk(await client.getRequest('/'));
+      scope.done();
+    });
 
-          describe('returnPromises disabled', function () {
-            forEach(fixtures, function (data, apiPath) {
-              describe(apiPath, function () {
-                let callbackInvoked, requestError, requestResponse, returnValue;
-                const params = {};
-                const callback = function (err, resp) {
-                  callbackInvoked = true;
-                  requestError = err;
-                  requestResponse = resp;
-                };
+    it('get request sends api_key when all creds are not provided', async () => {
+      const client = new TumblrClient({ consumer_key: 'abc123' });
+      client.returnPromises();
+      const scope = nock(client.baseUrl, {
+        badheaders: ['authorization'],
+      })
+        .get('/')
+        .query({ api_key: 'abc123' })
+        .reply(200, { meta: {}, response: {} });
 
-                setupNockBeforeAfter(httpMethod, data, apiPath);
+      // @ts-expect-error Promise request with no params, this is OK.
+      assert.isOk(await client.getRequest('/'));
+      scope.done();
+    });
 
-                describe('params and callback', function () {
-                  before(function (done) {
-                    callbackInvoked = false;
-                    requestError = false;
-                    requestResponse = false;
+    it('post request expected headers', async () => {
+      client.returnPromises();
+      const scope = nock(client.baseUrl, {
+        reqheaders: {
+          'user-agent': `tumblr.js/${client.version}`,
+          'content-type': /^multipart\/form-data; ?boundary=-*\d+/,
+          'content-length': /^\d+/,
+          authorization: (value) => {
+            return [
+              value.startsWith('OAuth '),
+              value.includes('oauth_signature_method="HMAC-SHA1"'),
+              value.includes('oauth_version="1.0"'),
+              value.includes(`oauth_consumer_key="${DUMMY_CREDENTIALS.consumer_key}"`),
+              value.includes(`oauth_token="${DUMMY_CREDENTIALS.token}"`),
+              /oauth_nonce="[^"]+"/.test(value),
+              /oauth_timestamp="[^"]+"/.test(value),
+              /oauth_signature="[^"]+"/.test(value),
+            ].every((passes) => passes);
+          },
+        },
+      })
+        .post('/')
+        .reply(200, { meta: {}, response: {} });
 
-                    returnValue = client[clientMethod](apiPath, params, function () {
-                      callback.apply(this, arguments);
+      // @ts-expect-error Promise request with no params, this is OK.
+      assert.isOk(await client.postRequest('/'));
+      scope.done();
+    });
+
+    it('get request sends api_key when all creds are not provided', async () => {
+      const client = new TumblrClient({ consumer_key: 'abc123' });
+      client.returnPromises();
+      const scope = nock(client.baseUrl, {
+        badheaders: ['authorization'],
+      })
+        .post('/')
+        .query({ api_key: 'abc123' })
+        .reply(200, { meta: {}, response: {} });
+
+      // @ts-expect-error Promise request with no params, this is OK.
+      assert.isOk(await client.postRequest('/'));
+      scope.done();
+    });
+
+    /** @type {const} */ ([
+      ['get', 'getRequest'],
+      ['post', 'postRequest'],
+    ]).forEach(function ([httpMethod, clientMethod]) {
+      describe('#' + clientMethod, function () {
+        const fixtures = JSON5.parse(
+          fs.readFileSync(path.join(__dirname, 'fixtures/' + httpMethod + '.json5')).toString(),
+        );
+
+        /**
+         * ### Callback
+         */
+
+        describe('returnPromises disabled', function () {
+          Object.entries(fixtures).forEach(function ([apiPath, data]) {
+            describe(apiPath, function () {
+              let callbackInvoked, requestError, requestResponse, returnValue;
+              const params = {};
+
+              const callback = function (err, resp) {
+                callbackInvoked = true;
+                requestError = err;
+                requestResponse = resp;
+              };
+
+              setupNockBeforeAfter(httpMethod, data, apiPath);
+
+              describe('params and callback', function () {
+                before(function (done) {
+                  callbackInvoked = false;
+                  requestError = false;
+                  requestResponse = false;
+
+                  returnValue = client[clientMethod](
+                    apiPath,
+                    params,
+                    /** @param {any} args */
+                    function (...args) {
+                      callback.call(client, ...args);
                       done();
-                    });
-                  });
-
-                  if (httpMethod === 'post') {
-                    // Nock seems to cause the POST request to return a Promise,
-                    // making this difficult to properly test.
-                    it('returns a Request');
-                  } else {
-                    it('returns a Request', function () {
-                      assert.isTrue(returnValue instanceof require('request').Request);
-                    });
-                  }
-
-                  it('invokes the callback', function () {
-                    assert.isTrue(callbackInvoked);
-                  });
-
-                  it('gets a successful response', function () {
-                    assert.isNotOk(requestError, 'err is falsy');
-                    assert.isDefined(requestResponse);
-                  });
+                    },
+                  );
                 });
 
-                describe('callback only', function () {
-                  before(function (done) {
+                if (httpMethod === 'post') {
+                  // Nock seems to cause the POST request to return a Promise,
+                  // making this difficult to properly test.
+                  it('returns a Request');
+                } else {
+                  it('returns a Request', function () {
+                    assert.isTrue(returnValue instanceof Request);
+                  });
+                }
+
+                it('invokes the callback', function () {
+                  assert.isTrue(callbackInvoked);
+                });
+
+                it('gets a successful response', function () {
+                  assert.isNull(requestError, 'err is falsy');
+                  assert.isDefined(requestResponse);
+                });
+              });
+
+              describe('callback only', function () {
+                before(function (done) {
+                  callbackInvoked = false;
+                  requestError = false;
+                  requestResponse = false;
+
+                  // @ts-expect-error This is a bad function signature - optionals in middle @TODO
+                  client[clientMethod](
+                    apiPath,
+                    /** @param {any} args */
+                    function (...args) {
+                      callback.call(client, ...args);
+                      done();
+                    },
+                  );
+                });
+
+                it('invokes the callback', function () {
+                  assert.isTrue(callbackInvoked);
+                });
+
+                it('gets a successful response', function () {
+                  assert.isNull(requestError, 'err is falsy');
+                  assert.isDefined(requestResponse);
+                });
+              });
+            });
+          });
+        });
+
+        /**
+         * ### Promises
+         */
+
+        describe('returnPromises enabled', function () {
+          beforeEach(function () {
+            client.returnPromises();
+          });
+
+          /** @type {const} */ ([
+            ['get', 'getRequest'],
+            ['post', 'postRequest'],
+          ]).forEach(function ([httpMethod, clientMethod]) {
+            describe('#' + clientMethod, function () {
+              Object.entries(fixtures).forEach(function ([apiPath, data]) {
+                describe(apiPath, function () {
+                  let callbackInvoked, requestError, requestResponse, returnValue;
+                  const params = {};
+                  const callback = function (err, resp) {
+                    callbackInvoked = true;
+                    requestError = err;
+                    requestResponse = resp;
+                  };
+
+                  setupNockBeforeAfter(httpMethod, data, apiPath);
+
+                  beforeEach(function (done) {
                     callbackInvoked = false;
                     requestError = false;
                     requestResponse = false;
 
-                    client[clientMethod](apiPath, function () {
-                      callback.apply(this, arguments);
-                      done();
-                    });
+                    // @ts-expect-error It's promises, no callback
+                    returnValue = client[clientMethod](apiPath, params);
+                    // Invoke the callback when the Promise resolves or rejects
+                    returnValue.then(
+                      function (resp) {
+                        callback(null, resp);
+                        done();
+                      },
+                      function (err) {
+                        callback(err, null);
+                        done();
+                      },
+                    );
+                  });
+
+                  it('returns a Promise', function () {
+                    assert.isTrue(returnValue instanceof Promise);
                   });
 
                   it('invokes the callback', function () {
@@ -285,87 +460,16 @@ describe('tumblr.js', function () {
                   });
 
                   it('gets a successful response', function () {
-                    assert.isNotOk(requestError, 'err is falsy');
+                    assert.isNull(requestError, 'err is falsy');
                     assert.isDefined(requestResponse);
                   });
                 });
               });
             });
           });
-
-          /**
-           * ### Promises
-           */
-
-          describe('returnPromises enabled', function () {
-            beforeEach(function () {
-              client.returnPromises();
-            });
-
-            forEach(
-              {
-                get: 'getRequest',
-                post: 'postRequest',
-              },
-              function (clientMethod, httpMethod) {
-                describe('#' + clientMethod, function () {
-                  const fixtures = JSON5.parse(
-                    fs
-                      .readFileSync(path.join(__dirname, 'fixtures/' + httpMethod + '.json5'))
-                      .toString(),
-                  );
-
-                  forEach(fixtures, function (data, apiPath) {
-                    describe(apiPath, function () {
-                      let callbackInvoked, requestError, requestResponse, returnValue;
-                      const params = {};
-                      const callback = function (err, resp) {
-                        callbackInvoked = true;
-                        requestError = err;
-                        requestResponse = resp;
-                      };
-
-                      setupNockBeforeAfter(httpMethod, data, apiPath);
-
-                      beforeEach(function (done) {
-                        callbackInvoked = false;
-                        requestError = false;
-                        requestResponse = false;
-
-                        returnValue = client[clientMethod](apiPath, params);
-                        // Invoke the callback when the Promise resolves or rejects
-                        returnValue
-                          .then(function (resp) {
-                            callback(null, resp);
-                            done();
-                          })
-                          .catch(function (err) {
-                            callback(err, null);
-                            done();
-                          });
-                      });
-
-                      it('returns a Promise', function () {
-                        assert.isTrue(returnValue instanceof Promise);
-                      });
-
-                      it('invokes the callback', function () {
-                        assert.isTrue(callbackInvoked);
-                      });
-
-                      it('gets a successful response', function () {
-                        assert.isNotOk(requestError, 'err is falsy');
-                        assert.isDefined(requestResponse);
-                      });
-                    });
-                  });
-                });
-              },
-            );
-          });
         });
-      },
-    );
+      });
+    });
 
     /**
      * ## Request methods
@@ -376,116 +480,101 @@ describe('tumblr.js', function () {
      * - TumblrClient#addPostMethods
      */
 
-    forEach(
-      {
-        get: 'addGetMethods',
-        post: 'addPostMethods',
-      },
-      function (clientMethod, httpMethod) {
-        describe('#' + clientMethod, function () {
-          const data = {
-            meta: {
-              status: 200,
-              msg: 'k',
+    /** @type {const} */ ([
+      ['get', 'addGetMethods'],
+      ['post', 'addPostMethods'],
+    ]).forEach(function ([httpMethod, clientMethod]) {
+      describe('#' + clientMethod, function () {
+        const data = {
+          meta: {
+            status: 200,
+            msg: 'k',
+          },
+          body: {
+            response: {
+              ayy: 'lmao',
             },
-            body: {
-              response: {
-                ayy: 'lmao',
-              },
-            },
-          };
+          },
+        };
 
-          const addMethods = {
-            testNoPathParameters: '/no/params',
-            testOnePathParameter: '/one/:url/param',
-            testTwoPathParameters: '/one/:url/param',
-            testRequiredParams: ['/quert/params', ['id']],
-            testPathAndRequiredParams: ['/query/:url/params', ['id']],
-          };
-
-          beforeEach(function () {
-            client[clientMethod](addMethods);
+        const addMethods =
+          /** @type {Record<string, readonly [string, ReadonlyArray<string>]>} */ ({
+            noPathParameters: ['/no/params', []],
+            onePathParameter: ['/one/:url/param', []],
+            twoPathParameters: ['/one/:url/param', []],
+            requiredParams: ['/query/params', ['id']],
+            pathAndRequiredParams: ['/query/:url/params', ['id']],
           });
 
-          forEach(addMethods, function (apiPath, methodName) {
-            describe(lowerCase(methodName).replace(/^test /i, ''), function () {
-              let callbackInvoked, requestError, requestResponse;
-              const params = {};
-              const callback = function (err, resp) {
-                callbackInvoked = true;
-                requestError = err;
-                requestResponse = resp;
-              };
-              const queryParams = {};
-              const args = [];
+        beforeEach(function () {
+          client[clientMethod](addMethods);
+        });
 
-              if (typeof apiPath === 'string') {
-                forEach(apiPath.match(URL_PARAM_REGEX), function (apiPathParam) {
-                  args.push(apiPathParam.replace(URL_PARAM_REGEX, '$1'));
-                });
-                apiPath = apiPath.replace(URL_PARAM_REGEX, '/$1');
-              } else {
-                forEach(apiPath[0].match(URL_PARAM_REGEX), function (apiPathParam) {
-                  args.push(apiPathParam.replace(URL_PARAM_REGEX, '$1'));
-                });
-                forEach(apiPath[1], function (param) {
-                  queryParams[param] = param + ' value';
-                  args.push(queryParams[param]);
-                });
-                apiPath = apiPath[0].replace(URL_PARAM_REGEX, '/$1');
+        Object.entries(addMethods).forEach(function ([methodName, [apiPath, params]]) {
+          describe(methodName, function () {
+            let callbackInvoked, requestError, requestResponse;
+            const callback = function (err, resp) {
+              callbackInvoked = true;
+              requestError = err;
+              requestResponse = resp;
+            };
+            const queryParams = {};
+            const args = [];
+
+            apiPath.match(URL_PARAM_REGEX)?.forEach(function (apiPathParam) {
+              args.push(apiPathParam.replace(URL_PARAM_REGEX, '$1'));
+            });
+            params.forEach(function (param) {
+              queryParams[param] = param + ' value';
+              args.push(queryParams[param]);
+            });
+            apiPath = apiPath.replace(URL_PARAM_REGEX, '/$1');
+
+            beforeEach(function (done) {
+              callbackInvoked = false;
+              requestError = false;
+              requestResponse = false;
+
+              if (client.credentials.consumer_key) {
+                queryParams.api_key = client.credentials.consumer_key;
               }
 
-              args.push(params);
+              const scope = nock(client.baseUrl)[httpMethod](apiPath);
+              if (params.length) {
+                scope.query(true);
+              }
 
-              beforeEach(function (done) {
-                callbackInvoked = false;
-                requestError = false;
-                requestResponse = false;
+              scope.reply(data.meta.status, data.body).persist();
 
-                if (client.credentials.consumer_key) {
-                  queryParams.api_key = client.credentials.consumer_key;
-                }
+              return client[methodName].apply(
+                client,
+                args.concat(function (...args) {
+                  callback.call(client, ...args);
+                  done();
+                }),
+              );
+            });
 
-                let testApiPath = apiPath;
-                if (httpMethod === 'get') {
-                  testApiPath += createQueryString(queryParams);
-                }
+            afterEach(function () {
+              nock.cleanAll();
+            });
 
-                nock(client.baseUrl)
-                  .persist()
-                  [httpMethod](testApiPath)
-                  .reply(data.meta.status, data.body);
+            it('method is a function', function () {
+              assert.isFunction(client[methodName]);
+            });
 
-                return client[methodName].apply(
-                  client,
-                  args.concat(function () {
-                    callback.apply(this, arguments);
-                    done();
-                  }),
-                );
-              });
+            it('invokes the callback', function () {
+              assert.isTrue(callbackInvoked);
+            });
 
-              afterEach(function () {
-                nock.cleanAll();
-              });
-
-              it('method is a function', function () {
-                assert.isFunction(client[methodName]);
-              });
-
-              it('invokes the callback', function () {
-                assert.isTrue(callbackInvoked);
-              });
-
-              it('gets a successful response', function () {
-                assert.isNotOk(requestError, 'err is falsy');
-                assert.isDefined(requestResponse);
-              });
+            it('gets a successful response', function () {
+              assert.isNull(requestError, 'err is falsy');
+              assert.isDefined(requestResponse);
             });
           });
         });
-      },
-    );
+      });
+    });
 
     /**
      * ~fin~

@@ -1,1 +1,6 @@
-/gh-pages/ linguist-generated=true
+# Generated files
+/gh-pages/         linguist-generated
+/package-lock.json linguist-generated
+
+# Syntax highlighting
+tsconfig*.json linguist-language=jsonc
