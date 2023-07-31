@@ -9,16 +9,16 @@ if (!env.TUMBLR_OAUTH_CONSUMER_KEY) {
 
 describe('consumer_key (api_key) only requests', () => {
   /** @type {Client} */
-  let c;
+  let client;
   before(() => {
-    c = new Client({
+    client = new Client({
       consumer_key: env.TUMBLR_OAUTH_CONSUMER_KEY,
     });
     c.returnPromises();
   });
 
   test('fetches blogInfo("staff")', async () => {
-    const resp = await c.blogInfo('staff');
+    const resp = await client.blogInfo('staff');
     assert.isOk(resp);
     assert.equal(resp.blog.name, 'staff');
     assert.equal(resp.blog.uuid, 't:0aY0xL2Fi1OFJg4YxpmegQ');

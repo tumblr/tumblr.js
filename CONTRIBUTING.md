@@ -21,7 +21,7 @@ First install dependencies by running `npm ci`.
 
 ### Unit tests
 
-Run unit tests as follows:
+Unit tests can be found under the `test/` directory. Run them tests as follows:
 
 ```sh
 npm run test
@@ -29,8 +29,10 @@ npm run test
 
 ### Integration tests
 
-To run the integration tests which will actually call the API, you'll need to get OAuth1 application
-credentials. To get valid credentials, visit the
+There are integration tests that will query the API. They can be found under the `integration/`
+directory.
+
+They require OAuth1 application credentials. To get valid credentials, visit the
 [Tumblr OAuth Applications page](https://www.tumblr.com/oauth/apps).
 
 **Never share your credentials. They're secret!**
