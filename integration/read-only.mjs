@@ -17,11 +17,13 @@ describe('consumer_key (api_key) only requests', () => {
     client.returnPromises();
   });
 
-  test('fetches blogInfo("staff")', async () => {
-    const resp = await client.blogInfo('staff');
-    assert.isOk(resp);
-    assert.equal(resp.blog.name, 'staff');
-    assert.equal(resp.blog.uuid, 't:0aY0xL2Fi1OFJg4YxpmegQ');
+  ['staff', 'staff.tumblr.com', 't:0aY0xL2Fi1OFJg4YxpmegQ'].forEach((blogIdentifier) => {
+    test(`fetches blogInfo(${JSON.stringify(blogIdentifier)})`, async () => {
+      const resp = await client.blogInfo(blogIdentifier);
+      assert.isOk(resp);
+      assert.equal(resp.blog.name, 'staff');
+      assert.equal(resp.blog.uuid, 't:0aY0xL2Fi1OFJg4YxpmegQ');
+    });
   });
 });
 
