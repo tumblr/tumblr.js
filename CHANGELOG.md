@@ -7,14 +7,27 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
-### Changed
-
-- **Breaking** Support Node.js versions `>=16`
-- `blogIdentifier` parameters do not get special treatment
-
 ### Added
 
 - Integration test suites using real API.
+
+### Changed
+
+- **Breaking** Support Node.js versions `>=16`.
+- **Breaking** `Client` constructor accepts single options argument.
+- **Breaking** Credentials should be provided directly as options, not nested under the
+  `credentials` property.
+- **Breaking** The (optional) `baseUrl` option should be of the form `https://example.com` with no
+  pathname, search, hash, etc. Bad `baseUrl` options will throw.
+
+### Fixed
+
+- `blogIdentifier` parameters will not have `.tumblr.com` automatically appended. Blog UUIDs can now
+  be used as `blogIdentifiers`.
+
+### Removed
+
+- **Breaking** The `request` option has been removed.
 
 ## [3.0.0] - 2020-07-28
 
