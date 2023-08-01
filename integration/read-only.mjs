@@ -3,14 +3,31 @@ import { Client } from 'tumblr.js';
 import { assert } from 'chai';
 import { test } from 'mocha';
 
-if (!env.TUMBLR_OAUTH_CONSUMER_KEY) {
-  throw new Error('Must provide TUMBLR_OAUTH_CONSUMER_KEY environment variable');
-}
+describe('unauthorized requests', () => {
+  /** @type {Client} */
+  let client;
+  before(() => {
+    client = new Client();
+    client.returnPromises();
+  });
+
+  ['staff', 'staff.tumblr.com', 't:0aY0xL2Fi1OFJg4YxpmegQ'].forEach((blogIdentifier) => {
+    test(`fetches blogAvatar(${JSON.stringify(blogIdentifier)})`, async () => {
+      const { avatar_url } = await client.blogAvatar(blogIdentifier);
+      assert.isString(avatar_url);
+    });
+  });
+});
 
 describe('consumer_key (api_key) only requests', () => {
   /** @type {Client} */
   let client;
-  before(() => {
+  before(function () {
+    if (!env.TUMBLR_OAUTH_CONSUMER_KEY) {
+      console.log('Provide TUMBLR_OAUTH_CONSUMER_KEY environment variable to run this block');
+      this.skip();
+    }
+
     client = new Client({
       consumer_key: env.TUMBLR_OAUTH_CONSUMER_KEY,
     });
@@ -27,13 +44,14 @@ describe('consumer_key (api_key) only requests', () => {
   });
 });
 
-const OAUTH1_ENV_VARS = [
-  'TUMBLR_OAUTH_CONSUMER_SECRET',
-  'TUMBLR_OAUTH_TOKEN',
-  'TUMBLR_OAUTH_CONSUMER_SECRET',
-];
-
 describe('oauth1 requests', () => {
+  const OAUTH1_ENV_VARS = [
+    'TUMBLR_OAUTH_CONSUMER_KEY',
+    'TUMBLR_OAUTH_CONSUMER_SECRET',
+    'TUMBLR_OAUTH_TOKEN',
+    'TUMBLR_OAUTH_CONSUMER_SECRET',
+  ];
+
   /** @type {Client} */
   let client;
   before(function () {
