@@ -1,4 +1,4 @@
-require('mocha');
+const tumblr = require('../lib/tumblr.js');
 
 const fs = require('fs');
 const path = require('path');
@@ -24,118 +24,90 @@ const DUMMY_API_URL = 'https://example.com';
 const URL_PARAM_REGEX = /\/:([^/]+)/g;
 
 describe('tumblr.js', function () {
-  it('can be included without throwing', function () {
-    assert.doesNotThrow(function () {
-      require('../lib/tumblr.js');
-    });
-  });
+  /** @type {const} */ ([
+    ['createClient', (options) => tumblr.createClient(options)],
+    ['constructor', (options) => new tumblr.Client(options)],
+  ]).forEach(([name, factory]) => {
+    describe(name, () => {
+      it('createClient produces a Client instance', () => {
+        const client = factory();
+        assert.isTrue(client instanceof tumblr.Client);
+      });
 
-  describe('createClient', function () {
-    const tumblr = require('../lib/tumblr.js');
+      it('handles no credentials', function () {
+        const client = factory();
+        assert.deepEqual(client.credentials, { auth: 'none' });
+      });
 
-    it('creates a TumblrClient instance', function () {
-      assert.isFunction(tumblr.createClient);
-      const client = tumblr.createClient({ consumer_key: 'abc123' });
-      assert.isTrue(client instanceof tumblr.Client);
-      assert.equal(client.credentials.consumer_key, 'abc123');
-    });
+      it('handles apiKey credentials', function () {
+        const client = factory({ consumer_key: 'abc123' });
+        assert.deepEqual(client.credentials, { auth: 'apiKey', apiKey: 'abc123' });
+      });
 
-    it('passes credentials to the client', function () {
-      const credentials = DUMMY_CREDENTIALS;
+      it('passes credentials to the client', function () {
+        const client = factory(DUMMY_CREDENTIALS);
+        assert.deepEqual(client.credentials, { auth: 'oauth1', ...DUMMY_CREDENTIALS });
+      });
 
-      const client = tumblr.createClient(credentials);
-      assert.equal(client.credentials.consumer_key, credentials.consumer_key);
-      assert.equal(client.credentials.consumer_secret, credentials.consumer_secret);
-      assert.equal(client.credentials.token, credentials.token);
-      assert.equal(client.credentials.token_secret, credentials.token_secret);
-    });
+      it('passes baseUrl to the client', function () {
+        const baseUrl = 'https://example.com/';
+        assert.equal(factory({ baseUrl }).baseUrl, baseUrl);
 
-    it('passes baseUrl to the client', function () {
-      const baseUrl = 'https://example.com/';
-      assert.equal(tumblr.createClient({ consumer_key: 'abc123', baseUrl }).baseUrl, baseUrl);
+        const baseUrlNoSlash = 'https://example.com';
+        assert.equal(factory({ consumer_key: 'abc123', baseUrl: baseUrlNoSlash }).baseUrl, baseUrl);
+      });
 
-      const baseUrlNoSlash = 'https://example.com';
-      assert.equal(
-        tumblr.createClient({ consumer_key: 'abc123', baseUrl: baseUrlNoSlash }).baseUrl,
-        baseUrl,
-      );
-    });
+      it('throws on baseUrl with path', function () {
+        assert.throws(
+          () => factory({ consumer_key: 'abc123', baseUrl: 'https://example.com/v2' }),
+          'baseUrl option must not include a pathname.',
+        );
+      });
 
-    it('throws on baseUrl with path', function () {
-      assert.throws(
-        () => tumblr.createClient({ consumer_key: 'abc123', baseUrl: 'https://example.com/v2' }),
-        'baseUrl option must not include a pathname.',
-      );
-    });
+      it('throws on baseUrl with search', function () {
+        assert.throws(
+          () =>
+            factory({
+              consumer_key: 'abc123',
+              baseUrl: 'https://example.com/?params',
+            }),
+          'baseUrl option must not include search params (query).',
+        );
+      });
 
-    it('throws on baseUrl with search', function () {
-      assert.throws(
-        () =>
-          tumblr.createClient({ consumer_key: 'abc123', baseUrl: 'https://example.com/?params' }),
-        'baseUrl option must not include search params (query).',
-      );
-    });
+      it('throws on baseUrl with username', function () {
+        assert.throws(
+          () => factory({ consumer_key: 'abc123', baseUrl: 'https://user@example.com/' }),
+          'baseUrl option must not include username.',
+        );
+      });
 
-    it('throws on baseUrl with username', function () {
-      assert.throws(
-        () => tumblr.createClient({ consumer_key: 'abc123', baseUrl: 'https://user@example.com/' }),
-        'baseUrl option must not include username.',
-      );
-    });
+      it('throws on baseUrl with password', function () {
+        assert.throws(
+          () => factory({ consumer_key: 'abc123', baseUrl: 'https://:pw@example.com/' }),
+          'baseUrl option must not include password.',
+        );
+      });
 
-    it('throws on baseUrl with password', function () {
-      assert.throws(
-        () => tumblr.createClient({ consumer_key: 'abc123', baseUrl: 'https://:pw@example.com/' }),
-        'baseUrl option must not include password.',
-      );
-    });
+      it('throws on baseUrl with hash', function () {
+        assert.throws(
+          () => factory({ consumer_key: 'abc123', baseUrl: 'https://example.com/#hash' }),
+          'baseUrl option must not include hash.',
+        );
+      });
 
-    it('throws on baseUrl with hash', function () {
-      assert.throws(
-        () => tumblr.createClient({ consumer_key: 'abc123', baseUrl: 'https://example.com/#hash' }),
-        'baseUrl option must not include hash.',
-      );
+      describe('default options', function () {
+        it('uses the default Tumblr API base URL', function () {
+          const client = factory();
+          assert.equal(client.baseUrl, 'https://api.tumblr.com/');
+        });
+      });
     });
   });
 
   describe('Client', function () {
     const tumblr = require('../lib/tumblr.js');
     const TumblrClient = tumblr.Client;
-
-    describe('constructor', function () {
-      it('creates a TumblrClient instance', function () {
-        const client = new TumblrClient(DUMMY_CREDENTIALS);
-        assert.isTrue(client instanceof TumblrClient);
-      });
-
-      it('uses the supplied credentials', function () {
-        const credentials = DUMMY_CREDENTIALS;
-
-        const client = new TumblrClient(credentials);
-        assert.equal(client.credentials.consumer_key, credentials.consumer_key);
-        assert.equal(client.credentials.consumer_secret, credentials.consumer_secret);
-        assert.equal(client.credentials.token, credentials.token);
-        assert.equal(client.credentials.token_secret, credentials.token_secret);
-      });
-
-      it('uses the supplied baseUrl', function () {
-        const client = tumblr.createClient({ ...DUMMY_CREDENTIALS, baseUrl: DUMMY_API_URL });
-        assert.equal(client.baseUrl, DUMMY_API_URL.replace(/\/?$/, '/'));
-      });
-
-      describe('default options', function () {
-        it('uses the default Tumblr API base URL', function () {
-          const client = tumblr.createClient(DUMMY_CREDENTIALS);
-          assert.equal(client.baseUrl, 'https://api.tumblr.com/');
-        });
-
-        it('does not return Promises', function () {
-          const client = tumblr.createClient(DUMMY_CREDENTIALS);
-          assert.equal(client.getRequest, tumblr.Client.prototype.getRequest);
-          assert.equal(client.postRequest, tumblr.Client.prototype.postRequest);
-        });
-      });
-    });
 
     describe('#returnPromises', function () {
       it('modifies getRequest and postRequest', function () {
