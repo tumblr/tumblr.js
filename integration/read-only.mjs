@@ -22,7 +22,7 @@ describe('unauthorized requests', () => {
 describe('consumer_key (api_key) only requests', () => {
   /** @type {Client} */
   let client;
-  before(() => {
+  before(function () {
     if (!env.TUMBLR_OAUTH_CONSUMER_KEY) {
       console.log('Provide TUMBLR_OAUTH_CONSUMER_KEY environment variable to run this block');
       this.skip();
