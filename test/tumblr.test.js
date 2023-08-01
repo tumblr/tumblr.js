@@ -41,32 +41,17 @@ describe('tumblr.js', function () {
     });
 
     it('passes credentials to the client', function () {
-      const credentials = DUMMY_CREDENTIALS;
-
-      // tumblr.createClient(credentials, baseUrl, requestLibrary)
-      let client = tumblr.createClient(credentials);
-      assert.equal(client.credentials.consumer_key, credentials.consumer_key);
-      assert.equal(client.credentials.consumer_secret, credentials.consumer_secret);
-      assert.equal(client.credentials.token, credentials.token);
-      assert.equal(client.credentials.token_secret, credentials.token_secret);
-
-      // tumblr.createClient(options)
-      client = tumblr.createClient({ credentials: credentials });
-      assert.equal(client.credentials.consumer_key, credentials.consumer_key);
-      assert.equal(client.credentials.consumer_secret, credentials.consumer_secret);
-      assert.equal(client.credentials.token, credentials.token);
-      assert.equal(client.credentials.token_secret, credentials.token_secret);
+      const client = tumblr.createClient(DUMMY_CREDENTIALS);
+      assert.equal(client.credentials.consumer_key, DUMMY_CREDENTIALS.consumer_key);
+      assert.equal(client.credentials.consumer_secret, DUMMY_CREDENTIALS.consumer_secret);
+      assert.equal(client.credentials.token, DUMMY_CREDENTIALS.token);
+      assert.equal(client.credentials.token_secret, DUMMY_CREDENTIALS.token_secret);
     });
 
     it('passes baseUrl to the client', function () {
       const baseUrl = 'https://t.umblr.com/v2';
 
-      // tumblr.createClient(credentials, baseUrl, requestLibrary)
-      let client = tumblr.createClient({}, baseUrl);
-      assert.equal(client.baseUrl, baseUrl);
-
-      // tumblr.createClient(options)
-      client = tumblr.createClient({ baseUrl: baseUrl });
+      const client = tumblr.createClient({ baseUrl: baseUrl });
       assert.equal(client.baseUrl, baseUrl);
     });
 
@@ -80,13 +65,11 @@ describe('tumblr.js', function () {
         },
       };
 
-      // TumblrClient(options)
       const client = tumblr.createClient({ request: requestLibrary });
       assert.equal(client.request, requestLibrary);
     });
 
     it('passes returnPromises to the client', function () {
-      // tumblr.createClient(options)
       const client = tumblr.createClient({ returnPromises: true });
       assert.notEqual(client.getRequest, tumblr.Client.prototype.getRequest);
       assert.notEqual(client.postRequest, tumblr.Client.prototype.postRequest);
@@ -104,39 +87,20 @@ describe('tumblr.js', function () {
       });
 
       it('uses the supplied credentials', function () {
-        let client;
-        const credentials = DUMMY_CREDENTIALS;
-
-        // TumblrClient(credentials, baseUrl, requestLibrary)
-        client = new TumblrClient(credentials);
-        assert.equal(client.credentials.consumer_key, credentials.consumer_key);
-        assert.equal(client.credentials.consumer_secret, credentials.consumer_secret);
-        assert.equal(client.credentials.token, credentials.token);
-        assert.equal(client.credentials.token_secret, credentials.token_secret);
-
-        // TumblrClient(options)
-        client = new TumblrClient({ credentials: credentials });
-        assert.equal(client.credentials.consumer_key, credentials.consumer_key);
-        assert.equal(client.credentials.consumer_secret, credentials.consumer_secret);
-        assert.equal(client.credentials.token, credentials.token);
-        assert.equal(client.credentials.token_secret, credentials.token_secret);
+        const client = new TumblrClient(DUMMY_CREDENTIALS);
+        assert.equal(client.credentials.consumer_key, DUMMY_CREDENTIALS.consumer_key);
+        assert.equal(client.credentials.consumer_secret, DUMMY_CREDENTIALS.consumer_secret);
+        assert.equal(client.credentials.token, DUMMY_CREDENTIALS.token);
+        assert.equal(client.credentials.token_secret, DUMMY_CREDENTIALS.token_secret);
       });
 
       it('uses the supplied baseUrl', function () {
-        let client;
         const baseUrl = DUMMY_API_URL;
-
-        // TumblrClient(credentials, baseUrl, requestLibrary)
-        client = tumblr.createClient({}, baseUrl);
-        assert.equal(client.baseUrl, baseUrl);
-
-        // TumblrClient(options)
-        client = tumblr.createClient({ baseUrl: baseUrl });
+        const client = tumblr.createClient({ baseUrl: baseUrl });
         assert.equal(client.baseUrl, baseUrl);
       });
 
       it('uses the supplied requestLibrary', function () {
-        let client;
         const requestLibrary = {
           get: function (options, callback) {
             return callback(options);
@@ -146,23 +110,12 @@ describe('tumblr.js', function () {
           },
         };
 
-        // TumblrClient(credentials, baseUrl, requestLibrary)
-        client = new TumblrClient({}, '', requestLibrary);
-        assert.equal(client.request, requestLibrary);
-
-        // TumblrClient(options)
-        client = new TumblrClient({ request: requestLibrary });
+        const client = new TumblrClient({ request: requestLibrary });
         assert.equal(client.request, requestLibrary);
       });
 
       it('uses the supplied returnPromises value', function () {
-        // tumblr.createClient(options)
-        let client = tumblr.createClient({ returnPromises: false });
-        assert.equal(client.getRequest, tumblr.Client.prototype.getRequest);
-        assert.equal(client.postRequest, tumblr.Client.prototype.postRequest);
-
-        // tumblr.createClient(options)
-        client = tumblr.createClient({ returnPromises: true });
+        const client = tumblr.createClient({ returnPromises: true });
         assert.notEqual(client.getRequest, tumblr.Client.prototype.getRequest);
         assert.notEqual(client.postRequest, tumblr.Client.prototype.postRequest);
       });
