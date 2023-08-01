@@ -3,7 +3,7 @@ import { Client } from 'tumblr.js';
 import { assert } from 'chai';
 import { test } from 'mocha';
 
-describe.only('unauthorized requests', () => {
+describe('unauthorized requests', () => {
   /** @type {Client} */
   let client;
   before(() => {
