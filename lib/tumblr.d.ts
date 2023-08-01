@@ -2,16 +2,22 @@ declare module 'tumblr.js' {
   type TumblrClientCallback = (err: any, resp: any, rawResp?: string) => void;
 
   interface Options {
-    consumer_key: string;
+    /** OAuth1 credential. Required for API key auth endpoints. */
+    consumer_key?: string;
+    /** OAuth1 credential. Required for OAuth endpoints. */
     consumer_secret?: string;
+    /** OAuth1 credential. Required for OAuth endpoints. */
     token?: string;
+    /** OAuth1 credential. Required for Oauth endpoints. */
     token_secret?: string;
+    /** (optional) The API url if different from the default. */
     baseUrl?: string;
+    /** (optional) Use promises instead of callbacks. */
     returnPromises?: boolean;
   }
 
   class TumblrClient {
-    constructor(options: Options);
+    constructor(options?: Options);
 
     userInfo(callback: TumblrClientCallback): void;
 
@@ -134,7 +140,7 @@ declare module 'tumblr.js' {
     ): Request;
   }
 
-  function createClient(options: Options): TumblrClient;
+  function createClient(options?: Options): TumblrClient;
 
   interface TextPostParams {
     title?: string;
