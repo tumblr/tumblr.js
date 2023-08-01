@@ -1,7 +1,18 @@
 declare module 'tumblr.js' {
   type TumblrClientCallback = (err: any, resp: any, rawResp?: string) => void;
 
-  interface TumblrClient {
+  interface Options {
+    consumer_key: string;
+    consumer_secret?: string;
+    token?: string;
+    token_secret?: string;
+    baseUrl?: string;
+    returnPromises?: boolean;
+  }
+
+  class TumblrClient {
+    constructor(options: Options);
+
     userInfo(callback: TumblrClientCallback): void;
 
     blogAvatar(
@@ -123,7 +134,7 @@ declare module 'tumblr.js' {
     ): Request;
   }
 
-  function createClient(options: any): TumblrClient;
+  function createClient(options: Options): TumblrClient;
 
   interface TextPostParams {
     title?: string;
