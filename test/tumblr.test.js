@@ -55,20 +55,6 @@ describe('tumblr.js', function () {
       assert.equal(client.baseUrl, baseUrl);
     });
 
-    it('passes requestLibrary to the client', function () {
-      const requestLibrary = {
-        get: function (options, callback) {
-          return callback(options);
-        },
-        post: function (options, callback) {
-          return callback(options);
-        },
-      };
-
-      const client = tumblr.createClient({ request: requestLibrary });
-      assert.equal(client.request, requestLibrary);
-    });
-
     it('passes returnPromises to the client', function () {
       const client = tumblr.createClient({ returnPromises: true });
       assert.notEqual(client.getRequest, tumblr.Client.prototype.getRequest);
@@ -100,20 +86,6 @@ describe('tumblr.js', function () {
         assert.equal(client.baseUrl, baseUrl);
       });
 
-      it('uses the supplied requestLibrary', function () {
-        const requestLibrary = {
-          get: function (options, callback) {
-            return callback(options);
-          },
-          post: function (options, callback) {
-            return callback(options);
-          },
-        };
-
-        const client = new TumblrClient({ request: requestLibrary });
-        assert.equal(client.request, requestLibrary);
-      });
-
       it('uses the supplied returnPromises value', function () {
         const client = tumblr.createClient({ returnPromises: true });
         assert.notEqual(client.getRequest, tumblr.Client.prototype.getRequest);
@@ -124,11 +96,6 @@ describe('tumblr.js', function () {
         it('uses the default Tumblr API base URL', function () {
           const client = tumblr.createClient();
           assert.equal(client.baseUrl, 'https://api.tumblr.com');
-        });
-
-        it('uses default request library', function () {
-          const client = tumblr.createClient();
-          assert.equal(client.request, require('request'));
         });
 
         it('does not return Promises', function () {
@@ -285,7 +252,7 @@ describe('tumblr.js', function () {
                     it('returns a Request');
                   } else {
                     it('returns a Request', function () {
-                      assert.isTrue(returnValue instanceof client.request.Request);
+                      assert.isTrue(returnValue instanceof require('request').Request);
                     });
                   }
 
