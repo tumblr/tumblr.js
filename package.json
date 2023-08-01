@@ -15,7 +15,7 @@
     "test": "mocha",
     "test:coverage": "nyc mocha",
     "test:integration": "mocha ./integration",
-    "lint": "eslint --report-unused-disable-directives lib test"
+    "lint": "eslint --report-unused-disable-directives --ext 'js' --ext 'mjs' lib test integration"
   },
   "engines": {
     "node": ">=16",
