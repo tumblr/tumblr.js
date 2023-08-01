@@ -10,6 +10,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Changed
 
 - **Breaking** Support Node.js versions `>=16`
+- **Breaking** blogIdentifier path parameters do not get special handling
 
 ### Added
 
