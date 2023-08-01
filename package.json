@@ -49,9 +49,7 @@
   "dependencies": {
     "@types/lodash": "^4.0.0",
     "@types/node": ">=16",
-    "@types/request": "^2.0.0",
-    "lodash": "^4.17.11",
-    "request": "^2.88.2"
+    "lodash": "^4.17.11"
   },
   "devDependencies": {
     "@tsconfig/node16": "^16.1.0",
