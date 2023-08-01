@@ -9,6 +9,8 @@ const lowerCase = require('lodash/lowerCase');
 const assert = require('chai').assert;
 const nock = require('nock');
 
+nock.disableNetConnect();
+
 const DUMMY_CREDENTIALS = {
   consumer_key: 'Mario',
   consumer_secret: 'Luigi',
@@ -120,7 +122,7 @@ describe('tumblr.js', function () {
     let client;
     beforeEach(function () {
       client = new TumblrClient({
-        credentials: DUMMY_CREDENTIALS,
+        ...DUMMY_CREDENTIALS,
         baseUrl: DUMMY_API_URL,
         returnPromises: false,
       });

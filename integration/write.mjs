@@ -3,19 +3,20 @@ import { Client } from 'tumblr.js';
 import { assert } from 'chai';
 import { test } from 'mocha';
 
-if (
-  !env.TUMBLR_OAUTH_CONSUMER_KEY ||
-  !env.TUMBLR_OAUTH_CONSUMER_SECRET ||
-  !env.TUMBLR_OAUTH_TOKEN ||
-  !env.TUMBLR_OAUTH_TOKEN_SECRET
-) {
-  throw new Error('Must provide all Oauth1 environment variables');
-}
-
 describe('oauth1 write requests', () => {
   /** @type {Client} */
   let client;
   before(function () {
+    if (
+      !env.TUMBLR_OAUTH_CONSUMER_KEY ||
+      !env.TUMBLR_OAUTH_CONSUMER_SECRET ||
+      !env.TUMBLR_OAUTH_TOKEN ||
+      !env.TUMBLR_OAUTH_TOKEN_SECRET
+    ) {
+      console.log('Must provide all Oauth1 environment variables');
+      this.skip();
+    }
+
     if (!env.CI) {
       console.warn(
         'This test suite uses the API to make changes. Modify the test suite to enabled it.',
