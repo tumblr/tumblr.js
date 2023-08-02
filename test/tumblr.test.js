@@ -1,12 +1,7 @@
 const tumblr = require('../lib/tumblr.js');
-
 const fs = require('fs');
 const path = require('path');
-
-// @ts-expect-error
-const Request = require('request').Request;
 const JSON5 = require('json5');
-
 const assert = require('chai').assert;
 const nock = require('nock');
 
@@ -200,8 +195,8 @@ describe('tumblr.js', function () {
       client.returnPromises();
       const scope = nock(client.baseUrl, {
         reqheaders: {
-          'user-agent': `tumblr.js/${client.version}`,
           accept: 'application/json',
+          'user-agent': `tumblr.js/${client.version}`,
           authorization: (value) => {
             return [
               value.startsWith('OAuth '),
@@ -219,7 +214,6 @@ describe('tumblr.js', function () {
         .get('/')
         .reply(200, { meta: {}, response: {} });
 
-      // @ts-expect-error Promise request with no params, this is OK.
       assert.isOk(await client.getRequest('/'));
       scope.done();
     });
@@ -234,38 +228,67 @@ describe('tumblr.js', function () {
         .query({ api_key: 'abc123' })
         .reply(200, { meta: {}, response: {} });
 
-      // @ts-expect-error Promise request with no params, this is OK.
       assert.isOk(await client.getRequest('/'));
       scope.done();
     });
 
-    it('post request expected headers', async () => {
-      client.returnPromises();
-      const scope = nock(client.baseUrl, {
-        reqheaders: {
-          'user-agent': `tumblr.js/${client.version}`,
-          'content-type': /^multipart\/form-data; ?boundary=-*\d+/,
-          'content-length': /^\d+/,
-          authorization: (value) => {
-            return [
-              value.startsWith('OAuth '),
-              value.includes('oauth_signature_method="HMAC-SHA1"'),
-              value.includes('oauth_version="1.0"'),
-              value.includes(`oauth_consumer_key="${DUMMY_CREDENTIALS.consumer_key}"`),
-              value.includes(`oauth_token="${DUMMY_CREDENTIALS.token}"`),
-              /oauth_nonce="[^"]+"/.test(value),
-              /oauth_timestamp="[^"]+"/.test(value),
-              /oauth_signature="[^"]+"/.test(value),
-            ].every((passes) => passes);
+    describe('post request expected headers', () => {
+      it('with body', async () => {
+        client.returnPromises();
+        const scope = nock(client.baseUrl, {
+          reqheaders: {
+            accept: 'application/json',
+            'user-agent': `tumblr.js/${client.version}`,
+            'content-type': 'application/json',
+            'content-length': '13',
+            authorization: (value) => {
+              return [
+                value.startsWith('OAuth '),
+                value.includes('oauth_signature_method="HMAC-SHA1"'),
+                value.includes('oauth_version="1.0"'),
+                value.includes(`oauth_consumer_key="${DUMMY_CREDENTIALS.consumer_key}"`),
+                value.includes(`oauth_token="${DUMMY_CREDENTIALS.token}"`),
+                /oauth_nonce="[^"]+"/.test(value),
+                /oauth_timestamp="[^"]+"/.test(value),
+                /oauth_signature="[^"]+"/.test(value),
+              ].every((passes) => passes);
+            },
           },
-        },
-      })
-        .post('/')
-        .reply(200, { meta: {}, response: {} });
+        })
+          .post('/', '{"foo":"bar"}')
+          .reply(200, { meta: {}, response: {} });
 
-      // @ts-expect-error Promise request with no params, this is OK.
-      assert.isOk(await client.postRequest('/'));
-      scope.done();
+        assert.isOk(await client.postRequest('/', { foo: 'bar' }));
+        scope.done();
+      });
+
+      it('without body', async () => {
+        client.returnPromises();
+        const scope = nock(client.baseUrl, {
+          badheaders: ['content-length', 'content-type'],
+          reqheaders: {
+            accept: 'application/json',
+            'user-agent': `tumblr.js/${client.version}`,
+            authorization: (value) => {
+              return [
+                value.startsWith('OAuth '),
+                value.includes('oauth_signature_method="HMAC-SHA1"'),
+                value.includes('oauth_version="1.0"'),
+                value.includes(`oauth_consumer_key="${DUMMY_CREDENTIALS.consumer_key}"`),
+                value.includes(`oauth_token="${DUMMY_CREDENTIALS.token}"`),
+                /oauth_nonce="[^"]+"/.test(value),
+                /oauth_timestamp="[^"]+"/.test(value),
+                /oauth_signature="[^"]+"/.test(value),
+              ].every((passes) => passes);
+            },
+          },
+        })
+          .post('/')
+          .reply(200, { meta: {}, response: {} });
+
+        assert.isOk(await client.postRequest('/'));
+        scope.done();
+      });
     });
 
     it('get request sends api_key when all creds are not provided', async () => {
