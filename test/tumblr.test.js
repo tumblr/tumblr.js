@@ -291,7 +291,7 @@ describe('tumblr.js', function () {
       });
     });
 
-    it('get request sends api_key when all creds are not provided', async () => {
+    it('post request sends api_key when all creds are not provided', async () => {
       const client = new TumblrClient({ consumer_key: 'abc123' });
       client.returnPromises();
       const scope = nock(client.baseUrl, {
@@ -301,7 +301,6 @@ describe('tumblr.js', function () {
         .query({ api_key: 'abc123' })
         .reply(200, { meta: {}, response: {} });
 
-      // @ts-expect-error Promise request with no params, this is OK.
       assert.isOk(await client.postRequest('/'));
       scope.done();
     });
@@ -356,7 +355,7 @@ describe('tumblr.js', function () {
                   it('returns a Request');
                 } else {
                   it('returns a Request', function () {
-                    assert.isTrue(returnValue instanceof Request);
+                    assert.isTrue(returnValue instanceof require('http').ClientRequest);
                   });
                 }
 
@@ -376,7 +375,6 @@ describe('tumblr.js', function () {
                   requestError = false;
                   requestResponse = false;
 
-                  // @ts-expect-error This is a bad function signature - optionals in middle @TODO
                   client[clientMethod](
                     apiPath,
                     /** @param {any} args */
@@ -431,7 +429,6 @@ describe('tumblr.js', function () {
                     requestError = false;
                     requestResponse = false;
 
-                    // @ts-expect-error It's promises, no callback
                     returnValue = client[clientMethod](apiPath, params);
                     // Invoke the callback when the Promise resolves or rejects
                     returnValue.then(
@@ -529,10 +526,6 @@ describe('tumblr.js', function () {
               callbackInvoked = false;
               requestError = false;
               requestResponse = false;
-
-              if (client.credentials.consumer_key) {
-                queryParams.api_key = client.credentials.consumer_key;
-              }
 
               const scope = nock(client.baseUrl)[httpMethod](apiPath);
               if (params.length) {
