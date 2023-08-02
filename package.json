@@ -50,6 +50,7 @@
     "@types/lodash": "^4.0.0",
     "@types/node": ">=16",
     "@types/oauth": "^0.9.1",
+    "form-data": "^4.0.0",
     "lodash": "^4.17.11",
     "oauth": "^0.10.0"
   },
