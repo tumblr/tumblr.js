@@ -219,8 +219,7 @@ describe('tumblr.js', function () {
     });
 
     it('get request sends api_key when all creds are not provided', async () => {
-      const client = new TumblrClient({ consumer_key: 'abc123' });
-      client.returnPromises();
+      const client = new TumblrClient({ consumer_key: 'abc123', returnPromises: true });
       const scope = nock(client.baseUrl, {
         badheaders: ['authorization'],
       })
@@ -234,13 +233,16 @@ describe('tumblr.js', function () {
 
     describe('post request expected headers', () => {
       it('with body', async () => {
-        client.returnPromises();
+        const client = new TumblrClient({
+          ...DUMMY_CREDENTIALS,
+          baseUrl: DUMMY_API_URL,
+          returnPromises: true,
+        });
         const scope = nock(client.baseUrl, {
           reqheaders: {
             accept: 'application/json',
             'user-agent': `tumblr.js/${client.version}`,
-            'content-type': 'application/json',
-            'content-length': '13',
+            'content-type': /^multipart\/form-data;\s*boundary=/,
             authorization: (value) => {
               return [
                 value.startsWith('OAuth '),
@@ -255,7 +257,11 @@ describe('tumblr.js', function () {
             },
           },
         })
-          .post('/', '{"foo":"bar"}')
+          .post('/', (body) => {
+            return (
+              /^Content-Disposition: form-data; name="foo"$/m.test(body) && /^bar$/m.test(body)
+            );
+          })
           .reply(200, { meta: {}, response: {} });
 
         assert.isOk(await client.postRequest('/', { foo: 'bar' }));
@@ -263,7 +269,11 @@ describe('tumblr.js', function () {
       });
 
       it('without body', async () => {
-        client.returnPromises();
+        const client = new TumblrClient({
+          ...DUMMY_CREDENTIALS,
+          baseUrl: DUMMY_API_URL,
+          returnPromises: true,
+        });
         const scope = nock(client.baseUrl, {
           badheaders: ['content-length', 'content-type'],
           reqheaders: {
@@ -347,6 +357,10 @@ describe('tumblr.js', function () {
                       done();
                     },
                   );
+                });
+
+                it('returns undefined', function () {
+                  assert.isUndefined(returnValue);
                 });
 
                 it('invokes the callback', function () {
