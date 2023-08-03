@@ -11,7 +11,6 @@ jobs:
   tests:
     name: Testing with Node.js ${{ matrix.node-version }}
     runs-on: ubuntu-latest
-    continue-on-error: true
 
     strategy:
       matrix:
