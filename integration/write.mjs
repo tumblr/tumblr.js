@@ -1,3 +1,5 @@
+import { readFile } from 'node:fs/promises';
+import { URL } from 'node:url';
 import { env } from 'node:process';
 import { Client } from 'tumblr.js';
 import { assert } from 'chai';
@@ -29,8 +31,8 @@ describe('oauth1 write requests', () => {
       consumer_secret: env.TUMBLR_OAUTH_CONSUMER_SECRET,
       token: env.TUMBLR_OAUTH_TOKEN,
       token_secret: env.TUMBLR_OAUTH_TOKEN_SECRET,
+      returnPromises: true,
     });
-    client.returnPromises();
   });
 
   test('creates a post', async () => {
@@ -48,5 +50,27 @@ describe('oauth1 write requests', () => {
         tags: `tumblr.js-test,tumblr.js-version-${client.version}`,
       }),
     );
+  });
+
+  describe('image post', () => {
+    it('creates an image post with data64', async () => {
+      const imageData = await readFile(new URL('../test/fixtures/image.jpg', import.meta.url), {
+        encoding: 'base64',
+      });
+      const userResp = await client.userInfo();
+
+      assert.isOk(userResp);
+      const blogName = userResp.user.blogs[0].name;
+
+      const res = await client.createPost(blogName, {
+        type: 'photo',
+        caption: `Arches National Park || Automated test post ${new Date().toISOString()}`,
+        link: 'https://openverse.org/en-gb/image/38b9b781-390f-4fc4-929d-0ecb4a2985e3',
+        data64: imageData,
+        tags: `tumblr.js-test,tumblr.js-version-${client.version}`,
+      });
+      console.log({ res });
+      assert.isOk(res);
+    });
   });
 });
