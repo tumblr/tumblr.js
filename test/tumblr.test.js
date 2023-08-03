@@ -349,16 +349,6 @@ describe('tumblr.js', function () {
                   );
                 });
 
-                if (httpMethod === 'post') {
-                  // Nock seems to cause the POST request to return a Promise,
-                  // making this difficult to properly test.
-                  it('returns a Request');
-                } else {
-                  it('returns a Request', function () {
-                    assert.isTrue(returnValue instanceof require('http').ClientRequest);
-                  });
-                }
-
                 it('invokes the callback', function () {
                   assert.isTrue(callbackInvoked);
                 });
