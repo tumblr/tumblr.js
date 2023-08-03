@@ -20,6 +20,20 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - **Breaking** The (optional) `baseUrl` option should be of the form `https://example.com` with no
   pathname, search, hash, etc. Bad `baseUrl` options will throw.
 
+### Deprecated
+
+- Deprecated the following legacy post creation methods. Prefer NPF methods (`/posts` endpoint).
+  - `createPost`
+    - `createAudioPost`
+    - `createChatPost`
+    - `createLinkPost`
+    - `createPhotoPost`
+    - `createQuotePost`
+    - `createTextPost`
+    - `createVideoPost`
+  - `editPost`
+  - `reblogPost`
+
 ### Fixed
 
 - `blogIdentifier` parameters will not have `.tumblr.com` automatically appended. Blog UUIDs can now
