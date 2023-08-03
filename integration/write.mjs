@@ -6,9 +6,13 @@ import { assert } from 'chai';
 import { test } from 'mocha';
 
 describe('oauth1 write requests', () => {
-  /** @type {Client} */
+  /** @type {import('tumblr.js').Client} */
   let client;
-  before(function () {
+
+  /** @type {string} */
+  let blogName;
+
+  before(async function () {
     if (
       !env.TUMBLR_OAUTH_CONSUMER_KEY ||
       !env.TUMBLR_OAUTH_CONSUMER_SECRET ||
@@ -33,14 +37,12 @@ describe('oauth1 write requests', () => {
       token_secret: env.TUMBLR_OAUTH_TOKEN_SECRET,
       returnPromises: true,
     });
+
+    const userResp = await client.userInfo();
+    blogName = userResp.user.blogs[0].name;
   });
 
-  test('creates a post', async () => {
-    const userResp = await client.userInfo();
-
-    assert.isOk(userResp);
-    const blogName = userResp.user.blogs[0].name;
-
+  test('creates a text post', async () => {
     assert.isOk(
       await client.createPost(blogName, {
         type: 'text',
@@ -52,25 +54,58 @@ describe('oauth1 write requests', () => {
     );
   });
 
-  describe('image post', () => {
-    it('creates an image post with data64', async () => {
-      const imageData = await readFile(new URL('../test/fixtures/image.jpg', import.meta.url), {
-        encoding: 'base64',
-      });
-      const userResp = await client.userInfo();
-
-      assert.isOk(userResp);
-      const blogName = userResp.user.blogs[0].name;
+  describe('photo post', () => {
+    it('creates a post via data', async () => {
+      const data = await readFile(new URL('../test/fixtures/image.jpg', import.meta.url));
 
       const res = await client.createPost(blogName, {
         type: 'photo',
         caption: `Arches National Park || Automated test post ${new Date().toISOString()}`,
         link: 'https://openverse.org/en-gb/image/38b9b781-390f-4fc4-929d-0ecb4a2985e3',
-        data64: imageData,
         tags: `tumblr.js-test,tumblr.js-version-${client.version}`,
+        data: data,
       });
-      console.log({ res });
       assert.isOk(res);
     });
+
+    it('creates a slideshow post via data[]', async () => {
+      const data = await readFile(new URL('../test/fixtures/image.jpg', import.meta.url));
+
+      const res = await client.createPost(blogName, {
+        type: 'photo',
+        caption: `Arches National Park || Automated test post ${new Date().toISOString()}`,
+        link: 'https://openverse.org/en-gb/image/38b9b781-390f-4fc4-929d-0ecb4a2985e3',
+        tags: `tumblr.js-test,tumblr.js-version-${client.version}`,
+        data: [data, data],
+      });
+      assert.isOk(res);
+    });
+
+    it(`creates a post via data64`, async () => {
+      const data = await readFile(new URL('../test/fixtures/image.jpg', import.meta.url), {
+        encoding: 'base64',
+      });
+
+      const res = await client.createPost(blogName, {
+        type: 'photo',
+        caption: `Arches National Park || Automated test post ${new Date().toISOString()}`,
+        link: 'https://openverse.org/en-gb/image/38b9b781-390f-4fc4-929d-0ecb4a2985e3',
+        tags: `tumblr.js-test,tumblr.js-version-${client.version}`,
+        data64: data,
+      });
+      assert.isOk(res);
+    });
+  });
+
+  it('creates an audio post with data', async () => {
+    const data = await readFile(new URL('../test/fixtures/audio.mp3', import.meta.url));
+
+    const res = await client.createPost(blogName, {
+      type: 'audio',
+      caption: `Multiple Dog Barks (King Charles Spaniel) || Automated test post ${new Date().toISOString()}`,
+      tags: `tumblr.js-test,tumblr.js-version-${client.version}`,
+      data: data,
+    });
+    assert.isOk(res);
   });
 });
