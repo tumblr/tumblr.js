@@ -16,8 +16,6 @@ const DUMMY_CREDENTIALS = {
 
 const DUMMY_API_URL = 'https://example.com';
 
-const URL_PARAM_REGEX = /\/:([^/]+)/g;
-
 describe('tumblr.js', function () {
   /** @type {const} */ ([
     ['createClient', (options) => tumblr.createClient(options)],
@@ -407,114 +405,5 @@ describe('tumblr.js', function () {
         });
       });
     });
-
-    /**
-     * ## Request methods
-     *
-     * Test the methods that add methods to the client
-     *
-     * - TumblrClient#addGetMethods
-     */
-
-    /** @type {const} */ ([['get', 'addGetMethods']]).forEach(function ([
-      httpMethod,
-      clientMethod,
-    ]) {
-      describe('#' + clientMethod, function () {
-        const client = new TumblrClient({
-          ...DUMMY_CREDENTIALS,
-          baseUrl: DUMMY_API_URL,
-        });
-
-        const data = {
-          meta: {
-            status: 200,
-            msg: 'k',
-          },
-          body: {
-            response: {
-              ayy: 'lmao',
-            },
-          },
-        };
-
-        const addMethods =
-          /** @type {Record<string, readonly [string, ReadonlyArray<string>]>} */ ({
-            noPathParameters: ['/no/params', []],
-            onePathParameter: ['/one/:url/param', []],
-            twoPathParameters: ['/one/:url/param', []],
-            requiredParams: ['/query/params', ['id']],
-            pathAndRequiredParams: ['/query/:url/params', ['id']],
-          });
-
-        beforeEach(function () {
-          client[clientMethod](addMethods);
-        });
-
-        Object.entries(addMethods).forEach(function ([methodName, [apiPath, params]]) {
-          describe(methodName, function () {
-            let callbackInvoked, requestError, requestResponse;
-            const callback = function (err, resp) {
-              callbackInvoked = true;
-              requestError = err;
-              requestResponse = resp;
-            };
-            const queryParams = {};
-            const args = [];
-
-            apiPath.match(URL_PARAM_REGEX)?.forEach(function (apiPathParam) {
-              args.push(apiPathParam.replace(URL_PARAM_REGEX, '$1'));
-            });
-            params.forEach(function (param) {
-              queryParams[param] = param + ' value';
-              args.push(queryParams[param]);
-            });
-            apiPath = apiPath.replace(URL_PARAM_REGEX, '/$1');
-
-            beforeEach(function (done) {
-              callbackInvoked = false;
-              requestError = false;
-              requestResponse = false;
-
-              const scope = nock(client.baseUrl)[httpMethod](apiPath);
-              if (params.length) {
-                scope.query(true);
-              }
-
-              scope.reply(data.meta.status, data.body).persist();
-
-              return client[methodName].apply(
-                client,
-                args.concat(function (...args) {
-                  callback.call(client, ...args);
-                  done();
-                }),
-              );
-            });
-
-            afterEach(function () {
-              nock.cleanAll();
-            });
-
-            it('method is a function', function () {
-              assert.isFunction(client[methodName]);
-            });
-
-            it('invokes the callback', function () {
-              assert.isTrue(callbackInvoked);
-            });
-
-            it('gets a successful response', function () {
-              assert.isNull(requestError, 'err is falsy');
-              assert.isDefined(requestResponse);
-            });
-          });
-        });
-      });
-    });
-
-    /**
-     * ~fin~
-     */
   });
 });
