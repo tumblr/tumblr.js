@@ -3,6 +3,11 @@ import { Client } from 'tumblr.js';
 import { assert } from 'chai';
 import { test } from 'mocha';
 
+// Wait a bit between tests to not spam API.
+beforeEach(function () {
+  return new Promise((resolve) => setTimeout(() => resolve(undefined), this.timeout() - 100));
+});
+
 describe('unauthorized requests', () => {
   /** @type {Client} */
   let client;
@@ -20,7 +25,7 @@ describe('unauthorized requests', () => {
 });
 
 describe('consumer_key (api_key) only requests', () => {
-  /** @type {Client} */
+  /** @type {import('tumblr.js').Client} */
   let client;
   before(function () {
     if (!env.TUMBLR_OAUTH_CONSUMER_KEY) {
@@ -30,8 +35,8 @@ describe('consumer_key (api_key) only requests', () => {
 
     client = new Client({
       consumer_key: env.TUMBLR_OAUTH_CONSUMER_KEY,
+      returnPromises: true,
     });
-    client.returnPromises();
   });
 
   ['staff', 'staff.tumblr.com', 't:0aY0xL2Fi1OFJg4YxpmegQ'].forEach((blogIdentifier) => {
