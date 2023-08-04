@@ -13,7 +13,6 @@ describe('unauthorized requests', () => {
   let client;
   before(() => {
     client = new Client();
-    client.returnPromises();
   });
 
   ['staff', 'staff.tumblr.com', 't:0aY0xL2Fi1OFJg4YxpmegQ'].forEach((blogIdentifier) => {
@@ -35,7 +34,6 @@ describe('consumer_key (api_key) only requests', () => {
 
     client = new Client({
       consumer_key: env.TUMBLR_OAUTH_CONSUMER_KEY,
-      returnPromises: true,
     });
   });
 
@@ -73,7 +71,6 @@ describe('oauth1 requests', () => {
       token: env.TUMBLR_OAUTH_TOKEN,
       token_secret: env.TUMBLR_OAUTH_TOKEN_SECRET,
     });
-    client.returnPromises();
   });
 
   test('fetches userInfo()', async () => {
