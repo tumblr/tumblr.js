@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
+      max-parallel: 1
+      fail-fast: true
       matrix:
-        fail-fast: true
-        max-parallel: 1
         node-version:
           - current
           - lts/*
