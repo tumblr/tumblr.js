@@ -22,16 +22,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Deprecated
 
-- Deprecated the following legacy post creation methods. Prefer NPF methods (`/posts` endpoint). The
-  deprecated methods are the following:
+- The following legacy post methods are deprecated. Prefer NPF methods (`/posts` endpoint)
   - `createPost`
-    - `createAudioPost`
-    - `createChatPost`
-    - `createLinkPost`
-    - `createPhotoPost`
-    - `createQuotePost`
-    - `createTextPost`
-    - `createVideoPost`
   - `editPost`
   - `reblogPost`
 
@@ -42,6 +34,14 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Removed
 
+- **Breaking** The following legacy post creation methods have been removed.
+  - `createAudioPost`: use `ceatePost` with `{type: "audio"}`.
+  - `createChatPost`: use `ceatePost` with `{type: "chat"}`.
+  - `createLinkPost`: use `ceatePost` with `{type: "link"}`.
+  - `createPhotoPost`: use `ceatePost` with `{type: "photo"}`.
+  - `createQuotePost`: use `ceatePost` with `{type: "quote"}`.
+  - `createTextPost`: use `ceatePost` with `{type: "text"}`.
+  - `createVideoPost`: use `ceatePost` with `{type: "video"}`.
 - **Breaking** The `request` option has been removed.
 - The dependency on the deprecated `request` library has been removed.
 

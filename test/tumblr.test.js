@@ -149,13 +149,6 @@ describe('tumblr.js', function () {
         'unfollowBlog',
         'likePost',
         'unlikePost',
-        'createTextPost',
-        'createPhotoPost',
-        'createQuotePost',
-        'createLinkPost',
-        'createChatPost',
-        'createAudioPost',
-        'createVideoPost',
       ]).forEach(function (methodName) {
         it('has #' + methodName, function () {
           assert.isFunction(client[methodName]);
