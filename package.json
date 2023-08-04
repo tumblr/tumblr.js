@@ -12,8 +12,8 @@
     "format-check": "prettier --check .",
     "generate-docs": "rm -rf gh-pages && node_modules/.bin/jsdoc -c jsdoc.json",
     "gh-pages": "git subtree push --prefix=gh-pages origin gh-pages",
-    "test": "mocha",
-    "test:coverage": "nyc mocha",
+    "test": "mocha --timeout 100",
+    "test:coverage": "nyc npm run test",
     "test:integration": "mocha ./integration",
     "lint": "eslint --report-unused-disable-directives --ext 'js' --ext 'mjs' lib test integration"
   },
