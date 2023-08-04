@@ -14,16 +14,16 @@ describe('oauth1 write requests', () => {
 
   before(async function () {
     if (
-      !env.TUMBLR_OAUTH_CONSUMER_KEY ||
-      !env.TUMBLR_OAUTH_CONSUMER_SECRET ||
-      !env.TUMBLR_OAUTH_TOKEN ||
-      !env.TUMBLR_OAUTH_TOKEN_SECRET
+      !env['TUMBLR_OAUTH_CONSUMER_KEY'] ||
+      !env['TUMBLR_OAUTH_CONSUMER_SECRET'] ||
+      !env['TUMBLR_OAUTH_TOKEN'] ||
+      !env['TUMBLR_OAUTH_TOKEN_SECRET']
     ) {
       console.log('Must provide all Oauth1 environment variables');
       this.skip();
     }
 
-    if (!env.CI) {
+    if (!env['CI']) {
       console.warn(
         'This test suite uses the API to make changes. Modify the test suite to enabled it.',
       );
@@ -31,11 +31,10 @@ describe('oauth1 write requests', () => {
     }
 
     client = new Client({
-      consumer_key: env.TUMBLR_OAUTH_CONSUMER_KEY,
-      consumer_secret: env.TUMBLR_OAUTH_CONSUMER_SECRET,
-      token: env.TUMBLR_OAUTH_TOKEN,
-      token_secret: env.TUMBLR_OAUTH_TOKEN_SECRET,
-      returnPromises: true,
+      consumer_key: env['TUMBLR_OAUTH_CONSUMER_KEY'],
+      consumer_secret: env['TUMBLR_OAUTH_CONSUMER_SECRET'],
+      token: env['TUMBLR_OAUTH_TOKEN'],
+      token_secret: env['TUMBLR_OAUTH_TOKEN_SECRET'],
     });
 
     const userResp = await client.userInfo();

@@ -1,9 +1,7 @@
 {
   "extends": ["@tsconfig/strictest/tsconfig.json", "@tsconfig/node16/tsconfig.json"],
   "compilerOptions": {
-    "composite": true,
-    "declaration": true,
-    "emitDeclarationOnly": true,
+    "noEmit": true,
     "rootDir": ".",
     "moduleResolution": "node16",
     "types": ["node", "mocha"],
