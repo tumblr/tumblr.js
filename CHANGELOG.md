@@ -34,6 +34,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Removed
 
+- **Breaking** The `addGetMethods` and `addPostMethods` methods have been removed. Additional
+  methods can be implemented using the `getRequest` or `postRequest` methods.
 - **Breaking** The following legacy post creation methods have been removed.
   - `createAudioPost`: use `ceatePost` with `{type: "audio"}`.
   - `createChatPost`: use `ceatePost` with `{type: "chat"}`.
