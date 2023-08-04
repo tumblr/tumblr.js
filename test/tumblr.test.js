@@ -314,75 +314,45 @@ describe('tumblr.js', function () {
             describe(apiPath, function () {
               setupNockBeforeAfter(httpMethod, data, apiPath);
 
-              it('params and callback invokes callback with a successful response', function (done) {
-                const returnValue = client[clientMethod](apiPath, { foo: 'bar' }, (err, resp) => {
-                  assert.isNull(err);
-                  assert.isDefined(resp);
+              it('returns undefined when a callback is provided', (done) => {
+                const returnValue = client[clientMethod](apiPath, { foo: 'bar' }, () => {
                   done();
                 });
                 assert.isUndefined(returnValue);
               });
 
-              it('callback only invokes callback with a successful response', function (done) {
-                const returnValue = client[clientMethod](apiPath, (err, resp) => {
+              it('callback is invoked with provided params', function (done) {
+                client[clientMethod](apiPath, { foo: 'bar' }, (err, resp) => {
                   assert.isNull(err);
                   assert.isDefined(resp);
                   done();
                 });
-                assert.isUndefined(returnValue);
+              });
+
+              it('callback is invoked without params', function (done) {
+                client[clientMethod](apiPath, (err, resp) => {
+                  assert.isNull(err);
+                  assert.isDefined(resp);
+                  done();
+                });
               });
             });
           });
         });
 
         describe('with promises', function () {
-          const client = new TumblrClient({
-            ...DUMMY_CREDENTIALS,
-            baseUrl: DUMMY_API_URL,
-          });
-
           Object.entries(fixtures).forEach(function ([apiPath, data]) {
             describe(apiPath, function () {
-              let callbackInvoked, requestError, requestResponse, returnValue;
-              const params = {};
-              const callback = function (err, resp) {
-                callbackInvoked = true;
-                requestError = err;
-                requestResponse = resp;
-              };
-
               setupNockBeforeAfter(httpMethod, data, apiPath);
 
-              beforeEach(function (done) {
-                callbackInvoked = false;
-                requestError = false;
-                requestResponse = false;
-
-                returnValue = client[clientMethod](apiPath, params);
-                // Invoke the callback when the Promise resolves or rejects
-                returnValue.then(
-                  function (resp) {
-                    callback(null, resp);
-                    done();
-                  },
-                  function (err) {
-                    callback(err, null);
-                    done();
-                  },
-                );
-              });
-
-              it('returns a Promise', function () {
+              it('returns a Promise', async () => {
+                const returnValue = client[clientMethod](apiPath, {});
                 assert.isTrue(returnValue instanceof Promise);
+                await returnValue;
               });
 
-              it('invokes the callback', function () {
-                assert.isTrue(callbackInvoked);
-              });
-
-              it('gets a successful response', function () {
-                assert.isNull(requestError, 'err is falsy');
-                assert.isDefined(requestResponse);
+              it('gets a successful response', async () => {
+                assert.isOk(await client[clientMethod](apiPath, {}));
               });
             });
           });
