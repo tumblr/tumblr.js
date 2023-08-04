@@ -22,7 +22,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Deprecated
 
-- Deprecated the following legacy post creation methods. Prefer NPF methods (`/posts` endpoint).
+- Deprecated the following legacy post creation methods. Prefer NPF methods (`/posts` endpoint). The
+  deprecated methods are the following:
   - `createPost`
     - `createAudioPost`
     - `createChatPost`
@@ -42,6 +43,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 ### Removed
 
 - **Breaking** The `request` option has been removed.
+- The dependency on the deprecated `request` library has been removed.
 
 ## [3.0.0] - 2020-07-28
 
