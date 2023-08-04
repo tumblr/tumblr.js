@@ -39,7 +39,6 @@ jobs:
     runs-on: ubuntu-latest
 
     strategy:
-      max-parallel: 1
       fail-fast: true
       matrix:
         node-version:
