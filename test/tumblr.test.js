@@ -324,11 +324,7 @@ describe('tumblr.js', function () {
           fs.readFileSync(path.join(__dirname, 'fixtures/' + httpMethod + '.json5')).toString(),
         );
 
-        /**
-         * ### Callback
-         */
-
-        describe('returnPromises disabled', function () {
+        describe('with callbacks', function () {
           Object.entries(fixtures).forEach(function ([apiPath, data]) {
             describe(apiPath, function () {
               let callbackInvoked, requestError, requestResponse, returnValue;
@@ -402,63 +398,54 @@ describe('tumblr.js', function () {
           });
         });
 
-        /**
-         * ### Promises
-         */
-
-        describe('returnPromises enabled', function () {
+        describe('with promises', function () {
           beforeEach(function () {
             client.returnPromises();
           });
 
-          /** @type {const} */ ([
-            ['get', 'getRequest'],
-            ['post', 'postRequest'],
-          ]).forEach(function ([httpMethod, clientMethod]) {
-            describe('#' + clientMethod, function () {
-              Object.entries(fixtures).forEach(function ([apiPath, data]) {
-                describe(apiPath, function () {
-                  let callbackInvoked, requestError, requestResponse, returnValue;
-                  const params = {};
-                  const callback = function (err, resp) {
-                    callbackInvoked = true;
-                    requestError = err;
-                    requestResponse = resp;
-                  };
+          describe('#' + clientMethod, function () {
+            Object.entries(fixtures).forEach(function ([apiPath, data]) {
+              describe(apiPath, function () {
+                let callbackInvoked, requestError, requestResponse, returnValue;
+                const params = {};
+                const callback = function (err, resp) {
+                  callbackInvoked = true;
+                  requestError = err;
+                  requestResponse = resp;
+                };
 
-                  setupNockBeforeAfter(httpMethod, data, apiPath);
+                setupNockBeforeAfter(httpMethod, data, apiPath);
 
-                  beforeEach(function (done) {
-                    callbackInvoked = false;
-                    requestError = false;
-                    requestResponse = false;
+                beforeEach(function (done) {
+                  callbackInvoked = false;
+                  requestError = false;
+                  requestResponse = false;
 
-                    returnValue = client[clientMethod](apiPath, params);
-                    // Invoke the callback when the Promise resolves or rejects
-                    returnValue.then(
-                      function (resp) {
-                        callback(null, resp);
-                        done();
-                      },
-                      function (err) {
-                        callback(err, null);
-                        done();
-                      },
-                    );
-                  });
+                  returnValue = client[clientMethod](apiPath, params);
+                  // Invoke the callback when the Promise resolves or rejects
+                  returnValue.then(
+                    function (resp) {
+                      callback(null, resp);
+                      done();
+                    },
+                    function (err) {
+                      callback(err, null);
+                      done();
+                    },
+                  );
+                });
 
-                  it('returns a Promise', function () {
-                    assert.isTrue(returnValue instanceof Promise);
-                  });
+                it('returns a Promise', function () {
+                  assert.isTrue(returnValue instanceof Promise);
+                });
 
-                  it('invokes the callback', function () {
-                    assert.isTrue(callbackInvoked);
-                  });
+                it('invokes the callback', function () {
+                  assert.isTrue(callbackInvoked);
+                });
 
-                  it('gets a successful response', function () {
-                    assert.isNull(requestError, 'err is falsy');
-                    assert.isDefined(requestResponse);
-                  });
+                it('gets a successful response', function () {
+                  assert.isNull(requestError, 'err is falsy');
+                  assert.isDefined(requestResponse);
                 });
               });
             });
