@@ -102,17 +102,6 @@ describe('tumblr.js', function () {
     const tumblr = require('../lib/tumblr.js');
     const TumblrClient = tumblr.Client;
 
-    describe('#returnPromises', function () {
-      it('modifies getRequest and postRequest', function () {
-        const client = new TumblrClient(DUMMY_CREDENTIALS);
-        const getRequestBefore = client.getRequest;
-        const postRequestBefore = client.postRequest;
-        client.returnPromises();
-        assert.notEqual(getRequestBefore, client.getRequest);
-        assert.notEqual(postRequestBefore, client.postRequest);
-      });
-    });
-
     /**
      * ## Default methods
      *
@@ -167,7 +156,6 @@ describe('tumblr.js', function () {
       const client = new TumblrClient({
         ...DUMMY_CREDENTIALS,
         baseUrl: DUMMY_API_URL,
-        returnPromises: true,
       });
       const scope = nock(client.baseUrl, {
         reqheaders: {
@@ -195,7 +183,7 @@ describe('tumblr.js', function () {
     });
 
     it('get request sends api_key when all creds are not provided', async () => {
-      const client = new TumblrClient({ consumer_key: 'abc123', returnPromises: true });
+      const client = new TumblrClient({ consumer_key: 'abc123' });
       const scope = nock(client.baseUrl, {
         badheaders: ['authorization'],
       })
@@ -212,7 +200,6 @@ describe('tumblr.js', function () {
         const client = new TumblrClient({
           ...DUMMY_CREDENTIALS,
           baseUrl: DUMMY_API_URL,
-          returnPromises: true,
         });
         const scope = nock(client.baseUrl, {
           reqheaders: {
@@ -248,7 +235,6 @@ describe('tumblr.js', function () {
         const client = new TumblrClient({
           ...DUMMY_CREDENTIALS,
           baseUrl: DUMMY_API_URL,
-          returnPromises: true,
         });
         const scope = nock(client.baseUrl, {
           badheaders: ['content-length', 'content-type'],
@@ -279,7 +265,6 @@ describe('tumblr.js', function () {
 
     it('post request sends api_key when all creds are not provided', async () => {
       const client = new TumblrClient({ consumer_key: 'abc123' });
-      client.returnPromises();
       const scope = nock(client.baseUrl, {
         badheaders: ['authorization'],
       })
@@ -354,7 +339,6 @@ describe('tumblr.js', function () {
           const client = new TumblrClient({
             ...DUMMY_CREDENTIALS,
             baseUrl: DUMMY_API_URL,
-            returnPromises: true,
           });
 
           Object.entries(fixtures).forEach(function ([apiPath, data]) {
