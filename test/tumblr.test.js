@@ -414,13 +414,12 @@ describe('tumblr.js', function () {
      * Test the methods that add methods to the client
      *
      * - TumblrClient#addGetMethods
-     * - TumblrClient#addPostMethods
      */
 
-    /** @type {const} */ ([
-      ['get', 'addGetMethods'],
-      ['post', 'addPostMethods'],
-    ]).forEach(function ([httpMethod, clientMethod]) {
+    /** @type {const} */ ([['get', 'addGetMethods']]).forEach(function ([
+      httpMethod,
+      clientMethod,
+    ]) {
       describe('#' + clientMethod, function () {
         const client = new TumblrClient({
           ...DUMMY_CREDENTIALS,
