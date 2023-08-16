@@ -7,3 +7,4 @@ credentials*.json
 .nyc_output
 *.tsbuildinfo
 *.d.ts
+*.d.mts

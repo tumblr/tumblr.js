@@ -10,14 +10,15 @@
   "scripts": {
     "autoformat": "prettier --write .",
     "format-check": "prettier --check .",
+    "typecheck": "tsc --build tsconfig.json",
     "generate-docs": "rm -rf gh-pages && node_modules/.bin/jsdoc -c jsdoc.json",
     "gh-pages": "git subtree push --prefix=gh-pages origin gh-pages",
+    "lint": "eslint --report-unused-disable-directives --ext 'js' --ext 'mjs' lib test integration",
+    "prepublishOnly": "tsc --build tsconfig.lib.json --force",
     "test": "mocha --timeout 100",
     "test:coverage": "nyc npm run test",
     "test:integration": "mocha ./integration/read-only",
-    "test:integration-write": "mocha ./integration/write --timeout=6000",
-    "lint": "eslint --report-unused-disable-directives --ext 'js' --ext 'mjs' lib test integration",
-    "prepublishOnly": "tsc --build tsconfig.lib.json --force"
+    "test:integration-write": "mocha ./integration/write --timeout=6000"
   },
   "engines": {
     "node": ">=16",
