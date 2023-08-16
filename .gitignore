@@ -6,3 +6,4 @@ node_modules
 credentials*.json
 .nyc_output
 *.tsbuildinfo
+*.d.ts

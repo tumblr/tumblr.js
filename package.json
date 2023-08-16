@@ -16,7 +16,8 @@
     "test:coverage": "nyc npm run test",
     "test:integration": "mocha ./integration/read-only",
     "test:integration-write": "mocha ./integration/write",
-    "lint": "eslint --report-unused-disable-directives --ext 'js' --ext 'mjs' lib test integration"
+    "lint": "eslint --report-unused-disable-directives --ext 'js' --ext 'mjs' lib test integration",
+    "prepublishOnly": "tsc --build tsconfig.lib.json --force"
   },
   "engines": {
     "node": ">=16",
@@ -71,6 +72,7 @@
     "typescript": "^5.1.6"
   },
   "files": [
+    "CHANGELOG.md",
     "/lib",
     "/LICENSE"
   ],
