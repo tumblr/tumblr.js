@@ -3,6 +3,7 @@
   "compilerOptions": {
     "composite": true,
     "emitDeclarationOnly": true,
+    "declarationMap": true,
     "rootDir": "lib",
     "moduleResolution": "node16",
     "types": ["node"],
