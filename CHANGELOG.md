@@ -9,7 +9,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-- Integration test suites using real API.
+- Integration test suites using the Tumblr API.
 
 ### Changed
 
@@ -19,6 +19,17 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   `credentials` property.
 - **Breaking** The (optional) `baseUrl` option should be of the form `https://example.com` with no
   pathname, search, hash, etc. Bad `baseUrl` options will throw.
+- Some API methods had documented signatures that were probably wrong. These have been updated.
+- Bundled type declarations are now generated from source and should be improved.
+- Dependencies have changed, notably `request` (deprecated) and `lodash` have been removed.
+
+### Deprecated
+
+- The following legacy post methods are deprecated. Prefer NPF methods (`/posts` endpoint)
+  - `createPost`
+  - `editPost`
+  - `reblogPost`
+- The callback API is considered deprecated in favor of the `Promise` API.
 
 ### Fixed
 
@@ -27,7 +38,20 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Removed
 
+- **Breaking** API methods return promises when no callback is provided. The `returnPromises` method
+  and option have no effect.
+- **Breaking** The `addGetMethods` and `addPostMethods` methods have been removed. Additional
+  methods can be implemented using the `getRequest` or `postRequest` methods.
+- **Breaking** The following legacy post creation methods have been removed.
+  - `createAudioPost`: use `ceatePost` with `{type: "audio"}`.
+  - `createChatPost`: use `ceatePost` with `{type: "chat"}`.
+  - `createLinkPost`: use `ceatePost` with `{type: "link"}`.
+  - `createPhotoPost`: use `ceatePost` with `{type: "photo"}`.
+  - `createQuotePost`: use `ceatePost` with `{type: "quote"}`.
+  - `createTextPost`: use `ceatePost` with `{type: "text"}`.
+  - `createVideoPost`: use `ceatePost` with `{type: "video"}`.
 - **Breaking** The `request` option has been removed.
+- Request objects are no longer returned from API methods.
 
 ## [3.0.0] - 2020-07-28
 

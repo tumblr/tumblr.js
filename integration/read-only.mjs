@@ -3,12 +3,16 @@ import { Client } from 'tumblr.js';
 import { assert } from 'chai';
 import { test } from 'mocha';
 
+// Wait a bit between tests to not spam API.
+beforeEach(function () {
+  return new Promise((resolve) => setTimeout(() => resolve(undefined), this.timeout() - 100));
+});
+
 describe('unauthorized requests', () => {
-  /** @type {Client} */
+  /** @type {import('tumblr.js').Client} */
   let client;
   before(() => {
     client = new Client();
-    client.returnPromises();
   });
 
   ['staff', 'staff.tumblr.com', 't:0aY0xL2Fi1OFJg4YxpmegQ'].forEach((blogIdentifier) => {
@@ -20,18 +24,17 @@ describe('unauthorized requests', () => {
 });
 
 describe('consumer_key (api_key) only requests', () => {
-  /** @type {Client} */
+  /** @type {import('tumblr.js').Client} */
   let client;
   before(function () {
-    if (!env.TUMBLR_OAUTH_CONSUMER_KEY) {
+    if (!env['TUMBLR_OAUTH_CONSUMER_KEY']) {
       console.log('Provide TUMBLR_OAUTH_CONSUMER_KEY environment variable to run this block');
       this.skip();
     }
 
     client = new Client({
-      consumer_key: env.TUMBLR_OAUTH_CONSUMER_KEY,
+      consumer_key: env['TUMBLR_OAUTH_CONSUMER_KEY'],
     });
-    client.returnPromises();
   });
 
   ['staff', 'staff.tumblr.com', 't:0aY0xL2Fi1OFJg4YxpmegQ'].forEach((blogIdentifier) => {
@@ -52,7 +55,7 @@ describe('oauth1 requests', () => {
     'TUMBLR_OAUTH_CONSUMER_SECRET',
   ];
 
-  /** @type {Client} */
+  /** @type {import('tumblr.js').Client} */
   let client;
   before(function () {
     if (!OAUTH1_ENV_VARS.every((envVarName) => Boolean(env[envVarName]))) {
@@ -63,12 +66,11 @@ describe('oauth1 requests', () => {
     }
 
     client = new Client({
-      consumer_key: env.TUMBLR_OAUTH_CONSUMER_KEY,
-      consumer_secret: env.TUMBLR_OAUTH_CONSUMER_SECRET,
-      token: env.TUMBLR_OAUTH_TOKEN,
-      token_secret: env.TUMBLR_OAUTH_TOKEN_SECRET,
+      consumer_key: /** @type {string} */ (env['TUMBLR_OAUTH_CONSUMER_KEY']),
+      consumer_secret: /** @type {string} */ (env['TUMBLR_OAUTH_CONSUMER_SECRET']),
+      token: /** @type {string} */ (env['TUMBLR_OAUTH_TOKEN']),
+      token_secret: /** @type {string} */ (env['TUMBLR_OAUTH_TOKEN_SECRET']),
     });
-    client.returnPromises();
   });
 
   test('fetches userInfo()', async () => {

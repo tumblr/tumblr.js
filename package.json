@@ -1,6 +1,6 @@
 {
   "name": "tumblr.js",
-  "version": "3.0.0",
+  "version": "4.0.0-alpha.0",
   "description": "Official JavaScript client for the Tumblr API",
   "main": "./lib/tumblr",
   "type": "commonjs",
@@ -12,10 +12,12 @@
     "format-check": "prettier --check .",
     "generate-docs": "rm -rf gh-pages && node_modules/.bin/jsdoc -c jsdoc.json",
     "gh-pages": "git subtree push --prefix=gh-pages origin gh-pages",
-    "test": "mocha",
-    "test:coverage": "nyc mocha",
-    "test:integration": "mocha ./integration",
-    "lint": "eslint --report-unused-disable-directives --ext 'js' --ext 'mjs' lib test integration"
+    "test": "mocha --timeout 100",
+    "test:coverage": "nyc npm run test",
+    "test:integration": "mocha ./integration/read-only",
+    "test:integration-write": "mocha ./integration/write --timeout=6000",
+    "lint": "eslint --report-unused-disable-directives --ext 'js' --ext 'mjs' lib test integration",
+    "prepublishOnly": "tsc --build tsconfig.lib.json --force"
   },
   "engines": {
     "node": ">=16",
@@ -47,11 +49,16 @@
     }
   ],
   "dependencies": {
-    "lodash": "^4.17.11",
-    "query-string": "^6.1.0",
-    "request": "^2.88.2"
+    "@types/node": ">=16",
+    "@types/oauth": "^0.9.1",
+    "form-data": "^4.0.0",
+    "oauth": "^0.10.0"
   },
   "devDependencies": {
+    "@tsconfig/node16": "^16.1.0",
+    "@tsconfig/strictest": "^2.0.1",
+    "@types/chai": "^4.3.5",
+    "@types/mocha": "^10.0.1",
     "chai": "^4.1.2",
     "docdash": "^2.0.1",
     "eslint": "^8.45.0",
@@ -61,9 +68,11 @@
     "mocha": "^10.2.0",
     "nock": "^13.3.2",
     "nyc": "^15.1.0",
-    "prettier": "^3.0.0"
+    "prettier": "^3.0.0",
+    "typescript": "^5.1.6"
   },
   "files": [
+    "CHANGELOG.md",
     "/lib",
     "/LICENSE"
   ],

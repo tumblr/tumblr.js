@@ -5,3 +5,5 @@ node_modules
 *.bak
 credentials*.json
 .nyc_output
+*.tsbuildinfo
+*.d.ts

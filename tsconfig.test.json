@@ -1,0 +1,16 @@
+{
+  "extends": ["@tsconfig/strictest/tsconfig.json", "@tsconfig/node16/tsconfig.json"],
+  "compilerOptions": {
+    "noEmit": true,
+    "rootDir": ".",
+    "moduleResolution": "node16",
+    "types": ["node", "mocha"],
+
+    "noUncheckedIndexedAccess": false,
+
+    // @todo Work through these
+    "noImplicitAny": false
+  },
+  "include": ["test/**/*", "integration/**/*"],
+  "references": [{ "path": "./tsconfig.lib.json" }]
+}
