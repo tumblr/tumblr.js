@@ -69,7 +69,7 @@ jobs:
           npm run test:coverage
 
   integration:
-    name: Integration testing with Node.js ${{ matrix.node-version }}
+    name: Integration API read-only tests
     runs-on: ubuntu-latest
 
     strategy:
@@ -107,7 +107,7 @@ jobs:
           npm run test:integration
 
   integration-write:
-    name: Integration testing with Node.js ${{ matrix.node-version }}
+    name: Integration API write tests
     runs-on: ubuntu-latest
     environment: integration-suite
 
