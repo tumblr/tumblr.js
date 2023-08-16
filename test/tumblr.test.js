@@ -17,7 +17,7 @@ const DUMMY_CREDENTIALS = {
 const DUMMY_API_URL = 'https://example.com';
 
 describe('tumblr.js', function () {
-  /** @type {const} */ ([
+  /** @type {ReadonlyArray<[string, typeof tumblr.createClient]>} */ ([
     ['createClient', (options) => tumblr.createClient(options)],
     ['constructor', (options) => new tumblr.Client(options)],
   ]).forEach(([name, factory]) => {
