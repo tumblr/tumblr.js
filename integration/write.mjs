@@ -58,8 +58,8 @@ describe('oauth1 write requests', () => {
     );
   });
 
-  describe('photo post', () => {
-    it('creates a post via data', async () => {
+  describe('create photo post', () => {
+    it('via data', async () => {
       const data = await readFile(new URL('../test/fixtures/image.jpg', import.meta.url));
 
       const res = await client.createPost(blogName, {
@@ -72,7 +72,7 @@ describe('oauth1 write requests', () => {
       assert.isOk(res);
     });
 
-    it('creates a slideshow post via data[]', async () => {
+    it('via data[]', async () => {
       const data = await readFile(new URL('../test/fixtures/image.jpg', import.meta.url));
 
       const res = await client.createPost(blogName, {
@@ -85,7 +85,7 @@ describe('oauth1 write requests', () => {
       assert.isOk(res);
     });
 
-    it(`creates a post via data64`, async () => {
+    it('via data64', async () => {
       const data = await readFile(new URL('../test/fixtures/image.jpg', import.meta.url), {
         encoding: 'base64',
       });

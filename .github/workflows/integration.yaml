@@ -8,7 +8,7 @@ on:
       - master
 
 jobs:
-  tests:
+  integration-read-only:
     name: Integration testing with Node.js ${{ matrix.node-version }}
     runs-on: ubuntu-latest
     environment: integration-suite

@@ -14,7 +14,8 @@
     "gh-pages": "git subtree push --prefix=gh-pages origin gh-pages",
     "test": "mocha --timeout 100",
     "test:coverage": "nyc npm run test",
-    "test:integration": "mocha ./integration",
+    "test:integration": "mocha ./integration/read-only",
+    "test:integration-write": "mocha ./integration/write",
     "lint": "eslint --report-unused-disable-directives --ext 'js' --ext 'mjs' lib test integration"
   },
   "engines": {
