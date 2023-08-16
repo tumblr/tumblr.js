@@ -9,7 +9,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
-- Integration test suites using real API.
+- Integration test suites using the Tumblr API.
 
 ### Changed
 
@@ -21,6 +21,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   pathname, search, hash, etc. Bad `baseUrl` options will throw.
 - Some API methods had documented signatures that were probably wrong. These have been updated.
 - Bundled type declarations are now generated from source and should be improved.
+- Dependencies have changed, notably `request` (deprecated) and `lodash` have been removed.
 
 ### Deprecated
 
@@ -50,7 +51,6 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   - `createTextPost`: use `ceatePost` with `{type: "text"}`.
   - `createVideoPost`: use `ceatePost` with `{type: "video"}`.
 - **Breaking** The `request` option has been removed.
-- The dependency on the deprecated `request` library has been removed.
 - Request objects are no longer returned from API methods.
 
 ## [3.0.0] - 2020-07-28
