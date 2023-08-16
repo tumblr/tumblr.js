@@ -1,8 +1,10 @@
 {
+  "$schema": "http://json.schemastore.org/tsconfig",
   "extends": ["@tsconfig/strictest/tsconfig.json", "@tsconfig/node16/tsconfig.json"],
   "compilerOptions": {
     "composite": true,
     "emitDeclarationOnly": true,
+    "declarationMap": true,
     "rootDir": "lib",
     "moduleResolution": "node16",
     "types": ["node"],
