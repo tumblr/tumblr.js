@@ -8,8 +8,8 @@ on:
       - master
 
 jobs:
-  lint:
-    name: Linting
+  static-checks:
+    name: Static checks
     runs-on: ubuntu-latest
 
     steps:
@@ -29,6 +29,10 @@ jobs:
       - name: Run lint
         run: |
           npm run lint
+
+      - name: Typecheck
+        run: |
+          npm run typecheck
 
       - name: Check formatting
         run: |
