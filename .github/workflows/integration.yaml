@@ -1,7 +1,7 @@
 name: Integration tests
 
 on:
-  workflow_dispatch:
+  pull_request:
   push:
     branches:
       - main
@@ -11,6 +11,7 @@ jobs:
   tests:
     name: Integration testing with Node.js ${{ matrix.node-version }}
     runs-on: ubuntu-latest
+    environment: integration-suite
 
     strategy:
       fail-fast: true
