@@ -2,16 +2,12 @@
   "extends": ["@tsconfig/strictest/tsconfig.json", "@tsconfig/node16/tsconfig.json"],
   "compilerOptions": {
     "composite": true,
-    "declaration": true,
     "emitDeclarationOnly": true,
     "rootDir": "lib",
     "moduleResolution": "node16",
     "types": ["node"],
 
-    "noUncheckedIndexedAccess": false,
-
-    // @todo Work through these
-    "noImplicitAny": false
+    "noUncheckedIndexedAccess": false
   },
   "files": ["lib/tumblr.js"]
 }
