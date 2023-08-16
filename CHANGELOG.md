@@ -43,13 +43,13 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - **Breaking** The `addGetMethods` and `addPostMethods` methods have been removed. Additional
   methods can be implemented using the `getRequest` or `postRequest` methods.
 - **Breaking** The following legacy post creation methods have been removed.
-  - `createAudioPost`: use `ceatePost` with `{type: "audio"}`.
-  - `createChatPost`: use `ceatePost` with `{type: "chat"}`.
-  - `createLinkPost`: use `ceatePost` with `{type: "link"}`.
-  - `createPhotoPost`: use `ceatePost` with `{type: "photo"}`.
-  - `createQuotePost`: use `ceatePost` with `{type: "quote"}`.
-  - `createTextPost`: use `ceatePost` with `{type: "text"}`.
-  - `createVideoPost`: use `ceatePost` with `{type: "video"}`.
+  - `createAudioPost`: use `createPost` with `{type: "audio"}`.
+  - `createChatPost`: use `createPost` with `{type: "chat"}`.
+  - `createLinkPost`: use `createPost` with `{type: "link"}`.
+  - `createPhotoPost`: use `createPost` with `{type: "photo"}`.
+  - `createQuotePost`: use `createPost` with `{type: "quote"}`.
+  - `createTextPost`: use `createPost` with `{type: "text"}`.
+  - `createVideoPost`: use `createPost` with `{type: "video"}`.
 - **Breaking** The `request` option has been removed.
 - Request objects are no longer returned from API methods.
 
