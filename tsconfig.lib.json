@@ -8,6 +8,7 @@
     "emitDeclarationOnly": true,
     "declarationMap": true,
     "rootDir": "lib",
+    "outDir": "types",
     "moduleResolution": "node16",
     "types": ["node"],
 
