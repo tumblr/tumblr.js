@@ -12,14 +12,16 @@ dependency on the long-deprecated `request` library.
 
 A few highlights for upgrading from version 3:
 
-The `createPost` method was renamed to `createLegacyPost`. `createPost` is a new method for creating
-NPF posts.
+The `createPost` and `editPost` methods were renamed to `createLegacyPost` and `editLegacyPost`.
+`createPost` and `editPost` are now for working with NPF posts (via the `/posts` endpoint).
 
 ```js
 // Before v4
 createPost(blogName, params);
+editPost(blogName, params);
 // After v4
 createLegacyPost(blogName, params);
+editLegacyPost(blogName, params);
 ```
 
 Some legacy post creation helper methods have been removed. For example:
@@ -57,7 +59,7 @@ provided.
 
 - The following legacy post methods are deprecated. Prefer NPF methods (`/posts` endpoint)
   - `createLegacyPost`
-  - `editPost`
+  - `editLegacyPost`
   - `reblogPost`
 - The callback API is considered deprecated in favor of the `Promise` API.
 
