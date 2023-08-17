@@ -67,17 +67,17 @@ describe('oauth1 write requests', () => {
       },
     ]);
 
-    test.only('creates a simple post', async () => {
+    test('creates a simple post', async () => {
       const res = await client.createPost(blogName, {
         content: postContent,
-        tags: ['tumblr.js-test', `tumblr.js-version-${client.version}`, 'test-npf-text'],
+        tags: ['tumblr.js-test', `tumblr.js-version-${client.version}`, 'test-npf'],
       });
       assert.isOk(res);
       assert.isString(res.id);
       createdPostId = res.id;
     });
 
-    test.only('edits the post', async function () {
+    test('edits the post', async function () {
       if (!createdPostId) {
         this.skip();
       }
@@ -85,7 +85,12 @@ describe('oauth1 write requests', () => {
       assert.isOk(
         await client.editPost(blogName, createdPostId, {
           content: [...postContent, { type: 'text', text: 'This block was appended in an edit.' }],
-          tags: ['tumblr.js-test', `tumblr.js-version-${client.version}`, 'test-npf-text'],
+          tags: [
+            'tumblr.js-test',
+            `tumblr.js-version-${client.version}`,
+            'test-npf',
+            'test-npf-edit',
+          ],
         }),
       );
     });
