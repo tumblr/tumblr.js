@@ -39,7 +39,7 @@ provided.
 ### Added
 
 - Integration test suites using the Tumblr API.
-- Creation of NPF posts is now supported via `createPost` 🎉
+- Creation and edition of NPF posts is now supported via `createPost`/`editPost` 🎉
 
 ### Changed
 
