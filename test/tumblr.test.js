@@ -17,7 +17,7 @@ const DUMMY_CREDENTIALS = {
 const DUMMY_API_URL = 'https://example.com';
 
 describe('tumblr.js', function () {
-  /** @type {const} */ ([
+  /** @type {ReadonlyArray<[string, typeof tumblr.createClient]>} */ ([
     ['createClient', (options) => tumblr.createClient(options)],
     ['constructor', (options) => new tumblr.Client(options)],
   ]).forEach(([name, factory]) => {
@@ -115,27 +115,29 @@ describe('tumblr.js', function () {
       });
 
       /** @type {const} */ ([
-        'blogInfo',
         'blogAvatar',
-        'blogLikes',
+        'blogDrafts',
         'blogFollowers',
+        'blogInfo',
+        'blogLikes',
         'blogPosts',
         'blogQueue',
-        'blogDrafts',
         'blogSubmissions',
-        'userInfo',
+        'createLegacyPost',
+        'createPost',
+        'deletePost',
+        'editLegacyPost',
+        'editPost',
+        'followBlog',
+        'likePost',
+        'reblogPost',
+        'taggedPosts',
+        'unfollowBlog',
+        'unlikePost',
         'userDashboard',
         'userFollowing',
+        'userInfo',
         'userLikes',
-        'taggedPosts',
-        'createPost',
-        'editPost',
-        'reblogPost',
-        'deletePost',
-        'followBlog',
-        'unfollowBlog',
-        'likePost',
-        'unlikePost',
       ]).forEach(function (methodName) {
         it('has #' + methodName, function () {
           assert.isFunction(client[methodName]);

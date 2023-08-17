@@ -4,12 +4,16 @@
   "env": {
     "node": true,
     "commonjs": true,
-    "es2020": true
+    "es2022": true
   },
   "rules": {
     "no-console": "error"
   },
   "overrides": [
+    {
+      "files": ["lib/**/*.ts"],
+      "parser": "@typescript-eslint/parser"
+    },
     {
       "files": ["./test/**/*", "./integration/**/*"],
       "parserOptions": {
