@@ -95,8 +95,40 @@ describe('oauth1 write requests', () => {
       );
     });
 
-    test.skip('creates a post with media', () => {
-      // Blocked on https://github.com/tumblr/docs/issues/88
+    test('creates a post with media', async () => {
+      const media = {
+        media_key: '9fb3517d95570cbd752caa77172f1ebb:60e936a44dbb258b-12',
+        type: 'image/jpeg',
+        width: 400,
+        height: 108,
+        url: 'https://64.media.tumblr.com/9fb3517d95570cbd752caa77172f1ebb/60e936a44dbb258b-12/s400x600/27f27482d8c9c631a05f478107976a0aeda2c9a5.jpg',
+        has_original_dimensions: true,
+      };
+
+      assert.isOk(
+        await client.createPost(blogName, {
+          content: [
+            ...postContent,
+            {
+              type: 'image',
+              media,
+              caption: 'Arches National Park',
+              alt_text: 'A mountain landsacpe',
+              attribution: {
+                type: 'link',
+                url: 'https://openverse.org/en-gb/image/38b9b781-390f-4fc4-929d-0ecb4a2985e3',
+              },
+            },
+          ],
+
+          tags: [
+            'tumblr.js-test',
+            `tumblr.js-version-${client.version}`,
+            'test-npf',
+            'test-npf-media',
+          ],
+        }),
+      );
     });
   });
 
