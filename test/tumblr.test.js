@@ -127,6 +127,7 @@ describe('tumblr.js', function () {
         'createPost',
         'deletePost',
         'editLegacyPost',
+        'editPost',
         'followBlog',
         'likePost',
         'reblogPost',
