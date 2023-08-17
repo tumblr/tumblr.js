@@ -124,6 +124,7 @@ describe('tumblr.js', function () {
         'blogQueue',
         'blogSubmissions',
         'createLegacyPost',
+        'createPost',
         'deletePost',
         'editPost',
         'followBlog',

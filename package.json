@@ -53,6 +53,7 @@
     "@types/node": ">=16",
     "@types/oauth": "^0.9.1",
     "form-data": "^4.0.0",
+    "mime-types": "^2.1.35",
     "oauth": "^0.10.0"
   },
   "devDependencies": {
@@ -60,6 +61,7 @@
     "@tsconfig/strictest": "^2.0.1",
     "@types/chai": "^4.3.5",
     "@types/mocha": "^10.0.1",
+    "@typescript-eslint/parser": "^6.4.0",
     "chai": "^4.1.2",
     "docdash": "^2.0.1",
     "eslint": "^8.45.0",
