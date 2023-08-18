@@ -257,11 +257,7 @@ describe('tumblr.js', function () {
             .post('/', new RegExp(`^Content-Disposition: form-data; name="${dataField}"$`, 'm'))
             .reply(200, { meta: {}, response: {} });
 
-          assert.isOk(
-            await client.postRequest('/', {
-              [dataField]: ':D',
-            }),
-          );
+          assert.isOk(await client.postRequest('/', { [dataField]: ':D' }));
           scope.done();
         });
       });
