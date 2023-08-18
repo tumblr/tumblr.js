@@ -207,7 +207,7 @@ describe('tumblr.js', function () {
           reqheaders: {
             accept: 'application/json',
             'user-agent': `tumblr.js/${client.version}`,
-            'content-type': /^multipart\/form-data;\s*boundary=/,
+            'content-type': 'application/json',
             authorization: (value) => {
               return [
                 value.startsWith('OAuth '),
@@ -222,15 +222,44 @@ describe('tumblr.js', function () {
             },
           },
         })
-          .post('/', (body) => {
-            return (
-              /^Content-Disposition: form-data; name="foo"$/m.test(body) && /^bar$/m.test(body)
-            );
-          })
+          .post('/', '{"foo":"bar"}')
           .reply(200, { meta: {}, response: {} });
 
         assert.isOk(await client.postRequest('/', { foo: 'bar' }));
         scope.done();
+      });
+
+      ['data', 'data64'].forEach((dataField) => {
+        it(`with body and ${dataField}`, async () => {
+          const client = new TumblrClient({
+            ...DUMMY_CREDENTIALS,
+            baseUrl: DUMMY_API_URL,
+          });
+          const scope = nock(client.baseUrl, {
+            reqheaders: {
+              accept: 'application/json',
+              'user-agent': `tumblr.js/${client.version}`,
+              'content-type': /^multipart\/form-data;\s*boundary=/,
+              authorization: (value) => {
+                return [
+                  value.startsWith('OAuth '),
+                  value.includes('oauth_signature_method="HMAC-SHA1"'),
+                  value.includes('oauth_version="1.0"'),
+                  value.includes(`oauth_consumer_key="${DUMMY_CREDENTIALS.consumer_key}"`),
+                  value.includes(`oauth_token="${DUMMY_CREDENTIALS.token}"`),
+                  /oauth_nonce="[^"]+"/.test(value),
+                  /oauth_timestamp="[^"]+"/.test(value),
+                  /oauth_signature="[^"]+"/.test(value),
+                ].every((passes) => passes);
+              },
+            },
+          })
+            .post('/', new RegExp(`^Content-Disposition: form-data; name="${dataField}"$`, 'm'))
+            .reply(200, { meta: {}, response: {} });
+
+          assert.isOk(await client.postRequest('/', { [dataField]: ':D' }));
+          scope.done();
+        });
       });
 
       it('without body', async () => {
