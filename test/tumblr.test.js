@@ -262,6 +262,28 @@ describe('tumblr.js', function () {
         });
       });
 
+      it('serializes different types of form-data fiels', async () => {
+        const client = new TumblrClient({
+          ...DUMMY_CREDENTIALS,
+          baseUrl: DUMMY_API_URL,
+        });
+        const scope = nock(client.baseUrl, {
+          reqheaders: { 'content-type': /^multipart\/form-data;/ },
+        })
+          .post('/')
+          .reply(200, { meta: {}, response: {} });
+
+        assert.isOk(
+          await client.postRequest('/', {
+            data: Buffer.from(''),
+
+            // Ensure common field types can be form-data serialized
+            booleanField: true,
+          }),
+        );
+        scope.done();
+      });
+
       it('without body', async () => {
         const client = new TumblrClient({
           ...DUMMY_CREDENTIALS,
