@@ -155,11 +155,9 @@ const blogQueue = await client.blogQueue(blogName, options);
 
 // Get the drafts for a blog
 const blogDrafts = await client.blogDrafts(blogName, options);
-const blogDrafts = await client.blogDrafts(blogName);
 
 // Get the submissions for a blog
 const blogSubmissions = await client.blogSubmissions(blogName, options);
-const blogSubmissions = await client.blogSubmissions(blogName);
 ```
 
 ### Post Methods
