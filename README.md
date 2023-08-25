@@ -175,7 +175,8 @@ await client.createPost(blogName, {
   content: [
     {
       type: 'image',
-      media: createReadStream(new URL('./image.jpg', import.meta.url)),
+      // Node's fs module, e.g. `import fs from 'node:fs';`
+      media: fs.createReadStream(new URL('./image.jpg', import.meta.url)),
       alt_text: '…',
     },
   ],
