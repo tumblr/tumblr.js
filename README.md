@@ -162,14 +162,36 @@ const blogSubmissions = await client.blogSubmissions(blogName, options);
 
 ### Post Methods
 
+#### Create a post with `createPost`
+
 ```js
-// Create or reblog a post
 await client.createPost(blogName, options);
+```
 
-// Edit a post
+To upload media with a created post, provide a `ReadStream` as the block media:
+
+```js
+await client.createPost(blogName, {
+  content: [
+    {
+      type: 'image',
+      // Node's fs module, e.g. `import fs from 'node:fs';`
+      media: fs.createReadStream(new URL('./image.jpg', import.meta.url)),
+      alt_text: '…',
+    },
+  ],
+});
+```
+
+#### Create a post with `editPost`
+
+```js
 await client.editPost(blogName, postId, options);
+```
 
-// Delete a given post
+#### Create a post with `deletePost`
+
+```js
 await client.deletePost(blogName, postId);
 ```
 

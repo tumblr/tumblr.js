@@ -1,4 +1,5 @@
 import { readFile } from 'node:fs/promises';
+import { createReadStream } from 'node:fs';
 import { URL } from 'node:url';
 import { env } from 'node:process';
 import { Client } from 'tumblr.js';
@@ -43,7 +44,9 @@ describe('oauth1 write requests', () => {
 
   // Wait a bit between tests to not spam API.
   afterEach(function () {
-    return new Promise((resolve) => setTimeout(() => resolve(undefined), this.timeout() - 100));
+    return new Promise((resolve) =>
+      setTimeout(() => resolve(undefined), Math.min(this.timeout() - 100, 1_000)),
+    );
   });
 
   describe('post creation and edition', () => {
@@ -95,7 +98,7 @@ describe('oauth1 write requests', () => {
       );
     });
 
-    test('creates a post with media', async () => {
+    test('creates a post with existing media', async () => {
       const media = {
         media_key: '9fb3517d95570cbd752caa77172f1ebb:60e936a44dbb258b-12',
         type: 'image/jpeg',
@@ -116,7 +119,7 @@ describe('oauth1 write requests', () => {
               alt_text: 'A mountain landsacpe',
               attribution: {
                 type: 'link',
-                url: 'https://openverse.org/en-gb/image/38b9b781-390f-4fc4-929d-0ecb4a2985e3',
+                url: 'https://openverse.org/image/38b9b781-390f-4fc4-929d-0ecb4a2985e3',
               },
             },
           ],
@@ -126,6 +129,45 @@ describe('oauth1 write requests', () => {
             `tumblr.js-version-${client.version}`,
             'test-npf',
             'test-npf-media',
+          ],
+        }),
+      );
+    });
+
+    test('creates a post with media upload', async () => {
+      assert.isOk(
+        await client.createPost(blogName, {
+          content: [
+            ...postContent,
+            {
+              type: 'image',
+              media: createReadStream(new URL('../test/fixtures/image.jpg', import.meta.url)),
+              caption: 'Arches National Park',
+              alt_text: 'A mountain landsacpe',
+              attribution: {
+                type: 'link',
+                url: 'https://openverse.org/image/38b9b781-390f-4fc4-929d-0ecb4a2985e3',
+              },
+            },
+            {
+              type: 'video',
+              media: createReadStream(new URL('../test/fixtures/video.mp4', import.meta.url)),
+              width: 92,
+              height: 69,
+              title:
+                'Phosphatidylinositol (4,5) Bisphosphate Controls T Cell Activation by Regulating T Cell Rigidity and Organization',
+              attribution: {
+                type: 'link',
+                url: 'https://commons.wikimedia.org/wiki/File:Phosphatidylinositol-(45)-Bisphosphate-Controls-T-Cell-Activation-by-Regulating-T-Cell-Rigidity-and-pone.0027227.s020.ogv',
+              },
+            },
+          ],
+
+          tags: [
+            'tumblr.js-test',
+            `tumblr.js-version-${client.version}`,
+            'test-npf',
+            'test-npf-media-upload',
           ],
         }),
       );
@@ -147,12 +189,12 @@ describe('oauth1 write requests', () => {
 
     describe('create photo post', () => {
       it('via data', async () => {
-        const data = await readFile(new URL('../test/fixtures/image.jpg', import.meta.url));
+        const data = createReadStream(new URL('../test/fixtures/image.jpg', import.meta.url));
 
         const res = await client.createLegacyPost(blogName, {
           type: 'photo',
           caption: `Arches National Park || Automated test post ${new Date().toISOString()}`,
-          link: 'https://openverse.org/en-gb/image/38b9b781-390f-4fc4-929d-0ecb4a2985e3',
+          link: 'https://openverse.org/image/38b9b781-390f-4fc4-929d-0ecb4a2985e3',
           tags: `tumblr.js-test,tumblr.js-version-${client.version},test-legacy-photo-data`,
           data: data,
         });
@@ -160,12 +202,12 @@ describe('oauth1 write requests', () => {
       });
 
       it('via data[]', async () => {
-        const data = await readFile(new URL('../test/fixtures/image.jpg', import.meta.url));
+        const data = createReadStream(new URL('../test/fixtures/image.jpg', import.meta.url));
 
         const res = await client.createLegacyPost(blogName, {
           type: 'photo',
           caption: `Arches National Park || Automated test post ${new Date().toISOString()}`,
-          link: 'https://openverse.org/en-gb/image/38b9b781-390f-4fc4-929d-0ecb4a2985e3',
+          link: 'https://openverse.org/image/38b9b781-390f-4fc4-929d-0ecb4a2985e3',
           tags: `tumblr.js-test,tumblr.js-version-${client.version},test-legacy-photo-data[]`,
           data: [data, data],
         });
@@ -180,7 +222,7 @@ describe('oauth1 write requests', () => {
         const res = await client.createLegacyPost(blogName, {
           type: 'photo',
           caption: `Arches National Park || Automated test post ${new Date().toISOString()}`,
-          link: 'https://openverse.org/en-gb/image/38b9b781-390f-4fc4-929d-0ecb4a2985e3',
+          link: 'https://openverse.org/image/38b9b781-390f-4fc4-929d-0ecb4a2985e3',
           tags: `tumblr.js-test,tumblr.js-version-${client.version},test-legacy-photo-data64`,
           data64: data,
         });
@@ -189,7 +231,7 @@ describe('oauth1 write requests', () => {
     });
 
     it('creates an audio post with data', async () => {
-      const data = await readFile(new URL('../test/fixtures/audio.mp3', import.meta.url));
+      const data = createReadStream(new URL('../test/fixtures/audio.mp3', import.meta.url));
 
       const res = await client.createLegacyPost(blogName, {
         type: 'audio',

@@ -1,11 +1,110 @@
+import { type ReadStream } from 'node:fs';
+import { type IncomingMessage } from 'node:http';
+
+export interface Options {
+  /**
+   * OAuth1 credential. Required for API key auth endpoints.
+   */
+  consumer_key?: string;
+  /**
+   * OAuth1 credential. Required for OAuth endpoints.
+   */
+  consumer_secret?: string;
+  /**
+   * OAuth1 credential. Required for OAuth endpoints.
+   */
+  token?: string;
+  /**
+   * OAuth1 credential. Required for Oauth endpoints.
+   */
+  token_secret?: string;
+  /**
+   * (optional) The API url if different from the default.
+   */
+  baseUrl?: string;
+  /**
+   * @deprecated Methods will return promises if no callback is provided.
+   */
+  returnPromises?: boolean;
+}
+
+/**
+ * Handles the response from a client reuest
+ *
+ * @param err - error message
+ * @param resp - response body
+ * @param response - raw response
+ */
+export type TumblrClientCallback = (
+  err: Error | null,
+  resp: Record<string, any> | null,
+  response?: IncomingMessage | null | undefined,
+) => void;
+
 export type PostState = 'published' | 'queue' | 'draft' | 'private' | 'unapproved';
+
+/**
+ * Many content blocks and their components include media objects which link directly to media assets.
+ * These media objects share a common JSON object format.
+ *
+ * @link https://github.com/tumblr/docs/blob/master/npf-spec.md#media-objects
+ */
+export interface MediaObject {
+  /**
+   * The canonical URL of the media asset
+   */
+  url: string;
+  /**
+   * The MIME type of the media asset, or a best approximation will be made based on the given URL
+   * @example "image/jpg"
+   */
+  type?: string;
+  /**
+   * The width of the media asset, if that makes sense (for images and videos, but not for audio)
+   */
+  width?: number;
+  /**
+   * The height of the media asset, if that makes sense (for images and videos, but not for audio)
+   */
+  height?: number;
+  /**
+   * For display purposes, this indicates whether the dimensions are defaults
+   */
+  original_dimensions_missing?: boolean;
+  /**
+   * This indicates whether this media object has the same dimensions as the original media
+   */
+  has_original_dimensions?: boolean;
+  /**
+   * This indicates whether this media object is a cropped version of the original media
+   */
+  cropped?: boolean;
+}
 
 export interface AudioBlock {
   type: 'audio';
+  /**
+   * NPF MediaObject or Node.js fs.ReadStream object
+   *
+   * Provide a fs.ReadStream object to upload media or an object satisfying the MediaObject interface to use existing media.
+   *
+   * @link https://www.tumblr.com/docs/npf#media-objects
+   * @link https://nodejs.org/docs/latest-v18.x/api/fs.html#class-fsreadstream
+   */
+  media: ReadStream | MediaObject;
   [prop: string]: any;
 }
 export interface ImageBlock {
   type: 'image';
+  /**
+   * NPF MediaObject or Node.js fs.ReadStream object
+   *
+   * Provide a fs.ReadStream object to upload media or an object satisfying the MediaObject interface to use existing media.
+   *
+   * @link https://www.tumblr.com/docs/npf#media-objects
+   * @link https://nodejs.org/docs/latest-v18.x/api/fs.html#class-fsreadstream
+   */
+  media: ReadStream | MediaObject;
   [prop: string]: any;
 }
 export interface LinkBlock {
@@ -22,6 +121,15 @@ export interface TextBlock {
 }
 export interface VideoBlock {
   type: 'video';
+  /**
+   * NPF MediaObject or Node.js fs.ReadStream object
+   *
+   * Provide a fs.ReadStream object to upload media or an object satisfying the MediaObject interface to use existing media.
+   *
+   * @link https://www.tumblr.com/docs/npf#media-objects
+   * @link https://nodejs.org/docs/latest-v18.x/api/fs.html#class-fsreadstream
+   */
+  media: ReadStream | MediaObject;
   [prop: string]: any;
 }
 
