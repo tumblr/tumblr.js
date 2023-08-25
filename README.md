@@ -162,14 +162,35 @@ const blogSubmissions = await client.blogSubmissions(blogName, options);
 
 ### Post Methods
 
+#### Create a post with `createPost`
+
 ```js
-// Create or reblog a post
 await client.createPost(blogName, options);
+```
 
-// Edit a post
+To upload media with a created post, provide a `ReadStream` as the block media:
+
+```js
+await client.createPost(blogName, {
+  content: [
+    {
+      type: 'image',
+      media: createReadStream(new URL('./image.jpg', import.meta.url)),
+      alt_text: '…',
+    },
+  ],
+});
+```
+
+#### Create a post with `editPost`
+
+```js
 await client.editPost(blogName, postId, options);
+```
 
-// Delete a given post
+#### Create a post with `deletePost`
+
+```js
 await client.deletePost(blogName, postId);
 ```
 
@@ -241,3 +262,7 @@ http://www.apache.org/licenses/LICENSE-2.0
 Unless required by applicable law or agreed to in writing, software distributed under the License is
 distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
 implied. See the License for the specific language governing permissions and limitations.
+
+```
+
+```
