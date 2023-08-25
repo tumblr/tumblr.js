@@ -17,6 +17,12 @@ const DUMMY_CREDENTIALS = {
 const DUMMY_API_URL = 'https://example.com';
 
 describe('tumblr.js', function () {
+  it('has matching version with the package version', () => {
+    const version = require('../package.json').version;
+    const client = tumblr.createClient();
+    assert.strictEqual(version, client.version);
+  });
+
   /** @type {ReadonlyArray<[string, typeof tumblr.createClient]>} */ ([
     ['createClient', (options) => tumblr.createClient(options)],
     ['constructor', (options) => new tumblr.Client(options)],
