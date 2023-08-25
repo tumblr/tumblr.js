@@ -1,3 +1,40 @@
+
+export interface Options {
+    /**
+     * OAuth1 credential. Required for API key auth endpoints.
+     */
+    consumer_key?: string;
+    /**
+     * OAuth1 credential. Required for OAuth endpoints.
+     */
+    consumer_secret?: string;
+    /**
+     * OAuth1 credential. Required for OAuth endpoints.
+     */
+    token?: string;
+    /**
+     * OAuth1 credential. Required for Oauth endpoints.
+     */
+    token_secret?: string;
+    /**
+     * (optional) The API url if different from the default.
+     */
+    baseUrl?: string;
+    /**
+     * @deprecated Methods will return promises if no callback is provided.
+     */
+    returnPromises?: boolean;
+};
+
+/**
+ * Handles the response from a client reuest
+*
+ * @param err - error message
+ * @param resp - response body
+ * @param response - raw response
+ */
+export type TumblrClientCallback = (err: Error | null, resp: Record<string,any> | null, response?: import('node:http').IncomingMessage | null | undefined) => void;
+
 export type PostState = 'published' | 'queue' | 'draft' | 'private' | 'unapproved';
 
 export interface AudioBlock {
