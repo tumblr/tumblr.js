@@ -10,7 +10,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 The 4.0 release is a significant change that modernizes the library, adds NPF support, and removes a
 dependency on the long-deprecated `request` library.
 
-A few highlights for upgrading from version 3:
+Some things to watch out for when migrating from v3:
 
 The `createPost` and `editPost` methods were renamed to `createLegacyPost` and `editLegacyPost`.
 `createPost` and `editPost` are now for working with NPF posts (via the `/posts` endpoint).
