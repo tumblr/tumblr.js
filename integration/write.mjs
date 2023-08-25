@@ -134,7 +134,7 @@ describe('oauth1 write requests', () => {
       );
     });
 
-    test('creates a post with media for upload', async () => {
+    test('creates a post with media upload', async () => {
       assert.isOk(
         await client.createPost(blogName, {
           content: [
