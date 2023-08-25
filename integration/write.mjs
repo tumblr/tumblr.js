@@ -44,7 +44,9 @@ describe('oauth1 write requests', () => {
 
   // Wait a bit between tests to not spam API.
   afterEach(function () {
-    return new Promise((resolve) => setTimeout(() => resolve(undefined), this.timeout() - 100));
+    return new Promise((resolve) =>
+      setTimeout(() => resolve(undefined), Math.min(this.timeout() - 100, 1_000)),
+    );
   });
 
   describe('post creation and edition', () => {
@@ -148,12 +150,15 @@ describe('oauth1 write requests', () => {
               },
             },
             {
-              type: 'audio',
-              media: createReadStream(new URL('../test/fixtures/audio.mp3', import.meta.url)),
-              title: 'Multiple Dog Barks (King Charles Spaniel)',
+              type: 'video',
+              media: createReadStream(new URL('../test/fixtures/video.mp4', import.meta.url)),
+              width: 92,
+              height: 69,
+              title:
+                'Phosphatidylinositol (4,5) Bisphosphate Controls T Cell Activation by Regulating T Cell Rigidity and Organization',
               attribution: {
                 type: 'link',
-                url: 'https://openverse.org/audio/4a013620-5327-4635-835e-d06888a15678',
+                url: 'https://commons.wikimedia.org/wiki/File:Phosphatidylinositol-(45)-Bisphosphate-Controls-T-Cell-Activation-by-Regulating-T-Cell-Rigidity-and-pone.0027227.s020.ogv',
               },
             },
           ],
@@ -184,7 +189,7 @@ describe('oauth1 write requests', () => {
 
     describe('create photo post', () => {
       it('via data', async () => {
-        const data = await readFile(new URL('../test/fixtures/image.jpg', import.meta.url));
+        const data = createReadStream(new URL('../test/fixtures/image.jpg', import.meta.url));
 
         const res = await client.createLegacyPost(blogName, {
           type: 'photo',
@@ -197,7 +202,7 @@ describe('oauth1 write requests', () => {
       });
 
       it('via data[]', async () => {
-        const data = await readFile(new URL('../test/fixtures/image.jpg', import.meta.url));
+        const data = createReadStream(new URL('../test/fixtures/image.jpg', import.meta.url));
 
         const res = await client.createLegacyPost(blogName, {
           type: 'photo',
@@ -226,7 +231,7 @@ describe('oauth1 write requests', () => {
     });
 
     it('creates an audio post with data', async () => {
-      const data = await readFile(new URL('../test/fixtures/audio.mp3', import.meta.url));
+      const data = createReadStream(new URL('../test/fixtures/audio.mp3', import.meta.url));
 
       const res = await client.createLegacyPost(blogName, {
         type: 'audio',
