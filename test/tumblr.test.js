@@ -1,7 +1,4 @@
 const tumblr = require('../lib/tumblr.js');
-const fs = require('fs');
-const path = require('path');
-const JSON5 = require('json5');
 const assert = require('chai').assert;
 const nock = require('nock');
 
