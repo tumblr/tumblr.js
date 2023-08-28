@@ -339,6 +339,7 @@ describe('tumblr.js', function () {
     /** @type {const} */ ([
       ['get', 'getRequest'],
       ['post', 'postRequest'],
+      ['put', 'putRequest'],
     ]).forEach(function ([httpMethod, clientMethod]) {
       describe('#' + clientMethod, function () {
         const client = new TumblrClient({
