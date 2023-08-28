@@ -400,7 +400,7 @@ describe('tumblr.js', function () {
         });
 
         /**
-         * @param {'get'|'post'} httpMethod
+         * @param {'get'|'post'|'put'} httpMethod
          * @param {any} data
          * @param {string} apiPath
          */
