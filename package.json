@@ -64,7 +64,7 @@
     "@typescript-eslint/parser": "^6.4.1",
     "chai": "^4.3.8",
     "docdash": "^2.0.1",
-    "eslint": "^8.47.0",
+    "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.0.0",
     "jsdoc": "^4.0.2",
     "json5": "^2.2.3",
