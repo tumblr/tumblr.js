@@ -58,19 +58,8 @@ const client = new tumblr.Client({
 });
 ```
 
-The request methods return `Request` objects by default, but you can have it return `Promise`
-objects instead, if that's more your thing. Pass `returnPromises: true` in the options to
-`createClient`:
-
-```js
-const tumblr = require('tumblr.js');
-const client = tumblr.createClient({
-  credentials: {
-    // ...
-  },
-  returnPromises: true,
-});
-```
+The request methods will return promises. The callback form is considered deprecated and should not
+be used.
 
 ### In the Browser
 
