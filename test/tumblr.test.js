@@ -169,7 +169,7 @@ describe('tumblr.js', function () {
       const scope = nock(client.baseUrl, {
         reqheaders: {
           accept: 'application/json',
-          'user-agent': `tumblr.js/${client.version}`,
+          'user-agent': `tumblr.js/${tumblr.Client.version}`,
           authorization: (value) => {
             return [
               value.startsWith('OAuth '),
@@ -213,7 +213,7 @@ describe('tumblr.js', function () {
         const scope = nock(client.baseUrl, {
           reqheaders: {
             accept: 'application/json',
-            'user-agent': `tumblr.js/${client.version}`,
+            'user-agent': `tumblr.js/${tumblr.Client.version}`,
             'content-type': 'application/json',
             authorization: (value) => {
               return [
@@ -245,7 +245,7 @@ describe('tumblr.js', function () {
           const scope = nock(client.baseUrl, {
             reqheaders: {
               accept: 'application/json',
-              'user-agent': `tumblr.js/${client.version}`,
+              'user-agent': `tumblr.js/${tumblr.Client.version}`,
               'content-type': /^multipart\/form-data;\s*boundary=/,
               authorization: (value) => {
                 return [
@@ -300,7 +300,7 @@ describe('tumblr.js', function () {
           badheaders: ['content-length', 'content-type'],
           reqheaders: {
             accept: 'application/json',
-            'user-agent': `tumblr.js/${client.version}`,
+            'user-agent': `tumblr.js/${tumblr.Client.version}`,
             authorization: (value) => {
               return [
                 value.startsWith('OAuth '),
