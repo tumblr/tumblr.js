@@ -161,6 +161,61 @@ describe('tumblr.js', function () {
      * - TumblrClient#postRequest
      */
 
+    describe('get request applies expected query params', () => {
+      it('using url search params', async () => {
+        const client = new TumblrClient({ baseUrl: DUMMY_API_URL });
+        const scope = nock(client.baseUrl)
+          .get('/')
+          .query(new URLSearchParams([['search', 'string']]))
+          .reply(200, { meta: {}, response: {} });
+
+        assert.isOk(await client.getRequest('/?search=string'));
+        scope.done();
+      });
+
+      it('applies string params', async () => {
+        const client = new TumblrClient({
+          ...DUMMY_CREDENTIALS,
+          baseUrl: DUMMY_API_URL,
+        });
+        const scope = nock(client.baseUrl)
+          .get('/')
+          .query({ tag: 'foo' })
+          .reply(200, { meta: {}, response: {} });
+
+        assert.isOk(await client.getRequest('/', { tag: 'foo' }));
+        scope.done();
+      });
+
+      it('combines search string and params', async () => {
+        const client = new TumblrClient({
+          ...DUMMY_CREDENTIALS,
+          baseUrl: DUMMY_API_URL,
+        });
+        const scope = nock(client.baseUrl)
+          .get('/')
+          .query({ search: 'string', tag: 'foo' })
+          .reply(200, { meta: {}, response: {} });
+
+        assert.isOk(await client.getRequest('/?search=string', { tag: 'foo' }));
+        scope.done();
+      });
+
+      it('transforms array params', async () => {
+        const client = new TumblrClient({
+          ...DUMMY_CREDENTIALS,
+          baseUrl: DUMMY_API_URL,
+        });
+        const scope = nock(client.baseUrl)
+          .get('/')
+          .query({ 'tag[0]': 'foo', 'tag[1]': 'bar' })
+          .reply(200, { meta: {}, response: {} });
+
+        assert.isOk(await client.getRequest('/', { tag: ['foo', 'bar'] }));
+        scope.done();
+      });
+    });
+
     it('get request expected headers', async () => {
       const client = new TumblrClient({
         ...DUMMY_CREDENTIALS,
