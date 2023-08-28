@@ -7,6 +7,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [4.0.0] - 2023-08-28
+
 The 4.0 release is a significant change that modernizes the library, adds NPF support, and removes a
 dependency on the long-deprecated `request` library.
 
@@ -91,7 +93,8 @@ provided.
 
 ## [1.0.0] - 2016-05-09
 
-[unreleased]: https://github.com/tumblr/tumblr.js/compare/v3.0.1...HEAD
-[3.0.0]: https://github.com/tumblr/tumblr.js/releases/tag/3.0.0
+[unreleased]: https://github.com/tumblr/tumblr.js/compare/v4.0.0...HEAD
+[4.0.0]: https://github.com/tumblr/tumblr.js/releases/tag/v4.0.0
+[3.0.0]: https://github.com/tumblr/tumblr.js/releases/tag/v3.0.0
 [2.0.0]: https://github.com/tumblr/tumblr.js/releases/tag/2.0.0
 [1.0.0]: https://github.com/tumblr/tumblr.js/releases/tag/1.0.0
