@@ -1,6 +1,6 @@
 {
   "name": "tumblr.js",
-  "version": "4.0.0-alpha.2",
+  "version": "4.0.0",
   "description": "Official JavaScript client for the Tumblr API",
   "main": "./lib/tumblr",
   "type": "commonjs",
