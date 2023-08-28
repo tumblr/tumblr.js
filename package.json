@@ -67,7 +67,6 @@
     "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.0.0",
     "jsdoc": "^4.0.2",
-    "json5": "^2.2.3",
     "mocha": "^10.2.0",
     "nock": "^13.3.3",
     "nyc": "^15.1.0",
