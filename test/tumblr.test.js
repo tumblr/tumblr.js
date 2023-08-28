@@ -365,9 +365,7 @@ describe('tumblr.js', function () {
           });
         }
 
-        const fixtures = JSON5.parse(
-          fs.readFileSync(path.join(__dirname, 'fixtures/' + httpMethod + '.json5')).toString(),
-        );
+        const fixtures = require('./fixtures/' + httpMethod + '.json');
 
         describe('with callbacks', function () {
           Object.entries(fixtures).forEach(function ([apiPath, data]) {
