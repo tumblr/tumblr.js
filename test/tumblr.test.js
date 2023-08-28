@@ -19,8 +19,9 @@ const DUMMY_API_URL = 'https://example.com';
 describe('tumblr.js', function () {
   it('has matching version with the package version', () => {
     const version = require('../package.json').version;
-    const client = tumblr.createClient();
+    const client = new tumblr.Client();
     assert.strictEqual(version, client.version);
+    assert.strictEqual(version, tumblr.Client.version);
   });
 
   /** @type {ReadonlyArray<[string, typeof tumblr.createClient]>} */ ([
