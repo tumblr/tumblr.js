@@ -1,7 +1,4 @@
 const tumblr = require('../lib/tumblr.js');
-const fs = require('fs');
-const path = require('path');
-const JSON5 = require('json5');
 const assert = require('chai').assert;
 const nock = require('nock');
 
@@ -19,8 +16,9 @@ const DUMMY_API_URL = 'https://example.com';
 describe('tumblr.js', function () {
   it('has matching version with the package version', () => {
     const version = require('../package.json').version;
-    const client = tumblr.createClient();
+    const client = new tumblr.Client();
     assert.strictEqual(version, client.version);
+    assert.strictEqual(version, tumblr.Client.version);
   });
 
   /** @type {ReadonlyArray<[string, typeof tumblr.createClient]>} */ ([
@@ -160,6 +158,61 @@ describe('tumblr.js', function () {
      * - TumblrClient#postRequest
      */
 
+    describe('get request applies expected query params', () => {
+      it('using url search params', async () => {
+        const client = new TumblrClient({ baseUrl: DUMMY_API_URL });
+        const scope = nock(client.baseUrl)
+          .get('/')
+          .query(new URLSearchParams([['search', 'string']]))
+          .reply(200, { meta: {}, response: {} });
+
+        assert.isOk(await client.getRequest('/?search=string'));
+        scope.done();
+      });
+
+      it('applies string params', async () => {
+        const client = new TumblrClient({
+          ...DUMMY_CREDENTIALS,
+          baseUrl: DUMMY_API_URL,
+        });
+        const scope = nock(client.baseUrl)
+          .get('/')
+          .query({ tag: 'foo' })
+          .reply(200, { meta: {}, response: {} });
+
+        assert.isOk(await client.getRequest('/', { tag: 'foo' }));
+        scope.done();
+      });
+
+      it('combines search string and params', async () => {
+        const client = new TumblrClient({
+          ...DUMMY_CREDENTIALS,
+          baseUrl: DUMMY_API_URL,
+        });
+        const scope = nock(client.baseUrl)
+          .get('/')
+          .query({ search: 'string', tag: 'foo' })
+          .reply(200, { meta: {}, response: {} });
+
+        assert.isOk(await client.getRequest('/?search=string', { tag: 'foo' }));
+        scope.done();
+      });
+
+      it('transforms array params', async () => {
+        const client = new TumblrClient({
+          ...DUMMY_CREDENTIALS,
+          baseUrl: DUMMY_API_URL,
+        });
+        const scope = nock(client.baseUrl)
+          .get('/')
+          .query({ 'tag[0]': 'foo', 'tag[1]': 'bar' })
+          .reply(200, { meta: {}, response: {} });
+
+        assert.isOk(await client.getRequest('/', { tag: ['foo', 'bar'] }));
+        scope.done();
+      });
+    });
+
     it('get request expected headers', async () => {
       const client = new TumblrClient({
         ...DUMMY_CREDENTIALS,
@@ -168,7 +221,7 @@ describe('tumblr.js', function () {
       const scope = nock(client.baseUrl, {
         reqheaders: {
           accept: 'application/json',
-          'user-agent': `tumblr.js/${client.version}`,
+          'user-agent': `tumblr.js/${tumblr.Client.version}`,
           authorization: (value) => {
             return [
               value.startsWith('OAuth '),
@@ -212,7 +265,7 @@ describe('tumblr.js', function () {
         const scope = nock(client.baseUrl, {
           reqheaders: {
             accept: 'application/json',
-            'user-agent': `tumblr.js/${client.version}`,
+            'user-agent': `tumblr.js/${tumblr.Client.version}`,
             'content-type': 'application/json',
             authorization: (value) => {
               return [
@@ -244,7 +297,7 @@ describe('tumblr.js', function () {
           const scope = nock(client.baseUrl, {
             reqheaders: {
               accept: 'application/json',
-              'user-agent': `tumblr.js/${client.version}`,
+              'user-agent': `tumblr.js/${tumblr.Client.version}`,
               'content-type': /^multipart\/form-data;\s*boundary=/,
               authorization: (value) => {
                 return [
@@ -299,7 +352,7 @@ describe('tumblr.js', function () {
           badheaders: ['content-length', 'content-type'],
           reqheaders: {
             accept: 'application/json',
-            'user-agent': `tumblr.js/${client.version}`,
+            'user-agent': `tumblr.js/${tumblr.Client.version}`,
             authorization: (value) => {
               return [
                 value.startsWith('OAuth '),
@@ -338,6 +391,7 @@ describe('tumblr.js', function () {
     /** @type {const} */ ([
       ['get', 'getRequest'],
       ['post', 'postRequest'],
+      ['put', 'putRequest'],
     ]).forEach(function ([httpMethod, clientMethod]) {
       describe('#' + clientMethod, function () {
         const client = new TumblrClient({
@@ -346,7 +400,7 @@ describe('tumblr.js', function () {
         });
 
         /**
-         * @param {'get'|'post'} httpMethod
+         * @param {'get'|'post'|'put'} httpMethod
          * @param {any} data
          * @param {string} apiPath
          */
@@ -364,9 +418,7 @@ describe('tumblr.js', function () {
           });
         }
 
-        const fixtures = JSON5.parse(
-          fs.readFileSync(path.join(__dirname, 'fixtures/' + httpMethod + '.json5')).toString(),
-        );
+        const fixtures = require('./fixtures/' + httpMethod + '.json');
 
         describe('with callbacks', function () {
           Object.entries(fixtures).forEach(function ([apiPath, data]) {

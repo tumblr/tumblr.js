@@ -1,6 +1,8 @@
 import { type ReadStream } from 'node:fs';
 import { type IncomingMessage } from 'node:http';
 
+export type PostType = 'text' | 'quote' | 'link' | 'answer' | 'video' | 'audio' | 'photo' | 'chat';
+
 export interface Options {
   /**
    * OAuth1 credential. Required for API key auth endpoints.
@@ -47,7 +49,7 @@ export type PostState = 'published' | 'queue' | 'draft' | 'private' | 'unapprove
  * Many content blocks and their components include media objects which link directly to media assets.
  * These media objects share a common JSON object format.
  *
- * @link https://github.com/tumblr/docs/blob/master/npf-spec.md#media-objects
+ * @link https://www.tumblr.com/docs/npf#media-objects
  */
 export interface MediaObject {
   /**
@@ -236,4 +238,62 @@ export interface NpfReblogParams extends NpfPostParams {
    * Instead of `hide_trail`, use this to specify an array of specific reblog trail item indexes to exclude from your reblog.
    */
   exclude_trail_items?: boolean;
+}
+
+export interface BlogPostsParams {
+  /**
+   * A specific post ID. Returns the single post specified or (if not found) a 404 error.
+   */
+  id?: string;
+  /**
+   * Limits the response to posts with the specified tags
+   *
+   * When multiple tags are provided, posts will be returned that have *all* of the provided tags.
+   * A maximum of four tags can be provided.
+   */
+  tag?: string | string[];
+  /**
+   * The type of post to return.
+   */
+  type?: PostType;
+  /**
+   * The number of posts to return: 1–20, inclusive.
+   */
+  limit?: number;
+  /**
+   * Offset post number (0 to start from first post).
+   */
+  offset?: number;
+  /**
+   * Indicates whether to return reblog information (specify true or false). Returns the various reblogged_ fields.
+   */
+  reblog_info?: boolean;
+  /**
+   * Indicates whether to return notes information (specify true or false). Returns note count and note metadata.
+   */
+  notes_info?: boolean;
+  /**
+   * Returns posts' content in NPF format instead of the legacy format.
+   *
+   * @link https://www.tumblr.com/docs/npf
+   */
+  npf?: boolean;
+}
+export interface BlogPosts<This> {
+  /**
+   * Gets a list of posts for a blog
+   *
+   * @param  blogIdentifier - blog name or URL
+   * @param  Params - Additional request parameters
+   */
+  (this: This, blogIdentifier: string, params?: BlogPostsParams, deprecated?: never): Promise<any>;
+  /** @deprecated Use promises instead of callbacks */
+  (this: This, blogIdentifier: string, callback: TumblrClientCallback): undefined;
+  /** @deprecated Use promises instead of callbacks */
+  (
+    this: This,
+    blogIdentifier: string,
+    params: BlogPostsParams,
+    callback: TumblrClientCallback,
+  ): undefined;
 }

@@ -1,13 +1,13 @@
 # tumblr.js
 
 [![CI](https://github.com/tumblr/tumblr.js/actions/workflows/ci.yaml/badge.svg)](https://github.com/tumblr/tumblr.js/actions/workflows/ci.yaml)
+[![npm](https://img.shields.io/npm/v/tumblr.js)][npm-package]
 
 The official JavaScript client library for the [Tumblr API](http://www.tumblr.com/docs/api/v2).
-Check out the [detailed documentation here](https://tumblr.github.io/tumblr.js/index.html).
 
 ## Installation
 
-Install this package from [npm](https://www.npmjs.com/package/tumblr.js):
+Install this package from [npm][npm-package]:
 
 ```bash
 npm install --save tumblr.js
@@ -263,3 +263,5 @@ http://www.apache.org/licenses/LICENSE-2.0
 Unless required by applicable law or agreed to in writing, software distributed under the License is
 distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
 implied. See the License for the specific language governing permissions and limitations.
+
+[npm-package]: https://www.npmjs.com/package/tumblr.js
