@@ -12,8 +12,7 @@
     "autoformat": "prettier --write .",
     "format-check": "prettier --check .",
     "typecheck": "tsc --build tsconfig.json",
-    "generate-docs": "rm -rf gh-pages && echo 'not implemented'",
-    "gh-pages": "git subtree push --prefix=gh-pages origin gh-pages",
+    "docs-site": "typedoc",
     "lint": "eslint --report-unused-disable-directives --ext 'js' --ext 'mjs' lib test integration",
     "prepublishOnly": "tsc --build tsconfig.lib.json --force",
     "test": "mocha --timeout 100",
@@ -69,6 +68,7 @@
     "nock": "^13.3.3",
     "nyc": "^15.1.0",
     "prettier": "^3.0.2",
+    "typedoc": "^0.25.0",
     "typescript": "^5.2.2"
   },
   "files": [

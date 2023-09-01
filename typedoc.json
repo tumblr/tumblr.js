@@ -1,0 +1,12 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "entryPoints": ["lib/tumblr.js"],
+  "tsconfig": "tsconfig.lib.json",
+  "out": "gh-pages",
+  "excludePrivate":true,
+  "excludeProtected": true,
+  "excludeInternal": true,
+  "navigationLinks": {
+    "GitHub": "https://github.com/tumblr/tumblr.js"
+  }
+}
