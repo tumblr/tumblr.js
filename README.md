@@ -4,6 +4,7 @@
 [![npm](https://img.shields.io/npm/v/tumblr.js)][npm-package]
 
 The official JavaScript client library for the [Tumblr API](http://www.tumblr.com/docs/api/v2).
+[Check out the detailed documentation here](https://tumblr.github.io/tumblr.js/).
 
 ## Installation
 
