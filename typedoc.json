@@ -1,8 +1,6 @@
 {
   "$schema": "https://typedoc.org/schema.json",
-  "entryPoints": [
-    "lib"
-  ],
+  "entryPoints": ["lib"],
   "entryPointStrategy": "expand",
   "tsconfig": "tsconfig.lib.json",
   "out": "gh-pages",
