@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "@tsconfig/node16": "^16.1.1",
-    "@tsconfig/strictest": "^2.0.1",
+    "@tsconfig/strictest": "^2.0.2",
     "@types/chai": "^4.3.5",
     "@types/mocha": "^10.0.1",
     "@typescript-eslint/parser": "^6.4.1",
