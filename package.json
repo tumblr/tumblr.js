@@ -60,7 +60,7 @@
     "@tsconfig/strictest": "^2.0.2",
     "@types/chai": "^4.3.5",
     "@types/mocha": "^10.0.1",
-    "@typescript-eslint/parser": "^6.4.1",
+    "@typescript-eslint/parser": "^6.5.0",
     "chai": "^4.3.8",
     "eslint": "^8.48.0",
     "eslint-config-prettier": "^9.0.0",
