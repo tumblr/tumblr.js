@@ -7,6 +7,10 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Added
+
+- Build updated docs site at https://tumblr.github.io/tumblr.js.
+
 ### Changed
 
 - Some `@private` properties of `Client` have been changed to `#private` fields.
