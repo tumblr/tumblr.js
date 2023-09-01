@@ -7,6 +7,8 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [4.0.1] - 2023-09-01
+
 ### Added
 
 - Build updated docs site at https://tumblr.github.io/tumblr.js.
@@ -101,7 +103,8 @@ provided.
 
 ## [1.0.0] - 2016-05-09
 
-[unreleased]: https://github.com/tumblr/tumblr.js/compare/v4.0.0...HEAD
+[unreleased]: https://github.com/tumblr/tumblr.js/compare/v4.0.1...HEAD
+[4.0.1]: https://github.com/tumblr/tumblr.js/releases/tag/v4.0.1
 [4.0.0]: https://github.com/tumblr/tumblr.js/releases/tag/v4.0.0
 [3.0.0]: https://github.com/tumblr/tumblr.js/releases/tag/v3.0.0
 [2.0.0]: https://github.com/tumblr/tumblr.js/releases/tag/2.0.0
