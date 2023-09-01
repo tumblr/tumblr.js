@@ -115,6 +115,10 @@ jobs:
     runs-on: ubuntu-latest
     environment: integration-suite
 
+    concurrency:
+      group: integration
+      cancel-in-progress: false
+
     strategy:
       fail-fast: true
       max-parallel: 1
