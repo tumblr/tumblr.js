@@ -43,6 +43,7 @@ export type TumblrClientCallback = (
   response?: IncomingMessage | null | undefined,
 ) => void;
 
+export type PostFormatFilter = 'text' | 'raw';
 export type PostState = 'published' | 'queue' | 'draft' | 'private' | 'unapproved';
 
 /**
