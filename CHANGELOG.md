@@ -7,6 +7,10 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+- Some `@private` properties of `Client` have been changed to `#private` fields.
+
 ## [4.0.0] - 2023-08-28
 
 The 4.0 release is a significant change that modernizes the library, adds NPF support, and removes a

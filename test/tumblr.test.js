@@ -31,19 +31,46 @@ describe('tumblr.js', function () {
         assert.isTrue(client instanceof tumblr.Client);
       });
 
-      it('handles no credentials', function () {
+      it('handles no credentials', async () => {
         const client = factory();
-        assert.deepEqual(client.credentials, { auth: 'none' });
+        const scope = nock(client.baseUrl, {
+          badheaders: ['authorization'],
+        })
+          .get('/')
+          .query({}) // no search params
+          .reply(200, { meta: {}, response: {} });
+
+        await client.getRequest('/');
+        scope.done();
       });
 
-      it('handles apiKey credentials', function () {
+      it('handles apiKey credentials', async () => {
         const client = factory({ consumer_key: 'abc123' });
-        assert.deepEqual(client.credentials, { auth: 'apiKey', apiKey: 'abc123' });
+
+        const scope = nock(client.baseUrl, {
+          badheaders: ['authorization'],
+        })
+          .get('/')
+          .query({ api_key: 'abc123' })
+          .reply(200, { meta: {}, response: {} });
+
+        await client.getRequest('/');
+        scope.done();
       });
 
-      it('passes credentials to the client', function () {
+      it('passes credentials to the client', async () => {
         const client = factory(DUMMY_CREDENTIALS);
-        assert.deepEqual(client.credentials, { auth: 'oauth1', ...DUMMY_CREDENTIALS });
+        const scope = nock(client.baseUrl, {
+          reqheaders: {
+            Authorization: /^OAuth oauth_consumer_key=/,
+          },
+        })
+          .get('/')
+          .query({})
+          .reply(200, { meta: {}, response: {} });
+
+        await client.getRequest('/');
+        scope.done();
       });
 
       it('passes baseUrl to the client', function () {
