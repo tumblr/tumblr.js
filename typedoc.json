@@ -1,9 +1,13 @@
 {
   "$schema": "https://typedoc.org/schema.json",
-  "entryPoints": ["lib/tumblr.js"],
+  "entryPoints": [
+    "lib"
+  ],
+  "entryPointStrategy": "expand",
   "tsconfig": "tsconfig.lib.json",
   "out": "gh-pages",
-  "excludePrivate":true,
+  "includeVersion": true,
+  "excludePrivate": true,
   "excludeProtected": true,
   "excludeInternal": true,
   "navigationLinks": {
