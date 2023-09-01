@@ -9,7 +9,7 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Changed
 
-- Some private properties of `Client` have been changed to private fields.
+- Some `@private` properties of `Client` have been changed to `#private` fields.
 
 ## [4.0.0] - 2023-08-28
 
