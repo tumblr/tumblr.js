@@ -218,7 +218,7 @@ client.getRequest(apiPath, params);
 client.postRequest(apiPath, params);
 
 // PUT requests
-client.postRequest(apiPath, params);
+client.putRequest(apiPath, params);
 ```
 
 ---
