@@ -173,13 +173,13 @@ await client.createPost(blogName, {
 });
 ```
 
-#### Create a post with `editPost`
+#### Edit a post with `editPost`
 
 ```js
 await client.editPost(blogName, postId, options);
 ```
 
-#### Create a post with `deletePost`
+#### Delete a post with `deletePost`
 
 ```js
 await client.deletePost(blogName, postId);
