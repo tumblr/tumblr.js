@@ -1,6 +1,7 @@
-const tumblr = require('../lib/tumblr.js');
-const assert = require('chai').assert;
-const nock = require('nock');
+import { readFileSync } from 'node:fs';
+import { assert } from 'chai';
+import * as tumblr from '../lib/tumblr.js';
+import nock from 'nock';
 
 nock.disableNetConnect();
 
@@ -15,7 +16,10 @@ const DUMMY_API_URL = 'https://example.com';
 
 describe('tumblr.js', function () {
   it('has matching version with the package version', () => {
-    const version = require('../package.json').version;
+    const { version } = JSON.parse(
+      readFileSync(new URL('../package.json', import.meta.url), 'utf8'),
+    );
+
     const client = new tumblr.Client();
     assert.strictEqual(version, client.version);
     assert.strictEqual(version, tumblr.Client.version);
@@ -130,7 +134,6 @@ describe('tumblr.js', function () {
   });
 
   describe('Client', function () {
-    const tumblr = require('../lib/tumblr.js');
     const TumblrClient = tumblr.Client;
 
     /**
@@ -445,7 +448,9 @@ describe('tumblr.js', function () {
           });
         }
 
-        const fixtures = require('./fixtures/' + httpMethod + '.json');
+        const fixtures = JSON.parse(
+          readFileSync(new URL('./fixtures/' + httpMethod + '.json', import.meta.url), 'utf8'),
+        );
 
         describe('with callbacks', function () {
           Object.entries(fixtures).forEach(function ([apiPath, data]) {
