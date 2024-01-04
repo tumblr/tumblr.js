@@ -285,7 +285,7 @@ export interface BlogPosts<This> {
    * Gets a list of posts for a blog
    *
    * @param  blogIdentifier - blog name or URL
-   * @param  Params - Additional request parameters
+   * @param  params - Additional request parameters
    */
   (this: This, blogIdentifier: string, params?: BlogPostsParams, deprecated?: never): Promise<any>;
   /** @deprecated Use promises instead of callbacks */
