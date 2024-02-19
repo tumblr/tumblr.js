@@ -288,6 +288,7 @@ describe('tumblr.js', function () {
 
     describe('post request expected headers', () => {
       it('with body', async () => {
+        const body = '{"foo":"bar"}';
         const client = new TumblrClient({
           ...DUMMY_CREDENTIALS,
           baseUrl: DUMMY_API_URL,
@@ -297,6 +298,7 @@ describe('tumblr.js', function () {
             accept: 'application/json',
             'user-agent': `tumblr.js/${tumblr.Client.version}`,
             'content-type': 'application/json',
+            'content-length': Buffer.byteLength(body, 'utf-8').toString(),
             authorization: (value) => {
               return [
                 value.startsWith('OAuth '),
@@ -311,10 +313,26 @@ describe('tumblr.js', function () {
             },
           },
         })
-          .post('/', '{"foo":"bar"}')
+          .post('/', body)
           .reply(200, { meta: {}, response: {} });
 
         assert.isOk(await client.postRequest('/', { foo: 'bar' }));
+        scope.done();
+      });
+
+      it('with unicode in body', async () => {
+        const body = '{"powerup":"🍄"}';
+        const client = new TumblrClient({
+          ...DUMMY_CREDENTIALS,
+          baseUrl: DUMMY_API_URL,
+        });
+        const scope = nock(client.baseUrl, {
+          reqheaders: { 'content-length': Buffer.byteLength(body, 'utf-8').toString() },
+        })
+          .post('/', body)
+          .reply(200, { meta: {}, response: {} });
+
+        assert.isOk(await client.postRequest('/', { powerup: '🍄' }));
         scope.done();
       });
 
