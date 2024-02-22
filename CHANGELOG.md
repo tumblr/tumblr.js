@@ -11,6 +11,10 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 - **Breaking** Support Node.js versions `>=18`.
 
+### Fixed
+
+- Fix Content-Length header size in UTF-8.
+
 ## [4.0.1] - 2023-09-01
 
 ### Added
