@@ -1,6 +1,6 @@
 {
   "name": "tumblr.js",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "description": "Official JavaScript client for the Tumblr API",
   "main": "./lib/tumblr",
   "type": "commonjs",
@@ -50,7 +50,7 @@
     }
   ],
   "dependencies": {
-    "@types/node": ">=16",
+    "@types/node": ">=18",
     "@types/oauth": "^0.9.1",
     "form-data": "^4.0.0",
     "oauth": "^0.10.0"
