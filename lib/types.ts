@@ -50,7 +50,7 @@ export type PostState = 'published' | 'queue' | 'draft' | 'private' | 'unapprove
  * Many content blocks and their components include media objects which link directly to media assets.
  * These media objects share a common JSON object format.
  *
- * @link https://www.tumblr.com/docs/npf#media-objects
+ * @see [Media objects documentation.](https://www.tumblr.com/docs/npf#media-objects)
  */
 export interface MediaObject {
   /**
@@ -91,8 +91,8 @@ export interface AudioBlock {
    *
    * Provide a fs.ReadStream object to upload media or an object satisfying the MediaObject interface to use existing media.
    *
-   * @link https://www.tumblr.com/docs/npf#media-objects
-   * @link https://nodejs.org/docs/latest-v18.x/api/fs.html#class-fsreadstream
+   * @see [Media objects documentation.](https://www.tumblr.com/docs/npf#media-objects)
+   * @see [`fs.ReadStream` documentation.](https://nodejs.org/docs/latest-v20.x/api/fs.html#class-fsreadstream)
    */
   media: ReadStream | MediaObject;
   [prop: string]: any;
@@ -104,8 +104,8 @@ export interface ImageBlock {
    *
    * Provide a fs.ReadStream object to upload media or an object satisfying the MediaObject interface to use existing media.
    *
-   * @link https://www.tumblr.com/docs/npf#media-objects
-   * @link https://nodejs.org/docs/latest-v18.x/api/fs.html#class-fsreadstream
+   * @see [Media objects documentation.](https://www.tumblr.com/docs/npf#media-objects)
+   * @see [`fs.ReadStream` documentation.](https://nodejs.org/docs/latest-v20.x/api/fs.html#class-fsreadstream)
    */
   media: ReadStream | MediaObject;
   [prop: string]: any;
@@ -129,8 +129,8 @@ export interface VideoBlock {
    *
    * Provide a fs.ReadStream object to upload media or an object satisfying the MediaObject interface to use existing media.
    *
-   * @link https://www.tumblr.com/docs/npf#media-objects
-   * @link https://nodejs.org/docs/latest-v18.x/api/fs.html#class-fsreadstream
+   * @see [Media objects documentation.](https://www.tumblr.com/docs/npf#media-objects)
+   * @see [`fs.ReadStream` documentation.](https://nodejs.org/docs/latest-v20.x/api/fs.html#class-fsreadstream)
    */
   media: ReadStream | MediaObject;
   [prop: string]: any;
@@ -161,13 +161,15 @@ export type NpfLayoutBlock = NpfLayoutAsk | NpfLayoutRows;
 export interface NpfPostParams {
   /**
    * An array of NPF content blocks to be used to make the post; in a reblog, this is any content you want to add.
-   * @link https://www.tumblr.com/docs/npf#content-blocks
+   *
+   * @see [Content blocks documentation.](https://www.tumblr.com/docs/npf#content-blocks)
    */
   content: ReadonlyArray<NpfContentBlock>;
 
   /**
    * An array of NPF layout objects to be used to lay out the post content.
-   * @link https://www.tumblr.com/docs/npf#layout-blocks
+   *
+   * @see [Layout blocks documentation.](https://www.tumblr.com/docs/npf#layout-blocks)
    */
   layout?: ReadonlyArray<NpfLayoutBlock>;
 
@@ -276,7 +278,7 @@ export interface BlogPostsParams {
   /**
    * Returns posts' content in NPF format instead of the legacy format.
    *
-   * @link https://www.tumblr.com/docs/npf
+   * @see [NPF documentation.](https://www.tumblr.com/docs/npf)
    */
   npf?: boolean;
 }
