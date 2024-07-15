@@ -69,7 +69,7 @@
     "nyc": "^17.0.0",
     "prettier": "^3.0.3",
     "typedoc": "^0.26.2",
-    "typescript": "^5.2.2"
+    "typescript": "^5.5.3"
   },
   "files": [
     "/lib/*.*js",
