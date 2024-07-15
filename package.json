@@ -78,6 +78,6 @@
     "CHANGELOG.md"
   ],
   "volta": {
-    "node": "20.11.0"
+    "node": "20.15.1"
   }
 }
