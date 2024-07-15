@@ -56,7 +56,7 @@
     "oauth": "^0.10.0"
   },
   "devDependencies": {
-    "@tsconfig/node16": "^16.1.1",
+    "@tsconfig/node18": "^18.2.4",
     "@tsconfig/strictest": "^2.0.2",
     "@types/chai": "^4.3.5",
     "@types/mocha": "^10.0.1",
@@ -69,7 +69,7 @@
     "nyc": "^17.0.0",
     "prettier": "^3.0.3",
     "typedoc": "^0.26.2",
-    "typescript": "^5.2.2"
+    "typescript": "^5.5.3"
   },
   "files": [
     "/lib/*.*js",
@@ -78,6 +78,6 @@
     "CHANGELOG.md"
   ],
   "volta": {
-    "node": "20.11.0"
+    "node": "20.15.1"
   }
 }
