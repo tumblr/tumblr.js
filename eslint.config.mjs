@@ -25,6 +25,7 @@ export default [
 
     rules: {
       'no-console': 'error',
+      'no-unused-vars': ['error', { caughtErrors: 'none' }],
     },
   },
   {
@@ -33,9 +34,16 @@ export default [
     languageOptions: {
       parser: tsParser,
     },
+
+    rules: {
+      'no-console': 'error',
+
+      // This TypeScript file only contains types which confuses unused vars.
+      'no-unused-vars': 'off',
+    },
   },
   {
-    files: ['./test/**/*', './integration/**/*'],
+    files: ['test/**/*', 'integration/**/*'],
 
     languageOptions: {
       globals: {

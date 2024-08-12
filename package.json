@@ -13,7 +13,7 @@
     "format-check": "prettier --check .",
     "typecheck": "tsc --build tsconfig.json",
     "docs-site": "typedoc",
-    "lint": "eslint --report-unused-disable-directives --ext 'js' --ext 'mjs' lib test integration",
+    "lint": "eslint --report-unused-disable-directives lib test integration",
     "prepublishOnly": "tsc --build tsconfig.lib.json --force",
     "test": "mocha --timeout 100",
     "test:coverage": "nyc npm run test",
