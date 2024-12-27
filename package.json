@@ -67,7 +67,7 @@
     "eslint": "^9.9.0",
     "eslint-config-prettier": "^9.0.0",
     "globals": "^15.9.0",
-    "mocha": "^10.2.0",
+    "mocha": "^11.0.1",
     "nock": "^13.3.3",
     "nyc": "^17.0.0",
     "prettier": "^3.0.3",
