@@ -65,7 +65,7 @@
     "@typescript-eslint/parser": "^8.0.0",
     "chai": "^5.0.0",
     "eslint": "^9.9.0",
-    "eslint-config-prettier": "^9.0.0",
+    "eslint-config-prettier": "^10.0.1",
     "globals": "^15.9.0",
     "mocha": "^11.0.1",
     "nock": "^13.3.3",
