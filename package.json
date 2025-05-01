@@ -5,7 +5,10 @@
   "main": "./lib/tumblr",
   "type": "commonjs",
   "exports": {
-    ".": "./lib/tumblr.js"
+    ".": {
+      "types": "./types/tumblr.d.ts",
+      "default": "./lib/tumblr.js"
+    }
   },
   "types": "./types/tumblr.d.ts",
   "scripts": {
