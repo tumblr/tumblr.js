@@ -1,14 +1,12 @@
 {
   "name": "tumblr.js",
-  "version": "5.0.0",
+  "version": "5.0.1-alpha.1",
   "description": "Official JavaScript client for the Tumblr API",
   "main": "./lib/tumblr",
   "type": "commonjs",
   "exports": {
-    ".": {
-      "types": "./types/tumblr.d.ts",
-      "default": "./lib/tumblr.js"
-    }
+    "types": "./types/tumblr.d.ts",
+    "default": "./lib/tumblr.js"
   },
   "types": "./types/tumblr.d.ts",
   "scripts": {
