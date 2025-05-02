@@ -119,7 +119,8 @@ provided.
 
 ## [1.0.0] - 2016-05-09
 
-[unreleased]: https://github.com/tumblr/tumblr.js/compare/v5.0.0...HEAD
+[unreleased]: https://github.com/tumblr/tumblr.js/compare/v5.0.1...HEAD
+[5.0.1]: https://github.com/tumblr/tumblr.js/releases/tag/v5.0.1
 [5.0.0]: https://github.com/tumblr/tumblr.js/releases/tag/v5.0.0
 [4.0.1]: https://github.com/tumblr/tumblr.js/releases/tag/v4.0.1
 [4.0.0]: https://github.com/tumblr/tumblr.js/releases/tag/v4.0.0
