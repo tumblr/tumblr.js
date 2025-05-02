@@ -7,6 +7,12 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [5.0.1] - 2025-05-02
+
+### Fixed
+
+- Ensure type declarations can be discovered in certain build setups.
+
 ## [5.0.0] - 2024-02-22
 
 ### Changed
@@ -113,7 +119,8 @@ provided.
 
 ## [1.0.0] - 2016-05-09
 
-[unreleased]: https://github.com/tumblr/tumblr.js/compare/v5.0.0...HEAD
+[unreleased]: https://github.com/tumblr/tumblr.js/compare/v5.0.1...HEAD
+[5.0.1]: https://github.com/tumblr/tumblr.js/releases/tag/v5.0.1
 [5.0.0]: https://github.com/tumblr/tumblr.js/releases/tag/v5.0.0
 [4.0.1]: https://github.com/tumblr/tumblr.js/releases/tag/v4.0.1
 [4.0.0]: https://github.com/tumblr/tumblr.js/releases/tag/v4.0.0
