@@ -7,6 +7,12 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [5.0.1] - 2025-05-02
+
+### Fixed
+
+- Ensure type declarations can be discovered in certain build setups.
+
 ## [5.0.0] - 2024-02-22
 
 ### Changed
