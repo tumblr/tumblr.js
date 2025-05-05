@@ -397,10 +397,11 @@ describe('tumblr.js', function () {
           baseUrl: DUMMY_API_URL,
         });
         const scope = nock(client.baseUrl, {
-          badheaders: ['content-length', 'content-type'],
+          badheaders: ['content-type'],
           reqheaders: {
             accept: 'application/json',
             'user-agent': `tumblr.js/${tumblr.Client.version}`,
+            'content-length': '0',
             authorization: (value) => {
               return [
                 value.startsWith('OAuth '),
