@@ -1,3 +1,6 @@
 printWidth: 100
 singleQuote: true
 proseWrap: 'always'
+
+plugins:
+  - '@prettier/plugin-oxc'
