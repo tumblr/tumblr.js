@@ -75,7 +75,7 @@
     "nock": "^14.0.4",
     "nyc": "^17.0.0",
     "prettier": "^3.0.3",
-    "typedoc": "^0.27.6",
+    "typedoc": "^0.28.7",
     "typescript": "^5.5.3"
   },
   "files": [
