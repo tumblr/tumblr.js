@@ -7,6 +7,10 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+### Changed
+
+- **Breaking** Support Node.js versions `>=20`.
+
 ## [5.0.1] - 2025-05-02
 
 ### Fixed
