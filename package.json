@@ -55,7 +55,7 @@
   "dependencies": {
     "@types/node": ">=18",
     "@types/oauth": "^0.9.1",
-    "form-data": "^4.0.0",
+    "form-data": "^4.0.4",
     "oauth": "^0.10.0"
   },
   "devDependencies": {
