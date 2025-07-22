@@ -24,8 +24,8 @@
     "test:integration-write": "mocha ./integration/write --timeout=6000"
   },
   "engines": {
-    "node": ">=18",
-    "npm": ">=9"
+    "node": ">=20",
+    "npm": ">=10"
   },
   "homepage": "https://github.com/tumblr/tumblr.js",
   "repository": {
@@ -53,7 +53,7 @@
     }
   ],
   "dependencies": {
-    "@types/node": ">=18",
+    "@types/node": ">=20",
     "@types/oauth": "^0.9.1",
     "form-data": "^4.0.4",
     "oauth": "^0.10.0"
