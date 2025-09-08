@@ -2,12 +2,16 @@
   "$schema": "https://typedoc.org/schema.json",
   "name": "tumblr.js",
   "entryPoints": ["lib/**/*"],
+  "readme": "./README.md",
   "tsconfig": "tsconfig.lib.json",
   "out": "gh-pages",
+  "emit": "docs",
 
   "navigationLinks": {
     "GitHub": "https://github.com/tumblr/tumblr.js"
   },
+
+  "cleanOutputDir": true,
 
   "includeVersion": true,
   "excludePrivate": true,
