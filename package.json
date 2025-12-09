@@ -53,7 +53,7 @@
     }
   ],
   "dependencies": {
-    "@types/node": ">=20",
+    "@types/node": ">=22",
     "@types/oauth": "^0.9.1",
     "form-data": "^4.0.4",
     "oauth": "^0.10.0"
