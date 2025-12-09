@@ -24,7 +24,7 @@
     "test:integration-write": "mocha ./integration/write --timeout=6000"
   },
   "engines": {
-    "node": ">=20",
+    "node": ">=22",
     "npm": ">=10"
   },
   "homepage": "https://github.com/tumblr/tumblr.js",
@@ -85,6 +85,6 @@
     "CHANGELOG.md"
   ],
   "volta": {
-    "node": "20.15.1"
+    "node": "22.21.1"
   }
 }
