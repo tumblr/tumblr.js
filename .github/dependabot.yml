@@ -1,8 +1,9 @@
 # See https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+# yaml-language-server: $schema=https://www.schemastore.org/dependabot-2.0.json
 
 version: 2
 updates:
   - package-ecosystem: npm
     directory: /
     schedule:
-      interval: weekly
+      interval: daily
