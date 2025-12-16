@@ -1,0 +1,50 @@
+name: Cleanup Deployments
+
+on:
+  delete:
+
+jobs:
+  cancel-deployments:
+    name: Cancel pending deployments
+    runs-on: ubuntu-latest
+    if: github.event.ref_type == 'branch'
+    permissions:
+      actions: write
+
+    steps:
+      - name: Cancel waiting deployments
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const branchName = context.payload.ref;
+            console.log(`Branch deleted: ${branchName}`);
+
+            // Get all workflow runs for the deleted branch with pagination
+            const workflowRuns = await github.paginate(
+              github.rest.actions.listWorkflowRunsForRepo,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                branch: branchName,
+                status: 'waiting',
+                per_page: 100,
+              },
+              (response) => response.data
+            );
+
+            console.log(`Found ${workflowRuns.length} waiting workflow runs for branch ${branchName}`);
+
+            // Cancel each waiting workflow run
+            for (const run of workflowRuns) {
+              console.log(`Cancelling workflow run ${run.id} (${run.name})`);
+              try {
+                await github.rest.actions.cancelWorkflowRun({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  run_id: run.id,
+                });
+                console.log(`Successfully cancelled workflow run ${run.id}`);
+              } catch (error) {
+                console.error(`Failed to cancel workflow run ${run.id}: ${error.message}`);
+              }
+            }
