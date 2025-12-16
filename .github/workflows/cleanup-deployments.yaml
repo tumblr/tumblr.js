@@ -17,18 +17,23 @@ jobs:
             const branchName = context.payload.ref;
             console.log(`Branch deleted: ${branchName}`);
 
-            // Get all workflow runs for the deleted branch
-            const { data: workflowRuns } = await github.rest.actions.listWorkflowRunsForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              branch: branchName,
-              status: 'waiting',
-            });
+            // Get all workflow runs for the deleted branch with pagination
+            const workflowRuns = await github.paginate(
+              github.rest.actions.listWorkflowRunsForRepo,
+              {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                branch: branchName,
+                status: 'waiting',
+                per_page: 100,
+              },
+              (response) => response.data
+            );
 
-            console.log(`Found ${workflowRuns.workflow_runs.length} waiting workflow runs for branch ${branchName}`);
+            console.log(`Found ${workflowRuns.length} waiting workflow runs for branch ${branchName}`);
 
             // Cancel each waiting workflow run
-            for (const run of workflowRuns.workflow_runs) {
+            for (const run of workflowRuns) {
               console.log(`Cancelling workflow run ${run.id} (${run.name})`);
               try {
                 await github.rest.actions.cancelWorkflowRun({
