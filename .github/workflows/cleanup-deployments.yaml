@@ -8,6 +8,8 @@ jobs:
     name: Cancel pending deployments
     runs-on: ubuntu-latest
     if: github.event.ref_type == 'branch'
+    permissions:
+      actions: write
 
     steps:
       - name: Cancel waiting deployments
