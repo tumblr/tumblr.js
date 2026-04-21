@@ -20,7 +20,6 @@ export default [
   },
   {
     files: ['lib/tumblr.js'],
-
     rules: {
       // Disabled for this file because it uses throw/catch for control flow validation, not error handling
       'preserve-caught-error': 'off',
