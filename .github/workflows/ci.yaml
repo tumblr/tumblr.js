@@ -51,7 +51,6 @@ jobs:
         node-version:
           - current
           - lts/*
-          - lts/-1
 
     steps:
       - name: Checkout code
