@@ -5,7 +5,6 @@ import prettier from 'eslint-config-prettier';
 
 export default [
   js.configs.recommended,
-  prettier,
   {
     languageOptions: {
       globals: {
@@ -17,7 +16,13 @@ export default [
     rules: {
       'no-console': 'error',
       'no-unused-vars': ['error', { caughtErrors: 'none' }],
-      // Disabled because the code uses throw/catch for control flow validation, not error handling
+    },
+  },
+  {
+    files: ['lib/tumblr.js'],
+
+    rules: {
+      // Disabled for this file because it uses throw/catch for control flow validation, not error handling
       'preserve-caught-error': 'off',
     },
   },
@@ -51,4 +56,5 @@ export default [
       'no-console': 'off',
     },
   },
+  prettier,
 ];
