@@ -84,6 +84,13 @@
     "/types",
     "CHANGELOG.md"
   ],
+  "devEngines": {
+    "runtime": {
+      "name": "node",
+      "version": "^20.19.0 || ^22.13.0 || >=24",
+      "onFail": "warn"
+    }
+  },
   "volta": {
     "node": "22.21.1"
   }
