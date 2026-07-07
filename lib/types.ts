@@ -137,12 +137,7 @@ export interface VideoBlock {
 }
 
 export type NpfContentBlock =
-  | AudioBlock
-  | ImageBlock
-  | LinkBlock
-  | PaywallBlock
-  | TextBlock
-  | VideoBlock;
+  AudioBlock | ImageBlock | LinkBlock | PaywallBlock | TextBlock | VideoBlock;
 
 export interface NpfLayoutAsk {
   type: 'ask';
