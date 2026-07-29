@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs';
+import { Readable } from 'node:stream';
 import { assert } from 'chai';
 import * as tumblr from '../lib/tumblr.js';
 import nock from 'nock';
@@ -177,6 +178,32 @@ describe('tumblr.js', function () {
           assert.isFunction(client[methodName]);
         });
       });
+    });
+
+    it('createPost accepts stream.Readable media uploads', async () => {
+      const client = new TumblrClient({
+        ...DUMMY_CREDENTIALS,
+        baseUrl: DUMMY_API_URL,
+      });
+      const stream = Readable.from(['hello from a generic readable']);
+      const scope = nock(client.baseUrl, {
+        reqheaders: { 'content-type': /^multipart\/form-data;/ },
+      })
+        .post('/v2/blog/example.tumblr.com/posts', (body) => {
+          const payload = Buffer.isBuffer(body) ? body.toString('utf8') : String(body);
+          return (
+            payload.includes('name="json"') &&
+            payload.includes('"identifier":"0"') &&
+            payload.includes('name="0"') &&
+            payload.includes('hello from a generic readable')
+          );
+        })
+        .reply(200, { meta: {}, response: {} });
+
+      await client.createPost('example.tumblr.com', {
+        content: [{ type: 'image', media: stream, alt_text: 'example' }],
+      });
+      scope.done();
     });
 
     /**
