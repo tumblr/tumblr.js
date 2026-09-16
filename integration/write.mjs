@@ -194,6 +194,29 @@ describe('oauth1 write requests', () => {
         }),
       );
     });
+
+    test('creates a post with audio upload and provider', async () => {
+      assert.isOk(
+        await client.createPost(blogName, {
+          content: [
+            ...postContent,
+            {
+              type: 'audio',
+              provider: 'tumblr',
+              media: createReadStream(new URL('../test/fixtures/audio.mp3', import.meta.url)),
+              title: 'Multiple Dog Barks (King Charles Spaniel)',
+            },
+          ],
+
+          tags: [
+            'tumblr.js-test',
+            `tumblr.js-version-${client.version}`,
+            'test-npf',
+            'test-npf-audio-upload-provider',
+          ],
+        }),
+      );
+    });
   });
 
   describe('legacy post creation', () => {
