@@ -424,6 +424,49 @@ describe('tumblr.js', function () {
       });
     });
 
+    describe('error responses', () => {
+      it('includes error details in the message', async () => {
+        const client = new tumblr.Client(DUMMY_CREDENTIALS);
+        const scope = nock(client.baseUrl)
+          .post('/v2/blog/example/posts')
+          .reply(400, {
+            meta: { status: 400, msg: 'Bad Request' },
+            response: [],
+            errors: [
+              {
+                title: 'Bad Request',
+                code: 8005,
+                detail: "Sorry, we don't support this media format yet.",
+              },
+            ],
+          });
+
+        const err = await client.createPost('example', { content: [] }).then(
+          () => assert.fail('expected rejection'),
+          (e) => e,
+        );
+        assert.strictEqual(
+          err.message,
+          "API error: 400 Bad Request (8005 Sorry, we don't support this media format yet.)",
+        );
+        scope.done();
+      });
+
+      it('omits details when the response has none', async () => {
+        const client = new tumblr.Client(DUMMY_CREDENTIALS);
+        const scope = nock(client.baseUrl)
+          .post('/v2/blog/example/posts')
+          .reply(401, { meta: { status: 401, msg: 'Unauthorized' }, response: [] });
+
+        const err = await client.createPost('example', { content: [] }).then(
+          () => assert.fail('expected rejection'),
+          (e) => e,
+        );
+        assert.strictEqual(err.message, 'API error: 401 Unauthorized');
+        scope.done();
+      });
+    });
+
     it('post request sends api_key when all creds are not provided', async () => {
       const client = new TumblrClient({ consumer_key: 'abc123' });
       const scope = nock(client.baseUrl, {
