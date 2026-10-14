@@ -1,4 +1,4 @@
-import { type ReadStream } from 'node:fs';
+import { type Readable } from 'node:stream';
 import { type IncomingMessage } from 'node:http';
 
 export type PostType = 'text' | 'quote' | 'link' | 'answer' | 'video' | 'audio' | 'photo' | 'chat';
@@ -87,27 +87,27 @@ export interface MediaObject {
 export interface AudioBlock {
   type: 'audio';
   /**
-   * NPF MediaObject or Node.js fs.ReadStream object
+   * NPF MediaObject or Node.js stream.Readable object
    *
-   * Provide a fs.ReadStream object to upload media or an object satisfying the MediaObject interface to use existing media.
+   * Provide a stream.Readable object to upload media or an object satisfying the MediaObject interface to use existing media.
    *
    * @see [Media objects documentation.](https://www.tumblr.com/docs/npf#media-objects)
-   * @see [`fs.ReadStream` documentation.](https://nodejs.org/docs/latest-v20.x/api/fs.html#class-fsreadstream)
+   * @see [`stream.Readable` documentation.](https://nodejs.org/docs/latest-v20.x/api/stream.html#class-streamreadable)
    */
-  media: ReadStream | MediaObject;
+  media: Readable | MediaObject;
   [prop: string]: any;
 }
 export interface ImageBlock {
   type: 'image';
   /**
-   * NPF MediaObject or Node.js fs.ReadStream object
+   * NPF MediaObject or Node.js stream.Readable object
    *
-   * Provide a fs.ReadStream object to upload media or an object satisfying the MediaObject interface to use existing media.
+   * Provide a stream.Readable object to upload media or an object satisfying the MediaObject interface to use existing media.
    *
    * @see [Media objects documentation.](https://www.tumblr.com/docs/npf#media-objects)
-   * @see [`fs.ReadStream` documentation.](https://nodejs.org/docs/latest-v20.x/api/fs.html#class-fsreadstream)
+   * @see [`stream.Readable` documentation.](https://nodejs.org/docs/latest-v20.x/api/stream.html#class-streamreadable)
    */
-  media: ReadStream | MediaObject;
+  media: Readable | MediaObject;
   [prop: string]: any;
 }
 export interface LinkBlock {
@@ -125,14 +125,14 @@ export interface TextBlock {
 export interface VideoBlock {
   type: 'video';
   /**
-   * NPF MediaObject or Node.js fs.ReadStream object
+   * NPF MediaObject or Node.js stream.Readable object
    *
-   * Provide a fs.ReadStream object to upload media or an object satisfying the MediaObject interface to use existing media.
+   * Provide a stream.Readable object to upload media or an object satisfying the MediaObject interface to use existing media.
    *
    * @see [Media objects documentation.](https://www.tumblr.com/docs/npf#media-objects)
-   * @see [`fs.ReadStream` documentation.](https://nodejs.org/docs/latest-v20.x/api/fs.html#class-fsreadstream)
+   * @see [`stream.Readable` documentation.](https://nodejs.org/docs/latest-v20.x/api/stream.html#class-streamreadable)
    */
-  media: ReadStream | MediaObject;
+  media: Readable | MediaObject;
   [prop: string]: any;
 }
 
