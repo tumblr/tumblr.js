@@ -158,7 +158,7 @@ const blogSubmissions = await client.blogSubmissions(blogName, options);
 await client.createPost(blogName, options);
 ```
 
-To upload media with a created post, provide a `ReadStream` as the block media:
+To upload media with a created post, provide a `Readable` stream as the block media:
 
 ```js
 await client.createPost(blogName, {
